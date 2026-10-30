@@ -9,12 +9,30 @@
  */
 {
   "sections": {
+    "school_reading_form": {
+      "type": "school-reading-form",
+      "name": "School Reading Form",
+      "settings": {
+        "product": "neown-school-reading-programme",
+        "kicker": "2 books a month for 3 months",
+        "school_name": "Tiny Bunny's Preschool",
+        "class_mode": "preschool",
+        "class_options": "Playgroup, Nursery, Jr KG, Sr KG",
+        "about_heading": "About this programme",
+        "included_heading": "",
+        "included_content": "",
+        "how_heading": "How it works",
+        "how_content": "<ol><li>Enter child's details above</li><li>Click on Pay Now to complete payment</li><li>Download the neOwn App to select books</li><li>Books are delivered to the school</li><li>Return books to school after a month and repeat!!</li></ol>"
+      }
+    },
     "main": {
       "type": "page",
+      "disabled": true,
       "settings": {}
     }
   },
   "order": [
+    "school_reading_form",
     "main"
   ]
 }

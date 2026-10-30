@@ -5,7 +5,13 @@
 {% endif %}
 
 {% assign form_variant = form_product.selected_or_first_available_variant %}
-{% assign school_name = 'S. M. Shetty International School and Jr College' %}
+{% assign school_name = section.settings.school_name | default: 'S. M. Shetty International School and Jr College' %}
+{% assign srp_kicker = section.settings.kicker | default: '2 books a month for 3 months' %}
+{% assign srp_preschool = false %}
+{% if section.settings.class_mode == 'preschool' %}
+  {% assign srp_preschool = true %}
+  {% assign srp_class_options = section.settings.class_options | default: 'Playgroup, Nursery, Jr KG, Sr KG' | split: ',' %}
+{% endif %}
 {% assign srp_on_sale = false %}
 {% if form_variant and form_variant.compare_at_price > form_variant.price %}
   {% assign srp_on_sale = true %}
@@ -22,7 +28,7 @@
 <div class="srp-wrap">
   <div class="srp-card">
     <div class="srp-header">
-      <p class="srp-kicker">2 books a month for 3 months</p>
+      <p class="srp-kicker">{{ srp_kicker }}</p>
  
       <h2 class="srp-title">{{ form_product.title }}</h2>
     </div>
@@ -45,8 +51,23 @@
 
       <div class="srp-row">
         <div class="srp-field">
-          <label class="srp-label" for="child_standard">Standard <span>*</span></label>
-          <input type="text" id="child_standard" name="properties[Child Standard]" placeholder="e.g. 4" required inputmode="numeric" maxlength="2" autocomplete="off">
+          {% if srp_preschool %}
+            <label class="srp-label" for="child_standard">Class <span>*</span></label>
+            <div class="srp-select-lock">
+              <select id="child_standard" name="properties[Child Standard]" required>
+                <option value="" selected disabled>Select class</option>
+                {% for class_option in srp_class_options %}
+                  {% assign class_option = class_option | strip %}
+                  {% if class_option != blank %}
+                    <option value="{{ class_option | escape }}">{{ class_option | escape }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          {% else %}
+            <label class="srp-label" for="child_standard">Standard <span>*</span></label>
+            <input type="text" id="child_standard" name="properties[Child Standard]" placeholder="e.g. 4" required inputmode="numeric" maxlength="2" autocomplete="off">
+          {% endif %}
           <p class="srp-error" id="child_standard_error"></p>
         </div>
         <div class="srp-field">
@@ -140,6 +161,7 @@
 
     const variantId = {{ form_variant.id | json }};
     const isSoldOut = {{ srp_sold_out | json }};
+    const isPreschool = {{ srp_preschool | json }};
 
     function getValue(id) {
       const el = document.getElementById(id);
@@ -162,6 +184,11 @@
 
     function validateStandard(showMsg) {
       const val = getValue('child_standard');
+      if (isPreschool) {
+        if (!val) { if (showMsg) showError('child_standard', 'Class is required'); return false; }
+        clearError('child_standard');
+        return true;
+      }
       if (!val) { if (showMsg) showError('child_standard', 'Standard is required'); return false; }
       const num = parseInt(val, 10);
       if (isNaN(num) || String(num) !== val || num < 1 || num > 12) {
@@ -206,7 +233,7 @@
     /* Allow only digits in standard & roll number */
     ['child_standard', 'child_roll_number'].forEach(function (id) {
       var el = document.getElementById(id);
-      if (el) {
+      if (el && el.tagName === 'INPUT') {
         el.addEventListener('input', function () {
           this.value = this.value.replace(/\D/g, '');
         });
@@ -221,6 +248,7 @@
 
     /* Validate on blur */
     document.getElementById('child_standard').addEventListener('blur', function () { validateStandard(true); });
+    document.getElementById('child_standard').addEventListener('change', function () { validateStandard(true); });
     document.getElementById('child_division').addEventListener('blur', function () { validateDivision(true); });
     document.getElementById('child_roll_number').addEventListener('blur', function () { validateRollNumber(true); });
 
@@ -410,6 +438,27 @@
     box-shadow: 0 0 0 3px rgba(132, 77, 255, 0.12);
   }
 
+  .srp-field select:not(:disabled) {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .srp-field select:not(:disabled):focus {
+    border-color: #844dff;
+    box-shadow: 0 0 0 3px rgba(132, 77, 255, 0.12);
+  }
+
+  .srp-field select:invalid {
+    color: #9a9a9a;
+  }
+
+  .srp-field select option {
+    color: #222;
+  }
+
+  .srp-field select.srp-input-error,
   .srp-field input.srp-input-error {
     border-color: #e53e3e;
     box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
@@ -643,6 +692,36 @@
       "id": "product",
       "label": "Product (optional)",
       "info": "Leave empty to use the product this template is assigned to."
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker text",
+      "default": "2 books a month for 3 months"
+    },
+    {
+      "type": "text",
+      "id": "school_name",
+      "label": "School name",
+      "info": "Locked in the form and saved on the order as School Name.",
+      "default": "S. M. Shetty International School and Jr College"
+    },
+    {
+      "type": "select",
+      "id": "class_mode",
+      "label": "Class field",
+      "options": [
+        { "value": "standard", "label": "Standard (1–12)" },
+        { "value": "preschool", "label": "Preschool class dropdown" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "text",
+      "id": "class_options",
+      "label": "Preschool classes",
+      "info": "Comma-separated. Used when Class field is Preschool class dropdown.",
+      "default": "Playgroup, Nursery, Jr KG, Sr KG"
     },
     {
       "type": "header",
