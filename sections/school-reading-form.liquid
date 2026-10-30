@@ -57,9 +57,9 @@
               <select id="child_standard" name="properties[Child Standard]" required>
                 <option value="" selected disabled>Select class</option>
                 {% for class_option in srp_class_options %}
-                  {% assign class_option = class_option | strip %}
-                  {% if class_option != blank %}
-                    <option value="{{ class_option | escape }}">{{ class_option | escape }}</option>
+                  {% assign class_label = class_option | strip %}
+                  {% if class_label != blank %}
+                    <option value="{{ class_label | escape }}">{{ class_label | escape }}</option>
                   {% endif %}
                 {% endfor %}
               </select>
