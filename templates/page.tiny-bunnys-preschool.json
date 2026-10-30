@@ -17,6 +17,8 @@
         "variant_title": "3 months",
         "kicker": "5 books a month for 3 months",
         "school_name": "Tiny Bunny's Preschool",
+        "school_logo": "shopify://shop_images/Tiny_Bunny_Logo_page.jpg",
+        "cobrand_accent": true,
         "class_mode": "preschool",
         "class_options": "Playgroup, Nursery, Jr KG, Sr KG",
         "about_heading": "About this programme",
