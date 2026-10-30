@@ -9,12 +9,34 @@
  */
 {
   "sections": {
+    "school_reading_form": {
+      "type": "school-reading-form",
+      "name": "School Reading Form",
+      "settings": {
+        "product": "neown-book-library-box-for-schools",
+        "variant_title": "3 months",
+        "kicker": "5 books a month for 3 months",
+        "school_name": "Tiny Bunny's Preschool",
+        "school_logo": "shopify://shop_images/Tiny_Bunny_Logo_page.jpg",
+        "cobrand_accent": true,
+        "class_mode": "preschool",
+        "class_options": "Playgroup, Nursery, Jr KG, Sr KG",
+        "about_heading": "About this programme",
+        "about_content": "<p>Your child gets <strong>5 books every month for 3 months</strong>, chosen from neOwn's collection of <strong>75,000+ books</strong>.</p><ul><li>Books are delivered to and collected from Tiny Bunny's Preschool, with <strong>no delivery charges</strong></li><li><strong>No deposit</strong> and no hidden charges</li><li><strong>Expert book recommendations</strong> to suit your child's age and reading level</li></ul><p><strong>Note:</strong> <em>We do a quality check on each book for the best reading experience.</em></p>",
+        "included_heading": "",
+        "included_content": "",
+        "how_heading": "How it works",
+        "how_content": "<ol><li>Enter child's details above</li><li>Click on Continue to complete payment</li><li>Download the neOwn App to select 5 books every month</li><li>Books are delivered to the school, free of delivery charges</li><li>Return books to school after a month and repeat!!</li></ol>"
+      }
+    },
     "main": {
       "type": "page",
+      "disabled": true,
       "settings": {}
     }
   },
   "order": [
+    "school_reading_form",
     "main"
   ]
 }

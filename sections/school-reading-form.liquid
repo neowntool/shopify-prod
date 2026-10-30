@@ -5,7 +5,23 @@
 {% endif %}
 
 {% assign form_variant = form_product.selected_or_first_available_variant %}
-{% assign school_name = 'S. M. Shetty International School and Jr College' %}
+{% if section.settings.variant_title != blank %}
+  {% assign srp_variant_title = section.settings.variant_title | strip | downcase %}
+  {% for variant in form_product.variants %}
+    {% assign variant_title = variant.title | downcase %}
+    {% if variant_title == srp_variant_title %}
+      {% assign form_variant = variant %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% assign school_name = section.settings.school_name | default: 'S. M. Shetty International School and Jr College' %}
+{% assign srp_kicker = section.settings.kicker | default: '2 books a month for 3 months' %}
+{% assign srp_preschool = false %}
+{% if section.settings.class_mode == 'preschool' %}
+  {% assign srp_preschool = true %}
+  {% assign srp_class_options = section.settings.class_options | default: 'Playgroup, Nursery, Jr KG, Sr KG' | split: ',' %}
+{% endif %}
 {% assign srp_on_sale = false %}
 {% if form_variant and form_variant.compare_at_price > form_variant.price %}
   {% assign srp_on_sale = true %}
@@ -20,9 +36,20 @@
 {% endif %}
 
 <div class="srp-wrap">
-  <div class="srp-card">
+  <div class="srp-card{% if section.settings.school_logo != blank and section.settings.cobrand_accent %} srp-card--accent{% endif %}">
+    {% if section.settings.school_logo != blank %}
+      <div class="srp-cobrand">
+        {{ section.settings.school_logo | image_url: width: 300 | image_tag: class: 'srp-cobrand-school', alt: school_name, loading: 'eager', widths: '150, 300' }}
+        <p class="srp-cobrand-text">
+          <span class="srp-cobrand-brand">neOwn</span>
+          <span class="srp-cobrand-x" aria-hidden="true">&times;</span>
+          <span class="srp-visually-hidden">in partnership with</span>
+          <span>{{ school_name }}</span>
+        </p>
+      </div>
+    {% endif %}
     <div class="srp-header">
-      <p class="srp-kicker">2 books a month for 3 months</p>
+      <p class="srp-kicker">{{ srp_kicker }}</p>
  
       <h2 class="srp-title">{{ form_product.title }}</h2>
     </div>
@@ -45,8 +72,23 @@
 
       <div class="srp-row">
         <div class="srp-field">
-          <label class="srp-label" for="child_standard">Standard <span>*</span></label>
-          <input type="text" id="child_standard" name="properties[Child Standard]" placeholder="e.g. 4" required inputmode="numeric" maxlength="2" autocomplete="off">
+          {% if srp_preschool %}
+            <label class="srp-label" for="child_standard">Class <span>*</span></label>
+            <div class="srp-select-lock">
+              <select id="child_standard" name="properties[Child Standard]" required>
+                <option value="" selected disabled>Select class</option>
+                {% for class_option in srp_class_options %}
+                  {% assign class_label = class_option | strip %}
+                  {% if class_label != blank %}
+                    <option value="{{ class_label | escape }}">{{ class_label | escape }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          {% else %}
+            <label class="srp-label" for="child_standard">Standard <span>*</span></label>
+            <input type="text" id="child_standard" name="properties[Child Standard]" placeholder="e.g. 4" required inputmode="numeric" maxlength="2" autocomplete="off">
+          {% endif %}
           <p class="srp-error" id="child_standard_error"></p>
         </div>
         <div class="srp-field">
@@ -95,14 +137,15 @@
   </div>
 
   <div class="srp-accordion">
-    {% if form_product.description != blank %}
+    {% assign srp_about_content = section.settings.about_content | default: form_product.description %}
+    {% if srp_about_content != blank %}
       <details class="srp-acc-item" open>
         <summary class="srp-acc-summary">
           <span>{{ section.settings.about_heading | default: 'About this programme' }}</span>
           <span class="srp-acc-icon" aria-hidden="true"></span>
         </summary>
         <div class="srp-acc-body rte">
-          {{ form_product.description }}
+          {{ srp_about_content }}
         </div>
       </details>
     {% endif %}
@@ -140,6 +183,7 @@
 
     const variantId = {{ form_variant.id | json }};
     const isSoldOut = {{ srp_sold_out | json }};
+    const isPreschool = {{ srp_preschool | json }};
 
     function getValue(id) {
       const el = document.getElementById(id);
@@ -162,6 +206,11 @@
 
     function validateStandard(showMsg) {
       const val = getValue('child_standard');
+      if (isPreschool) {
+        if (!val) { if (showMsg) showError('child_standard', 'Class is required'); return false; }
+        clearError('child_standard');
+        return true;
+      }
       if (!val) { if (showMsg) showError('child_standard', 'Standard is required'); return false; }
       const num = parseInt(val, 10);
       if (isNaN(num) || String(num) !== val || num < 1 || num > 12) {
@@ -206,7 +255,7 @@
     /* Allow only digits in standard & roll number */
     ['child_standard', 'child_roll_number'].forEach(function (id) {
       var el = document.getElementById(id);
-      if (el) {
+      if (el && el.tagName === 'INPUT') {
         el.addEventListener('input', function () {
           this.value = this.value.replace(/\D/g, '');
         });
@@ -221,6 +270,7 @@
 
     /* Validate on blur */
     document.getElementById('child_standard').addEventListener('blur', function () { validateStandard(true); });
+    document.getElementById('child_standard').addEventListener('change', function () { validateStandard(true); });
     document.getElementById('child_division').addEventListener('blur', function () { validateDivision(true); });
     document.getElementById('child_roll_number').addEventListener('blur', function () { validateRollNumber(true); });
 
@@ -300,6 +350,56 @@
   .srp-header {
     text-align: center;
     margin-bottom: 28px;
+  }
+
+  .srp-card--accent {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .srp-card--accent::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #e3228b 0%, #7aa22b 17%, #22b0aa 34%, #63308a 51%, #e3103a 68%, #f7b30f 84%, #ec6608 100%);
+  }
+
+  .srp-cobrand {
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 22px;
+    border-bottom: 1px dashed #e6e6ee;
+  }
+
+  .srp-cobrand-school {
+    display: block;
+    width: auto;
+    height: 104px;
+    margin: 0 auto;
+  }
+
+  .srp-cobrand-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2px 8px;
+    margin: 12px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0e1b4d;
+  }
+
+  .srp-cobrand-brand {
+    color: #ff1a96;
+  }
+
+  .srp-cobrand-x {
+    font-weight: 400;
+    color: #9aa0b4;
   }
 
   .srp-kicker {
@@ -410,6 +510,27 @@
     box-shadow: 0 0 0 3px rgba(132, 77, 255, 0.12);
   }
 
+  .srp-field select:not(:disabled) {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .srp-field select:not(:disabled):focus {
+    border-color: #844dff;
+    box-shadow: 0 0 0 3px rgba(132, 77, 255, 0.12);
+  }
+
+  .srp-field select:invalid {
+    color: #9a9a9a;
+  }
+
+  .srp-field select:not(:disabled) option {
+    color: #222;
+  }
+
+  .srp-field select.srp-input-error,
   .srp-field input.srp-input-error {
     border-color: #e53e3e;
     box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
@@ -545,6 +666,19 @@
       font-size: 22px;
     }
 
+    .srp-cobrand {
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+    }
+
+    .srp-cobrand-school {
+      height: 88px;
+    }
+
+    .srp-cobrand-text {
+      font-size: 13px;
+    }
+
     .srp-row {
       grid-template-columns: 1fr 1fr;
     }
@@ -645,6 +779,58 @@
       "info": "Leave empty to use the product this template is assigned to."
     },
     {
+      "type": "text",
+      "id": "variant_title",
+      "label": "Variant (optional)",
+      "info": "Exact variant name to sell, e.g. 3 months. Leave empty to use the first available variant."
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker text",
+      "default": "2 books a month for 3 months"
+    },
+    {
+      "type": "text",
+      "id": "school_name",
+      "label": "School name",
+      "info": "Locked in the form and saved on the order as School Name.",
+      "default": "S. M. Shetty International School and Jr College"
+    },
+    {
+      "type": "header",
+      "content": "School co-branding"
+    },
+    {
+      "type": "image_picker",
+      "id": "school_logo",
+      "label": "School logo",
+      "info": "Shows the school logo and a neOwn × school name line at the top of the form."
+    },
+    {
+      "type": "checkbox",
+      "id": "cobrand_accent",
+      "label": "Show colourful accent line",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "class_mode",
+      "label": "Class field",
+      "options": [
+        { "value": "standard", "label": "Standard (1–12)" },
+        { "value": "preschool", "label": "Preschool class dropdown" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "text",
+      "id": "class_options",
+      "label": "Preschool classes",
+      "info": "Comma-separated. Used when Class field is Preschool class dropdown.",
+      "default": "Playgroup, Nursery, Jr KG, Sr KG"
+    },
+    {
       "type": "header",
       "content": "Accordion"
     },
@@ -653,6 +839,12 @@
       "id": "about_heading",
       "label": "About heading",
       "default": "About this programme"
+    },
+    {
+      "type": "richtext",
+      "id": "about_content",
+      "label": "About content (optional)",
+      "info": "Leave empty to show the product description."
     },
     {
       "type": "text",
