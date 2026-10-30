@@ -1,0 +1,199 @@
+<section class="mr-million-readers"
+  style="
+    {% if section.settings.bg_image != blank %}
+      background-image: url({{ section.settings.bg_image | image_url }});
+    {% endif %}
+  ">
+
+  <div class="mr-wrapper">
+
+    <div class="mr-counter">
+      {{ section.settings.counter }}
+    </div>
+
+    <h2 class="mr-title">
+      {{ section.settings.heading }}
+    </h2>
+
+    <p class="mr-text">
+      {{ section.settings.subtext }}
+    </p>
+
+    <div class="mr-buttons">
+      <a href="{{ section.settings.primary_btn_link }}"
+         class="mr-btn mr-btn-primary">
+        {{ section.settings.primary_btn_text }}
+      </a>
+
+      <a href="{{ section.settings.secondary_btn_link }}"
+         class="mr-btn mr-btn-secondary">
+        {{ section.settings.secondary_btn_text }}
+      </a>
+    </div>
+
+    {% if section.settings.bottom_image != blank %}
+      <div class="mr-bottom-image">
+        <img src="{{ section.settings.bottom_image | image_url }}"
+             alt="Readers illustration">
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<style>
+/* =========================
+   MILLION READERS (ISOLATED)
+========================= */
+
+.mr-million-readers {
+  background-size: cover;
+  background-position: center;
+  padding: 380px 20px 0;
+  text-align: center;
+}
+
+.mr-wrapper {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.mr-counter {
+  font-size: 64px;
+  font-weight: 800;
+  color: #008FA1;
+  margin-bottom: 10px;
+}
+
+.mr-title {
+  font-size: 42px;
+  line-height: 1.2;
+  color: #2B2B2B;
+  margin-bottom: 15px;
+}
+
+.mr-text {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  font-size: 16px;
+  color: #2B2B2B;
+}
+
+.mr-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.mr-btn {
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.mr-btn-primary {
+  background: #FF1A96;
+  color: #fff;
+}
+
+.mr-btn-primary:hover {
+  opacity: 0.9;
+}
+
+.mr-btn-secondary {
+  border: 2px solid #FF1A96;
+  color: #FF1A96;
+  background: transparent;
+}
+
+.mr-btn-secondary:hover {
+  background: #FF1A96;
+  color: #fff;
+}
+
+.mr-bottom-image img {
+  width: 100%;
+  max-width: 900px;
+  display: block;
+  margin: auto;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .mr-title {
+    font-size: 30px;
+  }
+
+  .mr-counter {
+    font-size: 48px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Million Readers Movement",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "counter",
+      "label": "Counter Number",
+      "default": "000234"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join the Million Readers Movement"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Description",
+      "default": "Take the Pledge to help create a million young readers who become the adaptable, innovative leaders of tomorrow."
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_text",
+      "label": "Primary Button Text",
+      "default": "Join the Movement"
+    },
+    {
+      "type": "url",
+      "id": "primary_btn_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_text",
+      "label": "Secondary Button Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "secondary_btn_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_image",
+      "label": "Bottom Illustration Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Million Readers Movement"
+    }
+  ]
+}
+{% endschema %}

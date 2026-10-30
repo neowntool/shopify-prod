@@ -1,0 +1,50 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page",
+      "disabled": true,
+      "settings": {}
+    },
+    "1788778956dffb7721": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_ffa0464_xCnafA": {
+          "type": "ai_gen_block_ffa0464",
+          "settings": {
+            "button_label": "Join Group",
+            "button_link": "https://chat.whatsapp.com/IzM2H039IlD9hdG4sKSJFG",
+            "desktop_width_percent": 100,
+            "alignment": "center",
+            "button_font": "nunito_n4",
+            "button_font_size": 16,
+            "button_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_color": "#333333",
+            "button_hover_text_color": "#ffffff",
+            "focus_color": "#000000",
+            "border_width": 1,
+            "border_radius": 6
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_ffa0464_xCnafA"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "1788778956dffb7721"
+  ]
+}

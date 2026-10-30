@@ -1,0 +1,265 @@
+<section
+  class="srt-wrapper"
+  style="
+    {% if section.settings.bg_image != blank %}
+      --bg-desktop: url({{ section.settings.bg_image | image_url: width: 2000 }});
+    {% endif %}
+    {% if section.settings.bg_image_mobile != blank %}
+      --bg-mobile: url({{ section.settings.bg_image_mobile | image_url: width: 1200 }});
+    {% endif %}
+  "
+>
+  <div class="srt-container">
+
+    <!-- Heading -->
+    <div class="srt-header">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.subheading }}</p>
+      <div class="srt-line"></div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="srt-timeline">
+      {% for block in section.blocks %}
+        <div class="srt-item srt-item-{{ forloop.index }}">
+
+          <div class="srt-stick" style="background: {{ block.settings.color }}"></div>
+          <div class="srt-dot" style="background: {{ block.settings.color }}"></div>
+
+          <div class="srt-card" style="border-color: {{ block.settings.color }}">
+            <div class="srt-user">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 200 }}" alt="">
+              {% endif %}
+            </div>
+
+            <h4>{{ block.settings.name }}</h4>
+            <p class="srt-desc">{{ block.settings.text }}</p>
+            <div class="srt-footer">{{ block.settings.footer }}</div>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ===============================
+   STAR READERS TIMELINE (UNIQUE)
+   =============================== */
+
+.srt-wrapper {
+  padding: 280px 20px;
+  background-image: var(--bg-desktop);
+  background-size: cover;
+  background-position: center;
+}
+
+.srt-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.srt-header {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.srt-header h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.srt-header p {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.srt-line {
+  width: 80%;
+  height: 2px;
+  background: #00798A;
+  margin: 40px auto 0;
+}
+
+.srt-timeline {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.srt-item {
+  width: 30%;
+  position: relative;
+  text-align: center;
+}
+
+.srt-stick {
+  width: 2px;
+  height: 215px;
+  margin: auto;
+}
+
+/* Custom heights & colors */
+.srt-item-1 .srt-stick { height: 200px; background: #B291FF !important; }
+.srt-item-1 .srt-dot { background: #B291FF !important; }
+.srt-item-1 .srt-card { border: 1px solid #B291FF !important; background: #F0EBFF; }
+
+.srt-item-2 .srt-stick { height: 295px; background: #FF99D2 !important; }
+.srt-item-2 .srt-dot { background: #FF99D2 !important; }
+.srt-item-2 .srt-card { border: 1px solid #FF99D2 !important; background: #FFE6F5; }
+
+.srt-item-3 .srt-stick { height: 382px; background: #19EDFF !important; }
+.srt-item-3 .srt-dot { background: #19EDFF !important; }
+.srt-item-3 .srt-card { border: 1px solid #19EDFF !important; background: #E5FFFF; }
+
+.srt-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+}
+
+.srt-card {
+  background: #fff;
+  border: 2px solid;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.srt-user {
+  margin-bottom: 16px;
+}
+
+.srt-user img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.srt-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.srt-desc {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.srt-footer {
+  margin-top: 14px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .srt-wrapper {
+    background-image: var(--bg-mobile);
+    padding: 160px 20px;
+  }
+
+  .srt-timeline {
+    gap: 50px;
+    overflow-x: auto;
+  }
+
+  .srt-item {
+    width: 100%;
+  }
+
+  .srt-line {
+    width: 100%;
+  }
+
+  .srt-card {
+    width: 208px;
+    margin: auto;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Star Readers Timeline",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Last Month’s Star Readers"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "Meet the top 3 readers who completed their 20-day streak with flying colors."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reader",
+      "name": "Reader Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "User Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Arjun, Age 8"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Kids finish their books, while only 60% of new readers do."
+        },
+        {
+          "type": "text",
+          "id": "footer",
+          "label": "Footer Text",
+          "default": "80 mins • 12 books • Golden Learner"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Line & Border Color",
+          "default": "#22c1c3"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Star Readers Timeline",
+      "blocks": [
+        { "type": "reader" },
+        { "type": "reader" },
+        { "type": "reader" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,235 @@
+{% schema %}
+{
+  "name": "Custom Blog Scroll",
+  "settings": [
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Select Blog"
+    },
+    {
+      "type": "article",
+      "id": "featured_article",
+      "label": "Select Featured Blog (Left Side)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Blog Scroll",
+      "category": "Blog"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="custom-blog-wrapper">
+  <div class="custom-blog-container">
+
+    <!-- LEFT SIDE (HORIZONTAL SCROLL) -->
+    <div class="custom-blog-left">
+      <h2 class="custom-blog-heading">Latest Blogs</h2>
+      <div class="custom-blog-horizontal">
+        {% if section.settings.featured_article != blank %}
+  {% assign article = articles[section.settings.featured_article] %}
+  <div class="custom-blog-card">
+    <a href="{{ article.url }}">
+      {% if article.image %}
+        <img src="{{ article.image | img_url: '600x' }}" class="custom-blog-img" />
+      {% endif %}
+      <h3 class="custom-blog-title">{{ article.title }}</h3>
+      <p class="custom-blog-excerpt">{{ article.excerpt | strip_html | truncate: 140 }}</p>
+    </a>
+  </div>
+{% else %}
+  {% assign article = blogs[section.settings.blog].articles.first %}
+  {% if article %}
+    <div class="custom-blog-card">
+      <a href="{{ article.url }}">
+        {% if article.image %}
+          <img src="{{ article.image | img_url: '600x' }}" class="custom-blog-img" />
+        {% endif %}
+        <h3 class="custom-blog-title">{{ article.title }}</h3>
+        <p class="custom-blog-excerpt">{{ article.excerpt | strip_html | truncate: 140 }}</p>
+      </a>
+    </div>
+  {% endif %}
+{% endif %}
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (VERTICAL SCROLL) -->
+    <div class="custom-blog-right">
+      <h2 class="custom-blog-heading">Popular Blogs</h2>
+      <div class="custom-blog-vertical">
+        {% for article in blogs[section.settings.blog].articles %}
+          <div class="custom-blog-small-card">
+            <a href="{{ article.url }}" class="custom-blog-small-link">
+              {% if article.image %}
+                <img src="{{ article.image | img_url: '300x' }}" class="custom-blog-small-img" />
+              {% endif %}
+              <div>
+                <h4 class="custom-blog-small-title">{{ article.title }}</h4>
+                <p class="custom-blog-small-excerpt">{{ article.excerpt | strip_html | truncate: 80 }}</p>
+                <div class="custom-blog-btn-wrap"><span class="custom-blog-btn">Read More</span></div>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.custom-blog-wrapper {
+  padding: 40px 80px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.custom-blog-container {
+  display: flex;
+  gap: 80px;
+}
+
+.custom-blog-heading {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* LEFT SIDE */
+.custom-blog-left {
+  flex: 2;
+}
+
+.custom-blog-horizontal {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  scroll-behavior: smooth;
+}
+
+.custom-blog-horizontal::-webkit-scrollbar {
+  height: 6px;
+}
+
+.custom-blog-horizontal::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 0px;
+}
+
+.custom-blog-card {
+  min-width: 350px;
+  background: #fff;
+  padding: 15px 0px;
+  border-radius: 0px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.custom-blog-img {
+  width: 100%;
+}
+
+.custom-blog-title {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.custom-blog-excerpt {
+  font-size: 14px;
+  color: #666;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* RIGHT SIDE */
+.custom-blog-right {
+  flex: 1;
+}
+
+.custom-blog-vertical {
+  max-height: 500px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.custom-blog-small-card {
+  background: #fff;
+  padding: 10px 0px;
+  border-radius: 0px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.custom-blog-small-link {
+  {% comment %} display: flex; {% endcomment %}
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.custom-blog-small-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0px;
+  padding-bottom: 8px;
+}
+
+.custom-blog-small-title {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.custom-blog-small-excerpt {
+  font-size: 12px;
+  color: #777;
+}
+
+.custom-blog-btn-wrap{margin-top:10px;}
+.custom-blog-btn {
+  display: inline-block;
+  font-size: 12px;
+  color: #fff;
+  background: #FF1A96;
+  padding: 6px 14px;
+  border-radius: 8px;
+}
+
+.custom-blog-vertical {
+  scrollbar-width: thin; /* Firefox */
+}
+
+.custom-blog-vertical::-webkit-scrollbar {
+  width: 2px;
+}
+
+.custom-blog-vertical::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-blog-vertical::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 10px;
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .custom-blog-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .custom-blog-horizontal {
+    overflow-x: scroll;
+  }
+
+  .custom-blog-wrapper {
+    padding: 10px 10px;
+}
+}
+</style>

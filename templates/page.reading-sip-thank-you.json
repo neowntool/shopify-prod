@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "thanks": {
+      "type": "neown-reading-sip-thanks",
+      "settings": {
+        "playstore_link": "https://play.google.com/store/apps/details?id=com.neown",
+        "appstore_link": "https://apps.apple.com/in/app/neown/id6483860525",
+        "help_text": "+91 93244 55972 · Mon–Sat, 9am–6pm IST",
+        "whatsapp_link": "https://api.whatsapp.com/send/?phone=919324455972&text=Hi%2C+I+just+subscribed+to+Neown+Reading+SIP+and+need+help&type=phone_number&app_absent=0",
+        "fallback_url": "/pages/neown-reading-sip"
+      }
+    }
+  },
+  "order": [
+    "thanks"
+  ]
+}

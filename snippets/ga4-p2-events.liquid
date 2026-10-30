@@ -1,0 +1,134 @@
+{%- comment -%}
+  GA4 P2 "main clicks" events for GTM: nav_click, view_promotion, select_promotion, age_collection_click,
+  collection_view_all, whatsapp_click, community_join_click, gift_click, expert_video_play, reading_challenge_click.
+  All listeners are delegated, so no section needs editing. Never push name, phone or email.
+{%- endcomment -%}
+<script>
+(function () {
+  function dl(o) { window.dataLayer = window.dataLayer || []; window.dataLayer.push(o); }
+  function pageType() { return window.neownPageType || ''; }
+  function clean(t) { return String(t || '').replace(/\s+/g, ' ').trim(); }
+  function slug(t) { return clean(t).toLowerCase().replace(/&/g, 'and').replace(/[’']/g, '').replace(/[^a-z0-9+]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 100); }
+  function sectionEl(el) { return el && el.closest('.shopify-section'); }
+  function sectionName(el) {
+    var s = sectionEl(el);
+    return s ? s.id.replace(/^shopify-section-((template|sections)--\d+__)?/, '').replace(/_[A-Za-z0-9]{6}$/, '') : '';
+  }
+  function linkText(a) { return clean(a.innerText || a.textContent || a.getAttribute('aria-label') || a.title || ''); }
+
+  // ---------- promotions (hero sliders) ----------
+  function isHeroSlider(sec) { return sec && /__slider_|^shopify-section-slider/.test(sec.id); }
+  function slideOf(el) { return el.closest('.swiper-slide, .m-slide'); }
+  function promo(slide) {
+    var sec = sectionEl(slide);
+    var img = slide.querySelector('img');
+    var src = img ? (img.currentSrc || img.src || '') : '';
+    var file = src ? decodeURIComponent(src.split('?')[0].split('/').pop()).replace(/\.[a-z0-9]+$/i, '') : '';
+    var head = slide.querySelector('h1, h2, h3');
+    var name = file || clean(head && head.innerText).slice(0, 100) || 'banner';
+    var idx = slide.closest('.swiper-slide');
+    var slot = idx && idx.dataset.swiperSlideIndex !== undefined ? Number(idx.dataset.swiperSlideIndex) + 1 : 1;
+    return { promotion_name: name, creative_slot: String(slot), page_type: pageType(), key: (sec ? sec.id : '') + ':' + slot };
+  }
+  var seenPromo = {};
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting || en.intersectionRatio < 0.5) return;
+        var p = promo(en.target);
+        if (seenPromo[p.key]) return;
+        seenPromo[p.key] = 1;
+        dl({ event: 'view_promotion', promotion_name: p.promotion_name, creative_slot: p.creative_slot, page_type: p.page_type });
+      });
+    }, { threshold: [0.5] });
+    // view_promotion only for the top hero slider of the page (the first slider section);
+    // banner taps (select_promotion) are still tracked on every slider.
+    var watch = function () {
+      var hero = [].slice.call(document.querySelectorAll('.shopify-section')).filter(isHeroSlider)[0];
+      [hero].filter(Boolean).forEach(function (sec) {
+        sec.querySelectorAll('.swiper-slide, .m-slide').forEach(function (s) {
+          if (s.parentElement && s.parentElement.closest('.swiper-slide, .m-slide')) return; // nested inner wrapper
+          if (!s.dataset.gaObs) { s.dataset.gaObs = '1'; io.observe(s); }
+        });
+      });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watch); else watch();
+    window.addEventListener('load', watch);
+  }
+
+  // ---------- clicks ----------
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href], button, [data-video]');
+    if (!a) return;
+    var href = a.getAttribute && (a.getAttribute('href') || '');
+    var text = linkText(a);
+    var sec = sectionEl(a);
+    var pt = pageType();
+    var sn = sectionName(a) || (a.closest('[class*="whatsapp"], [class*="chat"], [class*="sticky"], [class*="float"]') ? 'floating_widget' : 'page');
+
+    // nav_click: header (desktop), menu (mobile drawer), footer
+    if (sec && /header-group|__header$/.test(sec.id) || (sec && /header/.test(sec.className))) {
+      if (text && a.tagName === 'A') {
+        var loc = a.closest('.m-menu-mobile, [class*="menu-mobile"], [class*="drawer"]') ? 'menu' : 'header';
+        dl({ event: 'nav_click', nav_location: loc, link_text: slug(text) });
+      }
+    } else if (sec && /footer-group|__footer$/.test(sec.id) && text && a.tagName === 'A') {
+      dl({ event: 'nav_click', nav_location: 'footer', link_text: slug(text) });
+    }
+
+    // select_promotion: tap on a hero slider banner
+    if (isHeroSlider(sec)) {
+      var slide = slideOf(a);
+      if (slide) {
+        var p = promo(slide);
+        dl({ event: 'select_promotion', promotion_name: p.promotion_name, creative_slot: p.creative_slot, page_type: p.page_type });
+      }
+    }
+
+    // age_collection_click: age tiles (0-2 ... 16+)
+    var age = /\/collections\//.test(href) && text.match(/(\d+\s*m?\s*[-–]\s*\d+|\d+\s*\+)\s*(years?|yrs?)?/i);
+    if (age && /year|yr/i.test(text + href)) {
+      dl({ event: 'age_collection_click', age_band: age[1].replace(/\s+/g, '').replace('–', '-').toLowerCase(), page_type: pt });
+    }
+
+    // collection_view_all: "View all" on a book row
+    if (/^(view all|see all|view more|shop all)$/i.test(text)) {
+      var h = sec && sec.querySelector('h1, h2, h3');
+      dl({ event: 'collection_view_all', collection_name: slug(h ? h.innerText : sn), page_type: pt });
+    }
+
+    // whatsapp_click / community_join_click
+    var isWa = /wa\.me|whatsapp\.com|api\.whatsapp/i.test(href);
+    var isCommunity = /community/i.test(text) && (/join/i.test(text) || isWa || /chat\.whatsapp\.com/i.test(href));
+    if (isCommunity) {
+      dl({ event: 'community_join_click', page_type: pt });
+    } else if (isWa) {
+      var blob = (text + ' ' + decodeURIComponent(href)).toLowerCase();
+      var intent = /cancel|pause|change/.test(blob) ? 'cancel_or_change'
+        : /gift/.test(blob) ? 'gift'
+        : /sip/.test(blob) || /^sip_/.test(pt) ? 'sip_help' : 'enquiry';
+      dl({ event: 'whatsapp_click', page_type: pt, section_name: sn, wa_intent: intent });
+    }
+
+    // gift_click
+    if (/gift/i.test(href) && /\/(products|pages|collections)\//.test(href) || /^gift now$/i.test(text)) {
+      dl({ event: 'gift_click', page_type: pt, section_name: sn });
+    }
+
+    // reading_challenge_click: Reading Challenge CTAs (not the header/footer menu links) and the
+    // "Download App" buttons on the reading challenge pages
+    var inNav = sec && /header|footer/.test(sec.id + ' ' + sec.className);
+    var onChallenge = /reading_challenge/.test(pt) || /reading_challenge/.test(sn);
+    if (!inNav && (/reading-challenge/i.test(href) || /reading challenge/i.test(text) || (onChallenge && /download|get the app/i.test(text)))) {
+      dl({ event: 'reading_challenge_click', page_type: pt });
+    }
+
+    // expert_video_play: video thumbnails (custom video gallery)
+    if (a.matches && a.matches('[data-video]')) {
+      var im = a.querySelector('img');
+      var title = im && (im.getAttribute('src') || '') ? decodeURIComponent(im.getAttribute('src').split('?')[0].split('/').pop()).replace(/\.[a-z0-9]+$/i, '') : (a.dataset.video || '').split('?')[0].split('/').pop();
+      dl({ event: 'expert_video_play', video_title: title, page_type: pt });
+    }
+  }, true);
+})();
+</script>

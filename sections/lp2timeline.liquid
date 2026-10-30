@@ -1,0 +1,267 @@
+<section class="nshw-section">
+
+  <div class="nshw-container">
+
+    <h2 class="nshw-heading">
+      {{ section.settings.heading }}
+    </h2>
+
+    <div class="nshw-timeline">
+
+      {% for block in section.blocks %}
+
+        <div class="nshw-step" {{ block.shopify_attributes }}>
+
+          <div class="nshw-number">
+            {{ block.settings.number }}
+          </div>
+
+          <div class="nshw-content">
+
+            <h3 class="nshw-title">
+              {{ block.settings.title }}
+            </h3>
+
+            <div class="nshw-description">
+              {{ block.settings.description }}
+            </div>
+
+          </div>
+
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+    {% if section.settings.button_text != blank %}
+      <div class="nshw-btn-wrap">
+        <a
+          href="{{ section.settings.button_link }}"
+          class="nshw-button"
+        >
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+
+</section>
+
+<style>
+
+.nshw-section{
+  padding:20px 20px 80px 20px;
+}
+
+.nshw-container{
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.nshw-heading{
+  text-align:center;
+  font-size:44px;
+  font-weight:800;
+  line-height:1.1;
+  margin:0 0 70px;
+  color:#3c3c3c;
+}
+
+/* DESKTOP */
+
+.nshw-timeline{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.nshw-timeline:before{
+  content:'';
+  position:absolute;
+  top:32px;
+  left:0;
+  right:0;
+  border-top:3px dashed #FF66BA;
+  z-index:1;
+}
+
+.nshw-step{
+  position:relative;
+  flex:1;
+  z-index:2;
+}
+
+.nshw-number{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  border:1.5px solid #FF66BA;
+  background: #ffffff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  font-weight:700;
+  color:#333;
+  margin-bottom:18px;
+}
+
+.nshw-title{
+  margin:0 0 8px;
+  font-size:20px;
+  font-weight:700;
+  color:#333;
+}
+
+.nshw-description{
+  color:#666;
+  font-size:16px;
+  line-height:1.5;
+}
+
+.nshw-btn-wrap{
+  text-align:center;
+  margin-top:50px;
+}
+
+.nshw-button{
+  display:inline-block;
+  min-width:320px;
+  padding:14px 65px;
+  border-radius:8px;
+  text-decoration:none;
+  background: #FF66BA;
+  color:#fff;
+  font-weight:700;
+  font-size:18px;
+}
+
+.nshw-button:hover{
+  opacity:.9;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .nshw-btn-wrap{
+  margin-top: 8px;
+}
+
+  .nshw-section{
+    padding:32px 20px 40px 20px;
+  }
+
+  .nshw-heading{
+    font-size:42px;
+    margin-bottom:40px;
+  }
+
+  .nshw-timeline{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    padding-left:10px;
+  }
+
+  .nshw-timeline:before{
+    top:0;
+    bottom: 36px;
+    left:32px;
+    right:auto;
+    width:0;
+    border-top:none;
+    border-left:3px dashed #ff99d3;
+  }
+
+  .nshw-step{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    margin-bottom:25px;
+  }
+
+  .nshw-number{
+    margin-bottom:0;
+    flex-shrink:0;
+    width:46px;
+    height:46px;
+    font-size:18px;
+  }
+
+  .nshw-title{
+    font-size:18px;
+  }
+
+  .nshw-description{
+    font-size:14px;
+  }
+
+  .nshw-button{
+    width:100%;
+    min-width:100%;
+    display:block;
+  }
+
+}
+
+</style>
+
+{% schema %}
+{
+  "name": "NS How It Works",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How It Works"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Start Subscription"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Subscribe to a Plan"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Pick the right subscription"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NS How It Works"
+    }
+  ]
+}
+{% endschema %}

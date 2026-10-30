@@ -1,0 +1,204 @@
+{% schema %}
+{
+  "name": "Custom Commitment Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_desktop",
+      "label": "Desktop Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Mobile Background Image"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Why make a longer commitment?"
+    },
+    {
+      "type": "textarea",
+      "id": "sub_text",
+      "label": "Sub Text",
+      "default": "Surround your child with Books/Toys all year round. Don’t break the momentum! Build a consistent habit!"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Feature description text goes here."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Custom Commitment Section"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="ccs-wrapper">
+  <div class="ccs-overlay">
+    <div class="ccs-container">
+
+      <div class="ccs-features">
+        {% for block in section.blocks %}
+          <div class="ccs-feature-item" {{ block.shopify_attributes }}>
+            {% if block.settings.icon %}
+              <img 
+                src="{{ block.settings.icon | image_url: width: 100 }}" 
+                alt="{{ block.settings.title }}" 
+                class="ccs-icon"
+                loading="lazy"
+              >
+            {% endif %}
+            <h4 class="ccs-feature-title">{{ block.settings.title }}</h4>
+            <p class="ccs-feature-desc">{{ block.settings.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="ccs-content">
+        <h2 class="ccs-heading">
+          {{ section.settings.main_heading }}
+        </h2>
+        <p class="ccs-subtext">
+          {{ section.settings.sub_text }}
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== UNIQUE SECTION STYLING ===== */
+.ccs-wrapper {
+  position: relative;
+  width: 100%;
+  background-image: url({{ section.settings.bg_desktop | image_url }});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.ccs-overlay {
+  padding: 190px 20px;
+}
+
+.ccs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.ccs-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  flex: 1;
+}
+
+.ccs-feature-item {
+  text-align: center;
+}
+
+.ccs-icon {
+  width: auto;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ccs-feature-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.ccs-feature-desc {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ccs-content {
+  flex: 1;
+}
+
+.ccs-heading {
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.ccs-subtext {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+.ccs-overlay {
+  padding: 220px 20px;
+}
+  .ccs-wrapper {
+    background-image: url({{ section.settings.bg_mobile | image_url }});
+  }
+
+  .ccs-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  /* 👇 Content top me */
+  .ccs-content {
+    order: 1;
+  }
+
+  /* 👇 Features neeche */
+  .ccs-features {
+    order: 2;
+    grid-template-columns: repeat(2, 1fr); /* 2 column in one row */
+    gap: 20px;
+  }
+
+  .ccs-feature-item {
+    text-align: center;
+  }
+
+  .ccs-heading {
+    font-size: 26px;
+  }
+
+  .ccs-subtext {
+    font-size: 15px;
+  }
+}
+
+</style>

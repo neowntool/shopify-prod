@@ -1,0 +1,1686 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "16341802176432806c": {
+      "type": "breadcrumb",
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "text_alignment": "center",
+        "hide_current": false,
+        "hide_on_mb": false,
+        "animations": "inherit"
+      }
+    },
+    "slider_cewxrj": {
+      "type": "slider",
+      "blocks": {
+        "slider_item_wzx4CE": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/More_Play_web_banner_5_2.png",
+            "mb_background": "shopify://shop_images/More_Play_web_banner_5_2.png",
+            "schedule_start": "2026-10-16 00:00",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/products/double-the-fun-toy-plan",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_DHDGPx": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/toys_diwali_web_banner_14_1.png",
+            "mb_background": "shopify://shop_images/toys_diwali_web_banner_14_1.png",
+            "schedule_start": "2026-10-29 00:00",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/products/double-the-fun-toy-plan",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_KQVVcw": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/Worth_Repeating_web_banner_3_1.png",
+            "mb_background": "shopify://shop_images/Worth_Repeating_web_banner_3_1.png",
+            "schedule_start": "2026-10-16 00:00",
+            "schedule_end": "2026-10-21 23:59",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/products/double-the-fun-toy-plan",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_QN77hd": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/Doublle_the_fun_web_2_2_1.png",
+            "mb_background": "shopify://shop_images/Doublle_the_fun_web_2_2_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/products/double-the-fun-toy-plan",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_7XeXfR": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/2.6.1.3-D.png",
+            "mb_background": "shopify://shop_images/2.6.1.3.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_L6wYMw": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/2.5.1.2_D.png",
+            "mb_background": "shopify://shop_images/2.5.1.2.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_r8e3rB": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/No_deposit_toy_banner_1.png",
+            "mb_background": "shopify://shop_images/No_deposit_toy_banner_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slider_item_wzx4CE",
+        "slider_item_DHDGPx",
+        "slider_item_KQVVcw",
+        "slider_item_QN77hd",
+        "slider_item_7XeXfR",
+        "slider_item_L6wYMw",
+        "slider_item_r8e3rB"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 3,
+        "use_content_above": false,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "text_fbtrdP": {
+          "type": "text",
+          "settings": {
+            "text": "8 toys monthly - 4 toys per Exchange 🎁 2 Exchanges each month",
+            "text_style": "body"
+          }
+        },
+        "text_JwwGKD": {
+          "type": "text",
+          "settings": {
+            "text": "Only operating in Mumbai",
+            "text_style": "uppercase"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "size_title": "Size"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": false,
+            "show_atc_button": false,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "shipping_hVtWBg": {
+          "type": "shipping",
+          "settings": {
+            "show_delivery_times": true,
+            "deliver_text": "Estimated Delivery:",
+            "deliver_days": "5",
+            "date_format": "%b %d",
+            "show_shipping_text": false,
+            "shipping_text": "<p><strong>Shipping Costs:</strong> <em><strong>FREE in Mumbai (Outside Mumbai: ₹150/month shipping charge)</strong></em></p>"
+          }
+        },
+        "addons": {
+          "type": "addons",
+          "disabled": true,
+          "settings": {
+            "show_atcp": false,
+            "show_ask_a_question": true,
+            "show_social": true
+          }
+        },
+        "collapsible_tab_6Qwipw": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product Description",
+            "content": "",
+            "liquid": "{{product.description}}",
+            "default_open": true
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "text_fbtrdP",
+        "text_JwwGKD",
+        "variant_picker",
+        "buy_buttons",
+        "shipping_hVtWBg",
+        "addons",
+        "collapsible_tab_6Qwipw"
+      ],
+      "custom_css": [
+        "img {border-radius: 15px;}",
+        "div .m-product-tag {background-color: green;}",
+        "div .m-currency--saved {font-weight: 600; margin-left: 3px;}"
+      ],
+      "settings": {
+        "container": "container",
+        "layout": "layout-6",
+        "show_atwl": false,
+        "enable_history_state": true,
+        "enable_variant_group_images": false,
+        "disable_selected_variant_default": false,
+        "show_featured_media": true,
+        "show_zoom_button": false,
+        "enable_video_autoplay": false,
+        "show_nav_media_mobile": false,
+        "show_pagination_mobile": false,
+        "use_sticky_atc": false,
+        "use_sticky_atc_on_mobile": false,
+        "enable_dynamic_checkout": false,
+        "sticky_atc_wishtlist": false,
+        "sticky_atc_compare": false
+      }
+    },
+    "rich_text_hDDGtC": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_4FUcF4": {
+          "type": "heading",
+          "settings": {
+            "heading": "How does it work?",
+            "heading_size": "h3"
+          }
+        }
+      },
+      "block_order": [
+        "heading_4FUcF4"
+      ],
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "image_with_text_2_P7EEwP": {
+      "type": "image-with-text-2",
+      "settings": {
+        "color_scheme": "",
+        "container": "w-full",
+        "hero_size": "adapt",
+        "show_overlay": false,
+        "image": "shopify://shop_images/2.1.3-How-it-works-D.png",
+        "image_link": "",
+        "parallax": false,
+        "parallax_direction": "vertical",
+        "content_in_container": false,
+        "content_position": "center middle",
+        "text_alignment": "center",
+        "text_size": "medium",
+        "text_color": "white",
+        "title": "",
+        "subtitle": "",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "text_alignment_mobile": "center",
+        "mb_image": "shopify://shop_images/neown-How_it_works.png",
+        "use_content_above": false,
+        "custom_class": "",
+        "animations": "inherit",
+        "enable_bg_zoom_effect": true
+      }
+    },
+    "empty_space_kLcNYh": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "show_divider_line": true,
+        "divider_style": "solid",
+        "divider_height": 10,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "custom_liquid_3DdeGF": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Reviews Slider</title>\n</head>\n<style>\n\n    .reviews-container {\n      width: 90%;\n      max-width: 1000px;\n      background-color: white;\n      padding: 20px;\n      border-radius: 10px;\n      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n      text-align: center;\n      position: relative;\n      \n    }\n</style>\n<body>\n<div style=\"display: flex; justify-content: center; align-items: center;\">\n  <div class=\"reviews-container\"> \n    <!-- style=\"font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; width: 80%; max-width: 800px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; position: relative;\"> -->\n    <h2 style=\"margin-bottom: 20px; font-size: 1.5rem; font-weight: bold;\">What Mothers Have to Say</h2>\n    <div class=\"review-slide active\" style=\"display: block; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position:relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; margin: 20px auto\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Neha_Mathur.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n      <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Perfect books for my daughter</h3>\n      <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">Thank you so much neOwn for sending the perfect books to my daughter, according to her interest.</p>\n      <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Neha Mathur</p>\n    </div>\n    </div>\n\n    <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n\n      <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/FB_PP_2.png?v=1721648050\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n      <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">The quality of books are really good</h3>\n      <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">The process has also been very very smooth And my daughter really enjoyed reading all of them</p>\n      <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Parul Jalan</p>\n        </div>\n    </div>\n    <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Tara_Baluwala.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Seeing improvement in vocabulary, knowledge</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">My child really enjoys reading and she is able to find all the kind of books she wants at neOwn. I can see that she is improving her vocabulary, knowledge, etc.The experience has been very nice.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Tara Baluwala</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/FB_PP_2.png?v=1721648050\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">My young one loved the touch-n-feel books</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">The best part I liked is the drop n pick up service where parents of nuclear family like me is all that we need 😇 My young one loved the touch n feel books she wants the same book, no matter how many times she might have seen it 😀</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Bhavna Juthani</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Rashmi_Tibrewala_1.png?v=1721646421\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">I love neOwn!!</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">It truly helped me in making my child start reading.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Rashmi Tibrewala</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Vanshika_Sethi.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Virtual library has been good option</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">Library is a comfort place for my daughter and this virtual library has been good option for her virtually.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Vanshika Sethi</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/FB_PP_2.png?v=1721648050\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">I can see improvement 😊</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">The books are in great condition and the availability of books at the time of selection is also too good. I can see improvement in my child's focus on reading. She has started reading chapter books. And she enjoys the books she gets😊</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Parul Jalan</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px;position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Anusha_Gamidi.jpg?v=1721561925\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Thanks for the wonderful picks</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">She is so excited as usual to see the new books😃😃😃 Not just my daughter, I too am enjoying reading these books</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Anusha Gamidi</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px;position: relative; \">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Bhagyashree_Gogte.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Love the concept</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">I am really happy with your services and I just love your concept of sharing resources.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Bhagyashree Gogte</p>\n        </div>\n      </div>\n\n    <div class=\"nav-buttons\" style=\"margin-top: 15px;\">\n      <button onclick=\"prevSlide()\" style=\"background-color: #8a2be2; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin: 0 5px;\">&lt;</button>\n      <button onclick=\"nextSlide()\" style=\"background-color: #8a2be2; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin: 0 5px;\">&gt;</button>\n    </div>\n  </div>\n  <script>\n    let currentIndex = 0;\n    const slides = document.querySelectorAll('.review-slide');\n\n    function showSlide(index) {\n      slides.forEach((slide, i) => {\n        slide.style.display = i === index ? 'block' : 'none';\n      });\n    }\n\n    function nextSlide() {\n      currentIndex = (currentIndex + 1) % slides.length;\n      showSlide(currentIndex);\n    }\n\n    function prevSlide() {\n      currentIndex = (currentIndex - 1 + slides.length) % slides.length;\n      showSlide(currentIndex);\n    }\n\n    // Auto-scroll functionality\n    setInterval(() => {\n      nextSlide();\n    }, 3000);\n  </script>\n</div>",
+        "custom_class": ""
+      }
+    },
+    "empty_space_gLM68J": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "show_divider_line": true,
+        "divider_style": "solid",
+        "divider_height": 10,
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "custom_class": ""
+      }
+    },
+    "image_with_text_2_r9UEXT": {
+      "type": "image-with-text-2",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "container": "w-full",
+        "hero_size": "adapt",
+        "show_overlay": false,
+        "image": "shopify://shop_images/Only_Toy_Subscription_Pricing.png",
+        "image_link": "",
+        "parallax": false,
+        "parallax_direction": "vertical",
+        "content_in_container": false,
+        "content_position": "center middle",
+        "text_alignment": "center",
+        "text_size": "medium",
+        "text_color": "white",
+        "title": "",
+        "subtitle": "",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "text_alignment_mobile": "center",
+        "mb_image": "shopify://shop_images/Only_Toy_Pricing.png",
+        "use_content_above": false,
+        "custom_class": "",
+        "animations": "inherit",
+        "enable_bg_zoom_effect": true
+      }
+    },
+    "featured_collection_GdXCV9": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        "h2 {font-size: 24px;}",
+        ".m-product-card__title {font-size: 16px;}",
+        "img {object-fit: contain;}",
+        ".m-button {margin-top: 0px;}",
+        ".swiper-container {padding-bottom: 0px;}",
+        ".m-price__sale,.m-price__regular {display: none;}",
+        "@media (max-width: 767px) {.m-section-py {padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px; }}"
+      ],
+      "settings": {
+        "heading": "{{ section.settings.collection.title }}",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "color_scheme": "",
+        "container": "container-fluid",
+        "collection": "popular-toys",
+        "enable_flashsale": false,
+        "show_countdown": false,
+        "product_to_show": 12,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": false,
+        "show_button_on_header": true,
+        "button_type": "link",
+        "button_text": "View all",
+        "button_style": "m-button--link",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 12,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "featured_collection_G3NWXe": {
+      "type": "featured-collection",
+      "custom_css": [
+        "h2 {font-size: 24px;}",
+        ".m-product-card__title {font-size: 16px;}",
+        "img {object-fit: contain;}",
+        ".m-button {margin-top: 0px;}",
+        ".swiper-container {padding-bottom: 0px;}",
+        ".m-price__sale,.m-price__regular {display: none;}",
+        "@media (max-width: 767px) {.m-section-py {padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px; }}"
+      ],
+      "settings": {
+        "heading": "{{ section.settings.collection.title }}",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "color_scheme": "",
+        "container": "container-fluid",
+        "collection": "all-toys",
+        "enable_flashsale": false,
+        "show_countdown": false,
+        "product_to_show": 12,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": false,
+        "show_button_on_header": true,
+        "button_type": "link",
+        "button_text": "View all",
+        "button_style": "m-button--link",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 12,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "collection_list_zTY9f9": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_block_bwLwpY": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "0-2-years",
+            "title": "{{ block.settings.collection.title }}",
+            "item_image": "shopify://shop_images/2.1.9_0-2.png"
+          }
+        },
+        "collection_block_Mm8RAB": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "3-5-years",
+            "title": "{{ block.settings.collection.title }}",
+            "item_image": "shopify://shop_images/2.1.9_3-5.png"
+          }
+        },
+        "collection_block_9AJFMx": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "6-8-years",
+            "title": "{{ block.settings.collection.title }}",
+            "item_image": "shopify://shop_images/2.1.9_6-8.png"
+          }
+        },
+        "collection_block_xc8RCj": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "9-12-years",
+            "title": "{{ block.settings.collection.title }}",
+            "item_image": "shopify://shop_images/2.1.9_9-12.png"
+          }
+        },
+        "collection_block_CzBxz4": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "13-16-years",
+            "title": "{{ block.settings.collection.title }}",
+            "item_image": "shopify://shop_images/2.1.9_13-16.png"
+          }
+        },
+        "collection_block_pLdamX": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "16-years",
+            "title": "{{ block.settings.collection.title }}",
+            "item_image": "shopify://shop_images/2.1.9_16.png"
+          }
+        }
+      },
+      "block_order": [
+        "collection_block_bwLwpY",
+        "collection_block_Mm8RAB",
+        "collection_block_9AJFMx",
+        "collection_block_xc8RCj",
+        "collection_block_CzBxz4",
+        "collection_block_pLdamX"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media screen and (max-width: 767px) {.m-mixed-layout--mobile-grid {--grid-columns-mobile: 3; }}"
+      ],
+      "settings": {
+        "heading": "Book Collections by age",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "color_scheme": "",
+        "container": "container-fluid",
+        "layout": "grid",
+        "expanded": true,
+        "card_style": "standard",
+        "text_alignment": "center",
+        "hover_effect": "scaling-down",
+        "show_product_count": false,
+        "count_inline_title": true,
+        "image_rounded": true,
+        "items_per_row": 6,
+        "item_gap": 30,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "mobile_disable_slider": true,
+        "use_scroll_mobile": false,
+        "mobile_gap": 10,
+        "hidden_slide_control_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "collection_list_a6t6pr": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_block_weMEHh": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toys-t18-t2-1",
+            "title": "0-2 years",
+            "item_image": "shopify://shop_images/2.1.10_6_mnths-2.png"
+          }
+        },
+        "collection_block_kKnAMW": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toys-t3-t4-new",
+            "title": "3 -5 years",
+            "item_image": "shopify://shop_images/2.1.10_3-5.png"
+          }
+        },
+        "collection_block_QadC8A": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toys-t5",
+            "title": "5 to 8 years",
+            "item_image": "shopify://shop_images/2.1.10_6-8.png"
+          }
+        }
+      },
+      "block_order": [
+        "collection_block_weMEHh",
+        "collection_block_kKnAMW",
+        "collection_block_QadC8A"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 767px) {.m-mixed-layout--mobile-grid {--grid-columns-mobile: 3; }}"
+      ],
+      "settings": {
+        "heading": "Toy Collections by age",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "color_scheme": "",
+        "container": "container-fluid",
+        "layout": "grid",
+        "expanded": true,
+        "card_style": "standard",
+        "text_alignment": "center",
+        "hover_effect": "scaling-down",
+        "show_product_count": false,
+        "count_inline_title": true,
+        "image_rounded": true,
+        "items_per_row": 6,
+        "item_gap": 30,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "mobile_disable_slider": true,
+        "use_scroll_mobile": false,
+        "mobile_gap": 10,
+        "hidden_slide_control_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "featured_collection_xfRYXP": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        "h2 {font-size: 24px;}",
+        ".m-product-card__title {font-size: 16px;}",
+        "img {object-fit: contain;}",
+        ".m-button {margin-top: 0px;}",
+        ".swiper-container {padding-bottom: 0px;}",
+        ".m-price__sale,.m-price__regular {display: none;}",
+        "@media (max-width: 767px) {.m-section-py {padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px; }}"
+      ],
+      "settings": {
+        "heading": "{{ section.settings.collection.title }}",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "color_scheme": "",
+        "container": "container-fluid",
+        "collection": "toys-t3-t4-new",
+        "enable_flashsale": false,
+        "show_countdown": false,
+        "product_to_show": 12,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": false,
+        "show_button_on_header": true,
+        "button_type": "link",
+        "button_text": "View all",
+        "button_style": "m-button--link",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 12,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "featured_collection_E4RFey": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        "h2 {font-size: 24px;}",
+        ".m-product-card__title {font-size: 16px;}",
+        "img {object-fit: contain;}",
+        ".m-button {margin-top: 0px;}",
+        ".swiper-container {padding-bottom: 0px;}",
+        ".m-price__sale,.m-price__regular {display: none;}",
+        "@media (max-width: 767px) {.m-section-py {padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px; }}"
+      ],
+      "settings": {
+        "heading": "{{ section.settings.collection.title }}",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "color_scheme": "",
+        "container": "container-fluid",
+        "collection": "6-month-to-18-months-new",
+        "enable_flashsale": false,
+        "show_countdown": false,
+        "product_to_show": 12,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": false,
+        "show_button_on_header": true,
+        "button_type": "link",
+        "button_text": "View all",
+        "button_style": "m-button--link",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 12,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "featured_collection_jw9wqg": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        "h2 {font-size: 24px;}",
+        ".m-product-card__title {font-size: 16px;}",
+        "img {object-fit: contain;}",
+        ".m-button {margin-top: 0px;}",
+        ".swiper-container {padding-bottom: 0px;}",
+        ".m-price__sale,.m-price__regular {display: none;}",
+        "@media (max-width: 767px) {.m-section-py {padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px; }}"
+      ],
+      "settings": {
+        "heading": "{{ section.settings.collection.title }}",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "color_scheme": "",
+        "container": "container-fluid",
+        "collection": "toys-cognitive-development",
+        "enable_flashsale": false,
+        "show_countdown": false,
+        "product_to_show": 12,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": false,
+        "show_button_on_header": true,
+        "button_type": "link",
+        "button_text": "View all",
+        "button_style": "m-button--link",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 12,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "featured_collection_JKrtBG": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        "h2 {font-size: 24px;}",
+        ".m-product-card__title {font-size: 16px;}",
+        "img {object-fit: contain;}",
+        ".m-button {margin-top: 0px;}",
+        ".swiper-container {padding-bottom: 0px;}",
+        ".m-price__sale,.m-price__regular {display: none;}",
+        "@media (max-width: 767px) {.m-section-py {padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px; }}"
+      ],
+      "settings": {
+        "heading": "{{ section.settings.collection.title }}",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "color_scheme": "",
+        "container": "container-fluid",
+        "collection": "toys-creativity-imagination-emotional-development",
+        "enable_flashsale": false,
+        "show_countdown": false,
+        "product_to_show": 12,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": false,
+        "show_button_on_header": true,
+        "button_type": "link",
+        "button_text": "View all",
+        "button_style": "m-button--link",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 12,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "image_with_text_NYWtMe": {
+      "type": "image-with-text",
+      "custom_css": [
+        ".h2 {font-size: 24px;}",
+        ".m-image-with-text {background-color: #fbffd6;}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "container": "container",
+        "color_scheme": "scheme-eb800cf9-67ed-44eb-8c0b-5c854070fef2",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "layout": "left",
+        "image_column_size": "6",
+        "image_overlap": false,
+        "show_image_reverse": false,
+        "hover_effect": false,
+        "image_animation": "none",
+        "image": "shopify://shop_images/neown-woman-reads-book-child-with-child-reading-book.png",
+        "link": "",
+        "link_2": "",
+        "second_image_offset_top": 10,
+        "title": "Gift a Subscription",
+        "sub_title": "",
+        "text": "<p>The Gift that Keeps Giving</p>",
+        "htmltext": "",
+        "text_size": "medium",
+        "content_alignment": "center",
+        "button_label": "GIFT NOW",
+        "button_link": "https://wa.me/919137081640?text=Hi,%20I%20want%20to%20gift%20a%20neOwn%20subscription",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "rich_text_EqVprp": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_jME3HH": {
+          "type": "heading",
+          "settings": {
+            "heading": "<b>The magic of reading and play</b>",
+            "heading_size": "h3"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jME3HH"
+      ],
+      "custom_css": [
+        "h1,h2,h3,h4,h5,h6 {font-size: 20px;}"
+      ],
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "scrolling_promotion_ryJkEH": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "image_tNXKdg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/1_d3c36fed-08f5-46fe-901d-5e3171529ad1.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_eiee6C": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3_39ed9dd0-0822-46c9-98c7-19e4dba5cdd9.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_XUTYbg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/22.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_D7Bi6r": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/12.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_pCf4dd": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4_24d15cee-1cf9-4c6a-b403-614145cfce9c.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_hyamEP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/5_5cd0df5b-bac3-49a3-9ac1-5b65b1736a24.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_9iKTmi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/13_a95d1222-df0d-45ed-b4cd-02ec06309a40.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_PqmUee": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/7_33eac9ec-b88f-490a-9d4f-f9ff73e3af50.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_eQJE3V": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/18.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_bkBbiF": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/23.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_wmimt7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2_4cbedca5-dcb2-47d0-9df2-769d74fd3673.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_ezyWwz": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/17_dcafae8c-afde-4af5-93db-323159fbdebb.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_RH9WAa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/19.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_MGqtwW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/25.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_hTqGMU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/15_b3759e36-292b-4e8a-ad10-8a7d905fabeb.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_HaKj6J": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/21.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_9mB3BL": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8_d9eb1472-f7d2-4100-a2a6-9b082abbfaba.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_gzKpWX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/11_a88676d1-23fe-4053-82b0-53b2d29215bc.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_dBfX9e": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/10_b786e8c4-7c32-426b-a467-1a351b35c6a8.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_iEk7da": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/9_95075ce5-54ee-4b21-b503-cb2edcd7b223.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_8LWPQf": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/16_287cd2fc-3ba2-4749-a026-600feddb41a6.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_Fbic7W": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/26.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_KAXFCp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/20.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_P7dwyX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/24.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_Tn6ryJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/14_364166e6-1f30-49ba-9efb-71ca2bd8d5f7.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_fjwGe8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/6_a6f3f220-5259-4c0c-bfc2-6de212374968.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_tNXKdg",
+        "image_eiee6C",
+        "image_XUTYbg",
+        "image_D7Bi6r",
+        "image_pCf4dd",
+        "image_hyamEP",
+        "image_9iKTmi",
+        "image_PqmUee",
+        "image_eQJE3V",
+        "image_bkBbiF",
+        "image_wmimt7",
+        "image_ezyWwz",
+        "image_RH9WAa",
+        "image_MGqtwW",
+        "image_hTqGMU",
+        "image_HaKj6J",
+        "image_9mB3BL",
+        "image_gzKpWX",
+        "image_dBfX9e",
+        "image_iEk7da",
+        "image_8LWPQf",
+        "image_Fbic7W",
+        "image_KAXFCp",
+        "image_P7dwyX",
+        "image_Tn6ryJ",
+        "image_fjwGe8"
+      ],
+      "disabled": true,
+      "settings": {
+        "container": "w-full",
+        "direction": "left",
+        "speed": 30,
+        "item_gap": 50,
+        "item_gap_mobile": 30,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "scrolling_promotion_GfBKew": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "image_3E6drA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Casa_Bambini.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_MRw7ir": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Giggles.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_KGWWMi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Fisher_Price.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_kbg7Rb": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Curious_cub.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_E63nKz": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/OK_Play.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_QT9grq": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Kipa_gaming.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_PUyHqg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Funskool.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_aKdn6Y": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Skillmatics.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_3E6drA",
+        "image_MRw7ir",
+        "image_KGWWMi",
+        "image_kbg7Rb",
+        "image_E63nKz",
+        "image_QT9grq",
+        "image_PUyHqg",
+        "image_aKdn6Y"
+      ],
+      "settings": {
+        "container": "w-full",
+        "direction": "left",
+        "speed": 30,
+        "item_gap": 50,
+        "item_gap_mobile": 30,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "brands_list_VUULtN": {
+      "type": "brands-list",
+      "blocks": {
+        "image_LNYtq4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Neown_Expert_Picks.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": "100px"
+          }
+        },
+        "image_KjMJGE": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Neown_Door_Step_Delivery.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": "80px"
+          }
+        },
+        "image_RPPJHB": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Neown_Huge_Saving.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": "100px"
+          }
+        },
+        "image_k4aDqL": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Neown_Clutter_free.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": "100px"
+          }
+        }
+      },
+      "block_order": [
+        "image_LNYtq4",
+        "image_KjMJGE",
+        "image_RPPJHB",
+        "image_k4aDqL"
+      ],
+      "settings": {
+        "heading": "Why choose neOwn?",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "color_scheme": "",
+        "item_per_row": 4,
+        "column_gap": 30,
+        "row_gap": 30,
+        "column_gap_mobile": 10,
+        "row_gap_mobile": 10,
+        "enable_slider": false,
+        "show_nav": false,
+        "show_pagination": false,
+        "autorotate": false,
+        "autorotate_speed": 3,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "image_with_text_MqehdT": {
+      "type": "image-with-text",
+      "custom_css": [
+        ".h2 {font-size: 24px;}",
+        ".m-image-with-text {background-color: #fbffd6;}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "container": "container",
+        "color_scheme": "scheme-eb800cf9-67ed-44eb-8c0b-5c854070fef2",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "layout": "left",
+        "image_column_size": "6",
+        "image_overlap": false,
+        "show_image_reverse": false,
+        "hover_effect": false,
+        "image_animation": "none",
+        "image": "shopify://shop_images/neown-woman-reads-book-child-with-child-reading-book.png",
+        "link": "",
+        "link_2": "",
+        "second_image_offset_top": 10,
+        "title": "Join the neOwn Parents' Community",
+        "sub_title": "",
+        "text": "<p>Get book recommendations & expert advice</p>",
+        "htmltext": "",
+        "text_size": "medium",
+        "content_alignment": "center",
+        "button_label": "JOIN NOW",
+        "button_link": "https://chat.whatsapp.com/JhQL63ML7ZJ7r6jBAXpks5",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "product-details-tabs": {
+      "type": "product-details-tabs",
+      "disabled": true,
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "default_open": true,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "collapsible_tabs_Yq864N": {
+      "type": "collapsible-tabs",
+      "blocks": {
+        "item_RTYT3J": {
+          "type": "item",
+          "settings": {
+            "header": "Do you deliver all over India? ",
+            "text_size": "h5",
+            "content": "<p> Currently, we only deliver books all over India. </p><p>Delivery is free within Mumbai, Thane, Navi Mumbai, and Mira-Bhayander. </p><p>Outside Mumbai: There is an additional delivery charge for Book Library deliveries outside Mumbai. </p><p>(Toy Library is only operating in Mumbai as of now) </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_3WpDxh": {
+          "type": "item",
+          "settings": {
+            "header": "How does the Library Subscription work? ",
+            "text_size": "h5",
+            "content": "<p>Step 1: 📚🧸You can subscribe to any plan from our website. </p><p>Step 2: 📲Download the neOwn app to select your books. </p><p>Step 3: 📦Books will be delivered and the pickup and exchange will happen after maximum 30 days</p><p>Step 4: 🔁Finally you return and repeat the same for all the following months of your subscription!</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_QhiRpM": {
+          "type": "item",
+          "settings": {
+            "header": "How can I select my toys?",
+            "text_size": "h5",
+            "content": "<p>Once you have subscribed, you can download our app📲 from which you can select the toys 🧸</p><p>You can select any toys of your choice, and in case you are not sure what to pick we have a book expert in-house who can help you out if needed 💖</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_8FWpPP": {
+          "type": "item",
+          "settings": {
+            "header": "How to download the neOwn app?",
+            "text_size": "h5",
+            "content": "<p>📲 neOwn App Link: </p><p>🔗 Android: <a href=\"https://play.google.com/store/apps/details?id=com.neown\"><span style=\"text-decoration:underline\">https://play.google.com/store/apps/details?id=com.neown</span></a> </p><p>🔗 Apple: <a href=\"https://apps.apple.com/in/app/neown/id6483860525\"><span style=\"text-decoration:underline\">https://apps.apple.com/in/app/neown/id6483860525</span></a></p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_y3mAD8": {
+          "type": "item",
+          "settings": {
+            "header": "What if I damage a Library Toy? What if I lose a Library Toy?",
+            "text_size": "h5",
+            "content": "<p>If the damage is minor and can be repaired by us, there will be no additional charge to you.</p><p>If the damage is major such that it cannot be circulated anymore, or if the item is lost/misplaced, we will charge you 40% of the MRP of the item (and you can keep the item).</p><p>neOwn trusts moms to take the utmost care of items so that we can all collectively enjoy them!</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_Ufn4JC": {
+          "type": "item",
+          "settings": {
+            "header": "Is there any deposit or registration fee?",
+            "text_size": "h5",
+            "content": "<p>No, there is no deposit or registration fee. </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_DhwbLi": {
+          "type": "item",
+          "settings": {
+            "header": "Do I get to choose my toys or do you send pre-curated toys? ",
+            "text_size": "h5",
+            "content": "<p>You can choose your toys! </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_W4zMEU": {
+          "type": "item",
+          "settings": {
+            "header": "There’s no place to enter my child’s details on the website, how will you know what kind of toys I want?",
+            "text_size": "h5",
+            "content": "<p>Our app asks for all these details to create a profile for your child. </p><p>Once you subscribe to any plan, you have to log in to our neOwn App to select your toys. </p><p>Before you can view the catalog on the app, you have to enter all your child’s details - including their age, so that we can provide an age-appropriate catalog for them. </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_HCE48n": {
+          "type": "item",
+          "settings": {
+            "header": "Can I see your collection before subscribing? What kind of books & toys do you have?",
+            "text_size": "h5",
+            "content": "<p>Yes, you can see our collections here: </p><p>Toy Collection: </p><p>We have wide range of premium toys for children between the ages of 6 months - 8 years. This includes STEM toys, Montessori toys, developmental toys, toys for pure fun, and more! </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_bWUjEw": {
+          "type": "item",
+          "settings": {
+            "header": "Can I get books for both my children in one library subscription, or do I need to subscribe to the ‘2 Siblings’ plan? ",
+            "text_size": "h5",
+            "content": "<p>No, you cannot get books for both children in one library subscription. You can subscribe to the ‘2 Siblings’ plan to get books for both your children, where you can get 3 books for each child or 5 books for each child. The reason for this is that we create a unique profile for each child with all their details and provide an age-appropriate curated catalog of books to choose from. This will enable you to see each child’s unique progress as well as all the books they have read in a more organised manner. </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_VzVMtt": {
+          "type": "item",
+          "settings": {
+            "header": "How do you sanitize the toys? ",
+            "text_size": "h5",
+            "content": "<p>Our process to ensure the toys are hygenic and in good condition: </p><ul><li>All toys are cleaned by our team before and after they go to or come back from any customer to ensure they are 100% sanitary</li><li>⁠We do a thorough check of all toys twice - once after they have come back from customers and the second time before they are going to another customer </li><li>⁠⁠If any toys are of bad quality we don't circulate it among customers anymore</li></ul>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_e3MM6N": {
+          "type": "item",
+          "settings": {
+            "header": "If I subscribe today, will my 30 days start now? ",
+            "text_size": "h5",
+            "content": "<p>No, your 30 days will start after the books have been delivered to you. </p><p>Once you subscribe, you have to download our app to select your books. After selection, they will be delivered in 2-5 days within Mumbai and 4-8 days outside Mumbai. </p><p>Your 30 days start from the day when the books are delivered. </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_DLg3kX": {
+          "type": "item",
+          "settings": {
+            "header": "How do I return the Library toys? ",
+            "text_size": "h5",
+            "content": "<p>Once you are done playing with the toys, you can select ‘Done Playing’ on our app. Then you have to select your next set of toys. Once the next set is confirmed, our team will schedule a delivery for the new toys and a pickup to return the old toys. The return process is as follows: We’ll send our delivery partner directly to your doorstep for the pickup of the toys. You’ll be notified of the timelines, and you can keep the toys packed for when it's time for the pickup.</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_HjLDnJ": {
+          "type": "item",
+          "settings": {
+            "header": "Can I cancel the Library Subscription at any time?",
+            "text_size": "h5",
+            "content": "<p>At this time, we do not offer order cancellation.</p><p>In case you’re facing any problems or are unhappy with your subscription, we’d love to hear what you would like us to change or improve! WhatsApp us on 9137081640, or you can get in touch directly with our founder at kranti@neown.in.</p>",
+            "content_page": "",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "item_RTYT3J",
+        "item_3WpDxh",
+        "item_QhiRpM",
+        "item_8FWpPP",
+        "item_y3mAD8",
+        "item_Ufn4JC",
+        "item_DhwbLi",
+        "item_W4zMEU",
+        "item_HCE48n",
+        "item_bWUjEw",
+        "item_VzVMtt",
+        "item_e3MM6N",
+        "item_DLg3kX",
+        "item_HjLDnJ"
+      ],
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "image_position": "left",
+        "column_gap": 100,
+        "heading": "FAQs",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "animations": "inherit",
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "16341802176432806c",
+    "slider_cewxrj",
+    "main",
+    "rich_text_hDDGtC",
+    "image_with_text_2_P7EEwP",
+    "empty_space_kLcNYh",
+    "custom_liquid_3DdeGF",
+    "empty_space_gLM68J",
+    "image_with_text_2_r9UEXT",
+    "featured_collection_GdXCV9",
+    "featured_collection_G3NWXe",
+    "collection_list_zTY9f9",
+    "collection_list_a6t6pr",
+    "featured_collection_xfRYXP",
+    "featured_collection_E4RFey",
+    "featured_collection_jw9wqg",
+    "featured_collection_JKrtBG",
+    "image_with_text_NYWtMe",
+    "rich_text_EqVprp",
+    "scrolling_promotion_ryJkEH",
+    "scrolling_promotion_GfBKew",
+    "brands_list_VUULtN",
+    "image_with_text_MqehdT",
+    "product-details-tabs",
+    "collapsible_tabs_Yq864N"
+  ]
+}

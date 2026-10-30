@@ -1,0 +1,206 @@
+
+
+
+
+{% style %}
+.easy-steps-sec-{{ section.id }} {
+  background-image: var(--bg-desktop);
+  background-size: cover;
+  background-position: center;
+  padding: 140px 20px;
+}
+
+.easy-steps-inner-{{ section.id }} {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.easy-steps-heading-{{ section.id }} h2 {
+  font-size: 42px;
+  margin-bottom: 8px;
+  color: {{ section.settings.heading_color }};
+}
+
+.easy-steps-heading-{{ section.id }} p {
+  font-size: 16px;
+  margin-bottom: 50px;
+  color: {{ section.settings.text_color }};
+}
+
+.easy-steps-grid-{{ section.id }} {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.easy-step-item-{{ section.id }} {
+  text-align: center;
+}
+
+.easy-step-circle-{{ section.id }} {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: {{ section.settings.circle_bg }};
+  color: {{ section.settings.circle_text }};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin: 0 auto 15px;
+}
+
+.easy-step-item-{{ section.id }} h4 {
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: {{ section.settings.heading_color }};
+}
+
+.easy-step-item-{{ section.id }} p {
+  font-size: 14px;
+  color: {{ section.settings.text_color }};
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .easy-steps-sec-{{ section.id }} {
+    background-image: var(--bg-mobile);
+    padding: 260px 20px;
+  }
+
+  .easy-step-circle-{{ section.id }} {
+    width: 75px;
+    height: 75px;
+    font-size: 32px;
+  }
+
+  .easy-steps-grid-{{ section.id }} {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .easy-steps-heading-{{ section.id }} h2 {
+    font-size: 30px;
+  }
+}
+{% endstyle %}
+
+<section
+  class="easy-steps-sec-{{ section.id }} easy_step_mb"
+  style="
+    --bg-desktop: url({{ section.settings.bg_image | image_url }});
+    --bg-mobile: url({{ section.settings.bg_image_mobile | image_url }});
+  "
+>
+  <div class="easy-steps-inner-{{ section.id }}">
+
+    <div class="easy-steps-heading-{{ section.id }}">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="easy-steps-grid-{{ section.id }}">
+      {% for block in section.blocks %}
+        <div class="easy-step-item-{{ section.id }}">
+          <div class="easy-step-circle-{{ section.id }}">
+            {{ block.settings.step_number }}
+          </div>
+          <h4>{{ block.settings.title }}</h4>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Easy Steps Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "As easy as 1-2-3"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "45,000+ books to choose from"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#444444"
+    },
+    {
+      "type": "color",
+      "id": "circle_bg",
+      "label": "Circle Background Color",
+      "default": "#e6f26d"
+    },
+    {
+      "type": "color",
+      "id": "circle_text",
+      "label": "Circle Text Color",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_number",
+          "label": "Step Number",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Choose a Plan"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Pick the right subscription."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Easy Steps (1-2-3)",
+      "blocks": [
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" }
+      ]
+    }
+  ]
+}
+{% endschema %}

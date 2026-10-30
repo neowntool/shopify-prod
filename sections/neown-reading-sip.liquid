@@ -1,0 +1,735 @@
+{%- comment -%}
+  Neown Reading SIP page: plan cards → 2-step modal (Your details → Payment) → Razorpay Checkout (UPI Autopay / card mandate).
+  Deliberately does NOT use Shopify's product form / cart / checkout buttons, so GoKwik never intercepts it.
+  Plans are blocks in the theme editor. Each block's price must match its Razorpay plan amount.
+  Backend (section setting "Backend URL"):
+    POST {backend}/razorpay/create-subscription/shopify  { planId, name, phone, email, source, utmParameters? } → { subscriptionId, keyId, prefill }
+      utmParameters: from this page's utm_* query params, kept in sessionStorage ("neown_sip_utm") for the visit.
+      If the backend rejects utmParameters (older deploy), the call is retried once without them.
+    POST {backend}/razorpay/verify-payment       { paymentId, subscriptionId, signature }
+{%- endcomment -%}
+
+{%- liquid
+  assign sid = section.id
+  assign accent = section.settings.accent_color | default: '#5F35E8'
+  assign hi = section.settings.highlight_color | default: '#EEFC74'
+  assign cta = section.settings.cta_color | default: '#E945A9'
+-%}
+
+<style>
+  #sip-{{ sid }}, #sip-modal-{{ sid }} {
+    --sip-accent: {{ accent }}; --sip-hi: {{ hi }}; --sip-ink: #3a3a3a; --sip-muted: #6f6c7a; --sip-line: #ebe9f2;
+    --sip-soft: #f1edfd; --sip-err: #c0322b; --sip-ok: #1a7f4b; --sip-cta: {{ cta }};
+    --sip-select: color-mix(in srgb, var(--sip-accent) 14%, #fff);
+    font-family: var(--font-stack-body, 'Poppins', system-ui, sans-serif); color: var(--sip-ink);
+  }
+  #sip-{{ sid }} *, #sip-modal-{{ sid }} * { box-sizing: border-box; }
+  #sip-{{ sid }} { max-width: 1100px; margin: 0 auto; padding: 48px 16px 56px; text-align: center; }
+  #sip-{{ sid }} .sip-title { font-family: var(--font-stack-header, inherit); font-weight: 800; font-size: clamp(30px, 5vw, 46px); line-height: 1.1; margin: 0 0 10px; color: var(--sip-ink); }
+  #sip-{{ sid }} .sip-sub { color: var(--sip-muted); font-size: 16px; line-height: 1.55; max-width: 620px; margin: 0 auto; }
+  #sip-{{ sid }} .sip-toggle { display: flex; justify-content: center; gap: 14px; margin: 26px auto 34px; }
+  #sip-{{ sid }} .sip-tab { min-width: 200px; padding: 12px 22px; border: 1.5px solid #e3e1ea; border-radius: 8px; background: #fff; font: inherit; font-size: 15px; font-weight: 500; line-height: 1.3; color: #444; cursor: pointer; letter-spacing: normal; text-transform: none; transition: background .15s, border-color .15s, color .15s; }
+  #sip-{{ sid }} .sip-tab:hover { border-color: color-mix(in srgb, var(--sip-accent) 45%, #fff); }
+  #sip-{{ sid }} .sip-tab[aria-selected="true"] { background: var(--sip-select); border-color: var(--sip-accent); color: var(--sip-accent); box-shadow: 0 4px 12px color-mix(in srgb, var(--sip-accent) 18%, transparent); }
+
+  #sip-{{ sid }} .sip-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; max-width: 1040px; margin: 0 auto; align-items: stretch; text-align: center; }
+  #sip-{{ sid }} .sip-card { position: relative; display: flex; flex-direction: column; align-items: center; background: #fff; border: 1.5px solid var(--sip-line); border-radius: 20px; padding: 42px 22px 22px; box-shadow: 0 10px 30px rgba(40, 30, 90, .07); transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease; outline: none; }
+  #sip-{{ sid }} .sip-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(40, 30, 90, .12); }
+  #sip-{{ sid }} .sip-card:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--sip-accent) 35%, transparent); }
+  #sip-{{ sid }} .sip-card[hidden] { display: none; }
+  #sip-{{ sid }} .sip-card.is-featured { background: var(--sip-hi); border-color: color-mix(in srgb, var(--sip-accent) 35%, transparent); }
+  #sip-{{ sid }} .sip-card h3, #sip-{{ sid }} .sip-card p { margin: 0; padding: 0; letter-spacing: normal; text-transform: none; }
+  #sip-{{ sid }} .sip-badge { position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--sip-cta); color: #fff; font-size: 12.5px; font-weight: 600; line-height: 1; letter-spacing: .03em; text-transform: uppercase; padding: 7px 26px; border-radius: 0 0 8px 8px; white-space: nowrap; }
+  #sip-{{ sid }} .sip-card .sip-books { font-family: var(--font-stack-header, inherit); font-size: 30px; font-weight: 800; line-height: 1.2; letter-spacing: .02em; text-transform: uppercase; color: var(--sip-ink); }
+  #sip-{{ sid }} .sip-card .sip-per { margin-top: 6px; font-size: 19px; font-weight: 500; line-height: 1.35; color: var(--sip-muted); }
+  #sip-{{ sid }} .is-featured .sip-per { color: #444; }
+  #sip-{{ sid }} .sip-card .sip-price { margin-top: 26px; font-size: clamp(48px, 5vw, 60px); font-weight: 800; line-height: 1; letter-spacing: -.01em; color: var(--sip-ink); font-variant-numeric: tabular-nums; }
+  #sip-{{ sid }} .sip-card .sip-subline { margin-top: 26px; font-size: 17px; font-weight: 500; line-height: 1.35; color: var(--sip-muted); }
+  #sip-{{ sid }} .is-featured .sip-subline { color: #333; font-weight: 600; }
+  #sip-{{ sid }} .sip-cta { width: 100%; margin-top: auto; height: 54px; padding: 0 16px; border: 1.5px solid var(--sip-cta); background: #fff; color: var(--sip-cta); border-radius: 8px; font: inherit; font-size: 16px; font-weight: 700; letter-spacing: normal; text-transform: none; line-height: 1; cursor: pointer; transition: background .15s, color .15s, transform .15s; }
+  #sip-{{ sid }} .sip-cta-gap { height: 24px; flex: 0 0 auto; }
+  #sip-{{ sid }} .sip-cta:hover, #sip-{{ sid }} .is-featured .sip-cta { background: var(--sip-cta); color: #fff; }
+  #sip-{{ sid }} .sip-cta:active, #sip-{{ sid }} .sip-mcta:active { transform: scale(.98); }
+  #sip-{{ sid }} .sip-mcta { display: none; }
+  #sip-{{ sid }} .sip-short { display: none; }
+  #sip-{{ sid }} .sip-perk { max-width: 480px; margin: 40px auto 0; padding: 14px 24px; border: 1.5px solid var(--sip-line); border-radius: 12px; background: #fff; }
+  #sip-{{ sid }} .sip-perk strong { display: block; font-size: 18px; font-weight: 600; line-height: 1.35; color: var(--sip-ink); }
+  #sip-{{ sid }} .sip-perk span { display: block; margin-top: 2px; font-size: 15px; color: var(--sip-muted); }
+  #sip-{{ sid }} .sip-note { max-width: 1040px; margin: 40px auto 0; }
+  #sip-{{ sid }} .sip-note strong { display: block; font-size: 18px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; margin-bottom: 4px; }
+  #sip-{{ sid }} .sip-note p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--sip-muted); }
+
+  /* tablet: same 3-up layout, tighter */
+  @media (max-width: 989px) {
+    #sip-{{ sid }} .sip-cards { gap: 18px; }
+    #sip-{{ sid }} .sip-card { padding: 40px 14px 16px; }
+    #sip-{{ sid }} .sip-card .sip-books { font-size: 24px; }
+    #sip-{{ sid }} .sip-card .sip-per { font-size: 16px; }
+    #sip-{{ sid }} .sip-card .sip-subline { font-size: 15px; }
+  }
+
+  /* mobile: all 3 plans in one row, tap to select, one Subscribe button */
+  @media (max-width: 749px) {
+    #sip-{{ sid }} { padding: 32px 16px 40px; }
+    #sip-{{ sid }} .sip-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 22px 0 26px; }
+    #sip-{{ sid }} .sip-tab { min-width: 0; padding: 12px 4px; font-size: clamp(12.5px, 3.6vw, 15px); }
+    #sip-{{ sid }} .sip-long { display: none; }
+    #sip-{{ sid }} .sip-short { display: inline; white-space: nowrap; }
+    #sip-{{ sid }} .sip-cards { gap: 10px; padding-top: 20px; align-items: end; }
+    #sip-{{ sid }} .sip-card { padding: 20px 4px 18px; border-radius: 16px; cursor: pointer; box-shadow: 0 6px 18px rgba(40, 30, 90, .07); -webkit-tap-highlight-color: transparent; }
+    #sip-{{ sid }} .sip-card:hover { transform: none; box-shadow: 0 6px 18px rgba(40, 30, 90, .07); }
+    #sip-{{ sid }} .sip-card.is-featured { background: #fff; border-color: color-mix(in srgb, var(--sip-accent) 50%, #fff); padding-top: 40px; margin-top: -20px; }
+    #sip-{{ sid }} .sip-card.is-selected { background: var(--sip-hi); border-color: color-mix(in srgb, var(--sip-hi), #000 10%); }
+    #sip-{{ sid }} .sip-card.is-featured.is-selected { border-color: color-mix(in srgb, var(--sip-accent) 50%, #fff); }
+    #sip-{{ sid }} .sip-badge { left: -1.5px; right: -1.5px; top: -1.5px; transform: none; padding: 6px 2px; border-radius: 16px 16px 0 0; font-size: 10px; letter-spacing: .02em; }
+    #sip-{{ sid }} .sip-card .sip-books { font-size: 17px; }
+    #sip-{{ sid }} .sip-card .sip-books--sib { font-size: 13.5px; letter-spacing: 0; white-space: nowrap; }
+    #sip-{{ sid }} .sip-card .sip-per { margin-top: 2px; font-size: 12.5px; line-height: 1.3; }
+    #sip-{{ sid }} .sip-card .sip-price { margin-top: 16px; font-size: 26px; }
+    #sip-{{ sid }} .sip-card .sip-subline { margin-top: 14px; font-size: 12px; line-height: 1.3; }
+    #sip-{{ sid }} .is-selected .sip-per, #sip-{{ sid }} .is-selected .sip-subline { color: #333; }
+    #sip-{{ sid }} .is-featured:not(.is-selected) .sip-subline { color: var(--sip-muted); font-weight: 500; }
+    #sip-{{ sid }} .sip-cta, #sip-{{ sid }} .sip-cta-gap { display: none; }
+    #sip-{{ sid }} .sip-mcta { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 52px; margin-top: 24px; border: 0; border-radius: 10px; background: var(--sip-cta); color: #fff; font: inherit; font-size: 17px; font-weight: 700; cursor: pointer; transition: transform .15s; }
+    #sip-{{ sid }} .sip-perk { margin-top: 16px; text-align: left; padding: 12px 18px; }
+    #sip-{{ sid }} .sip-perk strong { font-size: 16px; }
+    #sip-{{ sid }} .sip-perk span { font-size: 14px; }
+    #sip-{{ sid }} .sip-note { margin-top: 30px; }
+    #sip-{{ sid }} .sip-note strong { font-size: 16px; }
+    #sip-{{ sid }} .sip-note p { font-size: 14px; }
+  }
+  @media (max-width: 360px) {
+    #sip-{{ sid }} .sip-card .sip-books { font-size: 15px; }
+    #sip-{{ sid }} .sip-card .sip-books--sib { font-size: 12px; }
+    #sip-{{ sid }} .sip-card .sip-price { font-size: 22px; }
+    #sip-{{ sid }} .sip-card .sip-per, #sip-{{ sid }} .sip-card .sip-subline { font-size: 11px; }
+  }
+
+  /* ---------- modal ---------- */
+  #sip-modal-{{ sid }}[hidden] { display: none; }
+  #sip-modal-{{ sid }} { position: fixed; inset: 0; z-index: 2147483000; display: flex; align-items: center; justify-content: center; padding: 16px; }
+  #sip-modal-{{ sid }} .sip-overlay { position: absolute; inset: 0; background: rgba(30, 22, 40, .45); }
+  #sip-modal-{{ sid }} .sip-dialog { position: relative; width: 100%; max-width: 480px; max-height: calc(100vh - 32px); overflow-y: auto; background: #fff; border-radius: 24px; padding: 26px 28px 28px; box-shadow: 0 20px 60px rgba(0, 0, 0, .2); text-align: left; }
+  #sip-modal-{{ sid }} .sip-x { position: absolute; top: 14px; right: 16px; width: 36px; height: 36px; border: 0; background: transparent; font-size: 24px; line-height: 1; color: #888; cursor: pointer; border-radius: 50%; }
+  #sip-modal-{{ sid }} .sip-x:hover { background: #f3f2f6; }
+  #sip-modal-{{ sid }} .sip-steps { display: flex; align-items: center; justify-content: center; gap: 10px; list-style: none; margin: 0 40px 20px; padding: 0; font-size: 13px; color: #9a97a6; }
+  #sip-modal-{{ sid }} .sip-steps li { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  #sip-modal-{{ sid }} .sip-steps .sip-dot { width: 18px; height: 18px; border: 1.25px solid currentColor; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 600; }
+  #sip-modal-{{ sid }} .sip-steps .is-active, #sip-modal-{{ sid }} .sip-steps .is-done { color: var(--sip-accent); font-weight: 500; }
+  #sip-modal-{{ sid }} .sip-steps .is-done .sip-dot { background: var(--sip-accent); border-color: var(--sip-accent); color: #fff; }
+  #sip-modal-{{ sid }} .sip-steps .sip-line { flex: 1; max-width: 100px; height: 1px; background: #d9d6e2; }
+  #sip-modal-{{ sid }} .sip-sum { background: #f6f5f8; border: 1px solid var(--sip-line); border-radius: 14px; padding: 14px 18px; margin-bottom: 22px; }
+  #sip-modal-{{ sid }} .sip-sum-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  #sip-modal-{{ sid }} .sip-sum-row strong { font-size: 16px; font-weight: 600; }
+  #sip-modal-{{ sid }} .sip-sum-row span { color: var(--sip-accent); font-weight: 600; font-size: 16px; white-space: nowrap; }
+  #sip-modal-{{ sid }} .sip-sum p { margin: 4px 0 0; font-size: 13.5px; color: var(--sip-muted); }
+  #sip-modal-{{ sid }} .sip-step[hidden] { display: none; }
+  #sip-modal-{{ sid }} .sip-step h3 { font-family: var(--font-stack-header, inherit); font-size: 28px; font-weight: 800; margin: 0 0 6px; color: var(--sip-ink); }
+  #sip-modal-{{ sid }} .sip-step-sub { margin: 0 0 22px; font-size: 14.5px; color: var(--sip-muted); line-height: 1.5; }
+  #sip-modal-{{ sid }} .sip-field { margin-bottom: 18px; }
+  #sip-modal-{{ sid }} label { display: block; font-size: 14.5px; font-weight: 500; margin-bottom: 8px; color: var(--sip-ink); }
+  #sip-modal-{{ sid }} input { width: 100%; height: 52px; padding: 0 16px; border: 1px solid #e3e1ea; border-radius: 10px; font: inherit; font-size: 15px; color: var(--sip-ink); background: #fff; }
+  #sip-modal-{{ sid }} input::placeholder { color: #a9a6b3; }
+  #sip-modal-{{ sid }} input:focus { outline: none; border-color: var(--sip-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sip-accent) 15%, transparent); }
+  #sip-modal-{{ sid }} .sip-phone { display: flex; align-items: center; border: 1px solid #e3e1ea; border-radius: 10px; height: 52px; background: #fff; }
+  #sip-modal-{{ sid }} .sip-phone:focus-within { border-color: var(--sip-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sip-accent) 15%, transparent); }
+  #sip-modal-{{ sid }} .sip-phone span { padding: 0 14px 0 18px; border-right: 1px solid #e3e1ea; font-size: 15px; font-weight: 500; line-height: 26px; }
+  #sip-modal-{{ sid }} .sip-phone input { border: 0; height: 50px; box-shadow: none; }
+  #sip-modal-{{ sid }} .is-invalid, #sip-modal-{{ sid }} .sip-phone.is-invalid { border-color: var(--sip-err) !important; }
+  #sip-modal-{{ sid }} .sip-ferr { color: var(--sip-err); font-size: 12.5px; margin-top: 5px; }
+  #sip-modal-{{ sid }} .sip-ferr:empty { display: none; }
+  #sip-modal-{{ sid }} .sip-btn { width: 100%; height: 56px; border: 0; border-radius: 10px; background: var(--sip-cta); color: #fff; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 8px; }
+  #sip-modal-{{ sid }} .sip-btn:disabled { background: #d9d9dd; color: #9b9aa2; cursor: not-allowed; }
+  #sip-modal-{{ sid }} .sip-btn.is-busy { background: var(--sip-cta); color: #fff; opacity: .75; cursor: progress; }
+  #sip-modal-{{ sid }} .sip-trust { text-align: center; font-size: 12.5px; color: var(--sip-muted); margin: 12px 0 0; }
+  #sip-modal-{{ sid }} .sip-msg { margin-top: 14px; padding: 12px 14px; border-radius: 10px; font-size: 14px; line-height: 1.45; }
+  #sip-modal-{{ sid }} .sip-msg:empty { display: none; }
+  #sip-modal-{{ sid }} .sip-msg.err { background: #fdecea; color: var(--sip-err); }
+  #sip-modal-{{ sid }} .sip-msg.info { background: #f3f0fe; color: #4a3a8c; }
+  #sip-modal-{{ sid }} .sip-done { text-align: center; padding: 8px 0 4px; }
+  #sip-modal-{{ sid }} .sip-tick { width: 64px; height: 64px; border-radius: 50%; background: #e8f6ee; color: var(--sip-ok); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  #sip-modal-{{ sid }} .sip-done .sip-step-sub { margin-bottom: 20px; }
+  #sip-modal-{{ sid }} .sip-done a.sip-btn { display: flex; align-items: center; justify-content: center; text-decoration: none; }
+  @media (max-width: 600px) {
+    #sip-modal-{{ sid }} { align-items: flex-end; padding: 0; }
+    #sip-modal-{{ sid }} .sip-dialog { max-width: none; max-height: 92vh; border-radius: 20px 20px 0 0; padding: 22px 18px 24px; }
+    #sip-modal-{{ sid }} .sip-steps { margin: 0 36px 18px 0; justify-content: flex-start; }
+    #sip-modal-{{ sid }} .sip-step h3 { font-size: 24px; }
+  }
+  html.sip-lock, html.sip-lock body { overflow: hidden !important; }
+</style>
+
+<div id="choose-sip" style="position:relative;top:-90px;height:0;" aria-hidden="true"></div>
+<div id="sip-{{ sid }}" class="sip"
+     data-backend="{{ section.settings.backend_url | escape }}"
+     data-success-url="{{ section.settings.success_url | escape }}"
+     data-brand="{{ shop.name | escape }}"
+     data-accent="{{ accent }}">
+
+  <h2 class="sip-title">{{ section.settings.heading | escape }}</h2>
+  {%- if section.settings.subheading != blank -%}<p class="sip-sub">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+
+  <div class="sip-toggle" role="tablist" aria-label="Who is reading">
+    <button type="button" class="sip-tab" role="tab" data-aud="single" aria-selected="true">{{ section.settings.tab_single | escape }}</button>
+    <button type="button" class="sip-tab" role="tab" data-aud="siblings" aria-selected="false">{{ section.settings.tab_siblings | escape }}</button>
+  </div>
+
+  <div class="sip-cards">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'plan' -%}
+        {%- liquid
+          assign kids = 1
+          if block.settings.audience == 'siblings'
+            assign kids = 2
+          endif
+          assign books = block.settings.book_count | default: 1
+          assign total_books = books | times: kids
+          assign price_num = block.settings.price | strip | times: 1.0
+          assign per_book = price_num | divided_by: total_books | round
+          assign per_year = total_books | times: 12
+        -%}
+        <div class="sip-card{% if block.settings.featured %} is-featured{% endif %}" {{ block.shopify_attributes }}
+             role="radio" aria-checked="false" tabindex="0" 
+             data-aud="{{ block.settings.audience }}"
+             data-plan-id="{{ block.settings.razorpay_plan_id | strip | escape }}"
+             data-title="{{ block.settings.title | escape }}"
+             data-price="{{ block.settings.price | strip | escape }}"
+             data-books="{{ books }}">
+          {%- if block.settings.badge != blank -%}<span class="sip-badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
+          <h3 class="sip-books{% if kids == 2 %} sip-books--sib{% endif %}">{% if kids == 2 %}{{ books }}+{{ books }}{% else %}{{ books }}{% endif %} {% if books == 1 and kids == 1 %}Book{% else %}Books{% endif %}</h3>
+          <p class="sip-per">{% if kids == 2 %}<span class="sip-long">{{ section.settings.per_child_label | escape }}</span><span class="sip-short">{{ section.settings.per_child_short | default: section.settings.per_child_label | escape }}</span>{% else %}{{ section.settings.per_month_label | escape }}{% endif %}</p>
+          <p class="sip-price">₹{{ block.settings.price | strip | escape }}</p>
+          {%- case section.settings.card_subline -%}
+            {%- when 'per_book' -%}<p class="sip-subline">≈ ₹{{ per_book }} per book</p>
+            {%- when 'none' -%}
+            {%- else -%}<p class="sip-subline">{{ per_year }} books/year</p>
+          {%- endcase -%}
+          <span class="sip-cta-gap" aria-hidden="true"></span>
+          <button type="button" class="sip-cta" aria-haspopup="dialog">{{ section.settings.cta_label | escape }}</button>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <button type="button" class="sip-mcta" aria-haspopup="dialog">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 7.5l4.6 3.6L12 4l4.4 7.1L21 7.5 19.2 18H4.8L3 7.5zM5 19.5h14V21H5z"/></svg>
+    <span>{{ section.settings.cta_label | escape }}</span>
+  </button>
+
+  {%- if section.settings.perk_title != blank -%}
+    <div class="sip-perk">
+      <strong>{{ section.settings.perk_title | escape }}</strong>
+      {%- if section.settings.perk_text != blank -%}<span>{{ section.settings.perk_text | escape }}</span>{%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.note_heading != blank or section.settings.note_text != blank -%}
+    <div class="sip-note">
+      {%- if section.settings.note_heading != blank -%}<strong>{{ section.settings.note_heading | escape }}</strong>{%- endif -%}
+      {%- if section.settings.note_text != blank -%}<p>{{ section.settings.note_text | escape }}</p>{%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+<div id="sip-modal-{{ sid }}" class="sip-modal" hidden>
+  <div class="sip-overlay" data-close></div>
+  <div class="sip-dialog" role="dialog" aria-modal="true" aria-labelledby="sip-h-{{ sid }}">
+    <button type="button" class="sip-x" data-close aria-label="Close">&times;</button>
+
+    <ol class="sip-steps" aria-label="Progress">
+      <li data-ind="1"><span class="sip-dot">1</span>Your Details</li>
+      <li class="sip-line" aria-hidden="true"></li>
+      <li data-ind="2"><span class="sip-dot">2</span>Payment</li>
+    </ol>
+
+    <div class="sip-sum">
+      <div class="sip-sum-row"><strong data-m-title></strong><span data-m-price></span></div>
+      <p>{{ section.settings.renew_line | escape }}</p>
+    </div>
+
+    <div class="sip-step" data-step="1">
+      <h3 id="sip-h-{{ sid }}">{{ section.settings.details_heading | escape }}</h3>
+      <p class="sip-step-sub">{{ section.settings.details_sub | escape }}</p>
+      <form class="sip-form" novalidate autocomplete="on">
+        <div class="sip-field">
+          <label for="sip-name-{{ sid }}">Parent name</label>
+          <input id="sip-name-{{ sid }}" name="name" placeholder="Enter your name" autocomplete="name" maxlength="50" required>
+          <div class="sip-ferr" data-for="name"></div>
+        </div>
+        <div class="sip-field">
+          <label for="sip-phone-{{ sid }}">Phone number</label>
+          <div class="sip-phone" data-wrap="phone"><span>+91</span><input id="sip-phone-{{ sid }}" name="phone" type="tel" inputmode="numeric" placeholder="Enter 10-digit mobile number" autocomplete="tel-national" maxlength="10" required></div>
+          <div class="sip-ferr" data-for="phone"></div>
+        </div>
+        <div class="sip-field">
+          <label for="sip-email-{{ sid }}">Email address</label>
+          <input id="sip-email-{{ sid }}" name="email" type="email" placeholder="Enter your email address" autocomplete="email" required>
+          <div class="sip-ferr" data-for="email"></div>
+        </div>
+        <button type="submit" class="sip-btn" data-continue disabled>{{ section.settings.continue_label | escape }} &rarr;</button>
+        {%- if section.settings.trust_line != blank -%}<p class="sip-trust">{{ section.settings.trust_line | escape }}</p>{%- endif -%}
+      </form>
+    </div>
+
+    <div class="sip-step sip-done" data-step="3" hidden>
+      <span class="sip-tick" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <h3>{{ section.settings.success_heading | escape }}</h3>
+      <p class="sip-step-sub">{{ section.settings.success_text | escape }}</p>
+      {%- if section.settings.success_cta_url != blank -%}<a class="sip-btn" href="{{ section.settings.success_cta_url }}">{{ section.settings.success_cta_label | escape }}</a>{%- endif -%}
+    </div>
+
+    <div class="sip-msg" role="alert"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('sip-{{ sid }}');
+  var modal = document.getElementById('sip-modal-{{ sid }}');
+  if (!root || !modal || root.dataset.ready) return;
+  root.dataset.ready = '1';
+  // Fixed-position modal must not sit inside a transformed theme wrapper.
+  document.body.appendChild(modal);
+
+  var backend = (root.dataset.backend || '').replace(/\/$/, '');
+  var tabs = root.querySelectorAll('.sip-tab');
+  var cards = root.querySelectorAll('.sip-card');
+  var form = modal.querySelector('.sip-form');
+  var btnContinue = modal.querySelector('[data-continue]');
+  var msg = modal.querySelector('.sip-msg');
+  var $ = function (sel) { return modal.querySelector(sel); };
+
+  var plan = null;        // selected card's dataset
+  var sub = null;         // { id, key, prefill, hash }
+  var busy = false;
+  var step = 1;
+  var lastFocus = null;
+
+  // GA4 events via GTM. Never add name, phone or email here.
+  function planParams(p) {
+    if (!p) return {};
+    var type = p.aud === 'siblings' ? 'sibling' : 'single';
+    var b = String(p.books || '');
+    return {
+      plan: p.title,
+      plan_id: 'sip_' + type + '_' + (type === 'sibling' ? b + '_' + b : b),
+      plan_type: type,
+      books_per_month: Number(b) || undefined,
+      value: Number(p.price),
+      currency: 'INR',
+      razorpay_plan_id: p.planId
+    };
+  }
+  function track(ev, extra) {
+    window.dataLayer = window.dataLayer || [];
+    var o = { event: ev }, pp = planParams(plan), k;
+    for (k in pp) o[k] = pp[k];
+    for (k in extra || {}) o[k] = extra[k];
+    window.dataLayer.push(o);
+  }
+
+  /* ---------- plan cards ---------- */
+  // Selected plan: on mobile the cards are tap-to-select with one Subscribe button below.
+  var selected = null;
+  var mcta = root.querySelector('.sip-mcta');
+  function selectCard(c) {
+    selected = c;
+    cards.forEach(function (x) { var on = x === c; x.classList.toggle('is-selected', on); x.setAttribute('aria-checked', on ? 'true' : 'false'); });
+  }
+  function showAudience(aud) {
+    tabs.forEach(function (t) { t.setAttribute('aria-selected', t.dataset.aud === aud ? 'true' : 'false'); });
+    var first = null, featured = null;
+    cards.forEach(function (c) {
+      c.hidden = c.dataset.aud !== aud;
+      if (!c.hidden) { if (!first) first = c; if (!featured && c.classList.contains('is-featured')) featured = c; }
+    });
+    selectCard(featured || first);
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () {
+    showAudience(t.dataset.aud);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'sip_plan_toggle', plan_type: t.dataset.aud === 'siblings' ? 'sibling' : 'single' });
+  }); });
+  cards.forEach(function (c) {
+    c.addEventListener('click', function (e) { selectCard(c); if (e.target.closest('.sip-cta')) openModal(c, 'plan_card'); });
+    c.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectCard(c); } });
+  });
+  if (mcta) mcta.addEventListener('click', function () { if (selected) openModal(selected, 'bottom_cta'); });
+  showAudience('single');
+
+  /* ---------- modal ---------- */
+  // Screens: 1 = details form, 3 = success. Step 2 (Payment) is the Razorpay window itself;
+  // the stepper only marks it as current while Razorpay is open.
+  function goStep(n) {
+    step = n;
+    modal.querySelectorAll('.sip-step').forEach(function (s) { s.hidden = Number(s.dataset.step) !== (n === 2 ? 1 : n); });
+    setIndicator(n);
+    clearMsg();
+  }
+  function setIndicator(n) {
+    modal.querySelectorAll('[data-ind]').forEach(function (li) {
+      var i = Number(li.dataset.ind);
+      li.classList.toggle('is-active', i === n);
+      li.classList.toggle('is-done', i < n);
+      li.querySelector('.sip-dot').textContent = i < n ? '✓' : String(i);
+    });
+  }
+
+  function openModal(card, ctaLocation) {
+    var changed = !plan || plan.planId !== card.dataset.planId;
+    plan = card.dataset;
+    if (changed) sub = null;
+    $('[data-m-title]').textContent = plan.title;
+    $('[data-m-price]').textContent = '₹' + plan.price + '/month';
+    lastFocus = document.activeElement;
+    modal.hidden = false;
+    document.documentElement.classList.add('sip-lock');
+    goStep(1);
+    refreshContinue();
+    setTimeout(function () { (form.elements.name.value ? btnContinue : form.elements.name).focus(); }, 30);
+    track('sip_plan_select', { cta_location: ctaLocation || 'plan_card' });
+  }
+
+  function closeModal() {
+    if (busy) return;
+    if (!modal.hidden && step === 1) track('sip_modal_close', { step: 'details' });
+    modal.hidden = true;
+    document.documentElement.classList.remove('sip-lock');
+    if (step === 3) { form.reset(); sub = null; }
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  modal.querySelectorAll('[data-close]').forEach(function (el) { el.addEventListener('click', closeModal); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+
+  /* ---------- details step ---------- */
+  function values() {
+    return {
+      name: form.elements.name.value.replace(/\s+/g, ' ').trim(),
+      phone: form.elements.phone.value.replace(/\D/g, '').replace(/^(91|0)(?=\d{10}$)/, ''),
+      email: form.elements.email.value.trim()
+    };
+  }
+  function validate(d) {
+    var e = {};
+    if (d.name.length < 3) e.name = 'Enter your full name';
+    if (!/^[6-9]\d{9}$/.test(d.phone)) e.phone = 'Enter a valid 10-digit mobile number';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email)) e.email = 'Enter a valid email address';
+    return e;
+  }
+  function setFieldError(k, text) {
+    var box = modal.querySelector('.sip-ferr[data-for="' + k + '"]');
+    var target = k === 'phone' ? modal.querySelector('[data-wrap="phone"]') : form.elements[k];
+    if (box) box.textContent = text || '';
+    if (target) target.classList.toggle('is-invalid', !!text);
+  }
+  function trackFieldError(k, text, raw) {
+    if (!text) return;
+    track('sip_details_error', { field_name: k, error_type: raw ? 'invalid' : 'empty' });
+  }
+  function refreshContinue() { btnContinue.disabled = Object.keys(validate(values())).length > 0; }
+
+  form.elements.phone.addEventListener('input', function () { this.value = this.value.replace(/\D/g, '').slice(0, 10); });
+  ['name', 'phone', 'email'].forEach(function (k) {
+    var el = form.elements[k];
+    el.addEventListener('input', function () {
+      var wasBad = modal.querySelector('.sip-ferr[data-for="' + k + '"]').textContent;
+      if (wasBad) setFieldError(k, validate(values())[k]);   // clear the error as soon as it's fixed
+      refreshContinue();
+    });
+    el.addEventListener('blur', function () {
+      if (!el.value) return;
+      var before = modal.querySelector('.sip-ferr[data-for="' + k + '"]').textContent;
+      var err = validate(values())[k];
+      setFieldError(k, err);
+      if (err && err !== before) trackFieldError(k, err, el.value);
+    });
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = values(), errs = validate(d);
+    ['name', 'phone', 'email'].forEach(function (k) { setFieldError(k, errs[k]); trackFieldError(k, errs[k], d[k]); });
+    if (Object.keys(errs).length) return;
+    if (!backend) { showMsg('err', 'Subscription is not configured yet (backend URL missing).'); return; }
+    if (busy) return;
+    track('sip_details_submit');
+    startPayment();
+  });
+
+  /* ---------- payment step ---------- */
+  var rzpLoading = null;
+  function loadRazorpay() {
+    if (window.Razorpay) return Promise.resolve();
+    if (rzpLoading) return rzpLoading;
+    rzpLoading = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      s.onload = resolve; s.onerror = function () { rzpLoading = null; reject(new Error('load')); };
+      document.head.appendChild(s);
+    });
+    return rzpLoading;
+  }
+  loadRazorpay().catch(function () {});
+
+  function post(path, body) {
+    return fetch(backend + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { j._status = r.status; return j; }); });
+  }
+  function ok2xx(r) { return r._status >= 200 && r._status < 300; }
+
+  // UTMs for the Shopify order (backend copies them into note_attributes). Saved on landing so they survive reloads.
+  var UTM_KEY = 'neown_sip_utm';
+  function captureUtm() {
+    var q = new URLSearchParams(location.search);
+    var u = {
+      utmSource: q.get('utm_source'), utmMedium: q.get('utm_medium'), utmCampaign: q.get('utm_campaign'),
+      utmContent: q.get('utm_content'), utmTerm: q.get('utm_term'), utmUrl: location.href
+    };
+    if (!(u.utmSource || u.utmMedium || u.utmCampaign)) return;
+    try { sessionStorage.setItem(UTM_KEY, JSON.stringify(u)); } catch (e) {}
+  }
+  function getUtmParameters() {
+    var u = null;
+    try { u = JSON.parse(sessionStorage.getItem(UTM_KEY) || 'null'); } catch (e) {}
+    if (!u) return undefined;
+    var out = {};
+    Object.keys(u).forEach(function (k) { if (u[k]) out[k] = String(u[k]); });
+    return Object.keys(out).length ? out : undefined;
+  }
+  captureUtm();
+
+  // Older backends reject unknown fields with 400 "property utmParameters should not exist".
+  function rejectedUtm(r) {
+    var m = r && r.message;
+    var inner = m && typeof m === 'object' ? m.message : m;
+    return r && r._status === 400 && Array.isArray(inner) && inner.some(function (x) { return x && x.property === 'utmParameters'; });
+  }
+  function createSubscription(body) {
+    var utm = getUtmParameters();
+    if (!utm) return post('/razorpay/create-subscription/shopify', body);
+    return post('/razorpay/create-subscription/shopify', Object.assign({}, body, { utmParameters: utm }))
+      .then(function (r) { return rejectedUtm(r) ? post('/razorpay/create-subscription/shopify', body) : r; });
+  }
+
+  // Backend errors: { message: { message: [ { property, message } ] | 'text' } }
+  function apiError(r) {
+    var m = r && r.message;
+    var inner = m && typeof m === 'object' ? m.message : m;
+    if (Array.isArray(inner)) {
+      var fe = {};
+      inner.forEach(function (x) { if (x && ['name', 'phone', 'email'].indexOf(x.property) > -1) fe[x.property] = x.message; });
+      if (Object.keys(fe).length) return { fields: fe };
+      return { text: 'Please check your details and try again.' };
+    }
+    return { text: (typeof inner === 'string' && inner) || 'Could not start the subscription. Please try again.' };
+  }
+
+  var continueLabel = btnContinue.innerHTML;
+  function setBusy(b, label) {
+    busy = b;
+    btnContinue.disabled = b;
+    btnContinue.classList.toggle('is-busy', b);
+    if (b) btnContinue.textContent = label; else { btnContinue.innerHTML = continueLabel; refreshContinue(); }
+    form.querySelectorAll('input').forEach(function (i) { i.readOnly = b; });
+  }
+  function showMsg(kind, text) { msg.className = 'sip-msg ' + kind; msg.textContent = text; }
+  function clearMsg() { msg.className = 'sip-msg'; msg.textContent = ''; }
+
+  // Back on the details screen with a message (payment closed / failed / error).
+  function backToDetails(kind, text) {
+    setBusy(false);
+    goStep(1);
+    if (text) showMsg(kind, text);
+  }
+
+  function startPayment() {
+    clearMsg();
+    setIndicator(2);
+    var d = values();
+    var hash = [plan.planId, d.name, d.phone, d.email].join('|');
+    if (sub && sub.hash === hash) { openCheckout(d); return; }
+    setBusy(true, 'Setting up your SIP…');
+    Promise.all([loadRazorpay(), createSubscription({ planId: plan.planId, name: d.name, phone: d.phone, email: d.email, source: 'shopify-subscriptions-page' })])
+      .then(function (res) {
+        var r = res[1];
+        if (!ok2xx(r) || !r.subscriptionId || !r.keyId) {
+          var er = apiError(r);
+          backToDetails('err', er.fields ? '' : er.text);
+          if (er.fields) Object.keys(er.fields).forEach(function (k) { setFieldError(k, er.fields[k]); });
+          return;
+        }
+        sub = { id: r.subscriptionId, key: r.keyId, prefill: r.prefill, hash: hash };
+        openCheckout(d);
+      })
+      .catch(function (e) {
+        backToDetails('err', e && e.message === 'load' ? 'Could not load the payment window. Check your connection and try again.' : 'Network issue. Please try again.');
+      });
+  }
+
+  function openCheckout(d) {
+    setBusy(true, 'Opening secure payment…');
+    var rzp = new window.Razorpay({
+      key: sub.key,
+      subscription_id: sub.id,
+      name: root.dataset.brand || 'neOwn',
+      description: plan.title + ' · ₹' + plan.price + '/month',
+      prefill: sub.prefill || { name: d.name, email: d.email, contact: d.phone },
+      notes: { plan: plan.title },
+      theme: { color: root.dataset.accent || '#5F35E8' },
+      modal: {
+        ondismiss: function () {
+          if (verifying) return;
+          backToDetails(lastFailure ? 'err' : 'info', (lastFailure ? lastFailure + ' ' : '') + 'Payment not completed, so your SIP has not started. Tap Continue to Payment to try again.');
+          track('sip_payment_dismissed');
+        }
+      },
+      handler: function (resp) { verify(resp); }
+    });
+    rzp.on('payment.failed', function (e) {
+      // Razorpay keeps its window open so the parent can retry there; remember the reason for the dismiss message.
+      lastFailure = (e && e.error && e.error.description) || '';
+      var er = (e && e.error) || {};
+      track('sip_payment_failed', { error_code: er.code || '', error_reason: er.reason || '', error_step: er.step || '' });
+    });
+    lastFailure = '';
+    track('sip_payment_open');
+    rzp.open();
+  }
+  var lastFailure = '';
+  var verifying = false;
+
+  function verify(resp) {
+    verifying = true;
+    setBusy(true, 'Confirming your payment…');
+    post('/razorpay/verify-payment', {
+      paymentId: resp.razorpay_payment_id,
+      subscriptionId: resp.razorpay_subscription_id,
+      signature: resp.razorpay_signature
+    }).then(function (v) {
+      verifying = false;
+      if (ok2xx(v) && v.success !== false && v.verified !== false) { success(resp); return; }
+      backToDetails('err', 'We could not confirm the payment. If money was debited, your SIP is safe; please contact support with ID ' + resp.razorpay_payment_id + '.');
+    }).catch(function () {
+      verifying = false;
+      backToDetails('err', 'Network issue while confirming. If money was debited, your SIP is safe. Reference: ' + resp.razorpay_payment_id);
+    });
+  }
+
+  // Small receipt for the thank-you page (same browser tab only; nothing personal goes in the URL).
+  function saveReceipt(resp) {
+    var d = values();
+    var receipt = {
+      v: 1, plan: plan.title, price: plan.price, aud: plan.aud, books: plan.books,
+      paymentId: resp && resp.razorpay_payment_id, subscriptionId: (resp && resp.razorpay_subscription_id) || (sub && sub.id),
+      firstName: (d.name.split(' ')[0] || '').slice(0, 30),
+      phoneMasked: d.phone ? d.phone.slice(0, 2) + '\u2022\u2022\u2022\u2022\u2022' + d.phone.slice(-3) : '',
+      paidAt: Date.now()
+    };
+    try { sessionStorage.setItem('neown_sip_receipt', JSON.stringify(receipt)); } catch (e) {}
+  }
+
+  function success(resp) {
+    saveReceipt(resp);
+    setBusy(false);
+    track('subscription_started');
+    paidOk = true;
+    var url = root.dataset.successUrl;
+    // Going to the thank-you page: keep the popup on the details step (not "You're subscribed"),
+    // so pressing Back never lands on a stuck success sheet.
+    if (url) { setBusy(true, 'Taking you to your next steps\u2026'); window.location.href = url; return; }
+    goStep(3);
+  }
+
+  // Back/forward from the thank-you page restores this page from the browser cache with the popup
+  // still open. Reset it to a clean, closed state.
+  var paidOk = false;
+  function resetAfterReturn() {
+    busy = false; verifying = false;
+    modal.hidden = true;
+    document.documentElement.classList.remove('sip-lock');
+    if (paidOk) { form.reset(); sub = null; paidOk = false; }
+    setBusy(false);
+    goStep(1);
+  }
+  window.addEventListener('pageshow', function (e) {
+    var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+    if (e.persisted || (nav && nav.type === 'back_forward')) resetAfterReturn();
+  });
+
+  // Deep link: ?plan=<razorpay_plan_id> opens that plan's details step directly.
+  var qp = new URLSearchParams(location.search).get('plan');
+  if (qp) cards.forEach(function (c) { if (c.dataset.planId === qp) { showAudience(c.dataset.aud); selectCard(c); openModal(c, 'deep_link'); } });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Neown Reading SIP",
+  "tag": "section",
+  "class": "section-neown-subscription",
+  "settings": [
+    { "type": "header", "content": "Connection" },
+    { "type": "text", "id": "backend_url", "label": "Backend URL", "info": "Base URL only, no trailing slash. Dev: https://beta-dev-backend.neown.in" },
+    { "type": "url", "id": "success_url", "label": "Redirect after success (optional)", "info": "Leave empty to show the success step inside the popup." },
+    { "type": "header", "content": "Plan cards" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Choose Your SIP" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading (optional)" },
+    { "type": "text", "id": "tab_single", "label": "Toggle: single child", "default": "Single Child" },
+    { "type": "text", "id": "tab_siblings", "label": "Toggle: siblings", "default": "Sibling Plan (2 children)" },
+    { "type": "text", "id": "per_month_label", "label": "Line under books (single child)", "default": "per month" },
+    { "type": "text", "id": "per_child_label", "label": "Line under books (siblings)", "default": "per child, per month" },
+    { "type": "text", "id": "per_child_short", "label": "Line under books (siblings, mobile)", "default": "per child/month" },
+    { "type": "checkbox", "id": "show_per_book", "label": "(old setting, not used)", "default": true },
+    { "type": "select", "id": "card_subline", "label": "Line under price", "default": "books_year", "options": [ { "value": "books_year", "label": "Books per year" }, { "value": "per_book", "label": "Price per book" }, { "value": "none", "label": "Nothing" } ] },
+    { "type": "text", "id": "cta_label", "label": "Card button", "default": "Subscribe Now" },
+    { "type": "text", "id": "perk_title", "label": "Highlight box: title", "default": "Free delivery and pickup all over India" },
+    { "type": "text", "id": "perk_text", "label": "Highlight box: text", "default": "Auto-renews every month" },
+    { "type": "text", "id": "note_heading", "label": "Note heading", "default": "Monthly & flexible" },
+    { "type": "textarea", "id": "note_text", "label": "Note text", "default": "Your subscription renews automatically every month through your payment mandate. You'll be charged your selected plan amount each month until you cancel. Cancel anytime." },
+    { "type": "header", "content": "Popup: step 1 (details)" },
+    { "type": "text", "id": "renew_line", "label": "Plan summary line", "default": "Auto-renews every month · cancel anytime" },
+    { "type": "text", "id": "details_heading", "label": "Heading", "default": "Almost there!" },
+    { "type": "text", "id": "details_sub", "label": "Text", "default": "Just a few details to get your subscription started." },
+    { "type": "text", "id": "continue_label", "label": "Button", "default": "Continue to Payment" },
+    { "type": "text", "id": "trust_line", "label": "Line under button", "default": "Secure payment by Razorpay · UPI Autopay or card" },
+    { "type": "header", "content": "Popup: success" },
+    { "type": "text", "id": "success_heading", "label": "Heading", "default": "You're subscribed!" },
+    { "type": "textarea", "id": "success_text", "label": "Text", "default": "Your Autopay is set up and your first month is paid. Open the neOwn app with the same mobile number to choose your books." },
+    { "type": "text", "id": "success_cta_label", "label": "Button label", "default": "Open the neOwn app" },
+    { "type": "url", "id": "success_cta_url", "label": "Button link" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#5F35E8" },
+    { "type": "color", "id": "highlight_color", "label": "Featured / selected card background", "default": "#EEFC74" },
+    { "type": "color", "id": "cta_color", "label": "Buttons and badge", "default": "#E945A9" }
+  ],
+  "blocks": [
+    {
+      "type": "plan",
+      "name": "Plan",
+      "limit": 12,
+      "settings": [
+        { "type": "select", "id": "audience", "label": "Show under", "default": "single", "options": [ { "value": "single", "label": "Single child" }, { "value": "siblings", "label": "Siblings (2 children)" } ] },
+        { "type": "text", "id": "title", "label": "Plan name (shown in popup and on Razorpay)", "default": "5 Books Plan" },
+        { "type": "number", "id": "book_count", "label": "Books per month (per child for siblings)", "default": 5 },
+        { "type": "text", "id": "price", "label": "Monthly price, number only (must match the Razorpay plan amount)", "default": "499" },
+        { "type": "text", "id": "razorpay_plan_id", "label": "Razorpay plan ID", "info": "plan_XXXXXXXXXXXXXX from Razorpay → Subscriptions → Plans." },
+        { "type": "text", "id": "badge", "label": "Badge (optional)", "info": "e.g. 🔥 Most popular" },
+        { "type": "checkbox", "id": "featured", "label": "Highlight this card", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Neown Reading SIP",
+      "blocks": [
+        { "type": "plan", "settings": { "audience": "single", "title": "3 Books Plan", "book_count": 3, "price": "399" } },
+        { "type": "plan", "settings": { "audience": "single", "title": "5 Books Plan", "book_count": 5, "price": "499", "badge": "🔥 Most popular", "featured": true } },
+        { "type": "plan", "settings": { "audience": "single", "title": "10 Books Plan", "book_count": 10, "price": "799" } },
+        { "type": "plan", "settings": { "audience": "siblings", "title": "Sibling 3 Books Plan", "book_count": 3, "price": "799" } },
+        { "type": "plan", "settings": { "audience": "siblings", "title": "Sibling 5 Books Plan", "book_count": 5, "price": "999", "badge": "🔥 Most popular", "featured": true } },
+        { "type": "plan", "settings": { "audience": "siblings", "title": "Sibling 10 Books Plan", "book_count": 10, "price": "1599" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

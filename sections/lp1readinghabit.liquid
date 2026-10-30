@@ -1,0 +1,368 @@
+<section class="jr-rh-section">
+  <div class="jr-rh-container">
+
+    <div class="jr-rh-heading-wrap">
+      {% if section.settings.heading != blank %}
+        <h2 class="jr-rh-heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.highlight_heading != blank %}
+        <h3 class="jr-rh-highlight">
+          {{ section.settings.highlight_heading }}
+        </h3>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <div class="jr-rh-description">
+          {{ section.settings.description }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="jr-rh-flow">
+
+      {% for block in section.blocks %}
+
+        <div class="jr-rh-step" {{ block.shopify_attributes }}>
+
+          <div
+            class="jr-rh-card"
+            style="
+              border-color: {{ block.settings.border_color }};
+            "
+          >
+            {% if block.settings.title != blank %}
+              <h4 class="jr-rh-card-title">
+                {{ block.settings.title }}
+              </h4>
+            {% endif %}
+
+            {% if block.settings.content != blank %}
+              <div class="jr-rh-card-content">
+                {{ block.settings.content }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.label != blank %}
+            <div
+              class="jr-rh-label"
+              style="color: {{ block.settings.label_color }};"
+            >
+              {{ block.settings.label }}
+            </div>
+          {% endif %}
+
+          {% unless forloop.last %}
+
+            <div class="jr-rh-arrow">
+
+              {% if block.settings.arrow_image != blank %}
+                {{
+                  block.settings.arrow_image
+                  | image_url: width: 300
+                  | image_tag:
+                  loading: 'lazy',
+                  class: 'jr-rh-arrow-img'
+                }}
+              {% endif %}
+
+            </div>
+
+          {% endunless %}
+
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+
+.jr-rh-section{
+  padding: 30px 20px;
+}
+
+.jr-rh-container{
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.jr-rh-heading-wrap{
+  text-align:center;
+  margin-bottom:70px;
+}
+
+.jr-rh-heading{
+  margin:0;
+  font-size: 44px;
+  line-height:1.05;
+  font-weight:700;
+}
+
+.jr-rh-highlight{
+  margin:10px 0 15px;
+  font-size:38px;
+  line-height:1.05;
+  color:#8266ff;
+  font-weight:700;
+}
+
+.jr-rh-description{
+  max-width:850px;
+  margin:0 auto;
+  color:#666;
+  font-size:18px;
+  line-height:1.6;
+}
+
+.jr-rh-flow{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:0;
+  flex-wrap:nowrap;
+}
+
+.jr-rh-step{
+  display:flex;
+  align-items:center;
+}
+
+.jr-rh-card{
+  width:240px;
+  min-height:auto;
+  background:#fff;
+  border:2px solid #e5e5e5;
+  border-radius:14px;
+  padding:11px;
+  flex-shrink:0;
+}
+
+.jr-rh-card-title{
+  margin:0 0 10px;
+  font-size:18px;
+  line-height:1.1;
+  font-weight:700;
+}
+
+.jr-rh-card-content{
+  font-size:13px;
+  line-height:1.6;
+  color:#555;
+}
+
+.jr-rh-label{
+  width:124px;
+  text-align:center;
+  font-size:22px;
+  line-height:1.05;
+  font-weight:700;
+  padding:0 15px;
+}
+
+.jr-rh-arrow{
+  width:90px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.jr-rh-arrow-img{
+  max-width:80px;
+  height:auto;
+  display:block;
+}
+
+
+/* Card 1 */
+.jr-rh-step:nth-child(1) .jr-rh-card{
+  background:#FFE6F5;
+}
+
+/* Card 2 */
+.jr-rh-step:nth-child(2) .jr-rh-card{
+  background:#E5FFFF;
+
+  {% comment %} top: 82px;
+    position: relative; {% endcomment %}
+}
+
+/* Card 3 */
+.jr-rh-step:nth-child(3) .jr-rh-card{
+  background: #F0EBFF;
+}
+
+
+@media screen and (max-width: 1200px){
+
+  .jr-rh-heading{
+    font-size:50px;
+  }
+
+  .jr-rh-highlight{
+    font-size:44px;
+  }
+
+  .jr-rh-flow{
+    overflow-x:auto;
+    justify-content:flex-start;
+    padding-bottom:10px;
+  }
+
+}
+
+@media screen and (max-width: 768px){
+
+  .jr-rh-section{
+    padding:22px 15px;
+  }
+
+  .jr-rh-heading{
+    font-size:30px;
+  }
+  .jr-rh-heading-wrap{
+    margin-bottom: 22px;
+  }
+
+  .jr-rh-highlight{
+    font-size:28px;
+  }
+
+  .jr-rh-description{
+    font-size:15px;
+  }
+
+  .jr-rh-flow{
+    display:flex;
+    flex-direction:column;
+    overflow:visible;
+    gap:0;
+  }
+
+  .jr-rh-step{
+    width:100%;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .jr-rh-card{
+    width:100%;
+    max-width:320px;
+    min-height:auto;
+  }
+
+  .jr-rh-label{
+    width:auto;
+    padding:18px 0;
+    text-align:center;
+    font-size:24px;
+    padding-bottom: 0px;
+  }
+
+  .jr-rh-arrow{
+    width:auto;
+    padding:0px;
+  }
+
+  .jr-rh-arrow-img{
+    max-width:70px;
+    transform:rotate(90deg);
+  }
+
+}
+
+</style>
+
+
+{% schema %}
+{
+  "name": "Reading Habit Flow",
+  "tag": "section",
+  "class": "jr-reading-habit-flow",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "How Reading"
+    },
+    {
+      "type": "text",
+      "id": "highlight_heading",
+      "label": "Highlight Heading",
+      "default": "Becomes a Habit"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Reading habits are built step by step through consistency and engagement.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card Title",
+          "default": "90+ Days"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Card Content",
+          "default": "<p>Reading frequently helps build a long-term habit.</p>"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Middle Label",
+          "default": "Curiosity Kicks In"
+        },
+        {
+          "type": "color",
+          "id": "label_color",
+          "label": "Label Color",
+          "default": "#f4bfdc"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Card Border Color",
+          "default": "#ff84c6"
+        },
+        {
+          "type": "image_picker",
+          "id": "arrow_image",
+          "label": "Arrow Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reading Habit Flow",
+      "blocks": [
+        {
+          "type": "step"
+        },
+        {
+          "type": "step"
+        },
+        {
+          "type": "step"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

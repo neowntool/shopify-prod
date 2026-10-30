@@ -1,0 +1,190 @@
+{% schema %}
+{
+  "name": "What You Get - Advanced",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_desktop",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "What You Get"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "1500+ toys to choose from (serviceable only in Mumbai)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "color",
+          "id": "line_color",
+          "label": "Line & Dot Color",
+          "default": "#ff2f92"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Unlimited Toys, Delivered Free"
+        },
+        {
+          "type": "textarea",
+          "id": "desc",
+          "label": "Description",
+          "default": "Available only in Mumbai, Thane & Navi Mumbai with free pickup & delivery."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "What You Get (Styled)",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<section class="neown-wyg">
+  <div class="neown-wyg-bg">
+    <div class="neown-wyg-wrap">
+
+      <h2 class="neown-wyg-heading">{{ section.settings.heading }}</h2>
+      <p class="neown-wyg-subheading">{{ section.settings.subheading }}</p>
+
+      <div class="neown-wyg-grid">
+        {% for block in section.blocks %}
+          <div class="neown-wyg-card" {{ block.shopify_attributes }}>
+            
+            <div class="neown-wyg-line-wrap">
+              <span class="neown-wyg-line" style="background: {{ block.settings.line_color }}"></span>
+              <span class="neown-wyg-dot" style="background: {{ block.settings.line_color }}"></span>
+            </div>
+
+            <h3 class="neown-wyg-title">{{ block.settings.title }}</h3>
+            <p class="neown-wyg-desc">{{ block.settings.desc }}</p>
+
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.neown-wyg {
+  width: 100%;
+}
+
+.neown-wyg-bg {
+  background-image: url({{ section.settings.bg_desktop | image_url }});
+  background-size: cover;
+  background-position: center;
+  padding: 140px 20px;
+}
+
+.neown-wyg-wrap {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+.neown-wyg-heading {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.neown-wyg-subheading {
+  font-size: 15px;
+  margin-bottom: 60px;
+}
+
+.neown-wyg-grid {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.neown-wyg-card {
+  flex: 1;
+  text-align: left;
+}
+
+.neown-wyg-line-wrap {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  margin-bottom: 20px;
+}
+
+.neown-wyg-line {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  height: 2px;
+  width: 100%;
+}
+
+.neown-wyg-dot {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.neown-wyg-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.neown-wyg-desc {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .neown-wyg-bg {
+    background-image: url({{ section.settings.bg_mobile | image_url }});
+    padding: 140px 16px;
+  }
+
+  .neown-wyg-grid {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .neown-wyg-heading {
+    font-size: 32px;
+  }
+
+  .neown-wyg-line {
+    width: 100%;
+  }
+}
+</style>

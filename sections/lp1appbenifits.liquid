@@ -1,0 +1,437 @@
+<section class="cs4-section">
+  <div class="cs4-container">
+
+    <!-- Heading -->
+    <h2 class="cs4-heading">{{ section.settings.heading }}</h2>
+    <p class="cs4-subheading">{{ section.settings.subheading }}</p>
+
+    <div class="cs4-content">
+
+      <!-- LEFT TIMELINE -->
+      <div class="cs4-left">
+
+        <!-- Vertical bar -->
+        <div class="cs4-main-line"></div>
+
+        {% for block in section.blocks %}
+          <div class="cs4-item">
+
+            <!-- Connector -->
+            <div class="cs4-connector"></div>
+
+            <!-- Dot -->
+            <div class="cs4-dot"></div>
+
+            <!-- Card -->
+            <div class="cs4-card">
+              <h4>{{ block.settings.title }}</h4>
+              <p>{{ block.settings.text }}</p>
+            </div>
+
+          </div>
+        {% endfor %}
+
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="cs4-right">
+        <h3 class="cs4-cta-title">{{ section.settings.cta_heading }}</h3>
+
+        <div class="cs4-buttons">
+          {% if section.settings.playstore_image != blank %}
+            <a href="{{ section.settings.playstore_link }}">
+              <img src="{{ section.settings.playstore_image | image_url: width: 180 }}">
+            </a>
+          {% endif %}
+
+          {% if section.settings.appstore_image != blank %}
+            <a href="{{ section.settings.appstore_link }}">
+              <img src="{{ section.settings.appstore_image | image_url: width: 180 }}">
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+.cs4-section {
+  padding: 30px 20px;
+}
+
+.cs4-container {
+  max-width: 1100px;
+  margin: auto;
+  text-align: center;
+}
+
+.cs4-heading {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.cs4-subheading {
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+/* Layout */
+.cs4-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  text-align: left;
+}
+
+/* LEFT TIMELINE */
+.cs4-left {
+  position: relative;
+  width: 50%;
+  padding-left: 30px;
+}
+
+/* Thick vertical bar */
+.cs4-main-line {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  width: 10px;
+  height: 100%;
+  background: #BCCF00;
+  border-radius: 20px;
+}
+
+/* Item */
+.cs4-item {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+/* Connector */
+.cs4-connector {
+  {% comment %} position: absolute;
+  left: 32px;
+  top: 24px;
+  width: 35px;
+  height: 2px;
+  background: #BCCF00;  {% endcomment %}
+}
+
+
+
+/* Dot */
+.cs4-dot {
+  {% comment %} position: absolute;
+  left: 65px;
+  top: 20px;
+  width: 12px;
+  height: 12px;
+  background: #BCCF00;
+  border-radius: 50%; {% endcomment %}
+}
+
+/* Card */
+{% comment %} .cs4-card {
+  background: #FDFFE5;
+  border: 2px solid #BCCF00;
+  padding: 18px 20px;
+  border-radius: 12px;
+  margin-left: 90px;
+  max-width: 420px;
+} {% endcomment %}
+
+{% comment %}  {% endcomment %}
+
+.cs4-left .cs4-item:nth-of-type(2) .cs4-connector {
+position: absolute;
+  left: 0;
+    top: 50px;
+    width: 100px;
+  height: 2px;
+  background: #BCCF00; 
+}
+
+.cs4-left .cs4-item:nth-of-type(2) .cs4-dot {
+ position: absolute;
+  left: 100px;
+  top: 45px;
+  width: 12px;
+  height: 12px;
+  background: #BCCF00;
+  border-radius: 50%;
+}
+
+.cs4-left .cs4-item:nth-of-type(2) .cs4-card {
+   background: #FDFFE5;
+  border: 2px solid #BCCF00;
+  padding: 18px 20px;
+  border-radius: 12px;
+  margin-left: 110px;
+  max-width: 420px;
+}
+
+
+
+.cs4-left .cs4-item:nth-of-type(3) .cs4-connector {
+position: absolute;
+  left: 0;
+    top: 50px;
+    width: 50px;
+  height: 2px;
+  background: #BCCF00; 
+}
+
+.cs4-left .cs4-item:nth-of-type(3) .cs4-dot {
+ position: absolute;
+  left: 45px;
+  top: 45px;
+  width: 12px;
+  height: 12px;
+  background: #BCCF00;
+  border-radius: 50%;
+}
+
+.cs4-left .cs4-item:nth-of-type(3) .cs4-card {
+   background: #FDFFE5;
+  border: 2px solid #BCCF00;
+  padding: 18px 20px;
+  border-radius: 12px;
+  margin-left: 50px;
+  max-width: 420px;
+}
+
+
+.cs4-left .cs4-item:nth-of-type(4) .cs4-connector {
+position: absolute;
+  left: 0;
+    top: 50px;
+    width: 50px;
+  height: 2px;
+  background: #BCCF00; 
+}
+
+.cs4-left .cs4-item:nth-of-type(4) .cs4-dot {
+ position: absolute;
+  left: 45px;
+  top: 45px;
+  width: 12px;
+  height: 12px;
+  background: #BCCF00;
+  border-radius: 50%;
+}
+
+.cs4-left .cs4-item:nth-of-type(4) .cs4-card {
+   background: #FDFFE5;
+  border: 2px solid #BCCF00;
+  padding: 18px 20px;
+  border-radius: 12px;
+  margin-left: 50px;
+  max-width: 420px;
+}
+
+
+.cs4-left .cs4-item:nth-of-type(5) .cs4-connector {
+position: absolute;
+  left: 0;
+    top: 50px;
+    width: 100px;
+  height: 2px;
+  background: #BCCF00; 
+}
+
+.cs4-left .cs4-item:nth-of-type(5) .cs4-dot {
+ position: absolute;
+  left: 100px;
+  top: 45px;
+  width: 12px;
+  height: 12px;
+  background: #BCCF00;
+  border-radius: 50%;
+}
+
+.cs4-left .cs4-item:nth-of-type(5) .cs4-card {
+  background: #FDFFE5;
+  border: 2px solid #BCCF00;
+  padding: 18px 20px;
+  border-radius: 12px;
+  margin-left: 110px;
+  max-width: 420px;
+}
+
+{% comment %}  {% endcomment %}
+
+/* Text */
+.cs4-card h4 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cs4-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #444;
+}
+
+/* RIGHT SIDE */
+.cs4-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cs4-cta-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.cs4-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.cs4-buttons img {
+  height: 50px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cs4-content {
+    flex-direction: column;
+  }
+
+  .cs4-left,
+  .cs4-right {
+    width: 100%;
+  }
+
+  .cs4-left {
+    padding-left: 10px;
+  }
+
+  .cs4-main-line {
+    left: 10px;
+  }
+
+  .cs4-card h4 {
+    font-size: 16px;
+}
+
+  .cs4-left .cs4-item:nth-of-type(2) .cs4-connector {
+    width: 75px;
+}
+
+.cs4-left .cs4-item:nth-of-type(2) .cs4-dot {
+  left: 74px;
+}
+
+.cs4-left .cs4-item:nth-of-type(2) .cs4-card {
+  margin-left: 80px;
+}
+
+.cs4-left .cs4-item:nth-of-type(5) .cs4-connector {
+    width: 75px;
+}
+
+.cs4-left .cs4-item:nth-of-type(5) .cs4-dot {
+  left: 74px;
+}
+
+.cs4-left .cs4-item:nth-of-type(5) .cs4-card {
+  margin-left: 80px;
+}
+
+.cs4-right {
+    text-align: center;
+}
+.cs4-buttons {
+    justify-content: center;
+}
+
+
+}
+</style>
+
+{% schema %}
+{
+  "name": "App Benefits Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Smart Parenting Starts in One App"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Browse 75,000+ books & 1,500+ toys Manage your subscription & wishlist Join FREE 20-day reading challenges Get expert book recommendations Track reading history & milestones"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA Heading",
+      "default": "Download the neOwn App"
+    },
+    {
+      "type": "image_picker",
+      "id": "playstore_image",
+      "label": "Google Play Image"
+    },
+    {
+      "type": "url",
+      "id": "playstore_link",
+      "label": "Google Play Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "appstore_image",
+      "label": "App Store Image"
+    },
+    {
+      "type": "url",
+      "id": "appstore_link",
+      "label": "App Store Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Language & Communication Skills"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "Better proficiency in language, grammar, vocabulary & comprehension"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "App Benefits Section",
+      "blocks": [
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,197 @@
+<section class="cs3-section">
+  <div class="cs3-container">
+
+    <!-- Left Image -->
+    <div class="cs3-image-wrapper">
+      {% if section.settings.image != blank %}
+        <img 
+          src="{{ section.settings.image | image_url: width: 800 }}" 
+          alt="story image" 
+          class="cs3-image"
+        >
+      {% endif %}
+
+      {% if section.settings.image_label != blank %}
+        <div class="cs3-image-label">
+          {{ section.settings.image_label }}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Right Content -->
+    <div class="cs3-content">
+      <p class="cs3-small">{{ section.settings.small_heading }}</p>
+      <h2 class="cs3-heading">{{ section.settings.heading }}</h2>
+      <p class="cs3-text">{{ section.settings.description }}</p>
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+  .cs3-section {
+  padding: 60px 20px;
+}
+
+/* MAIN CONTAINER */
+.cs3-container {
+  position: relative;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  padding: 28px 40px;
+  background: #9364FF;
+
+  overflow: visible; /* 🔥 VERY IMPORTANT */
+}
+
+/* IMAGE WRAPPER (OVERLAP EFFECT) */
+.cs3-image-wrapper {
+  position: absolute;
+  left: 0px; /* 🔥 bahar niklega */
+  bottom: 0;
+  width: 42%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* IMAGE */
+.cs3-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  padding: 16px;
+}
+
+/* IMAGE LABEL */
+.cs3-image-label {
+  position: absolute;
+  bottom: 140px;
+  left: 20px;
+  background: #9364FF;
+  color: #fff;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+/* CONTENT AREA */
+.cs3-content {
+  width: 100%;
+  padding: 40px 40px 40px 52%; /* 🔥 image ke liye space */
+  color: #fff;
+  z-index: 2;
+}
+
+/* TEXT STYLES */
+.cs3-small {
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.cs3-heading {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.cs3-text {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.95;
+  max-width: 520px;
+}
+
+/* 📱 MOBILE FIX */
+@media (max-width: 768px) {
+ 
+  .cs3-section{
+  padding-bottom: 40px;
+  }
+
+
+  .cs3-image-label {
+    bottom: 68px;
+    left: -1px;
+  }
+  .cs3-container {
+    flex-direction: column;
+    padding: 0px 15px 20px 15px;
+  }
+
+  .cs3-image-wrapper {
+    position: relative;
+    width: 100%;
+    left: 0;
+    margin-bottom: 20px;
+    transform: none;
+    top: -56px !important;
+  }
+
+  .cs3-image {
+    transform: none;
+    padding: 0px;
+}
+
+
+  .cs3-content {
+    padding: 10px;
+    margin-top: -67px !important;
+  }
+
+  .cs3-heading {
+    font-size: 26px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Story Gradient Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Left Image"
+    },
+    {
+      "type": "text",
+      "id": "image_label",
+      "label": "Image Label",
+      "default": "Kranti Gada"
+    },
+    {
+      "type": "text",
+      "id": "small_heading",
+      "label": "Small Heading",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "Built by a mom who lived the problem"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Both her kids had screens. Only one was a reader. Kranti observed the difference long enough to figure out what it actually was..."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story Gradient Section"
+    }
+  ]
+}
+{% endschema %}

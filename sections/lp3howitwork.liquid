@@ -1,0 +1,181 @@
+<section class="hwx-section">
+
+  <div class="hwx-container">
+
+    <h2 class="hwx-heading">
+      {{ section.settings.heading }}
+    </h2>
+
+    <div class="hwx-grid">
+
+      {% for block in section.blocks %}
+        <div class="hwx-item">
+
+          <div class="hwx-number">
+            {{ block.settings.step_number }}
+          </div>
+
+          <div class="hwx-text">
+            {{ block.settings.text }}
+          </div>
+
+        </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+.hwx-section{
+  padding:60px 20px 20px 20px;
+}
+
+.hwx-container{
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.hwx-heading{
+  font-size:34px;
+  font-weight:800;
+  margin-bottom:30px;
+  color:#111;
+}
+
+.hwx-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
+.hwx-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:25px;
+  border-right:1px solid #C5C5C5;
+  border-bottom:1px solid #C5C5C5;
+}
+
+
+.hwx-item:nth-child(2){
+  border-right: 0px !important;
+}
+
+.hwx-item:nth-child(3){
+  border-bottom: 0px !important;
+}
+
+.hwx-item:nth-child(4){
+border-right: 0px !important;
+ border-bottom: 0px !important;
+}
+
+.hwx-number{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background: #ECF87D;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:32px;
+  color: #86921B;
+  flex-shrink:0;
+}
+
+.hwx-text{
+  font-size:22px;
+  color:#222;
+  font-weight:700;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.hwx-section{
+padding-top: 40px;
+}
+
+.hwx-item:nth-child(1){
+  border-right: 0px !important;
+}
+.hwx-item:nth-child(2){
+  border-right: 0px !important;
+}
+
+.hwx-item:nth-child(3){
+ border-bottom:1px solid #C5C5C5 !important;
+border-right: 0px !important;
+}
+
+
+
+
+  .hwx-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hwx-item{
+    padding: 18px 18px 18px 0px;
+  }
+
+  .hwx-heading{
+    font-size:28px;
+    margin-bottom: 10px;
+  }
+
+  .hwx-text{
+    font-size:15px;
+  }
+
+}
+</style>
+
+{% schema %}
+{
+  "name": "Lp3 How it works",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How it works"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_number",
+          "label": "Step Number",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Add step text here"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lp3 How it works",
+      "blocks": [
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" }
+      ]
+    }
+  ]
+}
+{% endschema %}

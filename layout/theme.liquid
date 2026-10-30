@@ -1,0 +1,579 @@
+{% liquid
+  assign enable_rtl = settings.enable_rtl
+  assign language_support_rtl = settings.language_support_rtl
+  if enable_rtl and language_support_rtl != blank
+    assign shop_locale = localization.language.iso_code
+    assign language_support_rtl_list = language_support_rtl | split: ','
+    assign is_rtl = language_support_rtl_list | where: shop_locale
+    if is_rtl.size > 0
+      assign enable_rtl = true
+    else
+      assign enable_rtl = false
+    endif
+  endif
+
+  assign body_classes = 'template-' | append: template.name | append: ' ' | append: template.suffix | append: ' m-gradient m-color-' | append: settings.default_color_scheme
+  if settings.page_transition
+    assign body_classes = body_classes | append: ' m:overflow-hidden'
+  endif
+  if template.suffix == 'about-us'
+    assign body_classes = body_classes | append: ' sf__page-about'
+  endif
+%}
+<!doctype html>
+<html
+  class="no-js {% if settings.page_transition %} m:overflow-hidden{% endif %}"
+  lang="{{ request.locale.iso_code }}"
+  data-template="{{ template.name }}"
+  {% if enable_rtl %}
+    dir="rtl"
+  {% endif %}
+>
+  <head>
+	<!-- Added by AVADA SEO Suite -->
+	{% include 'avada-seo' %}
+	<!-- /Added by AVADA SEO Suite -->
+    <!-- Gokwik theme code start -->
+  <link rel="dns-prefetch" href="https://pdp.gokwik.co/">
+  <link rel="dns-prefetch" href="https://api.gokwik.co">
+    {% render 'gokwik' %}
+ <!-- Gokwik theme code End -->
+    <!-- GA4 user context for GTM (must stay above the GTM snippet). No name/phone/email. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      {%- if customer -%}
+        {%- assign ga_oc = customer.orders_count | default: 0 -%}
+        window.dataLayer.push({
+          user_id: '{{ customer.id }}',
+          login_status: 'logged_in',
+          customer_type: '{% if ga_oc > 0 %}returning{% else %}new{% endif %}',
+          orders_band: '{% if ga_oc == 0 %}0{% elsif ga_oc == 1 %}1{% elsif ga_oc <= 3 %}2-3{% else %}4+{% endif %}'
+        });
+      {%- else -%}
+        window.dataLayer.push({ login_status: 'guest' });
+      {%- endif -%}
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PR44K2QM');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <meta name="theme-color" content="{{ settings.color_primary }}">
+
+    {%- liquid
+      render 'preload'
+      render 'SEO'
+      render 'social-meta-tags'
+      render 'font-face'
+    -%}
+
+    {% render 'critical-css' %}
+    {% render 'custom-code-head' %}
+
+    {{ 'grid.css' | asset_url | stylesheet_tag }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'modules.css' | asset_url | stylesheet_tag }}
+
+    {% render 'style-tags' %}
+
+    <script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'theme-global.js' | asset_url }}" defer="defer"></script>
+    {%- if settings.animations != 'none' -%}
+      <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+    {%- if request.design_mode -%}
+      <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode');
+      }
+    </script>
+    {% render 'theme-data' %}
+
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "m9rl1ggome");
+    </script>
+  {% include 'pagefly-app-header' %}
+
+  <script src='https://bridge.shopflo.com/js/shopflo.bundle.js' async></script>
+</head>
+
+  <body
+    id="m-theme"
+    class="{{ body_classes }}"
+    {% if template.name == 'product' %}
+      data-product-id="{{ product.id }}"
+    {% endif %}
+  >
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PR44K2QM"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    {% render 'page-transition' %}
+    {%- liquid
+      render 'scroll-top-button'
+      sections 'header-group'
+    -%}
+
+    <main role="main" id="MainContent">
+      {{ content_for_layout }}
+    </main>
+
+    {%- sections 'footer-group' -%}
+
+    {% render 'script-tags' %}
+    {% render 'cookie-banner' %}
+    {% render 'custom-code-body' %}
+
+    <script src="{{ 'product-quick-view.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'wishlist.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'compare-product.js' | asset_url }}" defer="defer"></script>
+
+    {%- if settings.enable_predictive_search -%}
+      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if linklists['gift-wrapping'].links != blank
+      and linklists['gift-wrapping'].links.first.type == 'product_link'
+    -%}
+      <script src="{{ 'gift-wrapping.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if settings.show_swatch_option -%}
+      <script src="{{ 'product-card-swatch.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if settings.enable_cart_drawer and template != 'cart' -%}
+      {% render 'cart-drawer' %}
+    {%- endif -%}
+
+<script> 
+document.addEventListener("DOMContentLoaded", function () {
+  const validPaths = ["/pages/book-library-renewal-page", "/pages/toy-book-combo-renewal-page", "/pages/toy-library-renewal-page"];
+  
+  if (validPaths.includes(window.location.pathname)) {
+    // Initial timeout to let basic page elements load
+    setTimeout(initializeVariantSelection, 400);
+    
+    // Run again after a longer delay to catch late-loading elements
+    setTimeout(initializeVariantSelection, 1200);
+    
+    // Final check to ensure our selection persists
+    setTimeout(initializeVariantSelection, 2500);
+    
+    function initializeVariantSelection() {
+      console.log("Initializing variant selection script for GoKwik checkout...");
+      
+      // Get variant data and find 12 month variant
+      const variantsData = JSON.parse(document.getElementById("productVariants").textContent);
+      const twelveMonthVariant = variantsData.find(variant => variant.option1 === "12 months");
+      
+      if (!twelveMonthVariant) {
+        console.error("12 months variant not found in product data");
+        return;
+      }
+      
+      console.log("Found 12 month variant:", twelveMonthVariant);
+      
+      // Store original price for comparison
+      let originalPrice = null;
+      try {
+        const priceElement = document.querySelector('.product__price:not(.product__price--compare)') || 
+                            document.querySelector('.price__regular .price-item') ||
+                            document.querySelector('.product-single__price') ||
+                            document.querySelector('[data-product-price]');
+        if (priceElement) {
+          originalPrice = priceElement.textContent.trim();
+          console.log("Original displayed price:", originalPrice);
+        }
+      } catch (e) {
+        console.error("Error storing original price:", e);
+      }
+      
+      // Main function to select the 12-month variant
+      function select12MonthVariant() {
+        // Use Minimog API if available
+        if (window.MinimogTheme?.Products?.productForm) {
+          window.MinimogTheme.Products.productForm.selectVariant(twelveMonthVariant.id);
+        }
+        
+        // Update variant ID input (critical for Buy Now)
+        const variantIdInput = document.querySelector('input[name="id"]');
+        if (variantIdInput) {
+          variantIdInput.value = twelveMonthVariant.id;
+          variantIdInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        
+        // Update UI elements
+        const variantRadios = document.querySelectorAll('.m-product-option--node input[type="radio"]');
+        const twelveMonthRadio = Array.from(variantRadios).find(radio => radio.value === "12 months");
+        
+        if (twelveMonthRadio) {
+          twelveMonthRadio.checked = true;
+          twelveMonthRadio.dispatchEvent(new Event('change', { bubbles: true }));
+          
+          // Update label if needed
+          const label = document.querySelector(`label[for="${twelveMonthRadio.id}"]`);
+          if (label) label.click();
+        } else {
+          // Fallback for dropdowns
+          document.querySelectorAll('select[name="id"], select.single-option-selector').forEach(selector => {
+            const option = Array.from(selector.options).find(opt => 
+              opt.textContent.toLowerCase().includes("12 months") || 
+              opt.value === twelveMonthVariant.id.toString()
+            );
+            
+            if (option) {
+              selector.value = option.value;
+              selector.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          });
+        }
+        
+        // Update GoKwik elements
+        updateGoKwikData();
+      }
+      
+      // Update price display
+      function updateDisplayedPrice() {
+        try {
+          // Find price element using various selectors that might exist
+          const priceElement = document.querySelector('.product__price:not(.product__price--compare)') || 
+                              document.querySelector('.price__regular .price-item') ||
+                              document.querySelector('.product-single__price') ||
+                              document.querySelector('[data-product-price]');
+          
+          if (priceElement) {
+            const currentPrice = priceElement.textContent.trim();
+            console.log("Current displayed price:", currentPrice);
+            
+            // Always force update the price to ensure consistency
+            if (twelveMonthVariant.price) {
+              // Format price as currency
+              const formattedPrice = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'INR'
+              }).format(twelveMonthVariant.price / 100);
+              
+              priceElement.textContent = formattedPrice;
+              console.log("Updated price display to:", formattedPrice);
+              
+              // Also update any price-related elements that might exist
+              document.querySelectorAll('[data-product-price], .product__price, .price__sale').forEach(el => {
+                if (el !== priceElement && !el.classList.contains('product__price--compare')) {
+                  el.textContent = formattedPrice;
+                }
+              });
+            }
+          }
+        } catch (e) {
+          console.error("Error updating price display:", e);
+        }
+      }
+      
+      // Update GoKwik data
+      function updateGoKwikData() {
+        // Update GoKwik buttons
+        document.querySelectorAll('[data-gokwik], .gokwik-button, [class*="gokwik"]').forEach(button => {
+          if (button.hasAttribute('data-variant-id')) {
+            button.setAttribute('data-variant-id', twelveMonthVariant.id);
+          }
+          if (button.hasAttribute('data-product-variant')) {
+            button.setAttribute('data-product-variant', twelveMonthVariant.id);
+          }
+          
+          // Ensure price is passed to GoKwik
+          if (button.hasAttribute('data-price')) {
+            button.setAttribute('data-price', twelveMonthVariant.price);
+          }
+          
+          // Update product options data if available
+          if (button.hasAttribute('data-product-options')) {
+            try {
+              const options = JSON.parse(button.getAttribute('data-product-options'));
+              options.variant_id = twelveMonthVariant.id;
+              options.variant = twelveMonthVariant.id;
+              if (options.price !== undefined) {
+                options.price = twelveMonthVariant.price;
+              }
+              button.setAttribute('data-product-options', JSON.stringify(options));
+            } catch (e) {
+              console.error("Error updating GoKwik product options:", e);
+            }
+          }
+        });
+        
+        // Update global GoKwik objects if they exist
+        if (window.GoKwikCheckout?.updateVariant) {
+          window.GoKwikCheckout.updateVariant(twelveMonthVariant.id);
+        }
+        
+        if (window.gokwikData) {
+          window.gokwikData.variantId = twelveMonthVariant.id;
+          window.gokwikData.variant_id = twelveMonthVariant.id;
+          // Update price in gokwikData if applicable
+          if (window.gokwikData.price !== undefined) {
+            window.gokwikData.price = twelveMonthVariant.price;
+          }
+        }
+      }
+      
+      // Initial selection
+      select12MonthVariant();
+      
+      // Update price display after selection
+      updateDisplayedPrice();
+      
+      // Listen for changes to re-apply our variant selection
+      document.addEventListener('change', function(e) {
+        if (e.target.closest('.m-product-option') || e.target.closest('.product-form__input')) {
+          const variantIdInput = document.querySelector('input[name="id"]');
+          if (variantIdInput && variantIdInput.value != twelveMonthVariant.id) {
+            setTimeout(function() {
+              select12MonthVariant();
+              updateDisplayedPrice();
+            }, 50);
+          }
+        }
+      });
+      
+      // Intercept form submissions
+      document.querySelectorAll('form[action="/cart/add"]').forEach(form => {
+        form.addEventListener('submit', function() {
+          const variantIdInput = form.querySelector('input[name="id"]');
+          if (variantIdInput && variantIdInput.value != twelveMonthVariant.id) {
+            variantIdInput.value = twelveMonthVariant.id;
+          }
+          updateGoKwikData();
+        });
+      });
+      
+      // Intercept buy now and GoKwik button clicks
+      document.addEventListener('click', function(e) {
+        const isBuyButton = e.target.classList.contains('shopify-payment-button__button') || 
+                           e.target.closest('.shopify-payment-button__button') ||
+                           e.target.hasAttribute('data-gokwik') || 
+                           e.target.closest('[data-gokwik]') ||
+                           e.target.classList.contains('gokwik-button') ||
+                           e.target.closest('.gokwik-button') ||
+                           e.target.getAttribute('class')?.includes('gokwik') ||
+                           e.target.closest('[class*="gokwik"]');
+        
+        if (isBuyButton) {
+          const variantIdInput = document.querySelector('input[name="id"]');
+          if (variantIdInput && variantIdInput.value != twelveMonthVariant.id) {
+            e.preventDefault();
+            e.stopPropagation();
+            variantIdInput.value = twelveMonthVariant.id;
+            updateGoKwikData();
+            setTimeout(() => e.target.click(), 100);
+          }
+        }
+      }, true);
+      
+      // Ensure price updates by attaching to variant change events
+      document.addEventListener('variant:changed', function(e) {
+        if (e.detail && e.detail.variant) {
+          // Make sure our 12-month variant stays selected
+          setTimeout(function() {
+            select12MonthVariant();
+            updateDisplayedPrice();
+          }, 50);
+        }
+      });
+      
+      // Watch for potential price updates by the theme
+      const priceObserver = new MutationObserver(function(mutations) {
+        const needsPriceUpdate = mutations.some(function(mutation) {
+          // Check if the mutation is a price-related change
+          const targetIsPrice = mutation.target.classList && 
+                              (mutation.target.classList.contains('product__price') ||
+                               mutation.target.hasAttribute('data-product-price') ||
+                               mutation.target.classList.contains('price-item'));
+          
+          return targetIsPrice;
+        });
+        
+        if (needsPriceUpdate) {
+          console.log("Detected price change, re-updating price");
+          updateDisplayedPrice();
+        }
+      });
+      
+      // Start observing price elements
+      document.querySelectorAll('.product__price, [data-product-price], .price-item').forEach(function(el) {
+        priceObserver.observe(el, { childList: true, characterData: true, subtree: true });
+      });
+      
+      // Observer for dynamic content changes
+      new MutationObserver(mutations => {
+        for (let mutation of mutations) {
+          if (mutation.addedNodes?.length) {
+            const hasGoKwikElement = Array.from(mutation.addedNodes).some(node => {
+              if (node.nodeType !== 1) return false; // Not an element
+              return node.hasAttribute?.('data-gokwik') || 
+                    node.classList?.contains('gokwik-button') ||
+                    node.getAttribute?.('class')?.includes('gokwik') ||
+                    node.querySelectorAll?.('[data-gokwik], .gokwik-button, [class*="gokwik"]').length > 0;
+            });
+            
+            if (hasGoKwikElement) {
+              updateGoKwikData();
+              break;
+            }
+          }
+        }
+      }).observe(document.body, { childList: true, subtree: true });
+      
+      console.log("GoKwik-compatible variant selection script initialized");
+    }
+  }
+});
+  
+</script>    
+
+ <!-- WhatsApp Floating Widget -->
+    <style>
+      #whatsapp-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25D366;
+        color: white;
+        padding: 12px 16px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 14px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        z-index: 9999;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      #whatsapp-widget img {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+      }
+
+      #whatsapp-widget:hover {
+        background-color: #1ebe5b;
+      }
+
+      @media screen and (max-width: 600px) {
+        #whatsapp-widget {
+          padding: 10px 12px;
+          font-size: 13px;
+        }
+
+        #whatsapp-widget img {
+          margin-right: 6px;
+        }
+      }
+    </style>
+
+    <a id="whatsapp-widget" target="_blank" rel="noopener">
+      <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp">
+      Need Help
+    </a>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const widget = document.getElementById('whatsapp-widget');
+
+    // Set your WhatsApp number here (no + or spaces)
+    const phone = '919324455972';
+
+  
+    const currentUrl = window.location.href;
+// Default message
+let message = "Hi, can you tell me about neOwn Subscriptions?";
+
+if (currentUrl === 'https://neown.in/pages/neown-book-subscription') {
+  message = "Hello, I want details of neOwn book Library";
+} else if (currentUrl === 'https://neown.in/pages/neown-book-subscription-sibling-pack') {
+  message = "Hello, I want details of neOwn book Library"; 
+} else if (currentUrl === 'https://neown.in/pages/neown-toy-subscription') {
+  message =  "Hello, I want details of neOwn toy Library";
+} 
+// else if (currentUrl.startsWith('https://yourstore.com/collections')) {
+//   message = "Hi, I'm looking at your collections.";
+// }
+
+
+    const encodedMessage = encodeURIComponent(message);
+    widget.href = `https://wa.me/${phone}?text=${encodedMessage}`;
+  });
+    </script>
+    <!-- End WhatsApp Widget -->
+
+    {% render 'shopflo-sso-add-button' %}
+
+      {%- comment -%} GA4: app_download_click on any Play Store / App Store link (thank-you page handles its own). {%- endcomment -%}
+    {%- liquid
+      assign ga_tpl = template.suffix | default: template.name
+      case ga_tpl
+        when 'index'
+          assign ga_page_type = 'home'
+        when 'reading-sip'
+          assign ga_page_type = 'sip_page'
+        when 'reading-sip-thank-you'
+          assign ga_page_type = 'sip_thank_you'
+        when 'LP1'
+          assign ga_page_type = 'lp1'
+        when 'books'
+          assign ga_page_type = 'books'
+        when 'toy-library', 'toys-landing-page'
+          assign ga_page_type = 'toys'
+        when 'book-product', 'books-product-page'
+          assign ga_page_type = 'book_pdp'
+        when 'workbook-main-page-new', 'workbooks-main-page'
+          assign ga_page_type = 'workbooks'
+        else
+          assign ga_page_type = ga_tpl | handleize | replace: '-', '_'
+      endcase
+    -%}
+    <script>
+      (function () {
+        window.neownPageType = '{{ ga_page_type }}';
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest && e.target.closest('a[href]');
+          if (!a || a.closest('[id^="sty-"]')) return;
+          var h = a.href || '', store = /play\.google\.com\/store\/apps/i.test(h) ? 'play' : (/apps\.apple\.com\//i.test(h) ? 'app_store' : '');
+          if (!store) return;
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'app_download_click', store: store, page_type: window.neownPageType });
+        }, true);
+      })();
+    </script>
+    {% render 'ga4-plan-events' %}
+    {% render 'ga4-p2-events' %}
+    {% render 'ga4-p3-events' %}
+</body>
+</html>

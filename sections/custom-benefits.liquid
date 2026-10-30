@@ -1,0 +1,178 @@
+{% schema %}
+{
+  "name": "Custom Benefits Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why Kids & Parents Love It"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "A simple routine that builds confidence and reduces screen time."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Benefit Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Text",
+          "default": "Your text here"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#f5f5f5"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Custom Benefits Section"
+    }
+  ]
+}
+{% endschema %}
+
+
+
+<section class="cb-section">
+  <div class="cb-container">
+
+    <!-- LEFT GRID -->
+    <div class="cb-left">
+      {% for block in section.blocks %}
+        <div class="cb-item" style="background-color: {{ block.settings.bg_color }};">
+          
+          {% if block.settings.icon %}
+            <img src="{{ block.settings.icon | image_url: width: 80 }}" alt="">
+          {% endif %}
+          
+          <h4>{{ block.settings.title }}</h4>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="cb-right">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.description }}</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.cb-section {
+  padding: 60px 20px;
+}
+
+.cb-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 160px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* LEFT SIDE */
+.cb-left {
+  width: 55%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.cb-item {
+  padding: 30px;
+}
+.cb-left .cb-item:nth-child(1) h4 {
+  color: #311499;
+}
+
+.cb-left .cb-item:nth-child(2) h4 {
+  color: #008FA1;
+}
+
+.cb-left .cb-item:nth-child(3) h4 {
+  color:#808A00;
+}
+
+.cb-left .cb-item:nth-child(4) h4 {
+  color: #FF33A2;
+}
+.cb-item img {
+  width: 40px;
+  margin-bottom: 12px;
+  {% comment %} margin: auto; {% endcomment %}
+}
+
+.cb-item h4 {
+  font-family: Playpen Sans;
+font-weight: 800;
+font-style: ExtraBold;
+font-size: 20px;
+leading-trim: NONE;
+line-height: 125%;
+letter-spacing: 0px;
+
+}
+
+/* RIGHT SIDE */
+.cb-right {
+  width: 45%;
+}
+
+.cb-right h2 {
+ font-family: Playpen Sans;
+font-weight: 800;
+font-style: ExtraBold;
+font-size: 56px;
+leading-trim: NONE;
+line-height: 125%;
+letter-spacing: 0px;
+}
+
+.cb-right p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .cb-right h2 {
+font-size: 32px;
+}
+  .cb-container {
+    flex-direction: column;
+     gap: 40px;
+  }
+
+  .cb-right {
+    order: -1; /* move to top */
+    width: 100%;
+    text-align: center;
+  }
+
+  .cb-left {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+}
+</style>

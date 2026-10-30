@@ -1,0 +1,37 @@
+{% if settings.goBuynowEnable %}             
+<button type="button" onclick="onBuyNowClick(this)" id="gokwik-buy-now"{% if settings.hideFlow %} style="display:none !important;" {% endif %}>{{ settings.buynow-titile }}
+<div style="display:none" class="addloadr" id="btn-loader"><div class="cir-loader">Loading..</div></div>
+</button>  
+
+<script>
+function customGoKwikBuyNow(element) {
+  // Get the variant data
+  const variantsData = JSON.parse(document.getElementById("productVariants").textContent);
+  
+  // Find the 12 month variant
+  const twelveMonthVariant = variantsData.find(variant => variant.option1 === "12 months");
+  
+  if (twelveMonthVariant) {
+    // Update the variant ID in the form
+    const variantIdInput = document.querySelector('input[name="id"]');
+    if (variantIdInput) {
+      variantIdInput.value = twelveMonthVariant.id;
+    }
+  }
+  
+  // Call the original GoKwik function
+  onBuyNowClick(element);
+}
+</script>
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+

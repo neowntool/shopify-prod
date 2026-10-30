@@ -1,0 +1,7 @@
+{% if type == 'tick' %}
+  <span class="jrct-tick">✓</span>
+{% elsif type == 'cross' %}
+  <span class="jrct-cross">✕</span>
+{% else %}
+  {{ text }}
+{% endif %}

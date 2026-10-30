@@ -1,0 +1,529 @@
+{% comment %} {% schema %}
+{
+  "name": "Parent Struggle",
+  "settings": [
+    { "type": "image_picker", "id": "section_bg", "label": "Section Background Image" },
+    { "type": "image_picker", "id": "people_image", "label": "People Image" },
+    { "type": "image_picker", "id": "quote_image", "label": "Quote Background Image" },
+    { "type": "text", "id": "heading", "label": "Right Heading", "default": "The Hidden Struggles Every Parent Faces" },
+    { "type": "textarea", "id": "subheading", "label": "Right Subheading", "default": "Tips and insights to help you navigate parenting challenges with ease." }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote Slide",
+      "settings": [
+        { "type": "text", "id": "pink_title", "label": "Pink Title" },
+        { "type": "textarea", "id": "pink_desc", "label": "Pink Description" },
+        { "type": "text", "id": "yellow_title", "label": "Yellow Title" },
+        { "type": "textarea", "id": "yellow_desc", "label": "Yellow Description" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Parent Struggle" }
+  ]
+}
+{% endschema %}
+
+<style>
+.parent-section {
+  background: url({{ section.settings.section_bg | image_url }}) center/cover no-repeat;
+  padding: 220px 80px;
+}
+
+.parent-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LEFT */
+.parent-left {
+  width: 55%;
+
+  position: relative;
+    bottom: -110px;
+}
+
+/* PEOPLE IMAGE = ANCHOR */
+.people-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.people-wrap img {
+  max-width: 300px;
+}
+
+/* QUOTE LOCKED TO PERSON */
+.quote-container {
+  position: absolute;
+  top: -220px;      /* ↑ above head */
+  left: 140px;      /* → to right side */
+  width: 420px;
+  z-index: 3;
+}
+
+.quote-container img {
+  width: 100%;
+}
+
+/* SLIDES */
+.quote-slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.quote-slide.active {
+  display: block;
+}
+
+/* TEXT POSITIONS INSIDE QUOTE IMAGE */
+.pink-box {
+  position: absolute;
+  bottom: 130px;
+  left: 35px;
+  max-width: 240px;
+  font-size: 13px;
+}
+
+.yellow-box {
+  position: absolute;
+  top: 28px;
+  left: 150px;
+  max-width: 240px;
+  font-size: 13px;
+}
+
+/* RIGHT */
+.parent-right {
+  width: 40%;
+}
+
+.parent-right h2 {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.parent-right p {
+  margin-top: 14px;
+  font-size: 16px;
+  max-width: 420px;
+}
+
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .parent-row {
+    flex-direction: column;
+    gap: 120px;
+  }
+
+  /* Heading & text upar */
+  .parent-right {
+    order: 1;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* Image & quote neeche */
+  .parent-left {
+    order: 2;
+  }
+
+  /* Image responsive */
+  .people-wrap img {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* Quote center align */
+  .quote-container {
+    text-align: center;
+  }
+  .parent-section {
+  padding: 240px 0px;
+  }
+
+  /* QUOTE LOCKED TO PERSON */
+.quote-container {
+  top: -220px;      /* ↑ above head */
+  left: 0px;      /* → to right side */
+  width: 100%;
+}
+
+.parent-left {
+  {% comment %} width: 100%; {% endcomment %}
+}
+.parent-right{
+width: 100%;
+}
+
+.yellow-box {
+    top: 17px;
+    left: 127px;
+}
+
+.pink-box {
+    bottom: 87px;
+}
+
+}
+
+</style>
+
+<div class="parent-section">
+  <div class="parent-row">
+
+    <!-- LEFT -->
+    <div class="parent-left">
+      <div class="people-wrap">
+
+        <img src="{{ section.settings.people_image | image_url }}">
+
+        <!-- QUOTE ATTACHED TO PERSON -->
+        <div class="quote-container">
+          <img src="{{ section.settings.quote_image | image_url }}">
+
+          {% for block in section.blocks %}
+            <div class="quote-slide">
+              <div class="pink-box">
+                <strong>{{ block.settings.pink_title }}</strong>
+                <p>{{ block.settings.pink_desc }}</p>
+              </div>
+
+              <div class="yellow-box">
+                <strong>{{ block.settings.yellow_title }}</strong>
+                <p>{{ block.settings.yellow_desc }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="parent-right">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.subheading }}</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const slides = document.querySelectorAll(".quote-slide");
+  let i = 0;
+
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove("active"));
+    slides[index].classList.add("active");
+  }
+
+  if (slides.length) {
+    showSlide(0);
+    setInterval(() => {
+      i = (i + 1) % slides.length;
+      showSlide(i);
+    }, 2000);
+  }
+});
+</script> {% endcomment %}
+
+
+
+{% comment %}
+  Parent Struggle Section
+  Desktop + Mobile Background Image Support
+{% endcomment %}
+
+<div
+  class="parent-section"
+  style="
+    {% if section.settings.section_bg != blank %}
+      --bg-desktop: url({{ section.settings.section_bg | image_url: width: 2000 }});
+    {% endif %}
+    {% if section.settings.section_bg_mobile != blank %}
+      --bg-mobile: url({{ section.settings.section_bg_mobile | image_url: width: 1200 }});
+    {% endif %}
+  "
+>
+  <div class="parent-row">
+
+    <!-- LEFT -->
+    <div class="parent-left">
+      <div class="people-wrap">
+
+        {% if section.settings.people_image != blank %}
+          <img src="{{ section.settings.people_image | image_url: width: 600 }}">
+        {% endif %}
+
+        <!-- QUOTE ATTACHED TO PERSON -->
+        <div class="quote-container">
+          {% if section.settings.quote_image != blank %}
+            <img src="{{ section.settings.quote_image | image_url: width: 800 }}">
+          {% endif %}
+
+          {% for block in section.blocks %}
+            <div class="quote-slide">
+              <div class="pink-box">
+                <strong>{{ block.settings.pink_title }}</strong>
+                <p>{{ block.settings.pink_desc }}</p>
+              </div>
+
+              <div class="yellow-box">
+                <strong>{{ block.settings.yellow_title }}</strong>
+                <p>{{ block.settings.yellow_desc }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="parent-right">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.subheading }}</p>
+    </div>
+
+  </div>
+</div>
+
+<style>
+/* ================================
+   PARENT STRUGGLE SECTION
+   ================================ */
+
+.parent-section {
+  background-image: var(--bg-desktop);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 220px 80px;
+}
+
+.parent-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LEFT */
+.parent-left {
+  width: 55%;
+  position: relative;
+  bottom: -110px;
+}
+
+.people-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.people-wrap img {
+  max-width: 300px;
+}
+
+/* QUOTE */
+.quote-container {
+  position: absolute;
+  top: -220px;
+  left: 140px;
+  width: 420px;
+  z-index: 3;
+}
+
+.quote-container img {
+  width: 100%;
+}
+
+/* SLIDES */
+.quote-slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.quote-slide.active {
+  display: block;
+}
+
+/* TEXT POSITIONS */
+.pink-box {
+  position: absolute;
+  bottom: 100px;
+  left: 18px;
+  max-width: 150px;
+  font-size: 10px;
+  text-align: left;
+}
+
+.yellow-box {
+  position: absolute;
+  top: 18px;
+  left: 142px;
+  max-width: 150px;
+  font-size: 10px;
+  text-align: left;
+}
+
+/* RIGHT */
+.parent-right {
+  width: 40%;
+}
+
+.parent-right h2 {
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.parent-right p {
+  margin-top: 14px;
+  font-size: 16px;
+  max-width: 420px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+
+  .parent-right h2 {
+    font-size: 42px;
+}
+  .parent-section {
+    background-image: var(--bg-mobile);
+    padding: 240px 0;
+  }
+
+  .parent-row {
+    flex-direction: column;
+    gap: 120px;
+  }
+
+  .parent-right {
+    order: 1;
+    text-align: center;
+    width: 100%;
+  }
+
+  .parent-left {
+    order: 2;
+    width: 100%;
+    text-align: center;
+    bottom: -142px;
+  }
+
+  .people-wrap img {
+    max-width: 320px;
+    margin: auto;
+    display: block;
+  }
+  .quote-container img{
+    max-width: 300px !important;
+  }
+
+  .quote-container {
+    top: -232px;
+    left: 30px;
+    {% comment %} width: 100%; {% endcomment %}
+    text-align: center;
+    width: 100% !important;
+  }
+
+  .yellow-box {
+    top: 17px;
+    left: 150px;
+  }
+
+  .pink-box {
+    bottom: 104px;
+    left: 31px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const slides = document.querySelectorAll(".quote-slide");
+  let i = 0;
+
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove("active"));
+    slides[index].classList.add("active");
+  }
+
+  if (slides.length) {
+    showSlide(0);
+    setInterval(() => {
+      i = (i + 1) % slides.length;
+      showSlide(i);
+    }, 2000);
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Parent Struggle",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "section_bg",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "section_bg_mobile",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "image_picker",
+      "id": "people_image",
+      "label": "People Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "quote_image",
+      "label": "Quote Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Right Heading",
+      "default": "The Hidden Struggles Every Parent Faces"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Right Subheading",
+      "default": "Tips and insights to help you navigate parenting challenges with ease."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote Slide",
+      "settings": [
+        { "type": "text", "id": "pink_title", "label": "Pink Title" },
+        { "type": "textarea", "id": "pink_desc", "label": "Pink Description" },
+        { "type": "text", "id": "yellow_title", "label": "Yellow Title" },
+        { "type": "textarea", "id": "yellow_desc", "label": "Yellow Description" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Parent Struggle" }
+  ]
+}
+{% endschema %}
+

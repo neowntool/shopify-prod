@@ -1,0 +1,182 @@
+{% schema %}
+{
+  "name": "Reader Research",
+  "settings": [
+    {
+      "type": "text",
+      "id": "small_heading",
+      "label": "Small Heading",
+      "default": "THE RESEARCH SAYS IT ALL"
+    },
+    {
+      "type": "textarea",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Why Becoming a Reader Changes Everything"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "research_card",
+      "name": "Research Card",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "card_text",
+          "label": "Card Text"
+        },
+        {
+          "type": "text",
+          "id": "source_text",
+          "label": "Source Text"
+        },
+        {
+          "type": "url",
+          "id": "source_link",
+          "label": "Source Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reader Research"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="rrs-section">
+  <div class="rrs-container">
+
+    <div class="rrs-left">
+      <span class="rrs-small-heading">
+        {{ section.settings.small_heading }}
+      </span>
+
+      <h2 class="rrs-main-heading">
+        {{ section.settings.main_heading }}
+      </h2>
+    </div>
+
+    <div class="rrs-right">
+      {% for block in section.blocks %}
+        <div class="rrs-card" {{ block.shopify_attributes }}>
+          <p class="rrs-card-text">
+            {{ block.settings.card_text }}
+          </p>
+
+          {% if block.settings.source_text != blank %}
+            <a
+              href="{{ block.settings.source_link }}"
+              class="rrs-card-link"
+            >
+              {{ block.settings.source_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+.rrs-section{
+  padding:40px 20px;
+}
+
+.rrs-container{
+  max-width:1400px;
+  margin:0 auto;
+  background: #FDFFE5;
+  border-radius:24px;
+  padding:40px;
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:40px;
+  align-items:center;
+}
+
+.rrs-small-heading{
+  display:block;
+  font-size:14px;
+  text-transform:uppercase;
+  color:#94A100;
+  letter-spacing:1px;
+  margin-bottom:15px;
+  font-weight:600;
+}
+
+.rrs-main-heading{
+  margin:0;
+  font-size:44px;
+  line-height:1.1;
+  color:#3d3d3d;
+  font-weight:700;
+}
+
+.rrs-right{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.rrs-card{
+  background: #F0EBFF;
+  border-radius:12px;
+  padding:18px;
+}
+
+.rrs-card-text{
+  margin:0 0 10px;
+  color:#555;
+  font-size:16px;
+  line-height:1.5;
+}
+
+.rrs-card-link{
+  color: #A37AFF;
+  text-decoration:none;
+  font-size:15px;
+  font-weight:600;
+}
+
+.rrs-card-link:hover{
+  text-decoration:underline;
+}
+
+/* Tablet */
+@media (max-width: 991px){
+  .rrs-container{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+
+  .rrs-main-heading{
+    font-size:42px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px){
+  .rrs-container{
+    padding:25px 16px;
+    border-radius: 0px;
+  }
+.rrs-section {
+    padding: 0px;
+}
+  .rrs-main-heading{
+    font-size:32px;
+  }
+
+  .rrs-card{
+    padding:15px;
+  }
+
+  .rrs-card-text{
+    font-size:14px;
+  }
+}
+</style>

@@ -1,0 +1,1078 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "16341802176432806c": {
+      "type": "breadcrumb",
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "text_alignment": "center",
+        "hide_current": false,
+        "hide_on_mb": false,
+        "animations": "inherit"
+      }
+    },
+    "custom_liquid_3mhbjn": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "custom_css": [
+        ".custom-header {background-color: #dbe95d; display: flex; justify-content: center; align-items: center; height: 50px; /* Adjust the height as needed */}",
+        ".custom-logo-wrapper {display: flex; justify-content: center; align-items: center;}",
+        ".custom-logo {max-width: 100%;}",
+        "@media (max-width: 767px) {.custom-logo {height: 30px; }}",
+        "@media (min-width: 768px) {.custom-logo {height: 50px; }}"
+      ],
+      "settings": {
+        "custom_liquid": "<header class=\"custom-header\">\n    <a href=\"{{ shop.url }}\" class=\"custom-logo-wrapper\">\n      <img src=\"{{ 'https://neown.in/cdn/shop/files/NEOWN_LOGO-06_1.png'}}\" alt=\"Site Logo\" class=\"custom-logo\">\n    </a>\n    <!-- other header content if any -->\n  </header>",
+        "custom_class": ""
+      }
+    },
+    "slider_LgDi4A": {
+      "type": "slider",
+      "blocks": {
+        "slider_item_7PaCgm": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/black_friday_desk_2.png",
+            "mb_background": "shopify://shop_images/black_friday_mob.png",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "slider_item_zN8MXd": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/Word_cloud_new_banner_1b_715af81a-f335-4ea6-9df4-06f405fcf445.png",
+            "mb_background": "shopify://shop_images/Reading_ecosystem_banner_mob_9dbec54b-cca4-4122-be14-b2a08dd64ffb.png",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "slider_item_DeXkRg": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/how_to_gift_with_neOwn_b72d4d05-63f5-4b51-bffa-8c451f5a4fe0.png",
+            "mb_background": "shopify://shop_images/How_to_gift_with_neOwn_2_912054ed-eb4e-414e-a85f-ae016ca693f0.png",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slider_item_7PaCgm",
+        "slider_item_zN8MXd",
+        "slider_item_DeXkRg"
+      ],
+      "name": "Slideshow",
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_content_above": false,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "empty_space_zWHGcH": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "show_divider_line": true,
+        "divider_style": "solid",
+        "divider_height": 5,
+        "padding_top": 10,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": false,
+            "show_atc_button": false,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_saving": true,
+            "sale_badge_type": "percentage"
+          }
+        },
+        "custom_text_mN8A79": {
+          "type": "custom_text",
+          "settings": {
+            "content": "<p>In case the recipient is outside Mumbai, shipping charges (includes delivery & pick-up) would be as follows: </p><ul><li>5 Books OR 3+3 Books: ₹80/MONTH  </li><li>5+5 Books: ₹160/MONTH </li></ul><p>TOYS RECIPIENT CAN ONLY BE IN MUMBAI as Toy Library is only operating in Mumbai. </p>"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "size_title": "Size"
+          }
+        },
+        "addons": {
+          "type": "addons",
+          "disabled": true,
+          "settings": {
+            "show_atcp": false,
+            "show_ask_a_question": true,
+            "show_social": true
+          }
+        },
+        "shipping_hVtWBg": {
+          "type": "shipping",
+          "settings": {
+            "show_delivery_times": true,
+            "deliver_text": "Estimated Delivery:",
+            "deliver_days": "5",
+            "date_format": "%b %d",
+            "show_shipping_text": true,
+            "shipping_text": ""
+          }
+        },
+        "collapsible_tab_6Qwipw": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product Description",
+            "content": "",
+            "liquid": "{{product.description}}",
+            "default_open": true
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "buy_buttons",
+        "price",
+        "custom_text_mN8A79",
+        "variant_picker",
+        "addons",
+        "shipping_hVtWBg",
+        "collapsible_tab_6Qwipw"
+      ],
+      "custom_css": [
+        "img {border-radius: 15px;}",
+        "div .m-product-tag {background-color: green;}",
+        "div .m-currency--saved {font-weight: 600; margin-left: 3px;}"
+      ],
+      "settings": {
+        "container": "container",
+        "layout": "layout-6",
+        "show_atwl": false,
+        "enable_history_state": true,
+        "enable_variant_group_images": false,
+        "disable_selected_variant_default": false,
+        "show_featured_media": true,
+        "show_zoom_button": false,
+        "enable_video_autoplay": false,
+        "show_nav_media_mobile": false,
+        "show_pagination_mobile": false,
+        "use_sticky_atc": false,
+        "use_sticky_atc_on_mobile": false,
+        "enable_dynamic_checkout": true,
+        "sticky_atc_wishtlist": false,
+        "sticky_atc_compare": false
+      }
+    },
+    "image_with_text_2_KwQUQz": {
+      "type": "image-with-text-2",
+      "name": "Image with text overlay",
+      "settings": {
+        "color_scheme": "",
+        "container": "w-full",
+        "hero_size": "adapt",
+        "show_overlay": false,
+        "image": "shopify://shop_images/how_to_gift_with_neOwn_b72d4d05-63f5-4b51-bffa-8c451f5a4fe0.png",
+        "image_link": "",
+        "parallax": false,
+        "parallax_direction": "vertical",
+        "content_in_container": false,
+        "content_position": "center middle",
+        "text_alignment": "center",
+        "text_size": "medium",
+        "text_color": "white",
+        "title": "",
+        "subtitle": "",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "text_alignment_mobile": "center",
+        "mb_image": "shopify://shop_images/How_to_gift_with_neOwn_2_912054ed-eb4e-414e-a85f-ae016ca693f0.png",
+        "use_content_above": true,
+        "custom_class": "",
+        "animations": "inherit",
+        "enable_bg_zoom_effect": true
+      }
+    },
+    "product-details-tabs": {
+      "type": "product-details-tabs",
+      "blocks": {
+        "description": {
+          "type": "description",
+          "settings": {
+            "header": "Product description"
+          }
+        },
+        "tab": {
+          "type": "tab",
+          "settings": {
+            "header": "Shipping & Return",
+            "content": "<p>Shipping cost is based on weight. Just add products to your cart and use the Shipping Calculator to see the shipping price.</p><p>We want you to be 100% satisfied with your purchase. Items can be returned or exchanged within 30 days of delivery.</p>",
+            "content_page": ""
+          }
+        },
+        "reviews": {
+          "type": "reviews",
+          "settings": {
+            "header": "Product reviews",
+            "container": "container",
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "description",
+        "tab",
+        "reviews"
+      ],
+      "disabled": true,
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "default_open": true,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "empty_space_RfcrUr": {
+      "type": "empty-space",
+      "disabled": true,
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "show_divider_line": true,
+        "divider_style": "solid",
+        "divider_height": 3,
+        "padding_top": 16,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "rich_text_EqVprp": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_jME3HH": {
+          "type": "heading",
+          "settings": {
+            "heading": "<b>Rent Popular Book Series & Authors<b></b></b>",
+            "heading_size": "h3"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jME3HH"
+      ],
+      "custom_css": [
+        "h1,h2,h3,h4,h5,h6 {font-size: 20px;}"
+      ],
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "scrolling_promotion_ryJkEH": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "image_tNXKdg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/1_d3c36fed-08f5-46fe-901d-5e3171529ad1.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_eiee6C": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3_39ed9dd0-0822-46c9-98c7-19e4dba5cdd9.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_XUTYbg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/22.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_D7Bi6r": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/12.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_pCf4dd": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4_24d15cee-1cf9-4c6a-b403-614145cfce9c.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_hyamEP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/5_5cd0df5b-bac3-49a3-9ac1-5b65b1736a24.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_9iKTmi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/13_a95d1222-df0d-45ed-b4cd-02ec06309a40.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_PqmUee": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/7_33eac9ec-b88f-490a-9d4f-f9ff73e3af50.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_eQJE3V": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/18.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_bkBbiF": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/23.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_wmimt7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2_4cbedca5-dcb2-47d0-9df2-769d74fd3673.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_ezyWwz": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/17_dcafae8c-afde-4af5-93db-323159fbdebb.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_RH9WAa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/19.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_MGqtwW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/25.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_hTqGMU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/15_b3759e36-292b-4e8a-ad10-8a7d905fabeb.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_HaKj6J": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/21.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_9mB3BL": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8_d9eb1472-f7d2-4100-a2a6-9b082abbfaba.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_gzKpWX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/11_a88676d1-23fe-4053-82b0-53b2d29215bc.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_dBfX9e": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/10_b786e8c4-7c32-426b-a467-1a351b35c6a8.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_iEk7da": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/9_95075ce5-54ee-4b21-b503-cb2edcd7b223.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_8LWPQf": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/16_287cd2fc-3ba2-4749-a026-600feddb41a6.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_Fbic7W": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/26.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_KAXFCp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/20.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_P7dwyX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/24.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_Tn6ryJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/14_364166e6-1f30-49ba-9efb-71ca2bd8d5f7.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        },
+        "image_fjwGe8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/6_a6f3f220-5259-4c0c-bfc2-6de212374968.png",
+            "image_height": 120,
+            "image_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_tNXKdg",
+        "image_eiee6C",
+        "image_XUTYbg",
+        "image_D7Bi6r",
+        "image_pCf4dd",
+        "image_hyamEP",
+        "image_9iKTmi",
+        "image_PqmUee",
+        "image_eQJE3V",
+        "image_bkBbiF",
+        "image_wmimt7",
+        "image_ezyWwz",
+        "image_RH9WAa",
+        "image_MGqtwW",
+        "image_hTqGMU",
+        "image_HaKj6J",
+        "image_9mB3BL",
+        "image_gzKpWX",
+        "image_dBfX9e",
+        "image_iEk7da",
+        "image_8LWPQf",
+        "image_Fbic7W",
+        "image_KAXFCp",
+        "image_P7dwyX",
+        "image_Tn6ryJ",
+        "image_fjwGe8"
+      ],
+      "settings": {
+        "container": "w-full",
+        "direction": "left",
+        "speed": 30,
+        "item_gap": 50,
+        "item_gap_mobile": 30,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "rich_text_Pc8Bkr": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_nLQeMb": {
+          "type": "heading",
+          "settings": {
+            "heading": "<b>Parent Reviews</b>",
+            "heading_size": "h3"
+          }
+        }
+      },
+      "block_order": [
+        "heading_nLQeMb"
+      ],
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "custom_liquid_UnKQ8p": {
+      "type": "custom-liquid",
+      "custom_css": [],
+      "settings": {
+        "custom_liquid": "<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Reviews Slider</title>\n</head>\n<style>\n\n    .reviews-container {\n      width: 90%;\n      max-width: 1000px;\n      background-color: white;\n      padding: 20px;\n      border-radius: 10px;\n      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n      text-align: center;\n      position: relative;\n      \n    }\n</style>\n<body>\n<div style=\"display: flex; justify-content: center; align-items: center;\">\n  <div class=\"reviews-container\"> \n    <!-- style=\"font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; width: 80%; max-width: 800px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; position: relative;\"> -->\n    <h2 style=\"margin-bottom: 20px; font-size: 1.5rem; font-weight: bold;\">What Mothers Have to Say</h2>\n    <div class=\"review-slide active\" style=\"display: block; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position:relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; margin: 20px auto\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Neha_Mathur.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n      <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Perfect books for my daughter</h3>\n      <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">Thank you so much neOwn for sending the perfect books to my daughter, according to her interest.</p>\n      <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Neha Mathur</p>\n    </div>\n    </div>\n\n    <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n\n      <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/FB_PP_2.png?v=1721648050\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n      <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">The quality of books are really good</h3>\n      <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">The process has also been very very smooth And my daughter really enjoyed reading all of them</p>\n      <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Parul Jalan</p>\n        </div>\n    </div>\n    <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Tara_Baluwala.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Seeing improvement in vocabulary, knowledge</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">My child really enjoys reading and she is able to find all the kind of books she wants at neOwn. I can see that she is improving her vocabulary, knowledge, etc.The experience has been very nice.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Tara Baluwala</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/FB_PP_2.png?v=1721648050\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">My young one loved the touch-n-feel books</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">The best part I liked is the drop n pick up service where parents of nuclear family like me is all that we need 😇 My young one loved the touch n feel books she wants the same book, no matter how many times she might have seen it 😀</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Bhavna Juthani</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Rashmi_Tibrewala_1.png?v=1721646421\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">I love neOwn!!</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">It truly helped me in making my child start reading.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Rashmi Tibrewala</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Vanshika_Sethi.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Virtual library has been good option</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">Library is a comfort place for my daughter and this virtual library has been good option for her virtually.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Vanshika Sethi</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/FB_PP_2.png?v=1721648050\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">I can see improvement 😊</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">The books are in great condition and the availability of books at the time of selection is also too good. I can see improvement in my child's focus on reading. She has started reading chapter books. And she enjoys the books she gets😊</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Parul Jalan</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px;position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Anusha_Gamidi.jpg?v=1721561925\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Thanks for the wonderful picks</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">She is so excited as usual to see the new books😃😃😃 Not just my daughter, I too am enjoying reading these books</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Anusha Gamidi</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px;position: relative; \">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Bhagyashree_Gogte.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Love the concept</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">I am really happy with your services and I just love your concept of sharing resources.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Bhagyashree Gogte</p>\n        </div>\n      </div>\n\n    <div class=\"nav-buttons\" style=\"margin-top: 15px;\">\n      <button onclick=\"prevSlide()\" style=\"background-color: #8a2be2; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin: 0 5px;\">&lt;</button>\n      <button onclick=\"nextSlide()\" style=\"background-color: #8a2be2; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin: 0 5px;\">&gt;</button>\n    </div>\n  </div>\n  <script>\n    let currentIndex = 0;\n    const slides = document.querySelectorAll('.review-slide');\n\n    function showSlide(index) {\n      slides.forEach((slide, i) => {\n        slide.style.display = i === index ? 'block' : 'none';\n      });\n    }\n\n    function nextSlide() {\n      currentIndex = (currentIndex + 1) % slides.length;\n      showSlide(currentIndex);\n    }\n\n    function prevSlide() {\n      currentIndex = (currentIndex - 1 + slides.length) % slides.length;\n      showSlide(currentIndex);\n    }\n\n    // Auto-scroll functionality\n    setInterval(() => {\n      nextSlide();\n    }, 3000);\n  </script>\n</div>",
+        "custom_class": ""
+      }
+    },
+    "featured_collection_GdXCV9": {
+      "type": "featured-collection",
+      "custom_css": [
+        "h3 {font-size: 16px; /* Sets the font size for h2 to h6 headings */}",
+        "img {border-radius: 15px;}",
+        ".m-slider-controls {margin-top: 0px;}"
+      ],
+      "settings": {
+        "heading": "International Bestsellers",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "Julia Donaldson, Eric Carle, Tom Percival, and other international bestsellers",
+        "header_alignment": "center",
+        "color_scheme": "",
+        "container": "container-fluid",
+        "collection": "international-bestsellers",
+        "enable_flashsale": false,
+        "show_countdown": false,
+        "product_to_show": 12,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": true,
+        "show_button_on_header": true,
+        "button_type": "link",
+        "button_text": "View more",
+        "button_style": "m-button--secondary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 12,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "featured_collection_G3NWXe": {
+      "type": "featured-collection",
+      "custom_css": [
+        "h3 {font-size: 16px; /* Sets the font size for h2 to h6 headings */}",
+        "img {border-radius: 15px;}",
+        ".m-slider-controls {margin-top: 0px;}"
+      ],
+      "settings": {
+        "heading": "Comics & Light Reading",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "For busy kids and reluctant readers",
+        "header_alignment": "center",
+        "color_scheme": "",
+        "container": "container-fluid",
+        "collection": "comics-light-reading",
+        "enable_flashsale": false,
+        "show_countdown": false,
+        "product_to_show": 12,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": true,
+        "show_button_on_header": true,
+        "button_type": "link",
+        "button_text": "View more",
+        "button_style": "m-button--secondary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 12,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "featured_collection_TQikMN": {
+      "type": "featured-collection",
+      "custom_css": [
+        "h3 {font-size: 16px; /* Sets the font size for h2 to h6 headings */}",
+        "img {border-radius: 15px;}",
+        ".m-slider-controls {margin-top: 0px;}"
+      ],
+      "settings": {
+        "heading": "Interactive Books",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "Touch & Feel, Lift The Flap, Push & Slide, and more",
+        "header_alignment": "center",
+        "color_scheme": "",
+        "container": "container-fluid",
+        "collection": "interactive-books",
+        "enable_flashsale": false,
+        "show_countdown": false,
+        "product_to_show": 12,
+        "items_per_row": 5,
+        "item_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": true,
+        "show_button_on_header": true,
+        "button_type": "link",
+        "button_text": "View more",
+        "button_style": "m-button--secondary",
+        "button_size": "",
+        "infinite_load": false,
+        "max_page_load": 3,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 12,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "icon_box_VjprnP": {
+      "type": "icon-box",
+      "blocks": {
+        "iconbox_TGMniC": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/Convenient_bfd6390e-f90f-4cd4-85e8-2c9a1746af3f.png",
+            "image_by_url": "",
+            "title": "Convenient",
+            "description": "<p>Doorstep delivery, frequent reminders, & a clutter-free home</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        },
+        "iconbox_F4i3LM": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/Affordable_d8a4df2b-3c21-4e32-bd78-30a97895975c.png",
+            "image_by_url": "",
+            "title": "Affordable",
+            "description": "<p>Why buy when you can rent at a fraction of the price?</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        },
+        "iconbox_QWbQdF": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/Consistent_67ec63db-0d5a-48bd-8bc9-16803d604a9c.png",
+            "image_by_url": "",
+            "title": "Consistent",
+            "description": "<p>Regular supply of books at your doorstep, monthly</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        },
+        "iconbox_cJpe8D": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/Variety_5cd6a73b-523e-4eb3-a002-31b2976f8c34.png",
+            "image_by_url": "",
+            "title": "Variety",
+            "description": "<p>Explore new books every month</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "iconbox_TGMniC",
+        "iconbox_F4i3LM",
+        "iconbox_QWbQdF",
+        "iconbox_cJpe8D"
+      ],
+      "custom_css": [
+        "h1,h2,h3,h4,h5,h6 {font-size: 20px;}"
+      ],
+      "settings": {
+        "heading": "<b>Why Choose a Subscription?<b></b></b>",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "color_scheme": "",
+        "item_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_color_scheme": "",
+        "card_style": "horizontal",
+        "image_max_width": "60px",
+        "content_alignment": "center",
+        "hover_effect": "scaling-up",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "empty_space_Te6nRD": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "show_divider_line": true,
+        "divider_style": "solid",
+        "divider_height": 3,
+        "padding_top": 16,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "empty_space_A8Ck6X": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "show_divider_line": true,
+        "divider_style": "solid",
+        "divider_height": 3,
+        "padding_top": 16,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "rich_text_XxHGjp": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_jDdBGA": {
+          "type": "heading",
+          "settings": {
+            "heading": "<b>Frequently asked questions</b>",
+            "heading_size": "h3"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jDdBGA"
+      ],
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "collapsible_tabs_Yq864N": {
+      "type": "collapsible-tabs",
+      "blocks": {
+        "item_3WpDxh": {
+          "type": "item",
+          "settings": {
+            "header": "How does the Library Subscription work? ",
+            "text_size": "h5",
+            "content": "<p>Step 1: 📚🧸You can subscribe to any plan from our website. </p><p>Step 2: 📲Download the neOwn app to select your books or toys. </p><p>Step 3: 📦Books/toys will be delivered and the pickup and exchange will happen after maximum 30 days</p><p>Step 4: 🔁Finally you return and repeat the same for all the following months of your subscription!</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_QhiRpM": {
+          "type": "item",
+          "settings": {
+            "header": "What if I damage a Library Book? What if I lose a Library Book? ",
+            "text_size": "h5",
+            "content": "<p>If the damage is minor and can be repaired by us, there will be no additional charge to you.</p><p>If the damage is major such that it cannot be circulated anymore, or if the book is lost/misplaced, we will charge you 40% of the MRP of the item (and you can keep the item).</p><p>neOwn trusts moms to take the utmost care of books so that we can all collectively enjoy them!</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_8FWpPP": {
+          "type": "item",
+          "settings": {
+            "header": "There’s no place to enter my child’s details on the website, how will you know what kind of books I want? ",
+            "text_size": "h5",
+            "content": "<p>Our app asks for all these details to create a profile for your child. </p><p>Once you subscribe to any plan, you have to log in to our neOwn App to select your books. </p><p>Before you can view the catalog on the app, you have to enter all your child’s details - including their age, so that we can provide an age-appropriate catalog for them. </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_y3mAD8": {
+          "type": "item",
+          "settings": {
+            "header": "If I subscribe today, will my 30 days start now? ",
+            "text_size": "h5",
+            "content": "<p>No, your 30 days will start after the books have been delivered to you. </p><p>Once you subscribe, you have to download our app to select your books. After selection, they will be delivered in 2-5 days within Mumbai and 4-8 days outside Mumbai. </p><p>Your 30 days start from the day when the books are delivered. </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_W4zMEU": {
+          "type": "item",
+          "settings": {
+            "header": "How can someone redeem the gift card?",
+            "text_size": "h5",
+            "content": "<p><strong>How to Redeem Your neOwn Gift Card:</strong></p><ol><li><strong>Scan the QR Code</strong> on your gift card (this takes you to the neOwn website)</li><li><strong>Select the Plan</strong> - Choose the exact plan name and duration mentioned on your gift card</li><li><strong>Fill in Details</strong> - Complete the required information and place your order</li><li><strong>Code Applies at Checkout</strong> - Your voucher will automatically get redeemed when you checkout</li></ol><p><strong>Important Notes:</strong><br/>⏰ Gift card must be activated within 30 days from purchase date<br/>📍 Toy delivery available only in Mumbai<br/>📚 Book delivery available across India</p><p><strong>Need Help?</strong><br/>WhatsApp us at +91 93244 55972</p><p><strong>What happens next?</strong><br/>Once redeemed, you'll get access to select 5 books monthly from our 45,000+ catalog, plus join our community for book recommendations, expert sessions, and fun activities!</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_HCE48n": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "header": "Do I have to return the products?",
+            "text_size": "h5",
+            "content": "<p>We’ll send our delivery partner directly to your doorstep for the delivery and the pickup of the items. All you have to do is be available to receive the delivery and keep the items packed when it's time for the pickup.</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_bWUjEw": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "header": "What if I damage an item?",
+            "text_size": "h5",
+            "content": "<p>If the damage can be repaired by us such that it can still be sent to others, there will be no additional charge to you.<br/>If the damage is such that it cannot be circulated anymore, we will charge you 40% of the MRP of the item (and you can keep the item).<br/>neOwn trusts moms to take the utmost care of items so that we can all collectively enjoy them!</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_VzVMtt": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "header": "Can I pause my subscription?",
+            "text_size": "h5",
+            "content": "<p>Yes - if you have an active subscription and you need to take a break in between months, you can pause your subscription for minimum 7 days and maximum 30 days. Please speak with our team at +91 9137081640 for more details! </p>",
+            "content_page": "",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "item_3WpDxh",
+        "item_QhiRpM",
+        "item_8FWpPP",
+        "item_y3mAD8",
+        "item_W4zMEU",
+        "item_HCE48n",
+        "item_bWUjEw",
+        "item_VzVMtt"
+      ],
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "image_position": "left",
+        "column_gap": 100,
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "animations": "inherit",
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "16341802176432806c",
+    "custom_liquid_3mhbjn",
+    "slider_LgDi4A",
+    "empty_space_zWHGcH",
+    "main",
+    "image_with_text_2_KwQUQz",
+    "product-details-tabs",
+    "empty_space_RfcrUr",
+    "rich_text_EqVprp",
+    "scrolling_promotion_ryJkEH",
+    "rich_text_Pc8Bkr",
+    "custom_liquid_UnKQ8p",
+    "featured_collection_GdXCV9",
+    "featured_collection_G3NWXe",
+    "featured_collection_TQikMN",
+    "icon_box_VjprnP",
+    "empty_space_Te6nRD",
+    "empty_space_A8Ck6X",
+    "rich_text_XxHGjp",
+    "collapsible_tabs_Yq864N"
+  ]
+}

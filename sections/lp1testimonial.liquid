@@ -1,0 +1,184 @@
+<section class="barky-testimonials-section">
+  <div class="page-width">
+
+    {% if section.settings.heading != blank %}
+      <h2 class="barky-testimonials-heading">
+        {{ section.settings.heading }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="barky-testimonials-subheading">
+        {{ section.settings.subheading }}
+      </p>
+    {% endif %}
+
+    <div class="barky-testimonials-wrapper">
+
+      {% for block in section.blocks %}
+        <div class="barky-testimonial-card" {{ block.shopify_attributes }}>
+
+          <div class="barky-stars">
+            ★★★★★
+          </div>
+
+          <h4 class="barky-author">
+            {{ block.settings.name }}
+          </h4>
+
+          <div class="barky-review">
+            "{{ block.settings.review }}"
+          </div>
+
+        </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+.barky-testimonials-section{
+  padding:30px 0;
+  background:#ffffff;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.barky-testimonials-heading{
+  text-align:center;
+          font-size: calc(((var(--font-h3-desktop)) / (var(--font-base-size))) * 1rem);
+        line-height: 1.278;
+  font-weight:700;
+  margin:0;
+}
+
+.barky-testimonials-subheading{
+  text-align:center;
+  font-size:18px;
+  color:#666;
+  margin:12px 0 18px;
+}
+
+.barky-testimonials-wrapper{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+}
+
+.barky-testimonial-card{
+  background:#F7F7F7F7;
+  border:1px solid #D5D5D5;
+  border-radius:8px;
+  padding:18px;
+  min-height:140px;
+}
+
+.barky-stars{
+  color:#ffb400;
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.barky-author{
+  margin:0 0 8px;
+  font-size:18px;
+  font-weight:700;
+}
+
+.barky-review{
+  color:#555;
+  font-size:14px;
+  line-height:1.5;
+}
+
+@media(max-width:989px){
+
+  .barky-testimonials-wrapper{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .barky-testimonials-heading{
+    font-size:36px;
+  }
+
+}
+
+@media(max-width:749px){
+  .barky-testimonials-section {
+    padding: 20px 0px 0px 0px;
+}
+
+  .barky-testimonials-wrapper{
+    display:flex;
+    overflow-x:auto;
+    gap:14px;
+    scroll-snap-type:x mandatory;
+    padding-bottom:10px;
+  }
+
+  .barky-testimonials-wrapper::-webkit-scrollbar{
+    display:none;
+  }
+
+  .barky-testimonial-card{
+    max-width:280px;
+    flex:0 0 auto;
+    scroll-snap-align:start;
+  }
+
+  .barky-testimonials-heading{
+    font-size:28px;
+  }
+
+  .barky-testimonials-subheading{
+    font-size:15px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Lp1 Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Parents Are Seeing the Difference"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "Real families. Real results. No incentivised reviews."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer Name",
+          "default": "Yashvi Gada"
+        },
+        {
+          "type": "textarea",
+          "id": "review",
+          "label": "Review",
+          "default": "He used to throw the books aside. By month 2 he would ask me when the new set was coming in."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lp1 Testimonials"
+    }
+  ]
+}
+{% endschema %}

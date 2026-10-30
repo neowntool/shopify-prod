@@ -1,0 +1,688 @@
+{% if section.settings.product != blank %}
+  {% assign form_product = all_products[section.settings.product] %}
+{% else %}
+  {% assign form_product = product %}
+{% endif %}
+
+{% assign form_variant = form_product.selected_or_first_available_variant %}
+{% assign school_name = 'S. M. Shetty International School and Jr College' %}
+{% assign srp_on_sale = false %}
+{% if form_variant and form_variant.compare_at_price > form_variant.price %}
+  {% assign srp_on_sale = true %}
+  {% assign srp_save_amount = form_variant.compare_at_price | minus: form_variant.price %}
+  {% assign srp_save_percent = srp_save_amount | times: 100 | divided_by: form_variant.compare_at_price %}
+{% endif %}
+{% assign srp_sold_out = false %}
+{% if form_variant == blank or form_variant.available == false %}
+  {% assign srp_sold_out = true %}
+{% elsif form_variant.inventory_management != blank and form_variant.inventory_quantity <= 0 %}
+  {% assign srp_sold_out = true %}
+{% endif %}
+
+<div class="srp-wrap">
+  <div class="srp-card">
+    <div class="srp-header">
+      <p class="srp-kicker">2 books a month for 3 months</p>
+ 
+      <h2 class="srp-title">{{ form_product.title }}</h2>
+    </div>
+
+    <div class="srp-form">
+      <div class="srp-field">
+        <label class="srp-label" for="school_name">School name</label>
+        <div class="srp-select-lock">
+          <select id="school_name" name="properties[School Name]" required disabled>
+            <option value="{{ school_name }}" selected>{{ school_name }}</option>
+          </select>
+        </div>
+        <input type="hidden" id="school_name_value" value="{{ school_name }}">
+      </div>
+
+      <div class="srp-field">
+        <label class="srp-label" for="child_name">Child name <span>*</span></label>
+        <input type="text" id="child_name" name="properties[Child Name]" placeholder="Enter child's full name" required autocomplete="name">
+      </div>
+
+      <div class="srp-row">
+        <div class="srp-field">
+          <label class="srp-label" for="child_standard">Standard <span>*</span></label>
+          <input type="text" id="child_standard" name="properties[Child Standard]" placeholder="e.g. 4" required inputmode="numeric" maxlength="2" autocomplete="off">
+          <p class="srp-error" id="child_standard_error"></p>
+        </div>
+        <div class="srp-field">
+          <label class="srp-label" for="child_division">Division <span>*</span></label>
+          <input type="text" id="child_division" name="properties[Child Division]" placeholder="e.g. A" required maxlength="1" autocomplete="off">
+          <p class="srp-error" id="child_division_error"></p>
+        </div>
+      </div>
+
+      <div class="srp-field">
+        <label class="srp-label" for="child_roll_number">Roll number <span>*</span></label>
+        <input type="text" id="child_roll_number" name="properties[Child Roll Number]" placeholder="e.g. 23" required inputmode="numeric" maxlength="4" autocomplete="off">
+        <p class="srp-error" id="child_roll_number_error"></p>
+      </div>
+    </div>
+
+    <div class="srp-footer">
+      {% if form_variant %}
+        <div class="srp-price">
+          <span>Total</span>
+          <div class="srp-price-values">
+            {% if srp_on_sale %}
+              <span class="srp-visually-hidden">Original price</span>
+              <s class="srp-compare">₹{{ form_variant.compare_at_price | money_without_currency }}</s>
+            {% endif %}
+            <span class="srp-visually-hidden">{% if srp_on_sale %}Sale price{% else %}Price{% endif %}</span>
+            <strong>₹{{ form_variant.price | money_without_currency }}</strong>
+            {% if srp_on_sale %}
+              <span class="srp-save">Save {{ srp_save_percent }}%</span>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+      {% if srp_sold_out %}
+        <p class="srp-stock" role="status">Registrations for the programme are closed</p>
+      {% endif %}
+      <button
+        type="button"
+        id="school-reading-continue"
+        class="srp-btn{% if srp_sold_out %} is-sold-out{% endif %}"
+        {% if srp_sold_out %}disabled aria-disabled="true"{% endif %}
+      >
+        {% if srp_sold_out %}Sold out{% else %}Continue{% endif %}
+      </button>
+    </div>
+  </div>
+
+  <div class="srp-accordion">
+    {% if form_product.description != blank %}
+      <details class="srp-acc-item" open>
+        <summary class="srp-acc-summary">
+          <span>{{ section.settings.about_heading | default: 'About this programme' }}</span>
+          <span class="srp-acc-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="srp-acc-body rte">
+          {{ form_product.description }}
+        </div>
+      </details>
+    {% endif %}
+
+    {% if section.settings.included_content != blank %}
+      <details class="srp-acc-item">
+        <summary class="srp-acc-summary">
+          <span>{{ section.settings.included_heading }}</span>
+          <span class="srp-acc-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="srp-acc-body rte">
+          {{ section.settings.included_content }}
+        </div>
+      </details>
+    {% endif %}
+
+    {% if section.settings.how_content != blank %}
+      <details class="srp-acc-item">
+        <summary class="srp-acc-summary">
+          <span>{{ section.settings.how_heading }}</span>
+          <span class="srp-acc-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="srp-acc-body rte">
+          {{ section.settings.how_content }}
+        </div>
+      </details>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  (function () {
+    const continueBtn = document.getElementById('school-reading-continue');
+    if (!continueBtn) return;
+
+    const variantId = {{ form_variant.id | json }};
+    const isSoldOut = {{ srp_sold_out | json }};
+
+    function getValue(id) {
+      const el = document.getElementById(id);
+      return el ? el.value.trim() : '';
+    }
+
+    function showError(inputId, msg) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(inputId + '_error');
+      if (input) input.classList.add('srp-input-error');
+      if (error) { error.textContent = msg; error.style.display = 'block'; }
+    }
+
+    function clearError(inputId) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(inputId + '_error');
+      if (input) input.classList.remove('srp-input-error');
+      if (error) { error.textContent = ''; error.style.display = 'none'; }
+    }
+
+    function validateStandard(showMsg) {
+      const val = getValue('child_standard');
+      if (!val) { if (showMsg) showError('child_standard', 'Standard is required'); return false; }
+      const num = parseInt(val, 10);
+      if (isNaN(num) || String(num) !== val || num < 1 || num > 12) {
+        if (showMsg) showError('child_standard', 'Must be 1–12');
+        return false;
+      }
+      clearError('child_standard');
+      return true;
+    }
+
+    function validateDivision(showMsg) {
+      const val = getValue('child_division');
+      if (!val) { if (showMsg) showError('child_division', 'Division is required'); return false; }
+      if (!/^[A-Za-z]$/.test(val)) {
+        if (showMsg) showError('child_division', 'Enter a single letter (A–Z)');
+        return false;
+      }
+      clearError('child_division');
+      return true;
+    }
+
+    function validateRollNumber(showMsg) {
+      const val = getValue('child_roll_number');
+      if (!val) { if (showMsg) showError('child_roll_number', 'Roll number is required'); return false; }
+      const num = parseInt(val, 10);
+      if (isNaN(num) || String(num) !== val || num < 1) {
+        if (showMsg) showError('child_roll_number', 'Enter a valid roll number');
+        return false;
+      }
+      clearError('child_roll_number');
+      return true;
+    }
+
+    /* Auto-uppercase division */
+    var divInput = document.getElementById('child_division');
+    if (divInput) {
+      divInput.addEventListener('input', function () {
+        this.value = this.value.toUpperCase().replace(/[^A-Z]/g, '');
+      });
+    }
+
+    /* Allow only digits in standard & roll number */
+    ['child_standard', 'child_roll_number'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', function () {
+          this.value = this.value.replace(/\D/g, '');
+        });
+      }
+    });
+
+    /* Clear errors on focus */
+    ['child_standard', 'child_division', 'child_roll_number'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('focus', function () { clearError(id); });
+    });
+
+    /* Validate on blur */
+    document.getElementById('child_standard').addEventListener('blur', function () { validateStandard(true); });
+    document.getElementById('child_division').addEventListener('blur', function () { validateDivision(true); });
+    document.getElementById('child_roll_number').addEventListener('blur', function () { validateRollNumber(true); });
+
+    continueBtn.addEventListener('click', function (e) {
+      if (isSoldOut || continueBtn.disabled) {
+        e.preventDefault();
+        return;
+      }
+
+      const childName = getValue('child_name');
+      const schoolName = getValue('school_name_value') || getValue('school_name');
+
+      var valid = true;
+      if (!childName) { valid = false; }
+      if (!validateStandard(true)) valid = false;
+      if (!validateDivision(true)) valid = false;
+      if (!validateRollNumber(true)) valid = false;
+
+      if (!childName || !schoolName) {
+        if (!childName) document.getElementById('child_name').focus();
+        return;
+      }
+
+      if (!valid) {
+        var firstErr = document.querySelector('.srp-input-error');
+        if (firstErr) firstErr.focus();
+        return;
+      }
+
+      if (!variantId || isSoldOut) {
+        alert('This product is currently sold out');
+        return;
+      }
+
+      var standard = getValue('child_standard');
+      var division = getValue('child_division');
+      var rollNumber = getValue('child_roll_number');
+
+      const props = {
+        'Child Name': childName,
+        'School Name': schoolName,
+        'Child Standard': standard,
+        'Child Division': division,
+        'Child Roll Number': rollNumber
+      };
+
+      if (typeof onBuyNowClick === 'function') {
+        onBuyNowClick(e, false, [
+          {
+            id: variantId,
+            quantity: 1,
+            properties: props
+          }
+        ]);
+      } else {
+        window.location.href = '/checkout';
+      }
+    });
+  })();
+</script>
+
+<style>
+  .srp-wrap {
+    padding: 40px 16px 72px;
+  }
+
+  .srp-card {
+    max-width: 560px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 16px;
+    padding: 32px 28px 28px;
+    box-shadow: 0 8px 30px rgba(14, 27, 77, 0.06);
+  }
+
+  .srp-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .srp-kicker {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #844dff;
+  }
+
+  .srp-title {
+    margin: 0;
+    font-size: 28px;
+    line-height: 1.25;
+    font-weight: 800;
+    color: #0e1b4d;
+  }
+
+  .srp-compare {
+    font-size: 16px;
+    font-weight: 600;
+    color: #9aa0b4;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #e53e3e;
+    text-underline-offset: 0;
+  }
+
+  .srp-save {
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: #fff0f7;
+    color: #ff1a96;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+
+  .srp-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .srp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .srp-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+
+  .srp-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    position: relative;
+    padding-bottom: 18px;
+  }
+
+  .srp-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0e1b4d;
+  }
+
+  .srp-label span {
+    color: #ff1a96;
+  }
+
+  .srp-field input,
+  .srp-field select {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 15px;
+    line-height: 48px;
+    color: #222;
+    outline: none;
+  }
+
+  .srp-field input::placeholder {
+    color: #9a9a9a;
+  }
+
+  .srp-field input:focus {
+    border-color: #844dff;
+    box-shadow: 0 0 0 3px rgba(132, 77, 255, 0.12);
+  }
+
+  .srp-field input.srp-input-error {
+    border-color: #e53e3e;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+  }
+
+  .srp-field input.srp-input-error:focus {
+    border-color: #e53e3e;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.15);
+  }
+
+  .srp-error {
+    display: none;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: #e53e3e;
+    line-height: 1.4;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    white-space: nowrap;
+  }
+
+  .srp-select-lock {
+    position: relative;
+  }
+
+  .srp-select-lock::after {
+    content: "";
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #888;
+    border-bottom: 2px solid #888;
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+
+  .srp-field select:disabled {
+    background: #f6f6f8;
+    color: #333;
+    cursor: not-allowed;
+    opacity: 1;
+    appearance: none;
+    padding-right: 36px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .srp-footer {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .srp-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: #555;
+    padding: 0 2px;
+  }
+
+  .srp-price-values {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px 10px;
+  }
+
+  .srp-price .srp-compare {
+    font-size: 15px;
+  }
+
+  .srp-price strong {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0e1b4d;
+    line-height: 1;
+  }
+
+  .srp-btn {
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 10px;
+    background: #ff1a96;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .srp-btn:hover:not(:disabled) {
+    background: #e01586;
+  }
+
+  .srp-btn:disabled,
+  .srp-btn.is-sold-out {
+    background: #d9d9e3;
+    color: #6b7085;
+    cursor: not-allowed;
+  }
+
+  .srp-stock {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #fff4f4;
+    color: #c53030;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .srp-wrap {
+      padding: 24px 16px 48px;
+    }
+
+    .srp-card {
+      padding: 24px 18px 20px;
+      border-radius: 14px;
+    }
+
+    .srp-title {
+      font-size: 22px;
+    }
+
+    .srp-row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .srp-field select:disabled {
+      white-space: normal;
+      height: auto;
+      min-height: 48px;
+      line-height: 1.35;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+  }
+
+  .srp-accordion {
+    max-width: 560px;
+    margin: 20px auto 0;
+    border: 1px solid #ececec;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .srp-acc-item {
+    border-bottom: 1px solid #ececec;
+  }
+
+  .srp-acc-item:last-child {
+    border-bottom: none;
+  }
+
+  .srp-acc-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    list-style: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0e1b4d;
+  }
+
+  .srp-acc-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .srp-acc-icon {
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #0e1b4d;
+    border-bottom: 2px solid #0e1b4d;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .srp-acc-item[open] .srp-acc-icon {
+    transform: rotate(225deg);
+    margin-top: 6px;
+  }
+
+  .srp-acc-body {
+    padding: 0 20px 18px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #444;
+  }
+
+  .srp-acc-body p {
+    margin: 0 0 12px;
+  }
+
+  .srp-acc-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .srp-acc-body ul,
+  .srp-acc-body ol {
+    margin: 0 0 12px;
+    padding-left: 18px;
+  }
+
+  .srp-acc-body li {
+    margin-bottom: 6px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "School Reading Form",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product (optional)",
+      "info": "Leave empty to use the product this template is assigned to."
+    },
+    {
+      "type": "header",
+      "content": "Accordion"
+    },
+    {
+      "type": "text",
+      "id": "about_heading",
+      "label": "About heading",
+      "default": "About this programme"
+    },
+    {
+      "type": "text",
+      "id": "included_heading",
+      "label": "What's included heading",
+      "default": "What's included"
+    },
+    {
+      "type": "richtext",
+      "id": "included_content",
+      "label": "What's included",
+      "default": "<p>Your child receives a curated reading plan with age-appropriate books, reading support, and regular exchanges through the school programme.</p><ul><li>Handpicked books matched to the child's reading level</li><li>Monthly book exchange</li><li>Reading guidance for parents and teachers</li></ul>"
+    },
+    {
+      "type": "text",
+      "id": "how_heading",
+      "label": "How it works heading",
+      "default": "How it works"
+    },
+    {
+      "type": "richtext",
+      "id": "how_content",
+      "label": "How it works",
+      "default": "<p>Fill in your child's school details, continue to checkout, and we take care of the rest.</p><ol><li>Enter school, child name, standard, and roll number</li><li>Complete payment</li><li>Books are delivered as part of the school reading programme</li></ol>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "School Reading Form"
+    }
+  ]
+}
+{% endschema %}

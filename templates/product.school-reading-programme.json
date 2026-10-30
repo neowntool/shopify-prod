@@ -1,0 +1,107 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "16341802176432806c": {
+      "type": "breadcrumb",
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "text_alignment": "center",
+        "hide_current": false,
+        "hide_on_mb": false,
+        "animations": "inherit"
+      }
+    },
+    "school_reading_form": {
+      "type": "school-reading-form",
+      "name": "School Reading Form",
+      "settings": {
+        "product": "neown-school-reading-programme",
+        "about_heading": "About this programme",
+        "included_heading": "",
+        "included_content": "",
+        "how_heading": "How it works",
+        "how_content": "<ol><li>Enter child's details above</li><li>Click on Pay Now to complete payment</li><li>Download the neOwn App to select books</li><li>Books are delivered to the school</li><li>Return books to school after a month and repeat!!</li></ol>"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_saving": false,
+            "sale_badge_type": "percentage"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "size_title": "Size"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_atc_button": true,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false
+          }
+        },
+        "collapsible_tab_6Qwipw": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product Description",
+            "content": "",
+            "liquid": "{{product.description}}",
+            "default_open": true
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "variant_picker",
+        "buy_buttons",
+        "collapsible_tab_6Qwipw"
+      ],
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "layout": "layout-6",
+        "show_atwl": false,
+        "enable_history_state": true,
+        "enable_variant_group_images": false,
+        "disable_selected_variant_default": false,
+        "show_featured_media": true,
+        "show_zoom_button": true,
+        "enable_video_autoplay": false,
+        "show_nav_media_mobile": false,
+        "show_pagination_mobile": true,
+        "use_sticky_atc": false,
+        "use_sticky_atc_on_mobile": false,
+        "enable_dynamic_checkout": false,
+        "sticky_atc_wishtlist": false,
+        "sticky_atc_compare": false
+      }
+    }
+  },
+  "order": [
+    "16341802176432806c",
+    "school_reading_form",
+    "main"
+  ]
+}

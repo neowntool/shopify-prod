@@ -1,0 +1,369 @@
+<section class="jr-parent-section">
+  <div class="jr-parent-container">
+
+    <div class="jr-parent-header">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="jr-parent-grid">
+
+      <!-- LEFT -->
+      <div class="jr-parent-left">
+
+        {% for block in section.blocks %}
+          {% if block.type == 'problem' %}
+            <div class="jr-parent-card jr-parent-problem jr-parent-problem-{{ forloop.index }}">
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+      </div>
+
+      <!-- CENTER ARROW -->
+      <div class="jr-parent-arrow">
+        <img src="https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Group_4989.png?v=1780980302" style="width: 180px;"/>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="jr-parent-right">
+
+        <div class="jr-parent-solution-heading">
+          <h3>{{ section.settings.solution_heading }}</h3>
+          <p>{{ section.settings.solution_text }}</p>
+        </div>
+
+        <div class="jr-parent-benefits">
+
+          {% for block in section.blocks %}
+            {% if block.type == 'benefit' %}
+              <div class="jr-parent-card jr-parent-benefit">
+                <h4>{{ block.settings.title }}</h4>
+                <p>{{ block.settings.text }}</p>
+              </div>
+            {% endif %}
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+.jr-parent-section{
+  padding:20px 20px 30px 20px;
+}
+
+.jr-parent-container{
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.jr-parent-header{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.jr-parent-header h2{
+  font-size:48px;
+  line-height:1;
+  margin:0 0 15px;
+  font-weight:700;
+}
+
+.jr-parent-header p{
+  color:#777;
+  font-size:18px;
+  margin:0;
+}
+
+.jr-parent-grid{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:40px;
+  align-items:center;
+}
+
+.jr-parent-left{
+  position:relative;
+  min-height:300px;
+}
+
+.jr-parent-card{
+  position:absolute;
+  width:300px;
+  padding:22px;
+  border-radius:12px;
+  background:#fff;
+  transition:.3s;
+}
+
+.jr-parent-card h3,
+.jr-parent-card h4{
+  margin:0 0 10px;
+  font-size: 18px;
+  line-height:1.2;
+}
+
+.jr-parent-card p{
+  margin:0;
+  color:#666;
+  line-height:1.5;
+}
+
+.jr-parent-problem-1{
+  top:0;
+  left:0;
+  background:#FFE6F5;
+  border:1px solid #FF66BA;
+  transform:rotate(-3deg);
+}
+
+.jr-parent-problem-2{
+  top:0px;
+  left:301px;
+  background:#FDFFE5;
+  border:1px solid #BCCF00;
+  transform:rotate(5deg);
+}
+
+.jr-parent-problem-3{
+  top:137px;
+  left:125px;
+  background:#F0EBFF;
+  border:1px solid #A37AFF;
+  transform:rotate(3deg);
+}
+
+.jr-parent-arrow{
+  font-size:80px;
+  color:#444;
+  font-weight:700;
+}
+
+.jr-parent-right{
+  text-align:center;
+}
+
+.jr-parent-solution-heading{
+  margin-bottom:30px;
+}
+
+.jr-parent-solution-heading h3{
+  font-size:30px;
+  line-height:1.2;
+  margin:0 0 15px;
+}
+
+.jr-parent-solution-heading p{
+  color:#666;
+  margin:0;
+}
+
+.jr-parent-benefits{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.jr-parent-benefit{
+  position:relative;
+  width:120px;
+  background:#E5FFFF;
+  border:1px solid #00A6B8;
+  transform:rotate(-4deg);
+  padding: 8px 10px !important;
+}
+
+.jr-parent-benefit:nth-child(even){
+  transform:rotate(3deg);
+}
+
+.jr-parent-benefit h4{
+  font-size:14px;
+  text-align: left;
+}
+.jr-parent-benefit p{
+  font-size:14px;
+  text-align: left;
+}
+
+
+@media(max-width:989px){
+
+  .jr-parent-grid{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .jr-parent-arrow{
+    transform:rotate(90deg);
+    text-align:center;
+    font-size:60px;
+    position: relative;
+        top: 143px;
+  }
+  .jr-parent-arrow img{
+  width: 100px !important;
+  }
+
+  .jr-parent-left{
+    min-height:auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+  }
+
+  .jr-parent-card{
+    position:relative;
+    width:calc(50% - 8px);
+    left:auto !important;
+    top:auto !important;
+  }
+
+  .jr-parent-benefits{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .jr-parent-benefit{
+    width:100%;
+  }
+
+  .jr-parent-header h2{
+    font-size:38px;
+  }
+
+  .jr-parent-solution-heading h3{
+    font-size:22px;
+  }
+}
+
+@media(max-width:575px){
+
+  .jr-parent-header h2{
+    font-size:28px;
+  }
+
+  .jr-parent-card{
+    max-width:100%;
+    padding:14px;
+  }
+
+  .jr-parent-card h3,
+  .jr-parent-card h4{
+    font-size:16px;
+  }
+
+  .jr-parent-card p{
+    font-size:12px;
+  }
+
+  .jr-parent-benefits{
+    margin-top:20px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Parent Problems",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Every Indian Parent Faces This"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "You want to raise a reader. The system makes it harder than it should be."
+    },
+    {
+      "type": "text",
+      "id": "solution_heading",
+      "label": "Solution Heading",
+      "default": "neOwn solves all three problems in one subscription"
+    },
+    {
+      "type": "text",
+      "id": "solution_text",
+      "label": "Solution Text",
+      "default": "Less than the cost of one book per month. No clutter. No guilt."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "problem",
+      "name": "Problem Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Benefit Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Parent Problems",
+      "blocks": [
+        {
+          "type": "problem"
+        },
+        {
+          "type": "problem"
+        },
+        {
+          "type": "problem"
+        },
+        {
+          "type": "benefit"
+        },
+        {
+          "type": "benefit"
+        },
+        {
+          "type": "benefit"
+        },
+        {
+          "type": "benefit"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

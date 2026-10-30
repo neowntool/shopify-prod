@@ -1,0 +1,5 @@
+# Local backups and working files
+_prepull_backup_*/
+_ga4_backup_*/
+Claude outputs/
+.DS_Store

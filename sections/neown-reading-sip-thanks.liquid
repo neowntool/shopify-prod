@@ -1,0 +1,343 @@
+{%- comment -%}
+  Neown Reading SIP: thank-you page (shown after a successful subscription).
+  The Reading SIP section saves a small receipt in sessionStorage ("neown_sip_receipt") just before redirecting here:
+  { plan, price, aud, firstName, phoneMasked, paidAt, ... }. No personal data travels in the URL.
+  If the receipt is missing (page opened directly / new tab), the page still works and hides the payment card values.
+{%- endcomment -%}
+
+{%- liquid
+  assign sid = section.id
+  assign accent = section.settings.accent_color | default: '#5F35E8'
+  assign hi = section.settings.highlight_color | default: '#EEFC74'
+-%}
+
+<style>
+  #sty-{{ sid }} {
+    --ty-accent: {{ accent }}; --ty-hi: {{ hi }}; --ty-ink: #3a3a3a; --ty-muted: #6f6c7a; --ty-line: #ebe9f2;
+    --ty-soft: #f1edfd; --ty-ok: #1a7f4b; --ty-okbg: #e8f6ee;
+    font-family: var(--font-stack-body, 'Poppins', system-ui, sans-serif); color: var(--ty-ink);
+    max-width: 1000px; margin: 0 auto; padding: 40px 16px 56px;
+  }
+  #sty-{{ sid }} * { box-sizing: border-box; }
+  #sty-{{ sid }} h1, #sty-{{ sid }} h2, #sty-{{ sid }} h3, #sty-{{ sid }} p { margin: 0; letter-spacing: normal; text-transform: none; }
+  #sty-{{ sid }} [hidden] { display: none !important; }
+  #sty-{{ sid }} .ty-confetti { position: fixed; inset: 0; pointer-events: none; z-index: 50; width: 100vw; height: 100vh; }
+
+  /* hero */
+  #sty-{{ sid }} .ty-hero { text-align: center; max-width: 620px; margin: 0 auto 32px; }
+  #sty-{{ sid }} .ty-tick { width: 72px; height: 72px; border-radius: 50%; background: var(--ty-okbg); color: var(--ty-ok); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; animation: ty-pop .5s cubic-bezier(.2, 1.4, .4, 1) both; }
+  #sty-{{ sid }} .ty-tick path { stroke-dasharray: 30; stroke-dashoffset: 30; animation: ty-draw .45s .35s ease forwards; }
+  @keyframes ty-pop { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  @keyframes ty-draw { to { stroke-dashoffset: 0; } }
+  #sty-{{ sid }} .ty-hero h1 { font-family: var(--font-stack-header, inherit); font-size: clamp(30px, 5vw, 42px); font-weight: 800; line-height: 1.15; color: var(--ty-ink); }
+  #sty-{{ sid }} .ty-lead { margin-top: 10px; font-size: 16.5px; line-height: 1.55; color: var(--ty-muted); }
+  #sty-{{ sid }} .ty-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 8px 16px; border-radius: 999px; background: var(--ty-hi); font-weight: 700; font-size: 14.5px; }
+
+  /* cards */
+  #sty-{{ sid }} .ty-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); grid-template-areas: 'steps pay' 'tl tl'; gap: 20px; align-items: stretch; }
+  #sty-{{ sid }} .ty-a-steps { grid-area: steps; } #sty-{{ sid }} .ty-a-pay { grid-area: pay; } #sty-{{ sid }} .ty-a-tl { grid-area: tl; }
+  #sty-{{ sid }} .ty-card { background: #fff; border: 2px solid var(--ty-line); border-radius: 20px; padding: 24px; box-shadow: 0 10px 30px rgba(40, 30, 90, .06); }
+  #sty-{{ sid }} .ty-card h2 { font-family: var(--font-stack-header, inherit); font-size: 20px; font-weight: 800; line-height: 1.25; color: var(--ty-ink); }
+
+  /* get started (information, not a checklist) */
+  #sty-{{ sid }} .ty-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 16px; }
+  #sty-{{ sid }} .ty-list li { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start; }
+  #sty-{{ sid }} .ty-num { width: 30px; height: 30px; border-radius: 50%; background: var(--ty-soft); color: var(--ty-accent); font-weight: 800; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; }
+  #sty-{{ sid }} .ty-list h3 { font-size: 15.5px; font-weight: 800; line-height: 1.35; padding-top: 4px; color: var(--ty-ink); }
+  #sty-{{ sid }} .ty-list p { margin-top: 2px; font-size: 14px; line-height: 1.5; color: var(--ty-muted); }
+  #sty-{{ sid }} .ty-list p strong { color: var(--ty-ink); white-space: nowrap; }
+  #sty-{{ sid }} .ty-stores { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  #sty-{{ sid }} .ty-stores img { display: block; height: 42px; width: auto; }
+  #sty-{{ sid }} .ty-stores a { text-decoration: none; }
+  #sty-{{ sid }} .ty-badge { display: inline-flex; align-items: center; gap: 9px; height: 44px; padding: 0 14px 0 12px; border-radius: 9px; background: #000; border: 1px solid #a6a6a6; color: #fff; line-height: 1.05; }
+  #sty-{{ sid }} .ty-badge span { display: flex; flex-direction: column; font-size: 16px; font-weight: 600; letter-spacing: .01em; }
+  #sty-{{ sid }} .ty-badge small { font-size: 9.5px; font-weight: 500; letter-spacing: .03em; }
+
+  /* payment */
+  #sty-{{ sid }} .ty-pay-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  #sty-{{ sid }} .ty-paid { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; background: var(--ty-okbg); color: var(--ty-ok); font-weight: 700; font-size: 13px; white-space: nowrap; }
+  #sty-{{ sid }} .ty-rows { margin: 12px 0 0; padding: 0; }
+  #sty-{{ sid }} .ty-row:first-child { border-top: 0; }
+  #sty-{{ sid }} .ty-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px dashed var(--ty-line); font-size: 14px; }
+  #sty-{{ sid }} .ty-row dt { color: var(--ty-muted); }
+  #sty-{{ sid }} .ty-row dd { margin: 0; font-weight: 700; text-align: right; }
+  #sty-{{ sid }} .ty-muted { margin-top: 10px; font-size: 13.5px; line-height: 1.5; color: var(--ty-muted); }
+  #sty-{{ sid }} .ty-wa { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; height: 46px; border-radius: 12px; background: #25d366; color: #fff; font-weight: 800; font-size: 14.5px; text-decoration: none; }
+  #sty-{{ sid }} .ty-wa-sub { margin-top: 6px; text-align: center; font-size: 12.5px; color: var(--ty-muted); }
+
+  /* what happens next */
+  #sty-{{ sid }} .ty-timeline { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); position: relative; }
+  #sty-{{ sid }} .ty-timeline::before { content: ''; position: absolute; left: 12.5%; right: 12.5%; top: 15px; height: 2px; background: var(--ty-line); }
+  #sty-{{ sid }} .ty-timeline li { position: relative; text-align: center; padding: 0 10px; }
+  #sty-{{ sid }} .ty-dot { position: relative; z-index: 1; width: 32px; height: 32px; margin: 0 auto 10px; border-radius: 50%; background: #fff; border: 2px solid var(--ty-line); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--ty-muted); }
+  #sty-{{ sid }} .ty-timeline .is-now .ty-dot { background: var(--ty-ok); border-color: var(--ty-ok); color: #fff; }
+  #sty-{{ sid }} .ty-timeline .is-key .ty-dot { background: var(--ty-accent); border-color: var(--ty-accent); color: #fff; }
+  #sty-{{ sid }} .ty-timeline h3 { font-size: 15px; font-weight: 800; color: var(--ty-ink); }
+  #sty-{{ sid }} .ty-timeline p { margin-top: 3px; font-size: 13px; line-height: 1.45; color: var(--ty-muted); }
+  #sty-{{ sid }} .ty-cycle { margin-top: 20px; display: flex; gap: 10px; align-items: center; justify-content: center; text-align: center; padding: 12px 16px; border-radius: 12px; background: var(--ty-hi); font-size: 14.5px; font-weight: 700; color: var(--ty-ink); }
+
+  @media (max-width: 860px) {
+    #sty-{{ sid }} .ty-grid { grid-template-columns: 1fr; grid-template-areas: 'steps' 'tl' 'pay'; }
+    #sty-{{ sid }} .ty-card { padding: 20px 18px; }
+    #sty-{{ sid }} .ty-timeline { grid-template-columns: 1fr; gap: 14px; }
+    #sty-{{ sid }} .ty-timeline::before { left: 15px; right: auto; top: 16px; bottom: 16px; width: 2px; height: auto; }
+    #sty-{{ sid }} .ty-timeline li { display: grid; grid-template-columns: 32px 1fr; gap: 0 12px; text-align: left; padding: 0; }
+    #sty-{{ sid }} .ty-dot { margin: 0; grid-row: span 2; }
+    #sty-{{ sid }} .ty-timeline h3 { padding-top: 6px; }
+    #sty-{{ sid }} .ty-cycle { text-align: left; justify-content: flex-start; }
+    #sty-{{ sid }} .ty-stores { gap: 8px; }
+    #sty-{{ sid }} .ty-badge { height: 40px; gap: 6px; padding: 0 10px 0 9px; }
+    #sty-{{ sid }} .ty-badge svg { width: 17px; height: 19px; }
+    #sty-{{ sid }} .ty-badge span { font-size: 13.5px; }
+    #sty-{{ sid }} .ty-badge small { font-size: 8.5px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #sty-{{ sid }} .ty-tick, #sty-{{ sid }} .ty-tick path { animation: none; stroke-dashoffset: 0; }
+  }
+</style>
+
+{%- liquid
+  assign guard = false
+  if section.settings.only_after_purchase and request.design_mode == false
+    assign guard = true
+  endif
+-%}
+<div id="sty-{{ sid }}" class="sip-thanks" data-select-days="{{ section.settings.select_days | default: 3 }}"
+     data-guard="{{ guard }}" data-fallback="{{ section.settings.fallback_url | default: '/' | escape }}"
+     {% if guard %}style="visibility:hidden"{% endif %}>
+
+  <div class="ty-hero">
+    <span class="ty-tick" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+    <h1 data-ty-heading data-tpl="{{ section.settings.heading | escape }}">{{ section.settings.heading | replace: '[name]', '' | replace: ', !', '!' | escape }}</h1>
+    <p class="ty-lead">{{ section.settings.lead | escape }}</p>
+    <span class="ty-pill" data-ty-pill hidden><span aria-hidden="true">📚</span><span data-ty-pill-text></span></span>
+  </div>
+
+  <div class="ty-grid">
+    <div class="ty-card ty-a-steps">
+      <h2>{{ section.settings.steps_heading | escape }}</h2>
+      <ol class="ty-list">
+        <li>
+          <span class="ty-num">1</span>
+          <div>
+            <h3>{{ section.settings.step1_title | escape }}</h3>
+            <p data-ty-login>{{ section.settings.step1_text | escape }}</p>
+            <div class="ty-stores" data-ty-stores>
+              {%- if section.settings.playstore_link != blank -%}
+                <a data-os="android" href="{{ section.settings.playstore_link }}" target="_blank" rel="noopener" data-track="sip_app_click_android">
+                  {%- if section.settings.playstore_image != blank -%}{{ section.settings.playstore_image | image_url: height: 84 | image_tag: alt: 'Get it on Google Play', height: 42, loading: 'lazy' }}{%- else -%}<span class="ty-badge"><svg width="22" height="24" viewBox="0 0 22 24" aria-hidden="true"><path fill="#00C3FF" d="M1.1.6C.8.9.6 1.4.6 2v20c0 .6.2 1.1.5 1.4l11.2-11.4z"/><path fill="#00E676" d="M16 8.1 2.9.9C2.2.5 1.6.4 1.1.6l11.2 11.4z"/><path fill="#FF3D57" d="M12.3 12 1.1 23.4c.5.2 1.1.1 1.8-.3L16 15.9z"/><path fill="#FFC400" d="M20.1 10.4 16 8.1 12.3 12l3.7 3.9 4.1-2.3c1.2-.7 1.2-2.5 0-3.2z"/></svg><span><small>GET IT ON</small>Google Play</span></span>{%- endif -%}
+                </a>
+              {%- endif -%}
+              {%- if section.settings.appstore_link != blank -%}
+                <a data-os="ios" href="{{ section.settings.appstore_link }}" target="_blank" rel="noopener" data-track="sip_app_click_ios">
+                  {%- if section.settings.appstore_image != blank -%}{{ section.settings.appstore_image | image_url: height: 84 | image_tag: alt: 'Download on the App Store', height: 42, loading: 'lazy' }}{%- else -%}<span class="ty-badge"><svg width="20" height="24" viewBox="0 0 20 24" aria-hidden="true"><path fill="#fff" d="M16.4 12.7c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9s-2-.9-3.4-.9C5.9 6.9 4.3 7.9 3.4 9.4c-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8s2 .8 3.4.8c1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.1zM13.9 5.1c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.5-.7.7-1.2 2-1.1 3.1 1.2.1 2.4-.6 3.1-1.4z"/></svg><span><small>Download on the</small>App Store</span></span>{%- endif -%}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </li>
+        <li>
+          <span class="ty-num">2</span>
+          <div>
+            <h3>{{ section.settings.step2_title | escape }}</h3>
+            <p data-ty-step2>{{ section.settings.step2_text | escape }}</p>
+          </div>
+        </li>
+        <li>
+          <span class="ty-num">3</span>
+          <div>
+            <h3>{{ section.settings.step3_title | escape }}</h3>
+            <p data-ty-step3 data-tpl="{{ section.settings.step3_text | escape }}">{{ section.settings.step3_text | replace: ' by [date]', '' | replace: '[date]', '' | escape }}</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="ty-card ty-a-pay">
+      <div class="ty-pay-head"><h2>{{ section.settings.payment_heading | escape }}</h2><span class="ty-paid" data-ty-paidtag hidden>✓ Paid</span></div>
+      <div data-ty-pay hidden>
+        <dl class="ty-rows">
+          <div class="ty-row"><dt>Amount paid</dt><dd>₹<span data-ty-amount></span></dd></div>
+          <div class="ty-row"><dt>Plan</dt><dd data-ty-plan></dd></div>
+          <div class="ty-row"><dt>Paid on</dt><dd data-ty-paid-on></dd></div>
+          <div class="ty-row"><dt>Renews</dt><dd data-ty-renews></dd></div>
+        </dl>
+      </div>
+      <p class="ty-muted" data-ty-nopay>{{ section.settings.no_receipt_text | escape }}</p>
+      {%- if section.settings.whatsapp_link != blank -%}
+        <a class="ty-wa" href="{{ section.settings.whatsapp_link }}" target="_blank" rel="noopener" data-track="sip_thankyou_whatsapp">{{ section.settings.whatsapp_label | escape }}</a>
+        {%- if section.settings.help_text != blank -%}<p class="ty-wa-sub">{{ section.settings.help_text | escape }}</p>{%- endif -%}
+      {%- endif -%}
+    </div>
+
+  <div class="ty-card ty-a-tl">
+    <h2>{{ section.settings.timeline_heading | escape }}</h2>
+    <ol class="ty-timeline">
+      <li class="is-now"><span class="ty-dot">✓</span><h3>{{ section.settings.tl1_title | escape }}</h3><p>{{ section.settings.tl1_text | escape }}</p></li>
+      <li><span class="ty-dot">2</span><h3>{{ section.settings.tl2_title | escape }}</h3><p>{{ section.settings.tl2_text | escape }}</p></li>
+      <li class="is-key"><span class="ty-dot">3</span><h3>{{ section.settings.tl3_title | escape }}</h3><p>{{ section.settings.tl3_text | escape }}</p></li>
+      <li><span class="ty-dot">4</span><h3>{{ section.settings.tl4_title | escape }}</h3><p>{{ section.settings.tl4_text | escape }}</p></li>
+    </ol>
+    {%- if section.settings.cycle_note != blank -%}<p class="ty-cycle"><span aria-hidden="true">🗓️</span><span>{{ section.settings.cycle_note | escape }}</span></p>{%- endif -%}
+  </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('sty-{{ sid }}');
+  if (!root || root.dataset.ready) return;
+  root.dataset.ready = '1';
+  var $ = function (s) { return root.querySelector(s); };
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function fmt(d) { return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear(); }
+  function fmtShort(d) { return d.getDate() + ' ' + MONTHS[d.getMonth()]; }
+  function track(ev, extra) { if (window.dataLayer) { var o = { event: ev }; for (var k in extra || {}) o[k] = extra[k]; window.dataLayer.push(o); } }
+
+  // Keep this page out of search results.
+  if (!document.querySelector('meta[name="robots"]')) { var m = document.createElement('meta'); m.name = 'robots'; m.content = 'noindex, nofollow'; document.head.appendChild(m); }
+
+  var r = null;
+  try { r = JSON.parse(sessionStorage.getItem('neown_sip_receipt') || 'null'); } catch (e) {}
+  if (r && (!r.paidAt || Date.now() - r.paidAt > 864e5)) r = null; // receipts are valid for 24 hours
+
+  // Only show this page right after a purchase in this browser tab; otherwise send the visitor to the plans page.
+  if (root.dataset.guard === 'true') {
+    if (!r) { location.replace(root.dataset.fallback || '/'); return; }
+    root.style.visibility = '';
+  }
+
+  var h = $('[data-ty-heading]'), tpl = h.dataset.tpl || '';
+  h.textContent = r && r.firstName ? tpl.replace('[name]', r.firstName) : tpl.replace(/,?\s*\[name\]/, '');
+
+  var s3 = $('[data-ty-step3]'), s3tpl = s3.dataset.tpl || '';
+  if (r) {
+    var paid = new Date(r.paidAt);
+    var pickBy = new Date(paid); pickBy.setDate(pickBy.getDate() + (Number(root.dataset.selectDays) || 3));
+    $('[data-ty-pill]').hidden = false;
+    $('[data-ty-pill-text]').textContent = r.plan + ' · ₹' + r.price + '/month';
+    $('[data-ty-pay]').hidden = false;
+    $('[data-ty-paidtag]').hidden = false;
+    $('[data-ty-nopay]').hidden = true;
+    $('[data-ty-amount]').textContent = r.price;
+    $('[data-ty-plan]').textContent = r.plan;
+    $('[data-ty-paid-on]').textContent = fmt(paid);
+    $('[data-ty-renews]').textContent = 'Monthly · Autopay';
+    if (r.phoneMasked) $('[data-ty-login]').innerHTML += ' Log in with <strong>+91 ' + r.phoneMasked.replace(/[<>&]/g, '') + '</strong>.';
+    s3.innerHTML = s3tpl.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace('[date]', '<strong>' + fmtShort(pickBy) + '</strong>');
+    if (r.aud === 'siblings') $('[data-ty-step2]').textContent += ' Add both children.';
+    track('sip_thankyou_view', { plan: r.plan, value: Number(r.price), subscription_id: r.subscriptionId });
+    sendPurchase(r);
+  } else {
+    s3.textContent = s3tpl.replace(/\s*by \[date\]/, '').replace('[date]', '');
+    track('sip_thankyou_view', { plan: '(no receipt)' });
+  }
+
+  // GA4 purchase for the Reading SIP (sent through GTM as the standard "purchase" event).
+  // Sent once per Razorpay payment ID: reloads, Back and new tabs never send it again.
+  function sendPurchase(rc) {
+    var pid = rc.paymentId;
+    if (!pid) return;
+    var key = 'neown_ga_sip_purchase_' + pid;
+    try { if (localStorage.getItem(key)) return; localStorage.setItem(key, '1'); } catch (e) {}
+    var type = rc.aud === 'siblings' ? 'sibling' : 'single';
+    var b = String(rc.books || ((rc.plan || '').match(/\d+/) || [''])[0]);
+    var planId = 'sip_' + type + '_' + (type === 'sibling' ? b + '_' + b : b);
+    var price = Number(rc.price) || 0;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ ecommerce: null });
+    window.dataLayer.push({
+      event: 'purchase',
+      checkout_type: 'razorpay_sip',
+      subscription_id: rc.subscriptionId || '',
+      ecommerce: {
+        transaction_id: pid,
+        value: price,
+        currency: 'INR',
+        items: [{ item_id: planId, item_name: rc.plan || planId, item_category: 'reading_sip', item_variant: type, price: price, quantity: 1 }]
+      }
+    });
+  }
+
+  // On a phone, show the matching store badge first.
+  var ua = navigator.userAgent || '', os = /android/i.test(ua) ? 'android' : (/iphone|ipad|ipod/i.test(ua) ? 'ios' : '');
+  var st = $('[data-ty-stores]');
+  if (os && st) st.querySelectorAll('a').forEach(function (a) { if (a.dataset.os === os) st.insertBefore(a, st.firstChild); });
+  root.querySelectorAll('[data-track]').forEach(function (a) { a.addEventListener('click', function () { track(a.dataset.track); }); });
+  root.querySelectorAll('a[data-os]').forEach(function (a) {
+    a.addEventListener('click', function () { track('app_download_click', { store: a.dataset.os === 'ios' ? 'app_store' : 'play', page_type: 'sip_thank_you' }); });
+  });
+
+  // One short confetti burst on first view (skipped for reduced motion).
+  function confetti(count) {
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var c = document.createElement('canvas'); c.className = 'ty-confetti'; root.appendChild(c);
+    var ctx = c.getContext('2d'), W = c.width = innerWidth, H = c.height = innerHeight;
+    var colors = [getComputedStyle(root).getPropertyValue('--ty-accent').trim() || '#5F35E8', '#EEFC74', '#ff4fa3', '#25d366', '#ffb020'];
+    var parts = [];
+    for (var i = 0; i < count; i++) parts.push({ x: W / 2 + (Math.random() - .5) * W * .3, y: H * .25, vx: (Math.random() - .5) * 12, vy: -Math.random() * 10 - 4, s: 5 + Math.random() * 6, r: Math.random() * 6, vr: (Math.random() - .5) * .3, c: colors[i % colors.length] });
+    var t0 = performance.now();
+    (function frame(t) {
+      ctx.clearRect(0, 0, W, H);
+      parts.forEach(function (p) { p.vy += .35; p.x += p.vx; p.y += p.vy; p.r += p.vr; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); ctx.restore(); });
+      if (t - t0 < 2600) requestAnimationFrame(frame); else c.remove();
+    })(t0);
+  }
+  if (r) {
+    var k = 'neown_sip_confetti_' + (r.subscriptionId || r.paidAt), seen = false;
+    try { seen = sessionStorage.getItem(k); sessionStorage.setItem(k, '1'); } catch (e) {}
+    if (!seen) setTimeout(function () { confetti(140); }, 350);
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Neown SIP thank-you",
+  "tag": "section",
+  "class": "section-neown-sip-thanks",
+  "settings": [
+    { "type": "header", "content": "Top" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "You're all set, [name]!", "info": "[name] is replaced with the parent's first name." },
+    { "type": "textarea", "id": "lead", "label": "Text under heading", "default": "Your child's Reading SIP is active. Here's how to get your first set of books." },
+    { "type": "header", "content": "Get started" },
+    { "type": "text", "id": "steps_heading", "label": "Heading", "default": "Get started in the neOwn app" },
+    { "type": "text", "id": "step1_title", "label": "1 · title", "default": "Download the app" },
+    { "type": "textarea", "id": "step1_text", "label": "1 · text", "default": "Your child's Reading SIP is linked to your mobile number." },
+    { "type": "text", "id": "step2_title", "label": "2 · title", "default": "Add your child and address in the app" },
+    { "type": "textarea", "id": "step2_text", "label": "2 · text", "default": "So we can suggest the right books and deliver to your door." },
+    { "type": "text", "id": "step3_title", "label": "3 · title", "default": "Select books for your child" },
+    { "type": "textarea", "id": "step3_text", "label": "3 · text", "default": "Choose in the app by [date], or we'll curate a set for you.", "info": "[date] becomes the pick-by date." },
+    { "type": "number", "id": "select_days", "label": "Days to pick books before we curate", "default": 3 },
+    { "type": "image_picker", "id": "playstore_image", "label": "Google Play badge" },
+    { "type": "url", "id": "playstore_link", "label": "Google Play link" },
+    { "type": "image_picker", "id": "appstore_image", "label": "App Store badge" },
+    { "type": "url", "id": "appstore_link", "label": "App Store link" },
+    { "type": "header", "content": "Payment card" },
+    { "type": "text", "id": "payment_heading", "label": "Heading", "default": "Payment" },
+    { "type": "textarea", "id": "no_receipt_text", "label": "Text when payment details aren't available", "default": "Your payment confirmation has been sent to you by SMS/email." },
+    { "type": "text", "id": "whatsapp_label", "label": "Help button", "default": "Need help? Chat on WhatsApp" },
+    { "type": "url", "id": "whatsapp_link", "label": "WhatsApp link" },
+    { "type": "text", "id": "help_text", "label": "Text under help button", "default": "Mon–Sat, 9am–6pm IST" },
+    { "type": "header", "content": "What happens next" },
+    { "type": "text", "id": "timeline_heading", "label": "Heading", "default": "What happens next" },
+    { "type": "text", "id": "tl1_title", "label": "1 · title", "default": "SIP active" },
+    { "type": "text", "id": "tl1_text", "label": "1 · text", "default": "Payment done, Autopay set." },
+    { "type": "text", "id": "tl2_title", "label": "2 · title", "default": "Select books" },
+    { "type": "text", "id": "tl2_text", "label": "2 · text", "default": "In the app, or we curate." },
+    { "type": "text", "id": "tl3_title", "label": "3 · title", "default": "Books delivered" },
+    { "type": "text", "id": "tl3_text", "label": "3 · text", "default": "Your reading cycle starts." },
+    { "type": "text", "id": "tl4_title", "label": "4 · title", "default": "Monthly swap" },
+    { "type": "text", "id": "tl4_text", "label": "4 · text", "default": "New books in, old ones picked up." },
+    { "type": "text", "id": "cycle_note", "label": "Highlighted note", "default": "Your monthly reading cycle starts on the day your books are delivered." },
+    { "type": "header", "content": "Access" },
+    { "type": "checkbox", "id": "only_after_purchase", "label": "Only show right after a purchase", "default": true, "info": "Visitors who open this page directly (no purchase in this browser tab in the last 24 hours) are sent to the link below. Always visible in the theme editor." },
+    { "type": "url", "id": "fallback_url", "label": "Send other visitors to", "info": "Usually the Reading SIP plans page." },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "accent_color", "label": "Accent", "default": "#5F35E8" },
+    { "type": "color", "id": "highlight_color", "label": "Highlight", "default": "#EEFC74" }
+  ],
+  "presets": [ { "name": "Neown SIP thank-you" } ]
+}
+{% endschema %}

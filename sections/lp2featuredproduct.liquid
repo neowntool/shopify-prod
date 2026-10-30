@@ -1,0 +1,538 @@
+<section class="sp_plan_section">
+  <div class="sp_plan_container">
+
+    <!-- Left Content -->
+    <div class="sp_plan_left">
+     
+
+      {% if section.settings.heading != blank %}
+        <h2 class="sp_plan_heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+       {% if section.settings.sub_heading != blank %}
+        <span class="sp_plan_subtitle">{{ section.settings.sub_heading }}</span>
+      {% endif %}
+
+      <div class="sp_plan_tags">
+        {% if section.settings.tag_1 != blank %}
+          <span>{{ section.settings.tag_1 }}</span>
+        {% endif %}
+
+        {% if section.settings.tag_2 != blank %}
+          <span>{{ section.settings.tag_2 }}</span>
+        {% endif %}
+
+        {% if section.settings.tag_3 != blank %}
+          <span>{{ section.settings.tag_3 }}</span>
+        {% endif %}
+      </div>
+
+      <div class="sp_plan_features">
+        {{ section.settings.features }}
+      </div>
+    </div>
+
+    <!-- Right Plans -->
+    <div class="sp_plan_right">
+
+      {% assign selected_product = all_products[section.settings.product] %}
+
+      {% if selected_product != blank %}
+
+        {% for variant in selected_product.variants %}
+
+          {% assign duration = variant.title | split: ' ' | first | times: 1 %}
+          {% assign books = duration | times: 5 %}
+          {% assign monthly_price = variant.price | divided_by: duration %}
+
+          {% assign discount_percentage = 0 %}
+
+          {% if variant.compare_at_price > variant.price %}
+            {% assign savings = variant.compare_at_price | minus: variant.price %}
+            {% assign discount_percentage = savings | times: 100 | divided_by: variant.compare_at_price %}
+          {% endif %}
+
+          <label class="sp_plan_option">
+            <input
+              type="radio"
+              name="sp_plan_variant"
+              value="{{ variant.id }}"
+              {% if forloop.first %}checked{% endif %}
+            >
+
+            <div class="sp_plan_card">
+
+  {% if discount_percentage > 0 %}
+    <div class="sp_plan_discount">
+      {{ discount_percentage }}% OFF
+    </div>
+  {% endif %}
+
+  <div class="sp_plan_card_inner">
+
+    <div class="sp_plan_card_left">
+
+      <div class="sp_plan_title">
+        {{ variant.title }} | {{ books }} books
+      </div>
+
+      <div class="sp_plan_monthly">
+        {{ monthly_price | money }}/ per month
+      </div>
+
+    </div>
+
+    <div class="sp_plan_card_right">
+
+      <div class="sp_plan_price">
+        {{ variant.price | money }}/-
+      </div>
+
+      {% if variant.compare_at_price > variant.price %}
+        <div class="sp_plan_compare">
+          {{ variant.compare_at_price | money }}/-
+        </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+
+</div>
+          </label>
+
+        {% endfor %}
+
+      {% endif %}
+
+     <button
+  class="sp_plan_buy_btn"
+  type="button"
+  id="sp_plan_buy_now"
+>
+  Start Subscription (<span id="sp_plan_btn_price"></span>)
+</button>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+.sp_plan_section{
+  padding:80px 20px;
+}
+
+.sp_plan_container{
+  max-width:1400px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:flex-start;
+}
+
+.sp_plan_subtitle{
+  display:inline-block;
+  color:#A37AFF;
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:15px;
+}
+
+.sp_plan_heading{
+  font-size:54px;
+  line-height:1.1;
+  margin:0 0 15px;
+  color:#111;
+  font-weight:700;
+}
+
+.sp_plan_tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:35px;
+}
+
+.sp_plan_tags span{
+  padding:12px 18px;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:500;
+}
+
+
+/* 1st span */
+.sp_plan_tags span:nth-child(1) {
+  background-color: #FFE6F5;
+  color: #FF4DAE;
+  font-weight: bold;
+}
+
+/* 2nd span */
+.sp_plan_tags span:nth-child(2) {
+  background-color: #F0EBFF;
+  color: #A37AFF;
+}
+
+/* 3rd span */
+.sp_plan_tags span:nth-child(3) {
+  background: #CCFEFF;
+  color: #00A6B8;
+}
+
+
+.sp_plan_features{
+  color:#444;
+  font-size:16px;
+  line-height:1.8;
+}
+
+.sp_plan_features ul{
+  margin:0;
+  padding-left:22px;
+}
+
+.sp_plan_features li{
+  margin-bottom:15px;
+}
+
+.sp_plan_right{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.sp_plan_option {
+  display: block;
+  position: relative;
+}
+
+.sp_plan_option input {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+
+.sp_plan_card {
+  position: relative;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  background: #fff;
+  padding: 22px 24px 22px 42px;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.sp_plan_option input:checked + .sp_plan_card {
+  border: 2px solid #FF4DAE;
+  background: #FFE6F5;
+}
+
+.sp_plan_option input:checked + .sp_plan_card .sp_plan_discount {
+  background: #E5FF05;
+  color: #000;
+}
+.sp_plan_price {
+  color: #2B2B2B !important;
+}
+
+.sp_plan_option input:checked + .sp_plan_card .sp_plan_price {
+  color: #FF4DAE !important;
+}
+.sp_plan_option input[type="radio"] {
+  accent-color: #FF4DAE;
+}
+
+
+.sp_plan_discount {
+  position: absolute;
+  top: -10px;
+  left: 26px;
+  background: #f0f0f0;
+  color: #666;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sp_plan_card_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.sp_plan_title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.sp_plan_monthly {
+  font-size: 13px;
+  color: #666;
+}
+
+.sp_plan_card_right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.sp_plan_price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.2;
+}
+
+.sp_plan_compare {
+  font-size: 12px;
+  color: #9a9a9a;
+  text-decoration: line-through;
+  margin-top: 4px;
+}
+
+@media screen and (max-width: 767px) {
+
+  .sp_plan_features p{
+  font-size: 12px;
+  }
+  .sp_plan_section {
+    padding: 30px 20px;
+}
+.sp_plan_subtitle {
+    justify-content: center;
+    display: flex;
+}
+.sp_plan_tags {
+    margin-bottom: 15px;
+    justify-content: center;
+}
+.sp_plan_tags span {
+    padding: 10px 12px;
+}
+
+  .sp_plan_card {
+    padding: 20px 18px 20px 38px;
+  }
+
+  .sp_plan_title {
+    font-size: 14px;
+  }
+
+  .sp_plan_price {
+    font-size: 16px;
+  }
+
+  .sp_plan_monthly,
+  .sp_plan_compare {
+    font-size: 12px;
+  }
+
+}
+
+.sp_plan_buy_btn{
+  width:100%;
+  margin-top:10px;
+  background: #FF4DAE;
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  padding:18px;
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.sp_plan_buy_btn:hover{
+  opacity:.9;
+}
+
+
+@media(max-width: 400px){
+.sp_plan_tags span{
+  padding: 6px 8px !important;
+  font-size: 12px;
+}
+}
+
+@media(max-width:991px){
+
+  .sp_plan_container{
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+
+  .sp_plan_heading{
+    font-size:42px;
+  }
+}
+
+@media(max-width:767px){
+
+  .sp_plan_heading{
+    font-size:34px;
+    text-align: center;
+  }
+  .sp_plan_card_left{
+  padding-left: 20px;
+  }
+
+  .sp_plan_card{
+    padding:22px;
+  }
+
+  .sp_plan_price{
+    font-size:22px;
+  }
+
+  .sp_plan_duration{
+    font-size:22px;
+  }
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  const section = document.querySelector('.sp_plan_section');
+  if (!section) return;
+
+  const buyButton = section.querySelector('#sp_plan_buy_now');
+  const priceSpan = section.querySelector('#sp_plan_btn_price');
+  const variantInputs = section.querySelectorAll('input[name="sp_plan_variant"]');
+
+  let selectedVariantId = '';
+  let selectedPrice = '';
+
+  function formatMoney(cents) {
+    return '₹' + (cents / 100).toLocaleString('en-IN');
+  }
+
+  function updateButton(price, variantId) {
+    selectedVariantId = variantId;
+    selectedPrice = price;
+
+    if (priceSpan) {
+      priceSpan.innerText = formatMoney(price);
+    }
+  }
+
+  variantInputs.forEach(function (input) {
+
+    const price = input.closest('.sp_plan_option')
+      .querySelector('.sp_plan_price')
+      .innerText.replace(/[^\d]/g, '');
+
+    if (input.checked) {
+      updateButton(price * 100, input.value);
+    }
+
+    input.addEventListener('change', function () {
+      updateButton(price * 100, this.value);
+    });
+
+  });
+
+ if (buyButton) {
+  buyButton.addEventListener('click', function (e) {
+
+    if (!selectedVariantId) {
+      alert("Please select a plan");
+      return;
+    }
+
+    // ✅ GOKWIK BUY NOW
+    if (typeof onBuyNowClick === "function") {
+      onBuyNowClick(e, false, [
+        {
+          id: selectedVariantId,
+          quantity: 1,
+          properties: {
+            "Plan": document.querySelector('input[name="sp_plan_variant"]:checked')
+                      ?.closest('.sp_plan_option')
+                      ?.querySelector('.sp_plan_title')?.innerText || ''
+          }
+        }
+      ]);
+    } else {
+      // fallback
+      window.location.href = "/checkout";
+    }
+
+  });
+}
+
+});
+</script>
+
+{% schema %}
+{
+  "name": "Plan Selector",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Select Product"
+    },
+    {
+      "type": "text",
+      "id": "sub_heading",
+      "label": "Sub Heading",
+      "default": "No deposit & no hidden charges"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose your plan"
+    },
+    {
+      "type": "text",
+      "id": "tag_1",
+      "label": "Tag 1",
+      "default": "0–14 yrs"
+    },
+    {
+      "type": "text",
+      "id": "tag_2",
+      "label": "Tag 2",
+      "default": "Rent 5 Books/month"
+    },
+    {
+      "type": "text",
+      "id": "tag_3",
+      "label": "Tag 3",
+      "default": "75,000+ books"
+    },
+    {
+      "type": "html",
+      "id": "features",
+      "label": "Features",
+      "default": "<ul><li>Free delivery in Mumbai, Thane & Navi Mumbai.</li><li>Outside Mumbai: ₹100/month (delivery & pickup included).</li></ul>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Buy Now"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Plan Selector"
+    }
+  ]
+}
+{% endschema %}

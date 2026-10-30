@@ -1,0 +1,210 @@
+{% schema %}
+{
+  "name": "Partners Movement",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Heading",
+      "default": "Our Partners in the Movement"
+    },
+    {
+      "type": "text",
+      "id": "section_subheading",
+      "label": "Section Subheading",
+      "default": "Everything your child needs — without the burden of owning everything."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "partner",
+      "name": "Partner Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Block Title"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "Add block description here."
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#F0EBFF"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Partners Movement",
+      "blocks": [
+        {"type": "partner"},
+        {"type": "partner"},
+        {"type": "partner"},
+        {"type": "partner"}
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+<section class="pmv-section">
+  <div class="pmv-container">
+
+    <div class="pmv-header">
+      <h2>{{ section.settings.section_heading }}</h2>
+      <p>{{ section.settings.section_subheading }}</p>
+    </div>
+
+    <div class="pmv-grid">
+
+      {% for block in section.blocks %}
+      <div class="pmv-card" style="background:{{ block.settings.bg_color }}">
+
+        {% if block.settings.icon != blank %}
+        <div class="pmv-icon">
+          <img src="{{ block.settings.icon | image_url }}" alt="">
+        </div>
+        {% endif %}
+
+        <h3>{{ block.settings.title }}</h3>
+        <p>{{ block.settings.content }}</p>
+
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+
+<style>
+
+.pmv-section{
+padding:70px 20px;
+}
+
+.pmv-container{
+max-width:1252px;
+margin:0 auto;
+}
+
+.pmv-header{
+text-align:center;
+margin-bottom:40px;
+}
+
+.pmv-header h2{
+font-size:32px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.pmv-header p{
+color:#666;
+font-size:16px;
+}
+
+.pmv-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.pmv-card{
+padding:20px 25px;
+border-radius:12px;
+transition:0.3s;
+text-align: center;
+}
+
+.pmv-card:hover{
+transform:translateY(-4px);
+}
+
+.pmv-icon img{
+width:40px;
+margin-bottom:15px;
+margin: auto;
+}
+
+.pmv-card h3{
+font-size:18px;
+margin-bottom:10px;
+font-weight:600;
+}
+.pmv-card:nth-child(1) h3{
+color: #311499;
+}
+.pmv-card:nth-child(2) h3{
+color: #008FA1;
+}
+.pmv-card:nth-child(3) h3{
+color: #808A00;
+}
+.pmv-card:nth-child(4) h3{
+color: #FF33A2;
+}
+.pmv-card:nth-child(1) p{
+color: #311499;
+}
+.pmv-card:nth-child(2) p{
+color: #008FA1;
+}
+.pmv-card:nth-child(3) p{
+color: #808A00;
+}
+.pmv-card:nth-child(4) p{
+color: #FF33A2;
+}
+
+
+.pmv-card p{
+font-size:14px;
+line-height:1.5;
+color:#444;
+}
+
+/* Tablet */
+
+@media(max-width:990px){
+
+.pmv-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/* Mobile */
+
+@media(max-width:600px){
+
+.pmv-header h2{
+font-size:24px;
+}
+
+.pmv-grid{
+grid-template-columns:1fr;
+}
+
+.pmv-card{
+padding:25px 20px;
+}
+
+}
+
+</style>

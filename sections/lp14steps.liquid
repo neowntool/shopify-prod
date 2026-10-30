@@ -1,0 +1,271 @@
+<section class="zentro-flow-section">
+  <div class="page-width">
+
+    {% if section.settings.heading != blank %}
+      <h2 class="zentro-flow-heading">
+        {{ section.settings.heading }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <div class="zentro-flow-subheading">
+        {{ section.settings.subheading }}
+      </div>
+    {% endif %}
+
+    <div class="zentro-flow-grid">
+
+      {% for block in section.blocks %}
+        <div class="zentro-flow-card" {{ block.shopify_attributes }}>
+
+          <div class="zentro-flow-number">
+            {{ block.settings.step_number }}
+          </div>
+
+          <div class="zentro-flow-content">
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.description }}</p>
+          </div>
+
+        </div>
+      {% endfor %}
+
+    </div>
+
+    {% if section.settings.button_text != blank %}
+      <div class="zentro-flow-btn-wrap">
+        <a
+          href="{{ section.settings.button_link }}"
+          class="zentro-flow-btn"
+        >
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {% endif %}
+
+    {% if section.settings.bottom_text != blank %}
+      <div class="zentro-flow-bottom-text">
+        {{ section.settings.bottom_text }}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<style>
+
+.zentro-flow-section{
+  padding:40px 0;
+  max-width: 1440px;
+  margin: auto;
+}
+
+.zentro-flow-heading{
+  text-align:center;
+   font-size: calc(((var(--font-h3-desktop)) / (var(--font-base-size))) * 1rem);
+        line-height: 1.278;
+  font-weight:700;
+  margin:0;
+}
+
+.zentro-flow-subheading{
+  text-align:center;
+  font-size:18px;
+  color:#777;
+  margin-top:10px;
+  margin-bottom:40px;
+}
+
+.zentro-flow-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.zentro-flow-card{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 16px;
+  background:#fff;
+  border-style: solid;
+  border-width: 1px 4px 4px 1px;
+  border-color: #FFCCE9;
+  border-radius:999px;
+}
+
+.zentro-flow-number{
+  width:46px;
+  height:46px;
+  min-width:46px;
+  border-radius:50%;
+  border:1px solid #FFCCE9;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  background:#fff;
+}
+
+.zentro-flow-content h3{
+  margin:0;
+  font-size:16px;
+  line-height:1.2;
+}
+
+.zentro-flow-content p{
+  margin:5px 0 0;
+  font-size:14px;
+  color:#777;
+}
+
+.zentro-flow-btn-wrap{
+  text-align:center;
+  margin-top:35px;
+}
+
+.zentro-flow-btn{
+  display:inline-block;
+  min-width:280px;
+  padding:14px 30px;
+  background:#FF4DAE;
+  color:#fff;
+  text-decoration:none;
+  border-radius:6px;
+  font-weight:700;
+}
+
+.zentro-flow-btn:hover{
+  opacity:.9;
+}
+
+.zentro-flow-bottom-text{
+  text-align:center;
+  margin-top:14px;
+  font-size:18px;
+  font-weight:600;
+  color:#666;
+}
+
+@media(max-width:989px){
+
+  .zentro-flow-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .zentro-flow-heading{
+    font-size:40px;
+  }
+
+}
+
+@media(max-width:749px){
+
+  .zentro-flow-section {
+    padding: 18px 0px 32px 0px;
+  }
+
+  .zentro-flow-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+
+  .zentro-flow-card{
+    border-radius:40px;
+    margin: 0px 10px;
+  }
+
+  .zentro-flow-heading{
+    font-size:30px;
+  }
+
+  .zentro-flow-subheading{
+    font-size:14px;
+     margin-bottom:20px;
+  }
+
+  .zentro-flow-content h3{
+    font-size:16px;
+  }
+
+  .zentro-flow-content p{
+    font-size:13px;
+  }
+
+  .zentro-flow-btn{
+    width:90%;
+    min-width:auto;
+  }
+
+}
+
+</style>
+
+{% schema %}
+{
+  "name": "Reading Steps Flow",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "4 Simple Steps to More Reading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Set it once. Books arrive every month. Habit builds itself."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Start Reading Today"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom Text",
+      "default": "No deposit required • Starts from ₹1,299"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_number",
+          "label": "Step Number",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Subscribe to a Plan"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Pick the right subscription"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reading Steps Flow"
+    }
+  ]
+}
+{% endschema %}

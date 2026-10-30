@@ -1,0 +1,303 @@
+
+
+
+
+<section
+  class="neown-scroll-main"
+  style="
+    --bg-desktop: url({{ section.settings.bg_image | image_url }});
+    --bg-mobile: url({{ section.settings.bg_image_mobile | image_url }});
+  "
+>
+  <div class="neown-scroll-container">
+
+    <!-- LEFT CONTENT -->
+    <div class="neown-scroll-left">
+      <h2 class="neown-scroll-heading">{{ section.settings.heading }}</h2>
+      <p class="neown-scroll-text">{{ section.settings.description }}</p>
+      {% if section.settings.button_text != blank %}
+        {% comment %} <a href="{{ section.settings.button_link }}" class="neown-scroll-btn">
+          {{ section.settings.button_text }}
+        </a> {% endcomment %}
+      {% endif %}
+    </div>
+
+    <!-- RIGHT AUTO SCROLL -->
+    <div class="neown-scroll-right">
+      {% comment %} <div class="neown-scroll-track">
+        {% for block in section.blocks %}
+          <div class="neown-scroll-card">
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | image_url: master }}" alt="image">
+            {% endif %}
+            <div class="neown-scroll-card-content">
+              <h4>{{ block.settings.title }}</h4>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div> {% endcomment %}
+      <div class="neown-scroll-track">
+  {% for block in section.blocks %}
+    <div class="neown-scroll-card">
+      {% if block.settings.image %}
+        <img src="{{ block.settings.image | image_url: master }}" alt="image">
+      {% endif %}
+      <div class="neown-scroll-card-content">
+        <h4>{{ block.settings.title }}</h4>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% for block in section.blocks %}
+    <div class="neown-scroll-card">
+      {% if block.settings.image %}
+        <img src="{{ block.settings.image | image_url: master }}" alt="image">
+      {% endif %}
+      <div class="neown-scroll-card-content">
+        <h4>{{ block.settings.title }}</h4>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+.neown-scroll-main{
+  background-image: var(--bg-desktop);
+  background-size: cover;
+  background-position: center;
+  padding: 160px 20px;
+}
+
+.neown-scroll-container{
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.neown-scroll-left{
+  width: 40%;
+}
+
+.neown-scroll-heading{
+  font-size: 50px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.neown-scroll-text{
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.neown-scroll-btn{
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+}
+
+{% comment %} .neown-scroll-right{
+  width: 60%;
+  overflow: hidden;
+} {% endcomment %}
+.neown-scroll-right{
+  width: 60%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+}
+
+.neown-scroll-right::-webkit-scrollbar {
+  height: 6px;
+}
+
+.neown-scroll-right::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 10px;
+}
+
+/* Hover pe animation pause */
+.neown-scroll-right:hover .neown-scroll-track{
+  animation-play-state: paused;
+}
+/* Hide Scrollbar But Keep Scroll Working */
+.neown-scroll-right {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.neown-scroll-right::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari */
+}
+
+
+{% comment %} end {% endcomment %}
+
+
+.neown-scroll-track{
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: neown-scroll-animation 60s linear infinite;
+}
+
+@keyframes neown-scroll-animation{
+  0%{ transform: translateX(0); }
+  100%{ transform: translateX(-50%); }
+}
+
+
+.neown-scroll-card{
+  min-width: 400px;
+  overflow: hidden;
+}
+
+.neown-scroll-card img{
+  width: 400px;
+  height: auto;
+  object-fit: contain;
+}
+
+.neown-scroll-card-content{
+  padding: 15px;
+}
+
+
+/* RESPONSIVE */
+@media(max-width: 768px){
+
+  .neown-scroll-heading {
+    font-size: 42px;
+}
+  .neown-scroll-main{
+    background-image: var(--bg-mobile);
+    padding: 200px 20px;
+  }
+
+  .neown-scroll-container{
+    flex-direction: column;
+  }
+
+  .neown-scroll-left,
+  .neown-scroll-right{
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Neown Auto Scroll Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why parents are choosing neOwn"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "This section builds trust with real parent stories."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Scroll Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Neown Auto Scroll Section"
+    }
+  ]
+}
+{% endschema %}
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const slider = document.querySelector(".neown-scroll-right");
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener("mousedown", (e) => {
+    isDown = true;
+    slider.classList.add("active");
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener("mouseleave", () => {
+    isDown = false;
+  });
+
+  slider.addEventListener("mouseup", () => {
+    isDown = false;
+  });
+
+  slider.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+});
+</script>

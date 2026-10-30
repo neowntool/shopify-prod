@@ -1,0 +1,261 @@
+{% schema %}
+{
+  "name": "Scroll Images + Content",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Add your content here"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_desktop",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Background Image (Mobile)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_block",
+      "name": "Image Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "small_desc",
+          "label": "Small Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scroll Images + Content"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+.scroll-sec-wrapper-unique {
+  display: flex;
+  gap: 40px;
+  padding: 180px 20px;
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+}
+
+/* LEFT SIDE */
+.scroll-sec-left-unique {
+  width: 60%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* TRACK */
+.scroll-track-unique {
+  display: flex;
+  gap: 20px;
+  width: auto;
+  animation: scrollLoop 25s linear infinite;
+}
+
+.scroll-sec-left-unique:hover .scroll-track-unique {
+  animation-play-state: paused;
+}
+
+/* ITEM */
+.scroll-sec-item-unique {
+  min-width: 220px;
+  text-align: center;
+}
+
+.scroll-sec-item-unique img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.scroll-sec-title-unique {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.scroll-sec-desc-unique {
+  font-size: 13px;
+  color: #666;
+}
+
+/* RIGHT SIDE */
+.scroll-sec-right-unique {
+  width: 40%;
+  {% comment %} padding: 0px 40px; {% endcomment %}
+}
+
+.scroll-sec-heading-unique {
+ font-family: Playpen Sans;
+font-weight: 800;
+font-style: ExtraBold;
+font-size: 46px;
+leading-trim: NONE;
+line-height: 125%;
+letter-spacing: 0px;
+
+}
+
+.scroll-sec-text-unique {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* LOOP ANIMATION */
+@keyframes scrollLoop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* MOBILE */
+@media(max-width: 768px) {
+
+.scroll-sec-heading-unique {
+    font-size: 32px;
+}
+  .scroll-sec-wrapper-unique {
+    flex-direction: column;
+  }
+
+  .scroll-sec-right-unique {
+    width: 100%;
+    order: 1;
+    text-align: center;
+  }
+
+  .scroll-sec-left-unique {
+    width: 100%;
+    order: 2;
+  }
+}
+</style>
+
+<div class="scroll-sec-wrapper-unique"
+     style="background-image:url({{ section.settings.bg_desktop | image_url }});"
+     data-bg-mobile="{{ section.settings.bg_mobile | image_url }}">
+
+  <!-- LEFT SIDE -->
+  <div class="scroll-sec-left-unique">
+    <div class="scroll-track-unique">
+
+      {% for block in section.blocks %}
+        <div class="scroll-sec-item-unique">
+          {% if block.settings.image %}
+            <img src="{{ block.settings.image | image_url }}" alt="">
+          {% endif %}
+          <div class="scroll-sec-title-unique">
+            {{ block.settings.title }}
+          </div>
+          <div class="scroll-sec-desc-unique">
+            {{ block.settings.small_desc }}
+          </div>
+        </div>
+      {% endfor %}
+
+      {% for block in section.blocks %}
+        <div class="scroll-sec-item-unique">
+          {% if block.settings.image %}
+            <img src="{{ block.settings.image | image_url }}" alt="">
+          {% endif %}
+          <div class="scroll-sec-title-unique">
+            {{ block.settings.title }}
+          </div>
+          <div class="scroll-sec-desc-unique">
+            {{ block.settings.small_desc }}
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="scroll-sec-right-unique">
+    <div class="scroll-sec-heading-unique">
+      {{ section.settings.heading }}
+    </div>
+
+    <div class="scroll-sec-text-unique">
+      {{ section.settings.description }}
+    </div>
+  </div>
+
+</div>
+
+<script>
+// DRAG FUNCTIONALITY
+const slider = document.querySelector('.scroll-sec-left-unique');
+const track = document.querySelector('.scroll-track-unique');
+
+let isDown = false;
+let startX;
+let scrollLeft;
+
+slider.addEventListener('mousedown', (e) => {
+  isDown = true;
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+  track.style.animationPlayState = 'paused';
+});
+
+slider.addEventListener('mouseleave', () => {
+  isDown = false;
+  track.style.animationPlayState = 'running';
+});
+
+slider.addEventListener('mouseup', () => {
+  isDown = false;
+  track.style.animationPlayState = 'running';
+});
+
+slider.addEventListener('mousemove', (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slider.offsetLeft;
+  const walk = (x - startX) * 1.5;
+  slider.scrollLeft = scrollLeft - walk;
+});
+
+// MOBILE BG SWITCH
+function updateBg() {
+  const wrapper = document.querySelector('.scroll-sec-wrapper-unique');
+  if (window.innerWidth < 768) {
+    wrapper.style.backgroundImage = `url(${wrapper.dataset.bgMobile})`;
+  }
+}
+
+updateBg();
+window.addEventListener('resize', updateBg);
+</script>

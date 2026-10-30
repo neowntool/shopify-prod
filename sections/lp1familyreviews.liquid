@@ -1,0 +1,260 @@
+<section class="nsfr-wrapper">
+  <div class="nsfr-container">
+
+    <div class="nsfr-header">
+      <h2 class="nsfr-title">{{ section.settings.heading }}</h2>
+      <p class="nsfr-subtitle">{{ section.settings.subheading }}</p>
+    </div>
+
+    <!-- ROW 1 -->
+    <div class="nsfr-marquee-row">
+      <div class="nsfr-track nsfr-track-right">
+
+        {% for block in section.blocks %}
+          {% if block.type == 'review_top' %}
+            <div class="nsfr-card" {{ block.shopify_attributes }}>
+              <div class="nsfr-stars">★★★★★</div>
+              <h4>{{ block.settings.name }}</h4>
+              <p>{{ block.settings.review }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% for block in section.blocks %}
+          {% if block.type == 'review_top' %}
+            <div class="nsfr-card">
+              <div class="nsfr-stars">★★★★★</div>
+              <h4>{{ block.settings.name }}</h4>
+              <p>{{ block.settings.review }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+      </div>
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="nsfr-marquee-row">
+      <div class="nsfr-track nsfr-track-left">
+
+        {% for block in section.blocks %}
+          {% if block.type == 'review_bottom' %}
+            <div class="nsfr-card" {{ block.shopify_attributes }}>
+              <div class="nsfr-stars">★★★★★</div>
+              <h4>{{ block.settings.name }}</h4>
+              <p>{{ block.settings.review }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% for block in section.blocks %}
+          {% if block.type == 'review_bottom' %}
+            <div class="nsfr-card">
+              <div class="nsfr-stars">★★★★★</div>
+              <h4>{{ block.settings.name }}</h4>
+              <p>{{ block.settings.review }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.nsfr-wrapper{
+    padding:20px 0;
+    overflow:hidden;
+}
+
+.nsfr-container{
+    max-width:1400px;
+    margin:0 auto;
+}
+
+.nsfr-header{
+    text-align:center;
+    margin-bottom:22px;
+}
+
+.nsfr-title{
+    font-size:40px;
+    font-weight:800;
+    line-height:1.1;
+    margin:0;
+    color:#3d3d3d;
+}
+
+.nsfr-subtitle{
+    margin-top:12px;
+    color:#777;
+    font-size:18px;
+}
+
+.nsfr-marquee-row{
+    overflow:hidden;
+    width:100%;
+    margin-bottom:24px;
+}
+
+.nsfr-track{
+    display:flex;
+    gap:20px;
+    width:max-content;
+}
+
+.nsfr-track-right{
+    animation:nsfrScrollRight 40s linear infinite;
+}
+
+.nsfr-track-left{
+    animation:nsfrScrollLeft 40s linear infinite;
+}
+
+.nsfr-marquee-row:hover .nsfr-track{
+    animation-play-state:paused;
+}
+
+.nsfr-card{
+    width:280px;
+    min-width:280px;
+    background:#F7F7F7F7;
+    border:1px solid #D5D5D5;
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.nsfr-stars{
+    color:#ffb400;
+    font-size:14px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.nsfr-card h4{
+    margin:0 0 8px;
+    font-size:18px;
+    color:#222;
+    font-weight:700;
+}
+
+.nsfr-card p{
+    margin:0;
+    font-size:14px;
+    color:#666;
+    line-height:1.6;
+}
+
+@keyframes nsfrScrollRight{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+@keyframes nsfrScrollLeft{
+    from{
+        transform:translateX(-50%);
+    }
+    to{
+        transform:translateX(0);
+    }
+}
+
+@media(max-width:768px){
+
+    .nsfr-wrapper{
+        padding:0px 0;
+    }
+
+    .nsfr-title{
+        font-size:34px;
+    }
+
+    .nsfr-subtitle{
+        font-size:14px;
+    }
+
+    .nsfr-card{
+        width:240px;
+        min-width:240px;
+    }
+
+    .nsfr-track-right{
+        animation-duration:25s;
+    }
+
+    .nsfr-track-left{
+        animation-duration:25s;
+    }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Family Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "10,000+ Families Can't Be Wrong"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "Real reviews from parents across India. Unfiltered."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_top",
+      "name": "Top Row Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer Name",
+          "default": "Yashvi Gada"
+        },
+        {
+          "type": "textarea",
+          "id": "review",
+          "label": "Review",
+          "default": "Amazing product for kids."
+        }
+      ]
+    },
+    {
+      "type": "review_bottom",
+      "name": "Bottom Row Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer Name",
+          "default": "Yashvi Gada"
+        },
+        {
+          "type": "textarea",
+          "id": "review",
+          "label": "Review",
+          "default": "Amazing product for kids."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Family Reviews"
+    }
+  ]
+}
+{% endschema %}

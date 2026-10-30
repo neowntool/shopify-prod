@@ -1,0 +1,336 @@
+<section class="jrct-section">
+  <div class="jrct-container">
+
+    <div class="jrct-header">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="jrct-table-wrapper">
+
+      <table class="jrct-table">
+
+        <thead>
+          <tr>
+            <th></th>
+
+            <th class="jrct-highlight">
+              {% if section.settings.logo != blank %}
+                {{
+                  section.settings.logo
+                  | image_url: width: 200
+                  | image_tag: class: 'jrct-logo'
+                }}
+              {% else %}
+                {{ section.settings.col1_heading }}
+              {% endif %}
+            </th>
+
+            <th>{{ section.settings.col2_heading }}</th>
+            <th>{{ section.settings.col3_heading }}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          {% for block in section.blocks %}
+
+            <tr {{ block.shopify_attributes }}>
+
+              <td class="jrct-feature">
+                {{ block.settings.feature }}
+              </td>
+
+              <td class="jrct-highlight">
+                {% render 'jr-comparison-cell',
+                  type: block.settings.col1_type,
+                  text: block.settings.col1_text %}
+              </td>
+
+              <td>
+                {% render 'jr-comparison-cell',
+                  type: block.settings.col2_type,
+                  text: block.settings.col2_text %}
+              </td>
+
+              <td>
+                {% render 'jr-comparison-cell',
+                  type: block.settings.col3_type,
+                  text: block.settings.col3_text %}
+              </td>
+
+            </tr>
+
+          {% endfor %}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    {% if section.settings.note != blank %}
+      <div class="jrct-note">
+        {{ section.settings.note }}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<style>
+.jrct-section{
+  padding:20px 20px;
+  background:#fff;
+}
+
+.jrct-container{
+  max-width:800px;
+  margin:auto;
+}
+
+.jrct-header{
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.jrct-header h2{
+ font-size: calc(((var(--font-h3-desktop)) / (var(--font-base-size))) * 1rem);
+        line-height: 1.278;
+  font-weight:800;
+  margin:0;
+}
+
+.jrct-header p{
+  margin-top:12px;
+  color:#777;
+  font-size:20px;
+}
+
+.jrct-table-wrapper{
+  overflow-x:auto;
+}
+
+.jrct-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:800px;
+}
+
+.jrct-table th,
+.jrct-table td{
+  padding:14px;
+  border-bottom:1px solid #e5e5e5;
+}
+
+.jrct-table th{
+  font-size:20px;
+  font-weight:600;
+  text-align:center;
+}
+
+.jrct-feature{
+  font-size:20px;
+  font-weight:500;
+  width:35%;
+}
+
+.jrct-table td{
+  text-align:center;
+  font-size:18px;
+}
+
+.jrct-highlight{
+  background:#ddf34d;
+}
+
+thead .jrct-highlight{
+  border-radius:20px 20px 0 0;
+}
+
+tbody tr:last-child .jrct-highlight{
+  border-radius:0 0 20px 20px;
+}
+
+.jrct-logo{
+  max-width:130px;
+}
+
+.jrct-tick{
+  color:#008fa6;
+  font-size:24px;
+  font-weight:700;
+}
+
+.jrct-cross{
+  color:#e51e25;
+  font-size:24px;
+  font-weight:700;
+}
+
+.jrct-note{
+  text-align:center;
+  margin-top:30px;
+  color:#666;
+  font-size:18px;
+}
+
+tbody tr td:first-child {
+  text-align: left;
+}
+
+@media(max-width:768px){
+
+  .jrct-header h2{
+    font-size:32px;
+  }
+
+  .jrct-header p{
+    font-size:16px;
+  }
+
+  .jrct-feature{
+    font-size:18px;
+  }
+
+  .jrct-table td{
+   font-size: 11px;
+   padding: 8px 0px;
+  }
+
+  .jrct-tick,
+  .jrct-cross{
+    font-size: 16px;
+  }
+  .jrct-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: auto;
+}
+  .jrct-logo {
+    max-width: 64px;
+    margin: auto;
+}
+  .jrct-table th {
+    font-size: 10px;
+        padding: 11px 0px;
+}
+}
+</style>
+
+{% schema %}
+{
+  "name": "Comparison Table",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Compare Options"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "See the difference"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Center Logo"
+    },
+    {
+      "type": "text",
+      "id": "col1_heading",
+      "label": "Column 1",
+      "default": "Our Service"
+    },
+    {
+      "type": "text",
+      "id": "col2_heading",
+      "label": "Column 2",
+      "default": "Buying"
+    },
+    {
+      "type": "text",
+      "id": "col3_heading",
+      "label": "Column 3",
+      "default": "Library"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Bottom Note"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature",
+          "label": "Feature"
+        },
+
+        {
+          "type": "select",
+          "id": "col1_type",
+          "label": "Column 1 Type",
+          "options": [
+            { "value": "text", "label": "Text" },
+            { "value": "tick", "label": "Tick" },
+            { "value": "cross", "label": "Cross" }
+          ],
+          "default": "tick"
+        },
+        {
+          "type": "text",
+          "id": "col1_text",
+          "label": "Column 1 Text"
+        },
+
+        {
+          "type": "select",
+          "id": "col2_type",
+          "label": "Column 2 Type",
+          "options": [
+            { "value": "text", "label": "Text" },
+            { "value": "tick", "label": "Tick" },
+            { "value": "cross", "label": "Cross" }
+          ],
+          "default": "cross"
+        },
+        {
+          "type": "text",
+          "id": "col2_text",
+          "label": "Column 2 Text"
+        },
+
+        {
+          "type": "select",
+          "id": "col3_type",
+          "label": "Column 3 Type",
+          "options": [
+            { "value": "text", "label": "Text" },
+            { "value": "tick", "label": "Tick" },
+            { "value": "cross", "label": "Cross" }
+          ],
+          "default": "cross"
+        },
+        {
+          "type": "text",
+          "id": "col3_text",
+          "label": "Column 3 Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Table"
+    }
+  ]
+}
+{% endschema %}

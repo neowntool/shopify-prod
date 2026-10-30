@@ -1,0 +1,412 @@
+{% assign selected_product = all_products[section.settings.product] %}
+
+<section class="jr-rp-section">
+  <div class="jr-rp-container">
+
+    <div class="jr-rp-header">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.subheading }}</p>
+       {% if section.settings.bottom_text != blank %}
+      <div class="jr-rp-bottom">
+        {{ section.settings.bottom_text }}
+      </div>
+    {% endif %}
+    </div>
+
+    {% if selected_product != blank %}
+      <div class="jr-rp-grid">
+
+        {% for variant in selected_product.variants %}
+
+          {% assign duration = variant.option1 | remove: 'Months' | strip | plus: 0 %}
+
+          {% assign monthly_price = variant.price | divided_by: duration %}
+
+          {% assign save_percent = 0 %}
+          {% if variant.compare_at_price > variant.price %}
+            {% assign diff = variant.compare_at_price | minus: variant.price %}
+            {% assign save_percent = diff | times: 100 | divided_by: variant.compare_at_price %}
+          {% endif %}
+
+          <div class="jr-rp-card {% if forloop.index == 2 %}jr-rp-featured{% endif %}">
+
+            {% if forloop.index == 2 %}
+              <span class="jr-rp-badge">
+                {{ section.settings.badge_text }}
+              </span>
+            {% endif %}
+
+            <h3>{{ variant.option1 }} Plan</h3>
+
+            {% assign books = duration | times: 5 %}
+          {% assign per_book_price = variant.price | divided_by: books %}
+
+                <div class="jr-rp-meta">
+                  {{ books }} Books Total • {{ per_book_price | money }} per book
+                </div>
+            <div style="display: flex;justify-content: center; gap: 10px; align-items: center;">
+            {% if variant.compare_at_price > variant.price %}
+              <div class="jr-rp-old-price">
+                {{ variant.compare_at_price | money }}
+              </div>
+            {% endif %}
+
+            <div class="jr-rp-save">
+              Save {{ save_percent }}%
+            </div>
+          </div>
+            <div class="jr-rp-price">
+              {{ variant.price | money }}
+            </div>
+
+            <div class="jr-rp-monthly">
+              {{ monthly_price | money }} / month
+            </div>
+
+            <div class="jr-rp-payment">
+              One-Time Payment
+            </div>
+
+            {% comment %} <a
+              href="/cart/{{ variant.id }}:1?checkout"
+              class="jr-rp-btn"
+            >
+              Start Subscription
+            </a> {% endcomment %}
+
+            <button  class="jr-rp-btn jr-buy-now-btn"
+              data-variant-id="{{ variant.id }}"
+              data-ga-buy="lp1"
+              data-ga-suffix="{{ selected_product.template_suffix | escape }}"
+              data-ga-variant="{{ variant.title | escape }}"
+              data-ga-price="{{ variant.price }}">
+                Start Subscription
+            </button>
+          </div>
+
+        {% endfor %}
+
+      </div>
+    {% endif %}
+
+    <div class="jr-rp-features">
+
+      {% for block in section.blocks %}
+        {% if block.type == 'feature' %}
+          <span class="jr-rp-pill">
+            {{ block.settings.text }}
+          </span>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+
+    {% comment %} {% if section.settings.bottom_text != blank %}
+      <div class="jr-rp-bottom">
+        {{ section.settings.bottom_text }}
+      </div>
+    {% endif %} {% endcomment %}
+
+  </div>
+</section>
+
+<script>
+  // One click handler per "Start Subscription" button. (This script used to sit inside the card
+  // loop, so each button got one listener per card and GoKwik Buy Now ran several times per click.)
+  document.querySelectorAll('.jr-buy-now-btn:not([data-buynow-bound])').forEach(function (btn) {
+    btn.setAttribute('data-buynow-bound', '1');
+    btn.addEventListener('click', function (e) {
+      var variantId = this.dataset.variantId;
+      if (!variantId) {
+        alert("Variant not found");
+        return;
+      }
+      // GoKwik Buy Now
+      if (typeof onBuyNowClick === "function") {
+        var card = this.closest('.jr-rp-card');
+        var h3 = card && card.querySelector('h3');
+        onBuyNowClick(e, false, [
+          {
+            id: variantId,
+            quantity: 1,
+            properties: { "Plan": (h3 && h3.innerText) || '' }
+          }
+        ]);
+      } else {
+        window.location.href = "/checkout";
+      }
+    });
+  });
+</script>
+
+<style>
+.jr-rp-section{
+  padding:0px 20px 20px 20px;
+}
+
+.jr-rp-container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.jr-rp-header{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.jr-rp-header h2{
+  font-size: calc(((var(--font-h3-desktop)) / (var(--font-base-size))) * 1rem);
+        line-height: 1.278;
+  font-weight:800;
+  margin:0 0 10px;
+}
+
+.jr-rp-header p{
+  color:#7f67ff;
+  font-size:15px;
+  max-width: 440px;
+    margin: auto;
+}
+
+.jr-rp-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.jr-rp-card{
+  background:#fff;
+  border:1px solid #ececec;
+  border-radius:16px;
+  padding:30px;
+  text-align:center;
+  position:relative;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.jr-rp-featured{
+  background:#EBFF58;
+  transform:scale(1.03);
+}
+
+.jr-rp-badge{
+  position:absolute;
+  top:-12px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#FF4DAE;
+  color:#fff;
+  font-size:12px;
+  padding:6px 14px;
+  border-radius:30px;
+}
+
+.jr-rp-card h3{
+  margin:0;
+  font-size:22px;
+  font-weight:700;
+}
+
+.jr-rp-meta{
+  color:#666;
+  margin-top:8px;
+  font-size:14px;
+}
+
+.jr-rp-old-price{
+  margin-top:18px;
+  text-decoration:line-through;
+  color:#000000;
+}
+
+.jr-rp-save{
+  display:inline-block;
+  margin-top:10px;
+  background:#DCFCE7;
+  color:#15803D;
+  padding:5px 12px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight: 700;
+}
+
+.jr-rp-price{
+  font-size:40px;
+  font-weight:800;
+  margin-top:12px;
+  line-height:1;
+}
+
+.jr-rp-monthly{
+  color:#FF4DAE;
+  font-weight:600;
+  margin-top:10px;
+}
+
+.jr-rp-payment{
+  color:#999;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.jr-rp-btn{
+  width: 100%;
+  display:block;
+  margin-top:25px;
+  text-decoration:none;
+  border:2px solid #FF4DAE;
+  color:#FF4DAE;
+  padding:10px;
+  border-radius:10px;
+  font-weight:700;
+  transition:.3s;
+}
+
+.jr-rp-featured .jr-rp-btn{
+  background:#FF4DAE;
+  color:#fff;
+}
+
+.jr-rp-btn:hover{
+  transform:translateY(-2px);
+}
+
+.jr-rp-features{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:35px;
+}
+
+.jr-rp-pill{
+  background: #E5FFFF;
+  border:1px solid #00798A;
+  color:#00798A;
+  padding:8px 13px;
+  border-radius:30px;
+  font-size:14px;
+}
+
+.jr-rp-bottom{
+  margin-top:8px;
+  background:#F0EBFF;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+}
+
+@media(max-width:989px){
+  .jr-rp-bottom {
+    padding: 7px;
+}
+
+  .jr-rp-grid{
+    gap:22px;
+    padding-bottom:10px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .jr-rp-card{
+    min-width:320px;
+    scroll-snap-align:start;
+  }
+
+  .jr-rp-header h2{
+    font-size:34px;
+  }
+
+  .jr-rp-price{
+    font-size:38px;
+  }
+}
+
+@media(max-width:749px){
+
+  .jr-rp-header p{
+  font-size:13px;
+}
+.jr-rp-section{
+  padding: 0px 20px 40px 20px;
+}
+  .jr-rp-header h2{
+    font-size:38px;
+  }
+
+  .jr-rp-card{
+    min-width:280px;
+    padding:20px;
+  }
+
+  .jr-rp-price{
+    font-size:32px;
+  }
+
+}
+</style>
+
+{% schema %}
+{
+  "name": "JR Reading Plans",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Subscription Product"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose Your Reading Plan"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "Rent 5 books per month • No deposit • Pan-India home delivery"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Featured Badge",
+      "default": "Top Pick for Parents"
+    },
+    {
+      "type": "html",
+      "id": "bottom_text",
+      "label": "Bottom Content"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Pill",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "JR Reading Plans",
+      "blocks": [
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,210 @@
+<section class="neo-people-sec"
+  style="--bg-desktop:url({{ section.settings.bg_desktop | image_url }}); --bg-mobile:url({{ section.settings.bg_mobile | image_url }});">
+
+<div class="neo-people-container">
+
+  {% if section.settings.heading != blank %}
+  <div class="neo-people-header">
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.subheading }}</p>
+  </div>
+  {% endif %}
+
+  <div class="neo-people-row neo-row-1">
+
+    <div class="neo-people-img">
+      {% if section.settings.left_image != blank %}
+        <img src="{{ section.settings.left_image | image_url }}" alt="">
+      {% endif %}
+    </div>
+
+    <div class="neo-people-content">
+      <h3>{{ section.settings.right_title }}</h3>
+      <p>{{ section.settings.right_text }}</p>
+    </div>
+
+  </div>
+
+
+  <div class="neo-people-row neo-row-2">
+
+    <div class="neo-people-content">
+      <h3>{{ section.settings.left_title }}</h3>
+      <p>{{ section.settings.left_text }}</p>
+    </div>
+
+    <div class="neo-people-img">
+      {% if section.settings.right_image != blank %}
+        <img src="{{ section.settings.right_image | image_url }}" alt="">
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>
+</section>
+
+
+<style>
+
+.neo-people-sec{
+padding:80px 20px;
+background-image:var(--bg-desktop);
+background-size:cover;
+background-position:center;
+}
+
+.neo-people-container{
+max-width:1200px;
+margin:auto;
+}
+
+.neo-people-header{
+text-align:center;
+margin-bottom:60px;
+}
+
+.neo-people-header h2{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.neo-people-header p{
+font-size:18px;
+opacity:.8;
+}
+
+.neo-people-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:60px;
+margin-bottom:60px;
+}
+
+.neo-people-img{
+flex:1;
+}
+
+.neo-people-img img{
+width:100%;
+border-radius:12px;
+display:block;
+}
+
+.neo-people-content{
+flex:1;
+}
+
+.neo-people-content h3{
+font-size:26px;
+margin-bottom:0px;
+}
+
+.neo-people-content p{
+font-size:16px;
+line-height:1.6;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.neo-people-sec{
+background-image:var(--bg-mobile);
+padding:60px 20px;
+}
+
+.neo-people-row{
+flex-direction:column;
+gap:30px;
+}
+
+.neo-row-2{
+flex-direction:column-reverse;
+}
+
+.neo-people-header h2{
+font-size:28px;
+}
+
+}
+
+</style>
+
+
+{% schema %}
+{
+"name": "Neo People Section",
+"settings": [
+
+{
+"type":"image_picker",
+"id":"bg_desktop",
+"label":"Desktop Background Image"
+},
+
+{
+"type":"image_picker",
+"id":"bg_mobile",
+"label":"Mobile Background Image"
+},
+
+{
+"type":"text",
+"id":"heading",
+"label":"Heading",
+"default":"Meet the People Behind"
+},
+
+{
+"type":"text",
+"id":"subheading",
+"label":"Sub Heading",
+"default":"Parents, educators, designers & book lovers"
+},
+
+{
+"type":"image_picker",
+"id":"left_image",
+"label":"Left Image (Row 1)"
+},
+
+{
+"type":"text",
+"id":"right_title",
+"label":"Right Title"
+},
+
+{
+"type":"textarea",
+"id":"right_text",
+"label":"Right Text"
+},
+
+{
+"type":"text",
+"id":"left_title",
+"label":"Left Title"
+},
+
+{
+"type":"textarea",
+"id":"left_text",
+"label":"Left Text"
+},
+
+{
+"type":"image_picker",
+"id":"right_image",
+"label":"Right Image (Row 2)"
+}
+
+],
+"presets":[
+{
+"name":"Neo People Section"
+}
+]
+}
+{% endschema %}

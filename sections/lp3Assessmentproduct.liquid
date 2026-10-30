@@ -1,0 +1,354 @@
+   <div class="topcontainer">
+   <h2 class="solutationheading">
+     The Solution
+    </h2>
+</div>
+
+<section class="pk-sec">
+
+  <div class="pk-container">
+
+    <div class="pk-left">
+
+      <!-- TAGS -->
+      <div class="pk-tags">
+        {% for block in section.blocks %}
+          {% if block.type == 'tag' %}
+            <span class="pk-tag">{{ block.settings.text }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- TITLE -->
+      <h2 class="pk-title">
+      {{ section.settings.custom_title }}
+      </h2>
+
+      <!-- PRICE -->
+      {% assign product = section.settings.product %}
+      {% assign first_variant = product.variants.first %}
+
+      <div class="pk-price">
+        <span class="pk-sale">
+          {{ first_variant.price | money }}
+        </span>
+
+        {% if first_variant.compare_at_price > first_variant.price %}
+          <span class="pk-compare">
+            {{ first_variant.compare_at_price | money }}
+          </span>
+
+          <span class="pk-save">
+            Save {{ first_variant.compare_at_price | minus: first_variant.price | times: 100 | divided_by: first_variant.compare_at_price }}%
+          </span>
+        {% endif %}
+      </div>
+
+      <p class="pk-desc">
+        {{ section.settings.description }}
+      </p>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="pk-right">
+
+      <h3 class="pk-pack-title">Select a pack</h3>
+
+      <!-- VARIANTS -->
+      <div class="pk-variants">
+        {% for variant in product.variants %}
+          <button 
+            class="pk-variant-btn {% if forloop.first %}active{% endif %}"
+            data-id="{{ variant.id }}"
+          >
+            {{ variant.title }}
+          </button>
+        {% endfor %}
+      </div>
+
+      <div class="pk-subtext">
+        {{ section.settings.subtext }}
+      </div>
+
+      <!-- BUY BUTTON -->
+      <form method="post" action="/cart/add" id="pk-form">
+        <input type="hidden" name="id" value="{{ first_variant.id }}" id="pk-variant-id">
+
+        <button type="submit" class="pk-btn">
+          {{ section.settings.button_text }}
+        </button>
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+.pk-sec{
+  background: #FFF4C4;
+  padding:50px 20px;
+  margin-top: 20px;
+}
+
+.topcontainer{
+max-width: 1400px;
+margin: auto;
+padding-top: 40px;
+}
+
+.solutationheading{
+  font-size:34px;
+  font-weight:800;
+  margin-bottom:30px;
+  color:#111;
+}
+.pk-container{
+  max-width:1400px;
+  margin:auto;
+  display:flex;
+  gap:40px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* LEFT */
+.pk-left{
+  width:55%;
+}
+
+.pk-tags{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.pk-tag{
+  background:#000;
+  color:#fff;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.pk-title{
+  font-size:36px;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.pk-price{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.pk-sale{
+  font-size:28px;
+  color:#ff008c;
+  font-weight:800;
+}
+
+.pk-compare{
+  text-decoration:line-through;
+  color:#333;
+}
+
+.pk-save{
+  color:#777;
+  font-size:14px;
+}
+
+.pk-desc{
+  font-size:16px;
+  color:#333;
+}
+
+/* RIGHT */
+.pk-right{
+  width:40%;
+}
+
+.pk-pack-title{
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+.pk-variants{
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+
+.pk-variant-btn{
+  padding:10px 14px;
+  border:1px solid #000;
+  background:transparent;
+  cursor:pointer;
+  border-radius:6px;
+}
+
+.pk-variant-btn.active{
+  background:#000;
+  color:#fff;
+}
+
+.pk-subtext{
+  margin-bottom:15px;
+}
+
+.pk-btn{
+  width:100%;
+  background: #FF0099;
+  color:#fff;
+  padding:10px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+
+.pk-tag:nth-child(1){
+  background: #0E335D;
+  color:#fff;
+}
+
+.pk-tag:nth-child(2){
+  background: #FFD000;
+  color:#000;
+}
+
+.pk-tag:nth-child(3){
+  background:#000;
+  color: #FFF0AC;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.solutationheading {
+    padding: 0px 10px;
+    font-size: 28px;
+}
+
+  .pk-container{
+    flex-direction:column;
+  }
+
+  .pk-left, .pk-right{
+    width:100%;
+  }
+
+  .pk-title{
+    font-size:26px;
+  }
+  .pk-variant-btn {
+    padding: 8px 10px;
+}
+.pk-container {
+    gap: 18px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const buttons = document.querySelectorAll(".pk-variant-btn");
+  const input = document.getElementById("pk-variant-id");
+
+  buttons.forEach(btn=>{
+    btn.addEventListener("click", function(){
+
+      buttons.forEach(b=>b.classList.remove("active"));
+      this.classList.add("active");
+
+      input.value = this.dataset.id;
+
+    });
+  });
+
+  /* DIRECT CHECKOUT */
+  document.getElementById("pk-form").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    fetch('/cart/add.js', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        id: input.value,
+        quantity:1
+      })
+    })
+    .then(()=> window.location.href='/checkout');
+
+  });
+
+});
+</script>
+
+{% schema %}
+{
+  "name": "Product Pack Section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Select Product"
+    },
+    {
+      "type": "html",
+      "id": "custom_title",
+      "label": "Custom Title"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "A holistic view of your child's mind, strengths, and potential."
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Sub Text",
+      "default": "assessment + counselling session + report"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Book My Slot"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tag",
+      "name": "Top Tag",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Tag Text",
+          "default": "Ages 12-18"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Pack Section",
+      "blocks": [
+        { "type": "tag" },
+        { "type": "tag" },
+        { "type": "tag" }
+      ]
+    }
+  ]
+}
+{% endschema %}

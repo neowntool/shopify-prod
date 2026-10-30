@@ -1,0 +1,1554 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "0fc8dd8f-b18b-4cd3-a43e-acaed5aa13a8": {
+      "type": "custom-code",
+      "disabled": true,
+      "settings": {
+        "custom_css": ".m-slider--home .m-slide__subtitle,\n.m-slider--home .m-slide__title {\n  font-weight: 500;\n}\n.m-slider--home .m-slide__subtitle,\nbody .m-richtext__description,\n.m-image-box--home .m-icon-box__heading {\n  font-family: 'M-Body-Font';\n}\nbody .m-section__header {\n  margin-bottom: 30px;\n}\n.m-collection-list--home .m-collection-card__image,\n.m-custom--banner .m-image-card {\n  border-radius: 10px;\n}\n.custom__html-block2 {\n  padding: 70px 80px;\n  background-image: url(https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Join_The_Community_Desktop_Banner_753039c1-b554-44c0-8a36-e391849036f2.png?v=1714471020?v=1622194012);\n  background-size: no-repeat;\n  background-size: cover;\n  background-position: center;\n  border-radius: 8px;\n}\n.custom__html-block2 .block__content {\n  text-align: center;\n  display: inline-block;\n}\n.custom__html-block2 .block__content h2 {\n  color: #fff;\n  margin-bottom: 6px;\n  margin-top: 0;\n}\n.custom__html-block2 .block__content p {\n  color: rgba(255, 255, 255, 0.7);\n}\n.custom__html-block2 .block__social {\n  margin-top: 50px;\n  text-align: center;\n}\n.custom__html-block2 .block__social ul {\n  margin: 0 -20px;\n  padding-left: 0;\n}\n.custom__html-block2 .block__social ul li {\n  display: inline-block;\n  padding: 0 20px;\n}\n.custom__html-block2 .block__social ul li a {\n  display: flex;\n  align-items: center;\n  color: #fff;\n}\n.custom__html-block2 .block__social ul li a img {\n  height: 15px;\n  margin-right: 10px;\n  margin-top: 0;\n  margin-bottom: 0;\n}\n.custom__html-block1 {\n  padding: 0 70px;\n  position: relative;\n}\n.custom__html-block1::after {\n  position: absolute;\n  content: \"\";\n  top: 22px;\n  left: 0;\n  width: 100%;\n  height: calc(100% - 56px);\n  border-radius: 8px;\n  background: #7A62E4;\n}\n.custom__html-block1 img {\n  max-width: 300px;\n  margin-right: 70px;\n}\n.custom__html-block1 .block__content {\n  position: relative;\n  z-index: 1;\n}\n.custom__html-block1 .block__content-text {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n}\n.custom__html-block1 .block__content-text .block__heading h3 {\n  font-size: 40px;\n  line-height: 56px;\n  margin-bottom: 4px;\n}\n.custom__html-block1 .block__content-text .block__heading p {\n  color: #696969;\n}\n\n@media (min-width: 768px) {\n  .m-slider--home .m-slide__subtitle {\n    font-size: 24px;\n  }\n}\n@media(max-width: 767px) {\n  .sf-custom--3 .m-section-my {\n    margin-bottom: 40px;\n  }\n  .custom__html-block1 {\n    padding: 0 20px 20px;\n  }\n  .custom__html-block1 .block__content,\n  .custom__html-block1 .block__content-text {\n    flex-direction: column;\n    text-align: center;\n  }\n  .custom__html-block1 img {\n    margin-right: 0;\n  }\n  .custom__html-block1 .block__content-text .block__heading h3 {\n    font-size: 24px;\n    line-height: 30px;\n    margin-top: 20px;\n  }\n  .custom__html-block1 .block__content-text .block__heading p {\n    margin-bottom: 20px;\n  }\n  .custom__html-block1::after {\n    height: 100%;\n  }\n  .custom__html-block2 {\n    padding: 50px 20px;\n    background-position: left;\n  }\n  .custom__html-block2 .block__content h3 {\n    font-size: 24px;\n    line-height: 30px;\n  }\n  .custom__html-block2 .block__social ul li {\n    margin-bottom: 15px;\n  }\n}\n\n.custom__html-block1 .block__content-text .block__heading h3,\n.custom__html-block1 .block__content-text .block__heading p {\n  color: #fff; /* Sets the text color to white */\n}\n\n.custom__html-block11 {\n  padding: 0 70px;\n  position: relative;\n  background-color: #F1F6BE; /* New background color */\n}\n\n.custom__html-block11::after {\n  position: absolute;\n  content: \"\";\n  top: 22px;\n  left: 0;\n  width: 100%;\n  height: calc(100% - 56px);\n  border-radius: 8px;\n  background: #F1F6BE; /* Inherits the background overlay from custom__html-block1 */\n}\n\n.custom__html-block11 img {\n  max-width: 300px;\n  margin-right: 70px;\n}\n\n.custom__html-block11 .block__content {\n  position: relative;\n  z-index: 1;\n}\n\n.custom__html-block11 .block__content-text {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n}\n\n.custom__html-block11 .block__content-text .block__heading h3 {\n  font-size: 40px;\n  line-height: 56px;\n  margin-bottom: 4px;\n}\n\n.custom__html-block11 .block__content-text .block__heading p {\n  color: #696969;\n}\n\n@media (max-width: 767px) {\n  .custom__html-block11 {\n    padding: 0 20px 20px;\n  }\n  .custom__html-block11 .block__content,\n  .custom__html-block11 .block__content-text {\n    flex-direction: column;\n    text-align: center;\n  }\n  .custom__html-block11 img {\n    margin-right: 0;\n  }\n  .custom__html-block11 .block__content-text .block__heading h3 {\n    font-size: 24px;\n    line-height: 30px;\n    margin-top: 20px;\n  }\n  .custom__html-block11 .block__content-text .block__heading p {\n    margin-bottom: 20px;\n  }\n  .custom__html-block11::after {\n    height: 100%;\n  }\n}"
+      }
+    },
+    "slider_bUa3Kb": {
+      "type": "slider",
+      "blocks": {
+        "slider_item_qw4FxJ": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/kids_read_web_banner_12_1.png",
+            "mb_background": "shopify://shop_images/kids_read_mob_banner_1.png",
+            "schedule_start": "2026-10-01 00:00",
+            "schedule_end": "",
+            "content_in_container": true,
+            "content_position": "right middle",
+            "text_alignment": "right",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "shopify://pages/books",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "slider_item_kULjQF": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/Reading_Day_web_banner_4_1.png",
+            "mb_background": "shopify://shop_images/Reading_Day_mob_banner_1.png",
+            "schedule_start": "2026-10-15 19:21",
+            "schedule_end": "2026-10-28 23:59",
+            "content_in_container": true,
+            "content_position": "right middle",
+            "text_alignment": "right",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "#shopify-section-template--25164233408786__custom_liquid_LNQdMe",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_BqxHLb": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/books_diwali_web_banner_10_1.png",
+            "mb_background": "shopify://shop_images/books_diwali_mob_banner_1.png",
+            "schedule_start": "2026-10-29 00:00",
+            "schedule_end": "",
+            "content_in_container": true,
+            "content_position": "right middle",
+            "text_alignment": "right",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "#shopify-section-template--25164233408786__custom_liquid_LNQdMe",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_XBrRWF": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/gifting_web_banner_12_1.png",
+            "mb_background": "shopify://shop_images/gifting_mob_banner_2_1.png",
+            "schedule_start": "2026-10-30 17:00",
+            "schedule_end": "2026-10-31 23:59",
+            "content_in_container": true,
+            "content_position": "right middle",
+            "text_alignment": "right",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/pages/books",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "slider_item_jHAgft": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/pre_diwali_1_banner_6_1.png",
+            "mb_background": "shopify://shop_images/pre_diwali_1_mob_banner_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/pages/books",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_8gzmUT": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/toys_diwali_web_banner_14_1.png",
+            "mb_background": "shopify://shop_images/toys_diwali_mob_banner_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": true,
+            "content_position": "right middle",
+            "text_alignment": "right",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/pages/toys",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "slider_item_CPmb9T": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/Right_Books_for_Every_Age_Desktop_2.webp",
+            "mb_background": "shopify://shop_images/Right_Books_for_Every_Age_Mobile_2.webp",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": true,
+            "content_position": "left top",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<div class=\"reading-app-section\">\n  <h1 class=\"reading-app-section__heading\">\n   Right Books <br>for Every Age\n  </h1>\n\n  <p class=\"reading-app-section__description\">\n  75,000+ Books & 1500+ Toys that are expertly curated and age-appropriate for kids between 0-15 years\n  </p>\n\n  <div class=\"reading-app-section__actions\">\n\n    <!-- Primary Button -->\n    <a href=\"#shopify-section-template--24996487463186__new_featured_product_A6jXkX\" class=\"reading-app-btn reading-app-btn--primary\">\n      See Plans\n    </a>\n\n    <!-- Store Buttons Wrapper -->\n    <div class=\"reading-app-stores\">\n    <a href=\"/collections/book-collection\" class=\"reading-app-btn reading-app-btn--secondary\">\n      Explore Book Collection\n    </a>\n    </div>\n\n  </div>\n</div>",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "slider_item_GB7BQk": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/India_s_First_App-Based_Book_Library_Desktop_2_1.webp",
+            "mb_background": "shopify://shop_images/India_s_First_App-Based_Book_Library_Mobile_2_1.webp",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "right",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<!-- Library Block -->\n<div class=\"library-block-unique\">\n  <h1 class=\"library-block-unique__title\">\n    India's First <br>App-Based <br>Book Library\n  </h1>\n\n  <p class=\"library-block-unique__subtitle\">\n    Browse our collection, Track Reading & Join our FREE 20-day reading challenge ALL-IN-ONE APP\n  </p>\n\n  <div class=\"library-block-unique__buttons\">\n\n    <!-- Primary Button -->\n    <a href=\"#shopify-section-template--24996487463186__new_featured_product_A6jXkX\" class=\"library-block-unique__btn library-block-unique__btn--plans\">\n      See Plans\n    </a>\n\n    <!-- Store Buttons Wrapper -->\n    <div class=\"store-buttons\">\n      <a href=\"https://play.google.com/store/apps/details?id=com.neown\" class=\"library-block-unique__btn library-block-unique__btn--google\" target=\"_blank\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Playstore.png?v=1771936310\" alt=\"Google Play\">\n      </a>\n\n      <a href=\"https://apps.apple.com/in/app/neown/id6483860525\" class=\"library-block-unique__btn library-block-unique__btn--apple\" target=\"_blank\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Playstore_1.png?v=1771936309\" alt=\"App Store\">\n      </a>\n    </div>\n\n  </div>\n</div>",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "slider_item_WRP4pE": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/A_Wholesome_Reading_Ecosystem_Desktop_3_1.webp",
+            "mb_background": "shopify://shop_images/A_Wholesome_Reading_Ecosystem_Mobilr_5.webp",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "right",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<div class=\"reading-app-section wholesome_new\">\n  <h1 class=\"reading-app-section__heading\">\n   A Wholesome<br> Reading<br> Ecosystem\n  </h1>\n\n  <p class=\"reading-app-section__description\">\n  Trusted by 10,000+ Readers, Across 300+ Cities & Towns, and 1200+ Schools\n  </p>\n\n  <div class=\"reading-app-section__actions wholesome_newbtn\">\n\n    <!-- Primary Button -->\n    <a href=\"#shopify-section-template--24996487463186__new_featured_product_A6jXkX\" class=\"reading-app-btn reading-app-btn--primary wholesome_newbtnin\">\n      See Plans\n    </a>\n\n    <!-- Store Buttons Wrapper -->\n    <div class=\"reading-app-stores\">\n    <a href=\"/collections/book-collection\" class=\"reading-app-btn reading-app-btn--secondary wholesome_newbtnin\">\n      Explore Book Collection\n    </a>\n    </div>\n\n  </div>\n</div>\n\n<style>\n@media(max-width: 767px){\n.wholesome_new{\npadding-top: 0px !important;\n}\n.wholesome_newbtn{\nflex-direction: row !important;\n}\n.wholesome_newbtnin {\n    padding: 11px 12px !important;\n    font-size: 13px !important;\n}\n}\n</style>",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "slider_item_6bxjPX": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/Safe_Sanitized_Toys_Desktop_2.webp",
+            "mb_background": "shopify://shop_images/Safe_Sanitized_Toys_Mobile_2.webp",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "right",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<!-- Library Block -->\n<div class=\"library-block-unique\">\n  <h1 class=\"library-block-unique__title\">\n   Safe &<br> Sanitized Toys\n  </h1>\n\n  <p class=\"library-block-unique__subtitle\">\n    Rent Premium Wooden & Plastic Toys for your kids. Every Toy is sanitised and packed with care - so parents relax & kids enjoy.\n  </p>\n\n  <div class=\"library-block-unique__buttons\">\n\n    <!-- Primary Button -->\n    <a href=\"/collections/all-toys\" class=\"library-block-unique__btn library-block-unique__btn--plans\">\n     Explore Toy Collection\n    </a>\n\n    <!-- Store Buttons Wrapper -->\n  \n  </div>\n</div>",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "slider_item_xrMg3y": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/Workbooks_that_make_Practice_Fun_Desktop_2.webp",
+            "mb_background": "shopify://shop_images/Workbooks_that_make_Practice_Fun_Mobile_2.webp",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": true,
+            "content_position": "left middle",
+            "text_alignment": "right",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<!-- Library Block -->\n<div class=\"library-block-unique\">\n  <h1 class=\"library-block-unique__title\">\n   Workbooks<br> that make <br>Practice Fun\n  </h1>\n\n  <p class=\"library-block-unique__subtitle\">\n    Expert Picked Workbooks for Preschool and Grade 1-3\n  </p>\n\n  <div class=\"library-block-unique__buttons\">\n\n    <!-- Primary Button -->\n    <a href=\"/pages/workbooks\" class=\"library-block-unique__btn library-block-unique__btn--plans\">\n     Explore Workbooks\n    </a>\n\n    <!-- Store Buttons Wrapper -->\n  \n  </div>\n</div>",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slider_item_qw4FxJ",
+        "slider_item_kULjQF",
+        "slider_item_BqxHLb",
+        "slider_item_XBrRWF",
+        "slider_item_jHAgft",
+        "slider_item_8gzmUT",
+        "slider_item_CPmb9T",
+        "slider_item_GB7BQk",
+        "slider_item_WRP4pE",
+        "slider_item_6bxjPX",
+        "slider_item_xrMg3y"
+      ],
+      "custom_css": [
+        "@media only screen and (min-width: 1080px) {.m-richtext__title {margin-left: auto !important; }}",
+        "@media (max-width: 767px) {.m-slide__wrapper {align-items: self-start !important; } .ibz-dark-wrap {padding-top: 0px !important; }}",
+        ".m-slide__content {max-width: 1100px;}"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "light",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 3,
+        "use_content_above": true,
+        "custom_class": "m-slider--home",
+        "animations": "inherit"
+      }
+    },
+    "scrolling_promotion_GiCQL6": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "announcement_jwHDpY": {
+          "type": "announcement",
+          "settings": {
+            "custom_svg": "",
+            "icon_size": "small",
+            "text": "75,000+ Books • 1500+ Toys • Pan-India Doorstep Delivery",
+            "text_size": 26,
+            "text_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_jwHDpY"
+      ],
+      "name": "Scrolling promotion",
+      "settings": {
+        "container": "w-full",
+        "direction": "left",
+        "speed": 30,
+        "item_gap": 50,
+        "item_gap_mobile": 30,
+        "color_scheme": "dark",
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "custom_class": ""
+      }
+    },
+    "custom_hero_banner_bLnBkW": {
+      "type": "custom-hero-banner",
+      "name": "Neown Style Section",
+      "settings": {
+        "bg_image": "shopify://shop_images/As_seen_on_National_TV_Desktop_1_2.webp",
+        "top_content_html": "<h2 class=\"tv-heading\">As seen on National TV</h2>\n\n<p class=\"tv-subtext\">neOwn is India's First App-Based Book Library</p>\n\n<img class=\"tv-image\" src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Frame_26086394.png?v=1768803491\">\n\n<p class=\"tv-quote\">\n  “Reading is not a luxury, it's a basic necessity for Children.” — <b>Kranti, founder of neOwn on Ideabaaz</b>\n</p>\n<style>\n.tv-heading,\n.tv-subtext,\n.tv-quote {\n  text-align: center;\n}\n\n.tv-image {\n  display: block;\n  margin: 20px auto;\nwidth: 220px;\n}\n</style>",
+        "bottom_main_image": "shopify://shop_images/As_seen_on_National_TV_Img.webp"
+      }
+    },
+    "brands_list_CTEXrd": {
+      "type": "brands-list",
+      "blocks": {
+        "image_dLAiYL": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/0_3_Years__Early_Learning.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": ""
+          }
+        },
+        "image_iJC3UG": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4_7_Years__Curiosity_Imagination.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": ""
+          }
+        },
+        "image_8hcYwd": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8_12_Years__Knowledge_Confidence.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": ""
+          }
+        },
+        "image_HVPtVw": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/13_15_Years__Future_Skills.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": ""
+          }
+        },
+        "image_EQwcKm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/0_3_Years__Early_Learning.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": ""
+          }
+        },
+        "image_6pTHin": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4_7_Years__Curiosity_Imagination.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": ""
+          }
+        },
+        "image_G3EQVa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8_12_Years__Knowledge_Confidence.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": ""
+          }
+        },
+        "image_xMzDmi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/13_15_Years__Future_Skills.png",
+            "image_by_url": "",
+            "image_link": "",
+            "max_width": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_dLAiYL",
+        "image_iJC3UG",
+        "image_8hcYwd",
+        "image_HVPtVw",
+        "image_EQwcKm",
+        "image_6pTHin",
+        "image_G3EQVa",
+        "image_xMzDmi"
+      ],
+      "custom_css": [],
+      "name": "Brands list",
+      "settings": {
+        "heading": "The Right Resources for Every Age",
+        "heading_size": "h2",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "color_scheme": "",
+        "item_per_row": 4,
+        "column_gap": 30,
+        "row_gap": 30,
+        "column_gap_mobile": 10,
+        "row_gap_mobile": 10,
+        "enable_slider": true,
+        "show_nav": false,
+        "show_pagination": false,
+        "autorotate": true,
+        "autorotate_speed": 2,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "custom_liquid_LNQdMe": {
+      "type": "custom-liquid",
+      "name": "Custom liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"x9-btn-wrap\">\n  <a href=\"https://neown.in/#m-featured-product-template--25164233408786__new_featured_product_A6jXkX\" class=\"x9-btn x9-btn-solid\">See Plans</a>\n  <a href=\"/collections/popular-books\"class=\"x9-btn x9-btn-outline\">Browse Books</a>\n</div>",
+        "custom_class": ""
+      }
+    },
+    "custom_quote_cNQGXF": {
+      "type": "custom-quote",
+      "blocks": {
+        "quote_aeCRRj": {
+          "type": "quote",
+          "settings": {
+            "pink_title": "Too much Screentime",
+            "pink_desc": "Screen time of children today is 2x the safe limit set by WHO",
+            "yellow_title": "neOwn",
+            "yellow_desc": "Screens stop being the only option when you start surrounding your children with new books & toys every month"
+          }
+        },
+        "quote_6RbN8H": {
+          "type": "quote",
+          "settings": {
+            "pink_title": "Too Much Screen Time, Too Little Play",
+            "pink_desc": "Kids spend 4+ hours daily on screens when they don’t have enough engaging offline options.",
+            "yellow_title": "neOwn",
+            "yellow_desc": "With neown, swap & return—your home stays clutter-free."
+          }
+        },
+        "quote_mYDnbp": {
+          "type": "quote",
+          "settings": {
+            "pink_title": "Spending Big, Kids Losing Interest Fast",
+            "pink_desc": "₹600–₹1,000 per toy, ₹400–₹600 per book—abandoned in just weeks.",
+            "yellow_title": "neOwn",
+            "yellow_desc": "neOwn costs less than one toy a month, with unlimited variety."
+          }
+        },
+        "quote_T9fDtb": {
+          "type": "quote",
+          "settings": {
+            "pink_title": "Boredom Hits Quicker Than You Think",
+            "pink_desc": "Children lose interest in the same toy or book in just days.",
+            "yellow_title": "neOwn",
+            "yellow_desc": "neOwn’s 75,000+ books & 1,500+ toys mean endless new choices."
+          }
+        }
+      },
+      "block_order": [
+        "quote_aeCRRj",
+        "quote_6RbN8H",
+        "quote_mYDnbp",
+        "quote_T9fDtb"
+      ],
+      "name": "Parent Quote Slider",
+      "settings": {
+        "section_bg": "shopify://shop_images/The_Hidden_Struggles_Every_Parent_Faces_Desktop.webp",
+        "section_bg_mobile": "shopify://shop_images/The_Hidden_Struggles_Every_Parent_Faces-_Mobile.webp",
+        "people_image": "shopify://shop_images/young-couple-thinking-white_1.png",
+        "quote_image": "shopify://shop_images/Thought_ae9c48ba-a5d7-45b6-9500-c997d6af06be.png",
+        "heading": "Everyday Problems that neOwn Solves",
+        "subheading": "Modern parenting requires smart solutions"
+      }
+    },
+    "new_featured_product_A6jXkX": {
+      "type": "new-featured-product",
+      "blocks": {
+        "custom_text_eP3zBz": {
+          "type": "custom_text",
+          "settings": {
+            "content": "<p><strong>Shipping Costs:</strong><br/>Free delivery in Mumbai/Thane/Navi Mumbai<br/><strong>Outside Mumbai:</strong><br/>₹80/month (delivery + pick-up included)</p>"
+          }
+        },
+        "title_4BbQiF": {
+          "type": "title",
+          "disabled": true,
+          "settings": {}
+        },
+        "price_JC3nbY": {
+          "type": "price",
+          "disabled": true,
+          "settings": {
+            "show_saving": false,
+            "sale_badge_type": "percentage"
+          }
+        },
+        "variant_picker_hKdpUR": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "buy_buttons_eRUAwR": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": false,
+            "show_atc_button": false,
+            "show_dynamic_checkout": true
+          }
+        }
+      },
+      "block_order": [
+        "custom_text_eP3zBz",
+        "title_4BbQiF",
+        "price_JC3nbY",
+        "variant_picker_hKdpUR",
+        "buy_buttons_eRUAwR"
+      ],
+      "custom_css": [
+        "@media (max-width: 767px) {.m-main-product--media {order: unset !important; } .m-main-product--info {order: 2 !important; } h3 {font-size: 26px; } p {font-size: 15px; }}"
+      ],
+      "name": "Featured product",
+      "settings": {
+        "custom_heading": "Plans & Pricing",
+        "custom_subheading": "Start their reading habit today!",
+        "know_more_url": "/products/neown-book-library-box",
+        "bottom_note": "",
+        "container": "container",
+        "color_scheme": "footer",
+        "featured_product": "neown-book-library-box",
+        "column_gap": 100,
+        "column_gap_mobile": 30,
+        "image_placement": "right",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "new_featured_product_fUbinR": {
+      "type": "new-featured-product",
+      "blocks": {
+        "title_yEWAXC": {
+          "type": "title",
+          "disabled": true,
+          "settings": {}
+        },
+        "custom_text_dkKAWk": {
+          "type": "custom_text",
+          "settings": {
+            "content": "<p><strong>Shipping Costs:</strong><br/>Free delivery in Mumbai/Thane/Navi Mumbai<br/><strong>Outside Mumbai </strong>(delivery + pick-up included)<br/>3+3: ₹80/month  | 5+5: ₹160/month </p>"
+          }
+        },
+        "price_6ciD6y": {
+          "type": "price",
+          "disabled": true,
+          "settings": {
+            "show_saving": false,
+            "sale_badge_type": "percentage"
+          }
+        },
+        "variant_picker_rCkt66": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "buy_buttons_YUaGHr": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": false,
+            "show_atc_button": false,
+            "show_dynamic_checkout": true
+          }
+        }
+      },
+      "block_order": [
+        "title_yEWAXC",
+        "custom_text_dkKAWk",
+        "price_6ciD6y",
+        "variant_picker_rCkt66",
+        "buy_buttons_YUaGHr"
+      ],
+      "custom_css": [
+        "@media (max-width: 767px) {.m-main-product--media {order: unset !important; } .m-main-product--info {order: 2 !important; } h3 {font-size: 26px; } p {font-size: 15px; }}"
+      ],
+      "name": "Featured product",
+      "settings": {
+        "custom_heading": "",
+        "custom_subheading": "",
+        "know_more_url": "/products/sibling-plan-neown-book-library-box",
+        "bottom_note": "",
+        "container": "container",
+        "color_scheme": "footer",
+        "featured_product": "sibling-plan-neown-book-library-box",
+        "column_gap": 100,
+        "column_gap_mobile": 30,
+        "image_placement": "left",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "slider_qzHMJm": {
+      "type": "slider",
+      "blocks": {
+        "slider_item_nHfMH4": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/Discover_Our_Toy_Library_Too.webp",
+            "mb_background": "shopify://shop_images/Discover_Our_Toy_Library_Too_BG_mobile.webp",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "Discover Our Toy<br> Library Too!",
+            "description": "<p>1,500+ Toys for kids between 0-8 years</p>",
+            "image_link": "",
+            "button_text": "Explore Toy Plans",
+            "button_link": "shopify://pages/toys",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slider_item_nHfMH4"
+      ],
+      "custom_css": [
+        ".m-richtext__title {color: #7437ff; font-size: 70px; font-weight: 700;}",
+        "@media (max-width: 767px) {.m-richtext__title {font-size: 34px; padding-top: 100px; } .m-slide__content {text-align: center; padding: 10px; } .m-richtext__button {justify-content: center; } .m-slide__wrapper {justify-content: center; }}"
+      ],
+      "name": "Slideshow",
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": false,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_content_above": true,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "easy_steps_Fam73g": {
+      "type": "easy-steps",
+      "blocks": {
+        "step_LiAJnc": {
+          "type": "step",
+          "settings": {
+            "step_number": "1",
+            "title": "Subscribe to a Plan",
+            "text": "Pick the right subscription."
+          }
+        },
+        "step_76w7Y6": {
+          "type": "step",
+          "settings": {
+            "step_number": "2",
+            "title": "Select Books/Toys on the App",
+            "text": "75,000+ Books & 1500+ Toys"
+          }
+        },
+        "step_Bkqi8T": {
+          "type": "step",
+          "settings": {
+            "step_number": "3",
+            "title": "Home Delivery",
+            "text": "Doorstep Delivery & Pick-Up"
+          }
+        },
+        "step_BX3zUn": {
+          "type": "step",
+          "settings": {
+            "step_number": "4",
+            "title": "Return & Repeat every month",
+            "text": "Enjoy new books/toys every month"
+          }
+        }
+      },
+      "block_order": [
+        "step_LiAJnc",
+        "step_76w7Y6",
+        "step_Bkqi8T",
+        "step_BX3zUn"
+      ],
+      "custom_css": [
+        "@media (max-width: 768px) {.easy_step_mb {margin-top: -176px !important; }}"
+      ],
+      "name": "Easy Steps (1-2-3)",
+      "settings": {
+        "bg_image": "shopify://shop_images/As_easy_as_1-2-3_Desktop.webp",
+        "bg_image_mobile": "shopify://shop_images/As_Easy_As_1-2-3_Mobile.webp",
+        "heading": "How it works?",
+        "subheading": "",
+        "heading_color": "#222222",
+        "text_color": "#444444",
+        "circle_bg": "#e6f26d",
+        "circle_text": "#000000"
+      }
+    },
+    "reviews_sec_e7cTxA": {
+      "type": "reviews-sec",
+      "blocks": {
+        "card_cyXbiA": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_7.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_8KHKbW": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_8.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_KBNh3J": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_9.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_L8gmhb": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_11.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_bQjNj3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_12.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_fdpe8A": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_13.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_RztB3E": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_14.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_MBgGfh": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_15.png",
+            "title": "",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_cyXbiA",
+        "card_8KHKbW",
+        "card_KBNh3J",
+        "card_L8gmhb",
+        "card_bQjNj3",
+        "card_fdpe8A",
+        "card_RztB3E",
+        "card_MBgGfh"
+      ],
+      "custom_css": [
+        "@media (max-width: 768px) {.neown-scroll-main {margin-top: -95px; }}"
+      ],
+      "name": "Neown Auto Scroll Section",
+      "settings": {
+        "bg_image": "shopify://shop_images/Rviews_-_Desktop_1.webp",
+        "bg_image_mobile": "shopify://shop_images/Reviews_-_Mobile.webp",
+        "heading": "Why parents are choosing neOwn",
+        "description": "",
+        "button_text": "",
+        "button_link": ""
+      }
+    },
+    "slider_gn3dEQ": {
+      "type": "slider",
+      "blocks": {
+        "slider_item_3UniEc": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/Why_Rent_desktop_1.png",
+            "mb_background": "shopify://shop_images/Why_rent_Mobile_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slider_item_3UniEc"
+      ],
+      "custom_css": [],
+      "name": "Slideshow",
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": false,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_content_above": false,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "custom_liquid_8kAeFW": {
+      "type": "custom-liquid",
+      "name": "Custom liquid",
+      "settings": {
+        "custom_liquid": "<!-- Still Confused Section -->\n<div class=\"scx-wrapper\">\n  <h2 class=\"m-section__heading h2 mb-4\">Still Confused?</h2>\n\n  <a href=\"https://api.whatsapp.com/send/?phone=919324455972&text=Hi%2C+can+you+tell+me+about+neOwn+Subscriptions%3F&type=phone_number&app_absent=0\" target=\"_blank\" class=\"scx-whatsapp-btn\">\n      <img\n            src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/logos_whatsapp-icon.png?v=1769157724\"/>\n    <span class=\"scx-btn-text\">Talk with Experts</span>\n  </a>\n</div>\n\n<style>\n  .scx-wrapper {\n    text-align: center;\n    padding: 32px 16px;\n    background-color: #ffffff;\n  }\n\n  .scx-heading {\n    font-size: 42px;\n    font-weight: 700;\n    color: #222222;\n    margin-bottom: 20px;\n  }\n\n  .scx-whatsapp-btn {\n    display: inline-flex;\n    align-items: center;\n    gap: 10px;\n    padding: 12px 36px;\n    background-color: #7437FF;\n    color: #ffffff;\n    text-decoration: none;\n    border-radius: 8px;\n    font-size: 14px;\n    font-weight: 600;\n    transition: background-color 0.25s ease, transform 0.2s ease;\n  }\n\n  .scx-wa-icon {\n    font-size: 18px;\n    line-height: 1;\n  }\n\n  .scx-btn-text {\n    white-space: nowrap;\n  }\n</style>",
+        "custom_class": ""
+      }
+    },
+    "product_tabs_je4Ace": {
+      "type": "product-tabs",
+      "blocks": {
+        "tab_Uftbi3": {
+          "type": "tab",
+          "settings": {
+            "title": "Books",
+            "collection": "popular-books"
+          }
+        },
+        "tab_9PhRkL": {
+          "type": "tab",
+          "settings": {
+            "title": "Toys",
+            "collection": "all-toys"
+          }
+        }
+      },
+      "block_order": [
+        "tab_Uftbi3",
+        "tab_9PhRkL"
+      ],
+      "custom_css": [
+        "img {/* object-fit: contain; */}",
+        ".m-tab-header.active {background: #7437ff; color: #fff; padding: 10px 70px; border-radius: 8px;}",
+        ".m-tab-header {border: 1px solid #7437ff; color: #7437ff; padding: 10px 70px; border-radius: 8px;}",
+        ".m-product-tabs--horizontal .m-tab-header:after {bottom: -10px;}",
+        ".m-product-card__price {display: none;}",
+        ".m-product-tabs .m-tabs__wrapper {overflow-y: hidden;}",
+        ".m-product-card__name {font-family: \"Nunito\", sans-serif; font-size: 16px; text-align: left;}"
+      ],
+      "name": "Product tabs",
+      "settings": {
+        "heading": "Explore Our Collection",
+        "heading_size": "h2",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "color_scheme": "footer",
+        "tab_header": "horizontal",
+        "limit": 10,
+        "show_button": true,
+        "button_type": "link",
+        "button_label": "Explore More Collections",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "pcard_layout": "",
+        "pcard_image_ratio": "3/4",
+        "show_vendor": false,
+        "items_per_row": 5,
+        "item_gap": 10,
+        "enable_slider": false,
+        "show_navigation": true,
+        "show_pagination": false,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 10,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "workbooks_fun_section_UFdFRT": {
+      "type": "workbooks-fun-section",
+      "custom_css": [],
+      "name": "Workbooks Fun Section",
+      "settings": {
+        "bg_image": "shopify://shop_images/As_easy_as_1-2-3_Desktop.webp",
+        "bg_image_mobile": "shopify://shop_images/Workbooks_that_Make_Learning_Fun_Mobile.png",
+        "heading": "Workbooks that Make Learning Fun",
+        "subheading": "Engaging workbooks for Grades 1–3—build strong skills in math, language & science.",
+        "card1_title": "By Grade",
+        "card1_text": "Tailored for Grades 1, 2 & 3",
+        "card1_link": "shopify://pages/workbooks",
+        "card2_title": "By Subject",
+        "card2_text": "Math, Brain Booster, English",
+        "card2_link": "shopify://pages/workbooks"
+      }
+    },
+    "real_results_stats_nkDFXa": {
+      "type": "real-results-stats",
+      "custom_css": [
+        "@media (max-width: 768px) {.rrs-container {display: flex; flex-direction: column; } .rrs-content {order: -1; text-align: center; margin-bottom: 20px; } .rrs-wrapper {margin-top: -66px; margin-bottom: 76%; }}"
+      ],
+      "name": "Real Results Stats",
+      "settings": {
+        "bg_image": "shopify://shop_images/Real_Results_From_Real_Families_Desktop.webp",
+        "bg_image_mobile": "shopify://shop_images/Real_Results_from_Real_Families_Mobile.webp",
+        "heading": "Real Results From Real Families",
+        "subheading": "See the difference when kids stay with us for 12 months.",
+        "stat1_value": "85%",
+        "stat1_text": "Kids finish their books, while only 60% of new readers do.",
+        "stat2_value": "60+",
+        "stat2_text": "Books read yearly, compared to just 2 for the average child.",
+        "stat3_value": "90th",
+        "stat3_text": "Percentile scores for kids who read 20 minutes daily.",
+        "stat4_value": "50%",
+        "stat4_text": "Bigger vocabulary for daily readers than non-readers."
+      }
+    },
+    "slider_HmzWPb": {
+      "type": "slider",
+      "blocks": {
+        "slider_item_qqL3Qt": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/MRM_1_desktop_with_imggg.webp",
+            "mb_background": "shopify://shop_images/MRM_1_with_img_mobile.webp",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center top",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "000565",
+            "title": "Join the Million <br>\nReaders Movement",
+            "description": "<p>I pledge to be a reader because I believe in the India Story!</p>",
+            "image_link": "",
+            "button_text": "Take The Pledge",
+            "button_link": "https://luma.com/vmdvgy9t",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--secondary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slider_item_qqL3Qt"
+      ],
+      "custom_css": [
+        ".m-richtext__subtitle {font-size: 172px; font-weight: 700; color: #008fa1;}",
+        ".m-richtext__title {font-size: 64px; font-weight: 700;}",
+        "@media (max-width: 767px) {.m-richtext__subtitle {font-size: 110px; } .m-richtext__title {font-size: 40px; } .m-slide__content {padding-top: 40%; } .m-richtext__button {flex-direction: column; } .m-richtext__button a {width: 100%; } m-slideshow {margin-top: -450px; }}"
+      ],
+      "name": "Slideshow",
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_content_above": true,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "smart_parenting_custom_EC6WJX": {
+      "type": "smart-parenting-custom",
+      "custom_css": [
+        "@media (max-width: 768px) {.spc-wrapper {margin-top: -140px; }}"
+      ],
+      "name": "Smart Parenting Custom",
+      "settings": {
+        "bg_image": "shopify://shop_images/Smart_Parenting_Starts_Here_Desktop.webp",
+        "bg_image_mobile": "shopify://shop_images/Wh_at_You_Get_Books_Mobile.webp",
+        "sku": "",
+        "left_liquid": "<div class=\"np-wrapper\">\n  <div class=\"np-card\">\n    <h1 class=\"np-title\">Smart Parenting<br>Starts Here</h1>\n    <p class=\"np-subtitle\">\n      Discover books & toys, manage subscriptions, and keep learning simple—all from one app.\n    </p>\n\n    <div class=\"np-feature\">\n      <span class=\"np-dot np-pink\"></span>\n      <div class=\"np-line np-pink-line\"></div>\n      <h3>Easy Selection</h3>\n      <p>Browse 75,000+ books & 1500+ toys by age, interest, and reading level</p>\n    </div>\n\n    <div class=\"np-feature\">\n      <span class=\"np-dot np-yellow\"></span>\n      <div class=\"np-line np-yellow-line\"></div>\n      <h3>Expert Recommendations</h3>\n      <p>Get personalized book suggestions based on reading history</p>\n    </div>\n\n    <div class=\"np-feature\">\n      <span class=\"np-dot np-purple\"></span>\n      <div class=\"np-line np-purple-line\"></div>\n      <h3>Waitlist Books</h3>\n      <p>Books in circulation? Waitlist them to get your next</p>\n    </div>\n\n    <div class=\"np-feature\">\n      <span class=\"np-dot np-blue\"></span>\n      <div class=\"np-line np-blue-line\"></div>\n      <h3>Reading Challenge</h3>\n      <p>Build discipline & a strong habit of reading daily & get rewards</p>\n    </div>\n\n    <div class=\"np-footer\">\n      <div class=\"np-download\">\n        <p>Download the neOwn app</p>\n        <div class=\"np-buttons\"><a href=\"https://apps.apple.com/in/app/neown/id6483860525\" target=\"_blank\">\n          <img src=\"https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg\" alt=\"App Store\"></a>\n<a href=\"https://play.google.com/store/apps/details?id=com.neown\" target=\"_blank\">\n          <img src=\"https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg\" alt=\"Google Play\"></a>\n        </div>\n      </div>\n\n      \n    </div>\n  </div>\n</div>",
+        "right_image": "shopify://shop_images/ChatGPT_Image_Feb_13_2026_04_01_12_PM_1.png",
+        "image_position": "right"
+      }
+    },
+    "smart_parenting_custom_GjGeEG": {
+      "type": "smart-parenting-custom",
+      "custom_css": [
+        "@media (max-width: 768px) {.spc-wrapper {margin-top: -135px; }}"
+      ],
+      "name": "Smart Parenting Custom",
+      "settings": {
+        "bg_image": "shopify://shop_images/Our_Challenge_Impact_So_Far_Desktop.webp",
+        "bg_image_mobile": "shopify://shop_images/Our_Challenge_Impact_So_Far_Mobile.webp",
+        "sku": "",
+        "left_liquid": "<div class=\"np2-wrapper\">\n  <div class=\"np2-card\">\n    <h1 class=\"np2-title\">\n      FREE Monthly<br>\n      Reading<br>\n      Challenges\n    </h1>\n\n    <p class=\"np2-desc\">\n      Build a strong and consistent reading habit with neOwn's Monthly Reading Challenges.\n    </p>\n\n    <div class=\"np2-cta\">\n      <a href=\"https://apps.apple.com/in/app/neown/id6483860525\" target=\"_blank\" class=\"np2-btn np2-btn-primary\">Download App</a>\n\n      <a href=\"#\" class=\"np2-btn np2-btn-outline\"></a>\n    </div>\n\n    <div class=\"np2-footer\">\n      <div class=\"np2-store\">\n        <p>Download the neOwn app</p>\n        <div class=\"np2-store-btns\">\n<a href=\"https://play.google.com/store/apps/details?id=com.neown\" target=\"_blank\">\n          <img src=\"https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg\" alt=\"Google Play\"></a>\n<a href=\"https://apps.apple.com/in/app/neown/id6483860525\" target=\"_blank\">\n\n          <img src=\"https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg\" alt=\"App Store\">\n</a>\n        </div>\n      </div>\n\n      \n    </div>\n  </div>\n</div>",
+        "right_image": "shopify://shop_images/RC_Img.png",
+        "image_position": "left"
+      }
+    },
+    "star_readers_timeline_Yecyri": {
+      "type": "star-readers-timeline",
+      "blocks": {
+        "reader_ke3zzz": {
+          "type": "reader",
+          "settings": {
+            "image": "shopify://shop_images/Frame_26086386_2.png",
+            "name": "Arjun, Age 8",
+            "text": "Kids finish their books, while only 60% of new readers do.",
+            "footer": "80 mins • 12 books • Golden Learner",
+            "color": "#22c1c3"
+          }
+        },
+        "reader_JpPkUj": {
+          "type": "reader",
+          "settings": {
+            "image": "shopify://shop_images/Frame_26086386_2.png",
+            "name": "Arjun, Age 8",
+            "text": "Kids finish their books, while only 60% of new readers do.",
+            "footer": "80 mins • 12 books • Golden Learner",
+            "color": "#22c1c3"
+          }
+        },
+        "reader_9HMhmc": {
+          "type": "reader",
+          "settings": {
+            "image": "shopify://shop_images/Frame_26086386_2.png",
+            "name": "Arjun, Age 8",
+            "text": "Kids finish their books, while only 60% of new readers do.",
+            "footer": "80 mins • 12 books • Golden Learner",
+            "color": "#22c1c3"
+          }
+        }
+      },
+      "block_order": [
+        "reader_ke3zzz",
+        "reader_JpPkUj",
+        "reader_9HMhmc"
+      ],
+      "disabled": true,
+      "name": "Star Readers Timeline",
+      "settings": {
+        "bg_image": "shopify://shop_images/Last_Month_s_Star_Readers_Desktops.png",
+        "bg_image_mobile": "shopify://shop_images/Last_Month_s_Star_Readers_Mobile.png",
+        "heading": "Last Month’s Star Readers",
+        "subheading": "Meet the top 3 readers who completed their 20-day streak with flying colors."
+      }
+    },
+    "parents_community_section_bBmFLG": {
+      "type": "parents-community-section",
+      "blocks": {
+        "line_aqA7fw": {
+          "type": "line",
+          "settings": {
+            "text": "8,000+ Active Parents",
+            "text_desc": "<p>Learn the Best Practices to Raise a Confident Kid</p>"
+          }
+        },
+        "line_LymxDa": {
+          "type": "line",
+          "settings": {
+            "text": "Expert Book Recommendations",
+            "text_desc": "<p>Request a Book Recommendation, Share book reviews by your kids</p>"
+          }
+        },
+        "line_gKJ6Td": {
+          "type": "line",
+          "settings": {
+            "text": "FREE Online Kids Events",
+            "text_desc": "<p>Monthly Book Exploration Sessions (Age 6-14 years), Storytelling Sessions (Age 2-6 years), Reading Challenges</p>"
+          }
+        },
+        "line_ARy4Cd": {
+          "type": "line",
+          "settings": {
+            "text": "Daily Discussions",
+            "text_desc": "<p>Reading Advice, Book Discussions and Support</p>"
+          }
+        }
+      },
+      "block_order": [
+        "line_aqA7fw",
+        "line_LymxDa",
+        "line_gKJ6Td",
+        "line_ARy4Cd"
+      ],
+      "custom_css": [
+        "@media (max-width: 900px) {.pcs-wrapper {margin-top: -114px; }}"
+      ],
+      "name": "Parents Community CTA",
+      "settings": {
+        "bg_image": "shopify://shop_images/JOIN_OUR_COMMUNITY_Desktop_1.webp",
+        "bg_image_mobile": "shopify://shop_images/Join_Parent_s_Community_Mobile.webp",
+        "heading": "Join the neOwn Parent's Community",
+        "subheading": "Get Book Recommendations & Expert Advice",
+        "button_text": "Join WhatsApp Community",
+        "button_link": "https://api.whatsapp.com/send/?phone=919324455972&text=Hi%2C+can+you+tell+me+about+neOwn+Subscriptions%3F&type=phone_number&app_absent=0"
+      }
+    },
+    "custom_liquid_g8CLKA": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Responsive Video Player</title>\n    <style>\n\n        .thumbnail-container {\n            display: flex;\n            gap: 10px;\n            overflow-x: auto; /* Enables horizontal scrolling */\n            padding: 10px;\n            scroll-snap-type: x mandatory; /* Enables scroll snapping */\n        }\n\n        /* Hide scrollbar */\n        .thumbnail-container::-webkit-scrollbar {\n            display: none; /* For WebKit browsers (Chrome, Safari) */\n        }\n        .thumbnail-container {\n            -ms-overflow-style: none;  /* For Internet Explorer and Edge */\n            scrollbar-width: none;    /* For Firefox */\n        }\n\n        .thumbnail {\n            position: relative;\n            flex-shrink: 0; /* Prevents shrinking */\n            width: 30vw; /* 70% of the viewport width */\n            height: 30vh; /* 40% of the viewport height */\n            background: #333;\n            border-radius: 8px;\n            overflow: hidden;\n            cursor: pointer;\n            scroll-snap-align: center; /* Aligns items in the center when scrolling */\n        }\n\n        .thumbnail img {\n            width: 100%;\n            height: 100%;\n            object-fit: cover;\n        }\n\n        .fullscreen-player {\n            position: fixed;\n            top: 0;\n            left: 0;\n            width: 100vw;\n            height: 100vh;\n            background-color: #ffffff;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            z-index: 1000;\n            display: none;\n        }\n\n        .fullscreen-player video {\n            width: 100%;\n            height: 100%;\n            object-fit: contain;\n        }\n\n        .close-btn {\n            position: absolute;\n            top: 10px;\n            right: 10px;\n            background: rgba(255, 255, 255, 0.8);\n            border: none;\n            width: 30px;\n            height: 30px;\n            border-radius: 50%;\n            /* padding: 10px; */\n            font-size: 16px;\n            cursor: pointer;\n            z-index: 2000;\n            justify-content: center;\n            align-items: center;\n            transition: background 0.1s ease-out; \n        }\n\n        .close-btn:hover {\n            background: rgba(117, 117, 117, 0.8);\n        }\n\n        /* Responsive Styling */\n        @media (min-width: 768px) {\n            .thumbnail {\n                width: 100px;\n                height: 200px;\n            }\n        }\n\n        @media (min-width: 1024px) {\n            .thumbnail {\n                width: 150px;\n                height: 300px;\n            }\n        }\n@media(max-width: 767px){\n.thumbnail{\nwidth: 70vw;\nheight: auto;\n}\n}\n    </style>\n</head>\n<body>\n    <div class=\"thumbnail-container\">\n        <div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/887bd9d275b24ac481637a372a0d58ae.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/1_Sapno_Ki_Rani.avifs?v=1732253357\" alt=\"Thumbnail for 1.mp4\">\n        </div>\n        <div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/3f0679673be34c0ab4160c8c81362b38.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/2_Growing_Up_Surrounded_by_Books.avifs?v=1732253357\" alt=\"Thumbnail for 2.mp4\">\n        </div>\n        <div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/32b40e2913324263a8052788eed28877.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/3_Playing_with_Toys.avifs?v=1732253357\" alt=\"Thumbnail for 3.mp4\">\n        </div>\n        <div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/4667aa9c1ac84b5cace8c692a23bbd78.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/workbooks4_compressed.avifs?v=1750066995\" alt=\"Thumbnail for 4.mp4\">\n        </div><div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/c732b2070b9645799bac421b8e24a470.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/5_POV_Building_the_Habit_of_Reading.avifs?v=1732253357\" alt=\"Thumbnail for 5.mp4\">\n        </div><div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/12aafa0d1bd74b23b756e325da0f3453.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/6_Book_Toy_Combo.avifs?v=1732253357\" alt=\"Thumbnail for 6.mp4\">\n        </div><div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/27e1f41d919d4019872169b65760b1e1.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/workbooks8compressed-ezgif.com-video-to-avif-converter.avifs?v=1750066995\" alt=\"Thumbnail for 7.mp4\">\n        </div><div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/27e1f41d919d4019872169b65760b1e1.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/8_Reading_improves_concentration.avifs?v=1732253357\" alt=\"Thumbnail for 8.mp4\">\n        </div><div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/2ae0436ab3594a82bc5083efc9ced68a.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/9_Weekly_Toys_Play_Schedule.avifs?v=1732253357\" alt=\"Thumbnail for 9.mp4\">\n        </div><div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/3bde7beb0c4f4504bd1331b5bc1cfb9b.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/10_Fun_Comfort_Go_Hand_in_Hand.avifs?v=1732253357\" alt=\"Thumbnail for 10.mp4\">\n        </div><div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/ffa910c4fba7427886be11ebc1590e6b.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/11_neOwn_library_customer_Unboxing.avifs?v=1732253358\" alt=\"Thumbnail for 11.mp4\">\n        </div><div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/e4aa58c2a4534f5fb069e35e95edef1e.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/12_Bath_Books.avifs?v=1732253357\" alt=\"Thumbnail for 12.mp4\">\n        </div><div class=\"thumbnail\" data-video=\"https://cdn.shopify.com/videos/c/o/v/eb10be539ec045a5b615ace4d9ff6cfb.mp4\">\n            <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/workbooks7compressed.avifs?v=1750066995\" alt=\"Thumbnail for 7.mp4\" alt=\"Thumbnail for 13.mp4\">\n        </div>\n    </div>\n\n    <div class=\"fullscreen-player\" id=\"fullscreen-player\">\n        <button class=\"close-btn\" id=\"close-btn\">✕</button>\n        <video id=\"video-player\" controls autoplay></video>\n    </div>\n\n    <script>\n        const thumbnails = document.querySelectorAll('.thumbnail');\n        const fullscreenPlayer = document.getElementById('fullscreen-player');\n        const videoPlayer = document.getElementById('video-player');\n        const closeBtn = document.getElementById('close-btn');\n\n        // Open fullscreen video player\n        thumbnails.forEach((thumbnail) => {\n            thumbnail.addEventListener('click', () => {\n                const videoSrc = thumbnail.dataset.video;\n                videoPlayer.src = videoSrc;\n                fullscreenPlayer.style.display = 'flex';\n                videoPlayer.play();\n            });\n        });\n\n        // Close fullscreen video player\n        closeBtn.addEventListener('click', () => {\n            fullscreenPlayer.style.display = 'none';\n            videoPlayer.pause(); // Stop video playback\n            videoPlayer.src = ''; // Clear video source\n        });\n    </script>",
+        "custom_class": ""
+      }
+    },
+    "empty_space_GPEfKe": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "show_divider_line": true,
+        "divider_style": "solid",
+        "divider_height": 5,
+        "padding_top": 10,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "collapsible_tabs_KzCFt7": {
+      "type": "collapsible-tabs",
+      "blocks": {
+        "item_B9pRyM": {
+          "type": "item",
+          "settings": {
+            "header": "Do you deliver all over India? ",
+            "text_size": "h5",
+            "content": "<p>Currently, we only deliver books all over India. </p><p>Delivery is free within Mumbai, Thane, Navi Mumbai, and Mira-Bhayander. </p><p>Outside Mumbai: There is an additional delivery charge for Book Library deliveries outside Mumbai. </p><p>(Toy Library is only operating in Mumbai as of now) </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_WXzefN": {
+          "type": "item",
+          "settings": {
+            "header": "How does the Library Subscription work?",
+            "text_size": "h5",
+            "content": "<p>Step 1: 📚🧸You can subscribe to any plan from our website. </p><p>Step 2: 📲Download the neOwn app to select your books or toys. </p><p>Step 3: 📦Books/toys will be delivered and the pickup and exchange will happen after maximum 30 days</p><p>Step 4: 🔁Finally you return and repeat the same for all the following months of your subscription!</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_m68hHg": {
+          "type": "item",
+          "settings": {
+            "header": "How can I select my books/toys? ",
+            "text_size": "h5",
+            "content": "<p>Once you have subscribed, you can download our app📲 from which you can select the books or toys 📚🧸</p><p>You can select any books/toys of your choice, and in case you are not sure what to pick we have a book expert in-house who can help you out if needed 💖</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_VG9bq9": {
+          "type": "item",
+          "settings": {
+            "header": "How to download the neOwn app? ",
+            "text_size": "h5",
+            "content": "<p>📲 neOwn App Link: </p><p>🔗 Android: <a href=\"https://play.google.com/store/apps/details?id=com.neown\"><span style=\"text-decoration:underline\">https://play.google.com/store/apps/details?id=com.neown</span></a> </p><p>🔗 Apple: <a href=\"https://apps.apple.com/in/app/neown/id6483860525\"><span style=\"text-decoration:underline\">https://apps.apple.com/in/app/neown/id6483860525</span></a> </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_jD9wdi": {
+          "type": "item",
+          "settings": {
+            "header": "Is there any deposit or registration fee?",
+            "text_size": "h5",
+            "content": "<p>No, there is no deposit or registration fee. </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_cwUPma": {
+          "type": "item",
+          "settings": {
+            "header": "Do you give refunds?",
+            "text_size": "h5",
+            "content": "<p>No, refunds are not provided. <br/>In an exceptional case if there is an error on neOwn’s part and your subscription has not yet started, a refund may be issued at neOwn’s discretion. <br/>In case your subscription has started, then it will not be possible to provide a refund.</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_CyTYcM": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "header": "How many books & toys can I get in the subscription?",
+            "text_size": "h5",
+            "content": "<p>Our Library Plans are as follows: </p><p><strong>Subscription Type</strong></p><p><strong>Number of items per month </strong></p><p>Book Library (1 child)</p><p>5 books per month</p><p>Book Library (2 siblings)</p><p>3+3 books per month </p><p>OR 5+5 books per month</p><p>Toy + Book Combo</p><p>3 toys + 2 books per month</p><p>Toy Library</p><p>4 toys per month</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_HiA39k": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "header": "Can I see your collection before subscribing? What kind of books & toys do you have?",
+            "text_size": "h5",
+            "content": "<p>Yes, you can see our collections here: </p><p>Book Collection: </p><p>Toy Collection: </p><p>We keep a very wide variety of fiction books for children between the ages of 0-15 years, and we also have a lot of non-fiction and educational books for children between the ages of 0-15 years. </p><p>We have wide range of premium toys for children between the ages of 6 months - 8 years. This includes STEM toys, Montessori toys, developmental toys, toys for pure fun, and more! </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_iE6i6A": {
+          "type": "item",
+          "settings": {
+            "header": "What is the age group you cater to? ",
+            "text_size": "h5",
+            "content": "<p>We cater to the following age groups: </p><ul><li>Book Library: 0-15 years </li><li>Toy Library: 6 months - 8 years</li></ul>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_iA4UfY": {
+          "type": "item",
+          "settings": {
+            "header": "I have books/toys at home that I want to donate, how can I do that?",
+            "text_size": "h5",
+            "content": "<p>Please WhatsApp us at +91 93244 55972 with your location and the details of your books/toys and we’ll get back to you!</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_VM8mni": {
+          "type": "item",
+          "settings": {
+            "header": "How do you sanitize the books & toys? ",
+            "text_size": "h5",
+            "content": "<p>Our process to ensure the books & toys are hygenic and in good condition: </p><ul><li>All toys are cleaned by our team before and after they go to or come back from any customer to ensure they are 100% sanitary</li><li>⁠⁠We also clean board books to ensure they are 100% sanitary </li><li>⁠We do a thorough check of all books & toys twice - once after they have come back from customers and the second time before they are going to another customer </li><li>⁠⁠If any books or toys are of bad quality we don't circulate it among customers anymore</li></ul>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_RcVE9H": {
+          "type": "item",
+          "settings": {
+            "header": "What topics do you do have workshops on?",
+            "text_size": "h5",
+            "content": "<p>We at neOwn conduct a wide variety of skill-building workshops on: </p><ul><li>Creative Writing</li><li>Speech & Communication </li><li>Debate & Public Speaking</li><li>Math Skills</li><li>Coding & AI</li><li>Life Skills</li><li>Art & Design (including learning softwares like Canva, Photoshop, and more)</li><li>Music</li></ul>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_DhxMXD": {
+          "type": "item",
+          "settings": {
+            "header": "How does the Reading Challenge work? ",
+            "text_size": "h5",
+            "content": "<p><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSeujWVZn90wu5_RieGkzYLLFISGiUV7JhBArfapKE2EtaKrCA/viewform?usp=sf_link\" target=\"_blank\" title=\"https://docs.google.com/forms/d/e/1FAIpQLSeujWVZn90wu5_RieGkzYLLFISGiUV7JhBArfapKE2EtaKrCA/viewform?usp=sf_link\">Step 1: Register by filling this form: </a><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSeujWVZn90wu5_RieGkzYLLFISGiUV7JhBArfapKE2EtaKrCA/viewform?usp=sf_link\" title=\"https://docs.google.com/forms/d/e/1FAIpQLSeujWVZn90wu5_RieGkzYLLFISGiUV7JhBArfapKE2EtaKrCA/viewform?usp=sf_link\">https://docs.google.com/forms/d/e/1FAIpQLSeujWVZn90wu5_RieGkzYLLFISGiUV7JhBArfapKE2EtaKrCA/viewform?usp=sf_link</a></p><p>Step 2: Request to join the WhatsApp Group (we will approve the request 2-5 days before the upcoming challenge) </p><p>Step 3: Read the Challenge Instructions which will be sent on the WhatsApp Group 1 day before the challenge </p><p>Step 4: Participate in the Reading Challenge! </p><p>Step 5: Win Certificates & Badges upon successful completion of the challenge </p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_VkTr47": {
+          "type": "item",
+          "settings": {
+            "header": "How do I join the neOwn Parents’ Community? ",
+            "text_size": "h5",
+            "content": "<p>Here is the links to join our Book Recommendations Group: <a href=\"https://chat.whatsapp.com/EEM2WhwUduW2WPeV3rxd8O\"><span style=\"text-decoration:underline\">https://chat.whatsapp.com/EEM2WhwUduW2WPeV3rxd8O</span></a></p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_pGQ8xg": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "header": "Which Kidswear sizes do you have? ",
+            "text_size": "h5",
+            "content": "<p>Currently we offer 4 sizes for the following age groups: </p><ul><li>2-3 yrs</li><li>3-4 yrs</li><li>4-5 yrs</li><li>5-6 yrs</li></ul>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_digaHx": {
+          "type": "item",
+          "settings": {
+            "header": "What subjects are covered in workbooks?",
+            "text_size": "h5",
+            "content": "<p>We currently offer workbooks in:</p><p>✅ English – Reading comprehension, grammar, vocabulary, and writing skills</p><p>✅ Math – Problem-solving, number operations, mental math, and application-based learning</p><p>✅ Brain Boosters – Logical reasoning, puzzles, critical thinking, and fun learning activities</p><p>We are always open to adding more workbooks! If you’d like to see specific topics covered, let us know <a href=\"https://wa.me/919137081640?text=Hi,%20I%20have%20a%20suggestion%20for%20workbooks\" target=\"_blank\" title=\"Workbooks Suggestion\">here</a>.</p>",
+            "content_page": "",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "item_B9pRyM",
+        "item_WXzefN",
+        "item_m68hHg",
+        "item_VG9bq9",
+        "item_jD9wdi",
+        "item_cwUPma",
+        "item_CyTYcM",
+        "item_HiA39k",
+        "item_iE6i6A",
+        "item_iA4UfY",
+        "item_VM8mni",
+        "item_RcVE9H",
+        "item_DhxMXD",
+        "item_VkTr47",
+        "item_pGQ8xg",
+        "item_digaHx"
+      ],
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "image_position": "left",
+        "column_gap": 100,
+        "heading": "FAQs",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "animations": "inherit",
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "0fc8dd8f-b18b-4cd3-a43e-acaed5aa13a8",
+    "slider_bUa3Kb",
+    "scrolling_promotion_GiCQL6",
+    "custom_hero_banner_bLnBkW",
+    "brands_list_CTEXrd",
+    "custom_liquid_LNQdMe",
+    "custom_quote_cNQGXF",
+    "new_featured_product_A6jXkX",
+    "new_featured_product_fUbinR",
+    "slider_qzHMJm",
+    "easy_steps_Fam73g",
+    "reviews_sec_e7cTxA",
+    "slider_gn3dEQ",
+    "custom_liquid_8kAeFW",
+    "product_tabs_je4Ace",
+    "workbooks_fun_section_UFdFRT",
+    "real_results_stats_nkDFXa",
+    "slider_HmzWPb",
+    "smart_parenting_custom_EC6WJX",
+    "smart_parenting_custom_GjGeEG",
+    "star_readers_timeline_Yecyri",
+    "parents_community_section_bBmFLG",
+    "custom_liquid_g8CLKA",
+    "empty_space_GPEfKe",
+    "collapsible_tabs_KzCFt7"
+  ]
+}

@@ -1,0 +1,192 @@
+{% schema %}
+{
+  "name": "Custom Content Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Heading Here"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Your description here"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_desktop",
+      "label": "Desktop Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Mobile Background Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Grid Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Text",
+          "default": "Item text"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Custom Content Grid"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="ccg-section">
+
+  <!-- BACKGROUND IMAGES -->
+  <div class="ccg-bg">
+    {% if section.settings.bg_desktop %}
+      <img class="ccg-bg-desktop" src="{{ section.settings.bg_desktop | image_url }}" alt="">
+    {% endif %}
+    {% if section.settings.bg_mobile %}
+      <img class="ccg-bg-mobile" src="{{ section.settings.bg_mobile | image_url }}" alt="">
+    {% endif %}
+  </div>
+
+  <div class="ccg-container">
+
+    <!-- TOP CONTENT -->
+    <div class="ccg-content">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.description }}</p>
+    </div>
+
+    <!-- GRID -->
+    <div class="ccg-grid">
+      {% for block in section.blocks %}
+        <div class="ccg-item">
+            <h2>{{ block.settings.icon }}</h2>
+          <h4>{{ block.settings.title }}</h4>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* UNIQUE CLASS PREFIX: ccg- */
+
+.ccg-section {
+  position: relative;
+  padding: 180px 20px;
+  overflow: hidden;
+}
+
+/* BACKGROUND */
+.ccg-bg img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.ccg-bg-mobile {
+  display: none;
+}
+
+/* CONTAINER */
+.ccg-container {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+/* CONTENT */
+.ccg-content h2 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.ccg-content p {
+  font-size: 16px;
+  margin-bottom: 40px;
+  color: #000;
+}
+
+/* GRID */
+.ccg-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.ccg-item {
+  background: rgba(255,255,255,0.1);
+  padding: 25px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+
+.ccg-item img {
+  width: 40px;
+  margin-bottom: 10px;
+}
+
+.ccg-item h2 {
+font-family: Playpen Sans;
+font-weight: 800;
+font-style: ExtraBold;
+font-size: 56px;
+leading-trim: NONE;
+line-height: 125%;
+letter-spacing: 0px;
+}
+.ccg-item h4 {
+ font-family: Nunito;
+font-weight: 500;
+font-style: Medium;
+font-size: 16px;
+leading-trim: NONE;
+line-height: 125%;
+letter-spacing: 0px;
+text-align: center;
+
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .ccg-bg-desktop {
+    display: none;
+  }
+
+  .ccg-bg-mobile {
+    display: block;
+  }
+
+  .ccg-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .ccg-content h2 {
+    font-size: 32px;
+  }
+}
+</style>

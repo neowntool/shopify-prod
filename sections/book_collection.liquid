@@ -1,0 +1,181 @@
+{% comment %}
+  Age Collection Selector - Perfect Connected Top Line
+{% endcomment %}
+
+<section class="age-sec-final">
+  <div class="age-wrap-final">
+
+    {% if section.settings.heading != blank %}
+      <h2 class="age-heading-final">
+        {{ section.settings.heading }}
+      </h2>
+    {% endif %}
+
+    <div class="age-container-final">
+
+      <!-- Top Horizontal Line -->
+      <div class="age-top-line-final"></div>
+
+      <div class="age-row-final">
+        {% for block in section.blocks %}
+          {% if block.settings.collection != blank %}
+            
+            <div class="age-item-final" {{ block.shopify_attributes }}>
+
+              <!-- Vertical Line (ONLY ABOVE BUTTON) -->
+              <span class="age-line-top-final"></span>
+
+              <!-- Button -->
+              <a href="{{ block.settings.collection.url }}" 
+                 class="age-btn-final">
+                {{ block.settings.age_label }}
+              </a>
+
+            </div>
+
+          {% endif %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.age-sec-final {
+  padding: 50px 0;
+  width: 100%;
+}
+
+.age-wrap-final {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 15px;
+}
+
+.age-heading-final {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.age-container-final {
+  position: relative;
+}
+
+/* Top Horizontal Line */
+.age-top-line-final {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #f5b6cf;
+  z-index: 1;
+}
+
+/* Row */
+.age-row-final {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 0px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Item */
+.age-item-final {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Vertical Line */
+.age-line-top-final {
+  width: 2px;
+  height: 30px;
+  background: #f5b6cf;
+}
+
+/* Button */
+.age-btn-final {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid #ff4f9a;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #333;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.age-btn-final:hover {
+  background: #ff4f9a;
+  color: #fff;
+}
+
+/* Mobile Scroll */
+@media (max-width: 768px) {
+  .age-row-final {
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+  }
+
+  .age-row-final::-webkit-scrollbar {
+    display: none;
+  }
+
+  .age-item-final {
+    flex: 0 0 auto;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Age Collection Selector",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Select Age"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "age_block",
+      "name": "Age Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "age_label",
+          "label": "Age Label",
+          "default": "0"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [
+    {
+      "name": "Age Collection Selector"
+    }
+  ]
+}
+{% endschema %}

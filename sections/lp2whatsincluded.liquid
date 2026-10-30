@@ -1,0 +1,218 @@
+<section class="nswi-section">
+  <div class="nswi-container">
+
+    <div class="nswi-header">
+      <h2 class="nswi-heading">
+        {{ section.settings.heading }}
+      </h2>
+    </div>
+
+    <div class="nswi-grid">
+
+      {% for block in section.blocks %}
+        <div class="nswi-card" {{ block.shopify_attributes }}>
+
+        {% if block.settings.icon_image != blank %}
+  <div class="nswi-icon-wrap">
+    {{
+      block.settings.icon_image
+      | image_url: width: 80
+      | image_tag: class: 'nswi-icon-image', loading: 'lazy'
+    }}
+  </div>
+{% endif %}
+
+          <h3 class="nswi-title">
+            {{ block.settings.title }}
+          </h3>
+
+          {% if block.settings.description != blank %}
+            <div class="nswi-description">
+              {{ block.settings.description }}
+            </div>
+          {% endif %}
+
+        </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+.nswi-section{
+  padding:0px 20px;
+}
+
+.nswi-container{
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.nswi-header{
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.nswi-heading{
+  margin:0;
+  font-size:48px;
+  line-height:1.1;
+  font-weight:800;
+  color:#3f3f3f;
+}
+
+.nswi-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:14px;
+}
+
+.nswi-card{
+  background:#F0EBFF;
+  border-style: solid;
+  border-width: 0px 0px 2px 2px; 
+  border-color: #A37AFF;
+  border-radius:18px;
+  padding:16px 14px;
+  min-height:auto;
+  transition:.3s ease;
+}
+
+.nswi-card:hover{
+  transform:translateY(-4px);
+}
+
+.nswi-icon{
+  font-size:24px;
+  line-height:1;
+  margin-bottom:18px;
+}
+
+.nswi-title{
+  margin:0 0 8px;
+  font-size:16px;
+  line-height:1.25;
+  font-weight:600;
+  color:#3d3d3d;
+}
+
+.nswi-description{
+  font-size:13px;
+  line-height:1.6;
+  color:#666;
+}
+
+
+.nswi-icon-wrap{
+  margin-bottom:18px;
+}
+
+.nswi-icon-image{
+  width:40px;
+  height:40px;
+  object-fit:contain;
+  display:block;
+}
+
+@media screen and (max-width:767px){
+
+  .nswi-icon-image{
+    width:32px;
+    height:32px;
+  }
+
+}
+
+@media screen and (max-width: 1200px){
+
+  .nswi-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+@media screen and (max-width: 767px){
+
+  .nswi-section{
+    padding:0px 15px 40px 15px;
+  }
+  .nswi-header {
+    text-align: left;
+    margin-bottom: 28px;
+}
+
+  .nswi-heading{
+    font-size:38px;
+  }
+
+  .nswi-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .nswi-card{
+    padding:18px;
+    min-height:140px;
+  }
+
+  .nswi-icon{
+    font-size:20px;
+    margin-bottom:12px;
+  }
+
+  .nswi-title{
+    font-size:18px;
+  }
+
+  .nswi-description{
+    font-size:13px;
+  }
+
+}
+</style>
+
+{% schema %}
+{
+  "name": "What's Included",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What's included"
+    }
+  ],
+  "blocks": [
+  {
+  "type": "feature",
+  "name": "Feature Card",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "icon_image",
+      "label": "Icon Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "5 Books Every Month"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Add feature description here."
+    }
+  ]
+}
+  ],
+  "presets": [
+    {
+      "name": "What's Included"
+    }
+  ]
+}
+{% endschema %}

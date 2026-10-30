@@ -1,0 +1,96 @@
+{%- comment -%}
+  GA4 prepaid-plan events for GTM (cta_subscribe_click, plan_variant_select, buy_now_click).
+  Plan products are identified by their product template suffix (map below).
+  Product pages / featured-product widgets read data from the <script data-ga-product> marker
+  in snippets/main-product-blocks.liquid; LP1 cards carry data-ga-* attributes.
+  Never push name, phone or email.
+{%- endcomment -%}
+<script>
+(function () {
+  var PLAN_IDS = {
+    'book-reg-subs': 'book_regular',
+    'book-sibling-plan': 'book_sibling',
+    'toy-subscription': 'toy',
+    'toys-subscription': 'toy',
+    'double-the-fun-toy': 'toy_double',
+    'book-toy-plan': 'combo',
+    'double-the-fun-combo': 'combo_double'
+  };
+  function dl(o) { window.dataLayer = window.dataLayer || []; window.dataLayer.push(o); }
+  function pageType() { return window.neownPageType || ''; }
+  // "6 months" -> 6m, "5 + 5 Books" -> 5_5, "6 months / 5 + 5 Books" -> 6m_5_5
+  function variantKey(title) {
+    var t = String(title || ''), parts = [];
+    var mo = t.match(/(\d+)\s*month/i), bk = t.match(/(\d+)\s*\+\s*(\d+)/);
+    if (mo) parts.push(mo[1] + 'm');
+    if (bk) parts.push(bk[1] + '_' + bk[2]);
+    if (parts.length) return parts.join('_');
+    return t.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+  }
+  function productData(formId) {
+    var el = formId && document.querySelector('script[data-ga-product="' + formId + '"]');
+    if (!el) return null;
+    try { return JSON.parse(el.textContent); } catch (e) { return null; }
+  }
+  function widgetPageType(d) {
+    if (!d || !d.featured) return 'plan_page';
+    var p = pageType();
+    if (p === 'books') return 'books_widget';
+    if (p === 'toys') return 'toys_widget';
+    return p ? p + '_widget' : 'widget';
+  }
+  function planPayload(d, variantId) {
+    var planId = d && PLAN_IDS[d.suffix];
+    var v = d && d.variants && d.variants[String(variantId)];
+    if (!planId || !v) return null;
+    return { plan_id: planId, variant: variantKey(v.t), value: v.p / 100, page_type: widgetPageType(d) };
+  }
+
+  // plan_variant_select: theme's variant picker fires 'change' on #product-form-<section> [name=id]
+  var lastSel = '';
+  document.addEventListener('change', function (e) {
+    var inp = e.target;
+    // note: form.id is shadowed by the form's <input name="id">, so read the attribute
+    var fid = inp && inp.name === 'id' && inp.form ? inp.form.getAttribute('id') || '' : '';
+    if (!/^product-form-/.test(fid) || fid === 'product-form-installment') return;
+    var p = planPayload(productData(fid), inp.value);
+    if (!p) return;
+    var key = fid + ':' + inp.value;
+    if (key === lastSel) return;
+    lastSel = key;
+    dl({ event: 'plan_variant_select', plan_id: p.plan_id, variant: p.variant, value: p.value, page_type: p.page_type });
+  }, true);
+
+  // buy_now_click: GoKwik Buy Now on product pages / widgets, and LP1 "Start Subscription" cards
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest && e.target.closest('[data-ga-buy], button[onclick*="onBuyNowClick"]');
+    if (!t) return;
+    var p = null;
+    if (t.dataset.gaBuy) {
+      var planId = PLAN_IDS[t.dataset.gaSuffix];
+      if (planId) p = { plan_id: planId, variant: variantKey(t.dataset.gaVariant), value: Number(t.dataset.gaPrice) / 100, page_type: t.dataset.gaBuy };
+    } else {
+      var m = (t.getAttribute('onclick') || '').match(/#(product-form-[\w-]+)/);
+      var form = m ? document.getElementById(m[1]) : t.closest('form');
+      var formId = m ? m[1] : null;
+      if (!formId) { var any = document.querySelector('script[data-ga-product^="product-form-"]'); formId = any && any.getAttribute('data-ga-product'); form = form || (formId && document.getElementById(formId)); }
+      var idInput = form && form.querySelector('[name="id"]');
+      p = planPayload(productData(formId), idInput && idInput.value);
+    }
+    if (!p) return;
+    dl({ event: 'buy_now_click', plan_id: p.plan_id, variant: p.variant, value: p.value, currency: 'INR', page_type: p.page_type });
+  }, true);
+
+  // cta_subscribe_click: CTAs that lead to plans (SIP page cards have their own events)
+  var CTA = /^(subscribe now|start reading today|choose your plan|choose your sip|view plans|see plans)$/i;
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest && e.target.closest('a, button');
+    if (!t || t.closest('.sip-card, .sip-mcta, [id^="sip-modal-"]') || t.matches('[data-ga-buy], [onclick*="onBuyNowClick"]')) return;
+    var text = (t.innerText || t.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!CTA.test(text)) return;
+    var sec = t.closest('.shopify-section');
+    var name = sec ? sec.id.replace(/^shopify-section-(template--\d+__)?/, '').replace(/_[A-Za-z0-9]{6}$/, '') : '';
+    dl({ event: 'cta_subscribe_click', cta_text: text.slice(0, 100), page_type: pageType(), section_name: name });
+  }, true);
+})();
+</script>

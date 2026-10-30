@@ -1,0 +1,203 @@
+{% schema %}
+{
+  "name": "All Doubts Cleared",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_desktop",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Left Heading",
+      "default": "All Your Doubts, Cleared"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Left Subheading",
+      "default": "Straightforward answers for busy parents."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Question Mark Color",
+          "default": "#ff4fa0"
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How many books can I rent & for how long?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer Points (one per line)",
+          "default": "5 books per month\nKeep each set of 5 books for maximum 30 days"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "All Doubts Cleared",
+      "blocks": [
+        { "type": "faq" },
+        { "type": "faq" },
+        { "type": "faq" },
+        { "type": "faq" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<section class="neown-faq">
+  <div class="neown-faq-bg">
+    <div class="neown-faq-wrap">
+
+      <div class="neown-faq-left">
+        <h2 class="neown-faq-heading">{{ section.settings.heading }}</h2>
+        <p class="neown-faq-subheading">{{ section.settings.subheading }}</p>
+      </div>
+
+      <div class="neown-faq-right">
+        {% for block in section.blocks %}
+          <div class="neown-faq-item" {{ block.shopify_attributes }}>
+            
+            <div class="neown-faq-icon" style="color: {{ block.settings.icon_color }}">
+              ?
+            </div>
+
+            <div class="neown-faq-content">
+              <h4 class="neown-faq-question">{{ block.settings.question }}</h4>
+              <ul class="neown-faq-answer">
+                {% assign points = block.settings.answer | newline_to_br | split: '<br />' %}
+                {% for point in points %}
+                  <li><svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.72667 7.05333L0.946666 4.27333L0 5.21333L3.72667 8.94L11.7267 0.94L10.7867 0L3.72667 7.05333Z" fill="#FF1A96"/>
+</svg><span class="all_doubt_mb_txt">
+{{ point }}</span></li>
+                {% endfor %}
+              </ul>
+            </div>
+
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+
+
+.neown-faq {
+  width: 100%;
+}
+
+.neown-faq-bg {
+  background-image: url({{ section.settings.bg_desktop | image_url }});
+  background-size: cover;
+  background-position: center;
+  padding: 140px 20px;
+}
+
+.neown-faq-wrap {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+.neown-faq-left {
+  flex: 1;
+}
+
+.neown-faq-heading {
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.neown-faq-subheading {
+  font-size: 16px;
+}
+
+.neown-faq-right {
+  flex: 1;
+}
+
+.neown-faq-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.neown-faq-icon {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.neown-faq-question {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.neown-faq-answer {
+  padding-left: 0px;
+  font-size: 14px;
+}
+
+.neown-faq-answer li {
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+.all_doubt_mb_txt{
+max-width: 300px;
+}
+
+
+  .neown-faq-bg {
+    background-image: url({{ section.settings.bg_mobile | image_url }});
+    padding: 130px 16px;
+    margin-bottom: 100px;
+}
+
+  .neown-faq-wrap {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .neown-faq-heading {
+    font-size: 32px;
+  }
+
+  .neown-faq-icon {
+    font-size: 28px;
+  }
+}
+</style>

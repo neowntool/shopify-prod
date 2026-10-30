@@ -1,0 +1,907 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page",
+      "disabled": true,
+      "settings": {}
+    },
+    "slider_rn4wVA": {
+      "type": "slider",
+      "blocks": {
+        "slider_item_CzDmXK": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/Workshop_1_Desktop.webp",
+            "mb_background": "shopify://shop_images/Workshop_Mobile.webp",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "right middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "<div class=\"ibz-dark-wrap\">\n\n  <!-- LOGO IMAGE ONLY (Blue N ignored as requested) -->\n  <div class=\"ibz-dark-logo\">\n<h1>Summer <br>Workshops </h1>\n  </div>\n\n  <!-- TEXT CONTENT -->\n\n  <div class=\"ibz-dark-desc\">\n   Live, expert-led online workshops for kids aged 8–15 years — from Creative Writing to Public Speaking & more\n  </div>\n\n  <!-- BUTTONS \n  <div class=\"ibz-dark-btns\">\n    <a href=\"#shopify-section-template--25042964709650__workshop_scroll_8TbmgT\" class=\"ibz-dark-btn-primary\">See Upcoming Workshops</a>\n   \n  </div>-->\n\n</div>",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_yG3nGY": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/independence_discount_web_banner_4_1.png",
+            "mb_background": "shopify://shop_images/independence_discount_web_banner_4_1.png",
+            "schedule_start": "2026-08-13 00:00",
+            "schedule_end": "2026-08-16 23:59",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_VGEKL7": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/Skill_up_desk_1_2.png",
+            "mb_background": "shopify://shop_images/Skill_up_desk_1_2.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "right middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/pages/workshops",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_CtgqCg": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/Bacche_khush_web_3.png",
+            "mb_background": "shopify://shop_images/Bacche_khush_web_4.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "right middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slider_item_CzDmXK",
+        "slider_item_yG3nGY",
+        "slider_item_VGEKL7",
+        "slider_item_CtgqCg"
+      ],
+      "custom_css": [
+        ".ibz-dark-btns {justify-content: left;}",
+        "@media (max-width: 767px) {.ibz-dark-wrap {padding: 0px; text-align: center; } .ibz-dark-logo h1 {padding-top: 220px; }}"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "light",
+        "show_dots": false,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 3,
+        "use_content_above": true,
+        "custom_class": "m-slider--home",
+        "animations": "inherit"
+      }
+    },
+    "workshop_scroll_8TbmgT": {
+      "type": "workshop-scroll",
+      "blocks": {
+        "workshop_V8FnVF": {
+          "type": "workshop",
+          "settings": {
+            "workshop_image": "shopify://shop_images/Subjectselection1_1.jpg",
+            "workshop_title": "Subject Selection Masterclass",
+            "workshop_desc": "neOwn x Hemangi Shah | Learn How to Choose the Right Subjects for Your Child",
+            "workshop_date": "Sun, 12th April, 2026",
+            "workshop_mode": "Zoom (Online)",
+            "workshop_url": "shopify://products/12th-apr-subject-selection-masterclass-neown-x-hemangi-shah-learn-how-to-choose-the-right-subjects-for-your-child-online-session-for-parents"
+          }
+        },
+        "workshop_8PirJe": {
+          "type": "workshop",
+          "settings": {
+            "workshop_image": "shopify://shop_images/CreativeWritingBeginnerA1_1_90daf69f-0f2a-4012-9927-33cd08617acd.jpg",
+            "workshop_title": "Creative Writing Beginners Bootcamp",
+            "workshop_desc": "neOwn x Smriti Kocchar | Build Story & Descriptive Writing Skills",
+            "workshop_date": "Sat, 25th Apr 2026 - Sun, 26th Apr 2026",
+            "workshop_mode": "Zoom (Online)",
+            "workshop_url": "shopify://products/25th-26th-apr-page-turners-creative-writing-beginner-workshop-neown-x-smriti-kochhar-build-story-descriptive-writing-skills-for-ages-8-12-yrs-online-workshops-for-kids"
+          }
+        },
+        "workshop_4CeYen": {
+          "type": "workshop",
+          "settings": {
+            "workshop_image": "shopify://shop_images/AIToolsA1_1_12c81cd8-40d2-42c8-bd5e-84f36d4c5060.jpg",
+            "workshop_title": "AI Tools - Introduction to Prompt Engineering",
+            "workshop_desc": "neOwn x MindChamp | Learn Basics of AI Tools for 11+ yrs",
+            "workshop_date": "Mon, 27th Apr 2026 - Tues, 28th Apr 2026",
+            "workshop_mode": "Zoom (Online)",
+            "workshop_url": "shopify://products/27th-28th-apr-ai-tools-introduction-to-prompt-engineering-neown-x-mindchamp-learn-basics-of-ai-tools-for-11-yrs-online-workshops-for-kids"
+          }
+        },
+        "workshop_Qkrfdh": {
+          "type": "workshop",
+          "settings": {
+            "workshop_image": "shopify://shop_images/CreativeWritingBlogC1_1.jpg",
+            "workshop_title": "Creative Writing - Blog & Travel Writing",
+            "workshop_desc": "neOwn x Smriti Kocchar | Learn Blog, Article & Travel Writing for 8-12 yrs",
+            "workshop_date": "Mon, 27th Apr 2026 - Tues, 28th Apr 2026",
+            "workshop_mode": "Zoom (Online)",
+            "workshop_url": "shopify://products/27th-28th-apr-creative-writing-blog-travel-writing-neown-x-smriti-kocchar-learn-blog-article-travel-writing-for-8-12-yrs-online-workshops-for-kids"
+          }
+        },
+        "workshop_f7adUj": {
+          "type": "workshop",
+          "settings": {
+            "workshop_image": "shopify://shop_images/CollegeEssayE1_1.jpg",
+            "workshop_title": "College Essay Writing Workshop",
+            "workshop_desc": "neOwn x Smriti Kocchar | Learn to Write Impactful Personal Essays for 8-12 yrs",
+            "workshop_date": "Sat, 2nd May 2026 - Sun, 3rd May 2026",
+            "workshop_mode": "Zoom (Online)",
+            "workshop_url": "shopify://products/2nd-3rd-may-college-essay-writing-workshop-neown-x-smriti-kocchar-learn-to-write-meaningful-essays-for-8-12-yrs-online-workshops-for-kids"
+          }
+        }
+      },
+      "block_order": [
+        "workshop_V8FnVF",
+        "workshop_8PirJe",
+        "workshop_4CeYen",
+        "workshop_Qkrfdh",
+        "workshop_f7adUj"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "Upcoming Workshops Scroll",
+      "settings": {
+        "heading": "Upcoming Workshops",
+        "view_all_text": "View All",
+        "view_all_url": ""
+      }
+    },
+    "empty_space_JqAWwh": {
+      "type": "empty-space",
+      "name": "Empty space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "show_divider_line": true,
+        "divider_style": "solid",
+        "divider_height": 1,
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "custom_class": ""
+      }
+    },
+    "workshops_tabs_MC4VNt": {
+      "type": "workshops-tabs",
+      "blocks": {
+        "tab_XeYGUT": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "All Workshops",
+            "tab_collection": "upcoming-workshops"
+          }
+        },
+        "tab_NM8UgA": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "",
+            "tab_collection": ""
+          }
+        },
+        "tab_gdPfMD": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Creative Writing",
+            "tab_collection": "creative-writing-workshops"
+          }
+        },
+        "tab_ed37MF": {
+          "type": "tab",
+          "disabled": true,
+          "settings": {
+            "tab_title": "Mapology",
+            "tab_collection": "mapology-workshops"
+          }
+        },
+        "tab_BBAkac": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Comic Making",
+            "tab_collection": "comic-making-workshops"
+          }
+        },
+        "tab_zDRxCa": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "AI/Tech Workshop",
+            "tab_collection": "ai-tech-workshops"
+          }
+        },
+        "tab_DRfX8r": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Communication Skills",
+            "tab_collection": "communication-skills-workshops"
+          }
+        }
+      },
+      "block_order": [
+        "tab_XeYGUT",
+        "tab_NM8UgA",
+        "tab_gdPfMD",
+        "tab_ed37MF",
+        "tab_BBAkac",
+        "tab_zDRxCa",
+        "tab_DRfX8r"
+      ],
+      "name": "FM Collection Tabs",
+      "settings": {
+        "heading": "Upcoming Workshops"
+      }
+    },
+    "custom_liquid_jUXrLT": {
+      "type": "custom-liquid",
+      "name": "Custom liquid",
+      "settings": {
+        "custom_liquid": "<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Reviews Slider</title>\n</head>\n<style>\n\n    .reviews-container {\n      width: 90%;\n      max-width: 1000px;\n      background-color: white;\n      padding: 20px;\n      border-radius: 10px;\n      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n      text-align: center;\n      position: relative;\n      \n    }\n</style>\n<body>\n<div style=\"display: flex; justify-content: center; align-items: center;\">\n  <div class=\"reviews-container\"> \n    <!-- style=\"font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; width: 80%; max-width: 800px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; position: relative;\"> -->\n    <h2 style=\"margin-bottom: 20px; font-size: 1.5rem; font-weight: bold;\">What Mothers Have to Say</h2>\n    <div class=\"review-slide active\" style=\"display: block; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position:relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; margin: 20px auto\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Namrata_Gulati.png?v=1745923827\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n      <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Very engaging!</h3>\n      <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">Thanks for the session. It was very interactive. Reyansh sat through the whole session which is quite a big deal for him 😅</p>\n      <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Namrata Gulati</p>\n      </div>\n    </div>\n    <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Kritika_Hire.png?v=1745923828\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n      <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Helped to enhance skills</h3>\n      <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">Anjika loved the class way too much. She likes to read. From last November we introduced her to novels. This class helped her how to enhance her writing skills.❤️</p>\n      <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Kritika Hire</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Aparna_Sagar.png?v=1745923827\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Built her confidence</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">First time she attended this type of workshop and I am sure it will help her to develop basic writing skills and techniques along with self-expression and confidence. Thank you neOwn team for arranging and encouraging her to attend this workshop.🥰❤️</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Aparna Sagar</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Sana_Sayed.png?v=1745923827\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Great time investment</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">Zahra enjoyed the sessions. It was amazing, in flow and kept the children glued to the screen and in the sync with the topics.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Sana Sayed</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Harbans_Kaur.png?v=1745923827\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Very encouraging environment</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">\"Thank you so much. Bandagi loved you. Especially your encouraging words for every kid\"</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Harbans Kaur</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Anjali_Bajpai.png?v=1745923827\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Great first time! 😊</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">This was his first time interacting with group on an online platform and he loved it :)</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Anjali Bajpai</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px;position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Kirti_Pednekar.png?v=1745923827\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">So informative!</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">Thank you neOwn team for arranging the session.. It's informative and helpful for kids.. Vaibhav enjoyed it. 👍</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Kirti Pednekar</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px;position: relative; \">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Sneha_Doshi.png?v=1745923827\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Great teaching style</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">I was so happy with the explanations & activity, it was simple but very interesting - really engaged my son and I can confidently say he did learn a lot!</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Sneha Doshi</p>\n        </div>\n      </div>\n    <div class=\"nav-buttons\" style=\"margin-top: 15px;\">\n      <button onclick=\"prevSlide()\" style=\"background-color: #8a2be2; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin: 0 5px;\">&lt;</button>\n      <button onclick=\"nextSlide()\" style=\"background-color: #8a2be2; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin: 0 5px;\">&gt;</button>\n    </div>\n  </div>\n  <script>\n    let currentIndex = 0;\n    const slides = document.querySelectorAll('.review-slide');\n\n    function showSlide(index) {\n      slides.forEach((slide, i) => {\n        slide.style.display = i === index ? 'block' : 'none';\n      });\n    }\n\n    function nextSlide() {\n      currentIndex = (currentIndex + 1) % slides.length;\n      showSlide(currentIndex);\n    }\n\n    function prevSlide() {\n      currentIndex = (currentIndex - 1 + slides.length) % slides.length;\n      showSlide(currentIndex);\n    }\n\n    // Auto-scroll functionality\n    setInterval(() => {\n      nextSlide();\n    }, 3000);\n  </script>\n</div>",
+        "custom_class": ""
+      }
+    },
+    "product_tabs_LGNa99": {
+      "type": "product-tabs",
+      "blocks": {
+        "tab_MVAjk9": {
+          "type": "tab",
+          "settings": {
+            "title": "All Workshops",
+            "collection": ""
+          }
+        },
+        "tab_RTzLyh": {
+          "type": "tab",
+          "settings": {
+            "title": "Creative Writing",
+            "collection": "creative-writing-workshops"
+          }
+        },
+        "tab_AJfJLL": {
+          "type": "tab",
+          "settings": {
+            "title": "Mapology",
+            "collection": ""
+          }
+        },
+        "tab_GWfdxC": {
+          "type": "tab",
+          "settings": {
+            "title": "AI & Tech",
+            "collection": "ai-tech-workshops"
+          }
+        },
+        "tab_MJ6YHP": {
+          "type": "tab",
+          "settings": {
+            "title": "Communication skills",
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_MVAjk9",
+        "tab_RTzLyh",
+        "tab_AJfJLL",
+        "tab_GWfdxC",
+        "tab_MJ6YHP"
+      ],
+      "disabled": true,
+      "name": "Product tabs",
+      "settings": {
+        "heading": "Upcoming Workshops",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "color_scheme": "",
+        "tab_header": "horizontal",
+        "limit": 8,
+        "show_button": false,
+        "button_type": "link",
+        "button_label": "View all",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "items_per_row": 4,
+        "item_gap": 30,
+        "enable_slider": false,
+        "show_navigation": true,
+        "show_pagination": false,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "custom_commitment_section_QyMGFd": {
+      "type": "custom-commitment-section",
+      "blocks": {
+        "feature_wncPpK": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/fi_10143723.png",
+            "title": "Interactive Learning",
+            "description": "Designed as engaging, hands-on, activity-based sessions."
+          }
+        },
+        "feature_X48BEq": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/fi_3775447_1.png",
+            "title": "Skill Development",
+            "description": "Encourages creativity, focus, and problem-solving abilities."
+          }
+        },
+        "feature_pKcLUB": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/fi_14600686_1.png",
+            "title": "Expert Mentors",
+            "description": "Led by Handpicked experts & educators"
+          }
+        },
+        "feature_9ar7Yt": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/fi_3135763_1.png",
+            "title": "Future-Ready Focus",
+            "description": "Every child receives a certificate for their achievement."
+          }
+        }
+      },
+      "block_order": [
+        "feature_wncPpK",
+        "feature_X48BEq",
+        "feature_pKcLUB",
+        "feature_9ar7Yt"
+      ],
+      "custom_css": [
+        "img {width: 56px; height: 56px;}"
+      ],
+      "name": "Custom Commitment Section",
+      "settings": {
+        "bg_desktop": "shopify://shop_images/All_Your_Doubts_Cleared_Desktop.png",
+        "bg_mobile": "shopify://shop_images/All_Your_Doubts_Cleared_Mobile.png",
+        "main_heading": "Why kids love our workshops",
+        "sub_text": "Every session is designed to help kids skill-up, build focus & make learning fun."
+      }
+    },
+    "past_workshops_grid_mY8eem": {
+      "type": "past-workshops-grid",
+      "blocks": {
+        "column_MgX3cM": {
+          "type": "column",
+          "settings": {
+            "top_image": "shopify://shop_images/Rectangle_40.png",
+            "top_url": "shopify://products/from-story-to-stage-script-it-skit-writing-workshop-neown-x-smriti-kochhar-learn-skit-writing-for-8-12-years-online-workshops-for-kids",
+            "bottom_image": "shopify://shop_images/Rectangle_42.png",
+            "bottom_url": "shopify://products/come-sit-with-me-under-poet-tree-writing-workshop-neown-x-ritu-desai-learn-poetry-writing-for-8-13-years-online-workshops-for-kids"
+          }
+        },
+        "column_Fk4Dta": {
+          "type": "column",
+          "settings": {
+            "top_image": "shopify://shop_images/Rectangle_43.png",
+            "top_url": "shopify://products/draw-tell-comic-making-workshop-neown-x-ritu-desai-learn-comic-making-for-8-12-yrs-online-workshops-for-kids-copy",
+            "bottom_image": "shopify://shop_images/Rectangle_41.png",
+            "bottom_url": "shopify://products/27th-28th-sept-page-turners-creative-writing-bootcamp-neown-x-smriti-kocchar-enhance-creative-writing-skills-for-8-12-yrs-online-workshops-for-kids"
+          }
+        },
+        "column_LUPd4B": {
+          "type": "column",
+          "settings": {
+            "top_image": "shopify://shop_images/Rectangle_44.png",
+            "top_url": "shopify://products/creative-chronicles-creative-writing-bootcamp-neown-x-smriti-kocchar-learn-autobiography-letter-writing-for-8-12-yrs-online-workshops-for-kids",
+            "bottom_image": "shopify://shop_images/Rectangle_45.png",
+            "bottom_url": "shopify://products/page-turners-creative-writing-bootcamp-neown-x-smriti-kocchar-enhance-creative-writing-skills-for-8-12-yrs-online-workshops-for-kids-copy"
+          }
+        },
+        "column_WkNMCQ": {
+          "type": "column",
+          "settings": {
+            "top_image": "shopify://shop_images/Rectangle_43.png",
+            "top_url": "shopify://products/draw-tell-comic-making-workshop-neown-x-ritu-desai-creative-bootcamp-for-8-yrs-kids-online-summer-workshops-for-kids",
+            "bottom_image": "shopify://shop_images/Draw_and_tell_-_Prod_page_1.webp",
+            "bottom_url": "shopify://products/8th-9th-nov-draw-tell-comic-making-workshop-neown-x-ritu-desai-learn-comic-making-for-8-13-yrs-online-workshops-for-kids"
+          }
+        }
+      },
+      "block_order": [
+        "column_MgX3cM",
+        "column_Fk4Dta",
+        "column_LUPd4B",
+        "column_WkNMCQ"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "Past Workshops Grid",
+      "settings": {
+        "heading": "Past Workshops"
+      }
+    },
+    "workshop_scroll_xhPqmx": {
+      "type": "workshop-scroll",
+      "blocks": {
+        "workshop_EWhWci": {
+          "type": "workshop",
+          "settings": {
+            "workshop_image": "shopify://shop_images/Rectangle_40.png",
+            "workshop_title": "",
+            "workshop_desc": "",
+            "workshop_date": "",
+            "workshop_mode": "",
+            "workshop_url": ""
+          }
+        },
+        "workshop_6kizCg": {
+          "type": "workshop",
+          "settings": {
+            "workshop_image": "shopify://shop_images/Rectangle_42.png",
+            "workshop_title": "",
+            "workshop_desc": "",
+            "workshop_date": "",
+            "workshop_mode": "",
+            "workshop_url": ""
+          }
+        },
+        "workshop_etBfhE": {
+          "type": "workshop",
+          "settings": {
+            "workshop_image": "shopify://shop_images/Rectangle_43.png",
+            "workshop_title": "",
+            "workshop_desc": "",
+            "workshop_date": "",
+            "workshop_mode": "",
+            "workshop_url": ""
+          }
+        },
+        "workshop_dTdFbK": {
+          "type": "workshop",
+          "settings": {
+            "workshop_image": "shopify://shop_images/Rectangle_41.png",
+            "workshop_title": "",
+            "workshop_desc": "",
+            "workshop_date": "",
+            "workshop_mode": "",
+            "workshop_url": ""
+          }
+        },
+        "workshop_PJqJ49": {
+          "type": "workshop",
+          "settings": {
+            "workshop_image": "shopify://shop_images/Rectangle_44.png",
+            "workshop_title": "",
+            "workshop_desc": "",
+            "workshop_date": "",
+            "workshop_mode": "",
+            "workshop_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "workshop_EWhWci",
+        "workshop_6kizCg",
+        "workshop_etBfhE",
+        "workshop_dTdFbK",
+        "workshop_PJqJ49"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".fm-card-content {display: none;}"
+      ],
+      "name": "Funky Workshops Scroll",
+      "settings": {
+        "heading": "Past Workshops",
+        "view_all_text": "View All",
+        "view_all_url": ""
+      }
+    },
+    "reviews_sec_B4MKwk": {
+      "type": "reviews-sec",
+      "blocks": {
+        "card_iKheM4": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_16.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_WdLGKd": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_17.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_RBtAgC": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_18.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_VLkBTN": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_19.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_Fjcd3i": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_20.png",
+            "title": "",
+            "text": ""
+          }
+        },
+        "card_eYPbRC": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Review_21.png",
+            "title": "",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_iKheM4",
+        "card_WdLGKd",
+        "card_RBtAgC",
+        "card_VLkBTN",
+        "card_Fjcd3i",
+        "card_eYPbRC"
+      ],
+      "disabled": true,
+      "name": "Neown Auto Scroll Section",
+      "settings": {
+        "bg_image": "shopify://shop_images/Rviews_-_Desktop_1.webp",
+        "bg_image_mobile": "shopify://shop_images/Reviews_-_Mobile.webp",
+        "heading": "Why parents are choosing neOwn",
+        "description": "",
+        "button_text": "Learn More",
+        "button_link": ""
+      }
+    },
+    "parents_community_section_ARALPR": {
+      "type": "parents-community-section",
+      "blocks": {
+        "line_jdW7Bm": {
+          "type": "line",
+          "settings": {
+            "text": "8,000+ Active Parents",
+            "text_desc": "<p>Learn the Best Practices to Raise a Confident Kid</p>"
+          }
+        },
+        "line_bAhGQm": {
+          "type": "line",
+          "settings": {
+            "text": "Expert Book Recommendations",
+            "text_desc": "<p>Request a Book Recommendation, Share book reviews by your kids</p>"
+          }
+        },
+        "line_j7wdc3": {
+          "type": "line",
+          "settings": {
+            "text": "FREE Online Kids Events",
+            "text_desc": "<p>Monthly Book Exploration Sessions (Age 6-14 years), Storytelling Sessions (Age 2-6 years), Reading Challenges</p>"
+          }
+        },
+        "line_G3d8Jy": {
+          "type": "line",
+          "settings": {
+            "text": "Daily Discussions",
+            "text_desc": "<p>Reading Advice, Book Discussions and Support</p>"
+          }
+        }
+      },
+      "block_order": [
+        "line_jdW7Bm",
+        "line_bAhGQm",
+        "line_j7wdc3",
+        "line_G3d8Jy"
+      ],
+      "custom_css": [
+        "@media (max-width: 900px) {.pcs-wrapper {margin-bottom: -100px; margin-top: -100px; }}"
+      ],
+      "name": "Parents Community CTA",
+      "settings": {
+        "bg_image": "shopify://shop_images/JOIN_OUR_COMMUNITY_Desktop_1.webp",
+        "bg_image_mobile": "shopify://shop_images/Join_Parent_s_Community_Mobile.webp",
+        "heading": "Join the neOwn Parent's Community",
+        "subheading": "Get Book Recommendations & Expert Advice",
+        "button_text": "Join WhatsApp Community",
+        "button_link": "https://wa.me/+919324455972"
+      }
+    },
+    "page_faqs_jY7xLJ": {
+      "type": "page-faqs",
+      "blocks": {
+        "accordion_XiWthW": {
+          "type": "accordion",
+          "settings": {
+            "title": "What topics do you do have workshops on?",
+            "content": "<p>We at neOwn conduct a wide variety of skill-building workshops on: </p><ul><li>Creative Writing</li><li>Speech & Communication </li><li>Debate & Public Speaking</li><li>Math Skills</li><li>Coding & AI</li><li>Life Skills</li><li>Art & Design (including learning softwares like Canva, Photoshop, and more)</li><li>Music</li></ul>",
+            "open": false
+          }
+        },
+        "accordion_wWxapm": {
+          "type": "accordion",
+          "settings": {
+            "title": "Are the neOwn workshops conducted online?",
+            "content": "<p>Yes! As of now, the neOwn workshops are conducted online as we have children from all over India participating in them. </p>",
+            "open": false
+          }
+        },
+        "accordion_98FnHe": {
+          "type": "accordion",
+          "settings": {
+            "title": "Are the workshops only for neOwn customers?",
+            "content": "<p>No. Anyone in the appropriate age range can participate in the neOwn workshops. </p>",
+            "open": false
+          }
+        },
+        "accordion_TjN8da": {
+          "type": "accordion",
+          "settings": {
+            "title": "Are these paid workshops?",
+            "content": "<p>Yes, they are paid workshops. </p><p>We do conduct free community sessions online like book exploration & storytelling, which you can attend by joining our parents’ community on WhatsApp (where Zoom link & other details will be shared). </p>",
+            "open": false
+          }
+        },
+        "accordion_fhEYkH": {
+          "type": "accordion",
+          "settings": {
+            "title": "What’s your workshop cancellation policy?",
+            "content": "<p>Refund will only be granted if the cancellation is done 24 hours before the workshop. </p>",
+            "open": false
+          }
+        },
+        "accordion_JGFVja": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "Is there any deposit or registration fee?",
+            "content": "<p>No, there is no deposit or registration fee. </p>",
+            "open": false
+          }
+        },
+        "accordion_VUQPmJ": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "Do I get to choose my books or do you send pre-curated books?",
+            "content": "<p>You can choose your books! If you require any help with selection, you can take recommendations from our in-house book expert. </p>",
+            "open": false
+          }
+        },
+        "accordion_dXNAQy": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "There’s no place to enter my child’s details on the website, how will you know what kind of books I want?",
+            "content": "<p>Our app asks for all these details to create a profile for your child. </p><p>Once you subscribe to any plan, you have to log in to our neOwn App to select your books. </p><p>Before you can view the catalog on the app, you have to enter all your child’s details - including their age, so that we can provide an age-appropriate catalog for them. </p>",
+            "open": false
+          }
+        },
+        "accordion_mXAMLA": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "Can I get books for both my children in one library subscription, or do I need to subscribe to the ‘2 Siblings’ plan?",
+            "content": "<p>No, you cannot get books for both children in one library subscription. You can subscribe to the ‘2 Siblings’ plan to get books for both your children, where you can get 3 books for each child or 5 books for each child. The reason for this is that we create a unique profile for each child with all their details and provide an age-appropriate curated catalog of books to choose from. This will enable you to see each child’s unique progress as well as all the books they have read in a more organised manner. </p>",
+            "open": false
+          }
+        },
+        "accordion_ikFw3k": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "How do you sanitize the books?",
+            "content": "<p>Our process to ensure the books are hygenic and in good condition: </p><ul><li>⁠We do a thorough check of all books twice - once after they have come back from customers and the second time before they are going to another customer </li><li>⁠⁠We also clean board books to ensure they are 100% sanitary </li><li>⁠⁠If any books are of bad quality we don't circulate them among customers anymore</li></ul>",
+            "open": false
+          }
+        },
+        "accordion_HTJKXC": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "If I subscribe today, will my 30 days start now?",
+            "content": "<p>No, your 30 days will start after the books have been delivered to you. </p><p>Once you subscribe, you have to download our app to select your books. After selection, they will be delivered in 2-5 days within Mumbai and 4-8 days outside Mumbai. </p><p>Your 30 days start from the day when the books are delivered. </p>",
+            "open": false
+          }
+        },
+        "accordion_MnkN7P": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "What are the shipping charges for outstation?",
+            "content": "<p>The shipping charges for out-of-Mumbai deliveries are as follows: </p><p><strong>Plan Name</strong></p><p><strong>Number of items per month </strong></p><p><strong>Outside Mumbai Shipping Charge </strong></p><p>Book Library (1 child)</p><p>5 books per month</p><p>₹150/- per month</p><p>Book Library (2 siblings) (3+3 Plan)</p><p>3+3 (total 6) books per month </p><p>₹150/- per month</p><p>Book Library (2 siblings) (5+5 Plan)</p><p>5+5 books (total 10) per month</p><p>₹200/- per month</p><p>Currently our Toy Library is only being serviced in Mumbai, Navi Mumbai, & Thane. </p>",
+            "open": false
+          }
+        },
+        "accordion_aTVRQj": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "My pin code is showing not serviceable. What do I do?",
+            "content": "<p>We may still be able to deliver to you! WhatsApp us at +91 9137081640 and let us know your pin code, we’ll inform you if your area is serviceable. </p>",
+            "open": false
+          }
+        },
+        "accordion_79wQzC": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "How do I return the Library books?",
+            "content": "<p>Once you are done reading the books, you can select ‘Done Reading’ on our app. Then you have to select your next set of books. Once the next set is confirmed, our team will schedule a delivery for the new items and a pickup to return the old books. The return process is as follows: We’ll send our delivery partner directly to your doorstep for the pickup of the books. You’ll be notified of the timelines, and you can keep the books packed for when it's time for the pickup.</p>",
+            "open": false
+          }
+        },
+        "accordion_Rp6NhE": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "Do you have other languages books?",
+            "content": "<p>Yes! We also have a limited collection of books in Hindi, Marathi, and Gujarati. </p>",
+            "open": false
+          }
+        },
+        "accordion_MrqUic": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "Can I cancel the Library Subscription at any time?",
+            "content": "<p>At this time, we do not offer order cancellation.</p><p>In case you’re facing any problems or are unhappy with your subscription, we’d love to hear what you would like us to change or improve! WhatsApp us on 9137081640, or you can get in touch directly with our founder at kranti@neown.in.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "accordion_XiWthW",
+        "accordion_wWxapm",
+        "accordion_98FnHe",
+        "accordion_TjN8da",
+        "accordion_fhEYkH",
+        "accordion_JGFVja",
+        "accordion_VUQPmJ",
+        "accordion_dXNAQy",
+        "accordion_mXAMLA",
+        "accordion_ikFw3k",
+        "accordion_HTJKXC",
+        "accordion_MnkN7P",
+        "accordion_aTVRQj",
+        "accordion_79wQzC",
+        "accordion_Rp6NhE",
+        "accordion_MrqUic"
+      ],
+      "settings": {
+        "headingsec": "Frequently asked questions",
+        "container": "container",
+        "color_scheme": "",
+        "menu": "",
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "slider_rn4wVA",
+    "workshop_scroll_8TbmgT",
+    "empty_space_JqAWwh",
+    "workshops_tabs_MC4VNt",
+    "custom_liquid_jUXrLT",
+    "product_tabs_LGNa99",
+    "custom_commitment_section_QyMGFd",
+    "past_workshops_grid_mY8eem",
+    "workshop_scroll_xhPqmx",
+    "reviews_sec_B4MKwk",
+    "parents_community_section_ARALPR",
+    "page_faqs_jY7xLJ"
+  ]
+}

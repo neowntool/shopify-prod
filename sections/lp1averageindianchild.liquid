@@ -1,0 +1,197 @@
+<section class="cs2-section">
+  <div class="cs2-container">
+
+    <!-- Heading -->
+    <h2 class="cs2-heading">{{ section.settings.heading }}</h2>
+
+    <!-- Table -->
+    <div class="cs2-table">
+
+      <!-- Header Row -->
+      <div class="cs2-row cs2-header">
+        <div class="cs2-col">
+          {{ section.settings.left_heading }}
+        </div>
+
+        <div class="cs2-col cs2-right-header">
+          {% if section.settings.right_logo != blank %}
+            <img src="{{ section.settings.right_logo | image_url: width: 120 }}" alt="logo" class="cs2-logo">
+          {% endif %}
+          <span style="margin-bottom: -14px;">{{ section.settings.right_heading }}</span>
+        </div>
+      </div>
+
+      <!-- Dynamic Rows -->
+      {% for block in section.blocks %}
+        <div class="cs2-row">
+          <div class="cs2-col">
+            {{ block.settings.left_text }}
+          </div>
+          <div class="cs2-col cs2-highlight">
+            {{ block.settings.right_text }}
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+.cs2-section {
+  padding: 20px 20px;
+}
+
+.cs2-container {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+.cs2-heading {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+/* Table */
+.cs2-table {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e0dede;
+}
+
+/* Rows */
+.cs2-row {
+  display: flex;
+}
+
+.cs2-row:nth-child(even) {
+  {% comment %} background: #f9f9f9; {% endcomment %}
+}
+
+/* Header */
+.cs2-header {
+  background: #FFE6F5;
+  font-weight: 600;
+}
+
+/* Columns */
+.cs2-col {
+  width: 50%;
+  padding: 18px;
+  text-align: left;
+  border-right: 1px solid #e0dede;
+}
+
+.cs2-col:last-child {
+  border-right: none;
+}
+
+/* Right Highlight */
+.cs2-highlight {
+  color: #6c4cff;
+  font-weight: 500;
+}
+
+/* Right Header with logo */
+.cs2-right-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Logo */
+.cs2-logo {
+  max-height: 28px;
+  object-fit: contain;
+}
+
+.cs2-table .cs2-row:nth-child(3) {
+  background-color: #FFE6F5; 
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cs2-row {
+    {% comment %} flex-direction: column; {% endcomment %}
+  }
+  .cs2-col {
+    width: 100%;
+  }
+  .cs2-col {
+  padding: 10px;
+  }
+  .cs2-heading {
+    font-size: 32px;
+}
+}
+</style>
+
+{% schema %}
+{
+  "name": "Average Comparison Table",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "An Average Indian Child vs A neOwn Child"
+    },
+    {
+      "type": "text",
+      "id": "left_heading",
+      "label": "Left Heading",
+      "default": "Average Indian Child"
+    },
+    {
+      "type": "text",
+      "id": "right_heading",
+      "label": "Right Heading",
+      "default": "Child"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_logo",
+      "label": "Right Side Logo (Optional)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "left_text",
+          "label": "Left Text",
+          "default": "2 books per year"
+        },
+        {
+          "type": "text",
+          "id": "right_text",
+          "label": "Right Text",
+          "default": "60 books per year"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Average Comparison Table",
+      "blocks": [
+        {
+          "type": "row"
+        },
+        {
+          "type": "row"
+        },
+        {
+          "type": "row"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

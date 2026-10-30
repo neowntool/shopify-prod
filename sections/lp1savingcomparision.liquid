@@ -1,0 +1,224 @@
+{% comment %}
+  Savings Comparison Section
+{% endcomment %}
+
+<section class="custom-savings-section">
+  <div class="cs-container">
+    
+    <!-- Heading -->
+    <h2 class="cs-heading">{{ section.settings.heading }}</h2>
+    <p class="cs-subheading">{{ section.settings.subheading }}</p>
+
+    <!-- Comparison Row -->
+    <div class="cs-comparison">
+
+      <!-- Plan -->
+      <div class="cs-row">
+        <div class="cs-label">
+          {{ section.settings.plan_name }}
+        </div>
+        {% comment %} <div class="cs-bar cs-bar-primary">
+          {{ section.settings.plan_price }}
+        </div> {% endcomment %}
+    <div class="cs-bar">
+  <div class="cs-fill cs-fill-primary" style="width: 46%;">
+    {{ section.settings.plan_price }}
+  </div>
+</div>
+
+
+      </div>
+
+      <!-- Buying -->
+      <div class="cs-row">
+        <div class="cs-label">
+          {{ section.settings.buying_label }}
+        </div>
+        {% comment %} <div class="cs-bar cs-bar-secondary">
+          {{ section.settings.buying_price }}
+        </div> {% endcomment %}
+       <div class="cs-bar">
+  <div class="cs-fill cs-fill-secondary" style="width: 96%;">
+    {{ section.settings.buying_price }}
+  </div>
+</div>
+      </div>
+
+    </div>
+
+    <!-- Savings Box -->
+    <div class="cs-savings-box">
+      <h3>{{ section.settings.savings_heading }}</h3>
+      <p>{{ section.settings.savings_text }}</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.custom-savings-section {
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.cs-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.cs-heading {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.cs-subheading {
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.cs-comparison {
+  margin-bottom: 40px;
+}
+
+.cs-row {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 15px;
+  gap: 15px;
+}
+
+.cs-label {
+  min-width: 160px;
+  text-align: right;
+  font-size: 16px;
+}
+{% comment %}  {% endcomment %}
+ .cs-bar {
+  width: 100%;
+  background: #EFEFEF;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cs-fill {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* Purple bar */
+.cs-fill-primary {
+  background: #7b61ff;
+  text-align: left;
+}
+
+/* Pink bar */
+.cs-fill-secondary {
+  background: #990052;
+  text-align: left;
+}
+{% comment %}  {% endcomment %}
+
+.cs-comparison {
+  max-width: 480px;
+  margin: auto;
+}
+
+.cs-savings-box {
+  border:1px solid #9364FF;
+  border-radius: 12px;
+  padding: 26px;
+  background: #F0EBFF;
+  max-width: 522px;
+  margin: auto;
+}
+
+.cs-savings-box h3 {
+  color: #7b61ff;
+  font-size: 28px;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.cs-savings-box p {
+  color: #555;
+}
+
+@media(max-width: 767px){
+.cs-heading {
+font-size: 29px;
+}
+.custom-savings-section{
+padding-top: 0px;
+ }
+ 
+.cs-fill {
+  padding: 8px 8px;
+}
+}
+</style>
+
+{% schema %}
+{
+  "name": "Savings Comparison",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "60 Books a Year at a Fraction of the Cost"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "The numbers speak for themselves."
+    },
+    {
+      "type": "text",
+      "id": "plan_name",
+      "label": "Plan Name",
+      "default": "neOwn (12M Plan)"
+    },
+    {
+      "type": "text",
+      "id": "plan_price",
+      "label": "Plan Price",
+      "default": "₹4,000"
+    },
+    {
+      "type": "text",
+      "id": "buying_label",
+      "label": "Buying Label",
+      "default": "Buying"
+    },
+    {
+      "type": "text",
+      "id": "buying_price",
+      "label": "Buying Price",
+      "default": "₹24,000"
+    },
+    {
+      "type": "text",
+      "id": "savings_heading",
+      "label": "Savings Heading",
+      "default": "Save ₹20,000 every year"
+    },
+    {
+      "type": "textarea",
+      "id": "savings_text",
+      "label": "Savings Text",
+      "default": "That's ₹20,000 back in your pocket, travel, invest your call."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Savings Comparison Section"
+    }
+  ]
+}
+{% endschema %}

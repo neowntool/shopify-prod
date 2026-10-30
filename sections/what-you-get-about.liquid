@@ -1,0 +1,198 @@
+{% schema %}
+{
+  "name": "Our Journy",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_desktop",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "What You Get"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "1500+ toys to choose from (serviceable only in Mumbai)"
+    },
+    {
+      "type": "html",
+      "id": "bottom_desc",
+      "label": "Details"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "color",
+          "id": "line_color",
+          "label": "Line & Dot Color",
+          "default": "#ff2f92"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Unlimited Toys, Delivered Free"
+        },
+        {
+          "type": "textarea",
+          "id": "desc",
+          "label": "Description",
+          "default": "Available only in Mumbai, Thane & Navi Mumbai with free pickup & delivery."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Our Journy",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<section class="journey-sec">
+  <div class="journey-bg">
+    <div class="journey-container">
+
+      <h2 class="journey-heading">{{ section.settings.heading }}</h2>
+      <p class="journey-subheading">{{ section.settings.subheading }}</p>
+
+      <div class="journey-grid">
+        {% for block in section.blocks %}
+          <div class="journey-card" {{ block.shopify_attributes }}>
+            
+            <div class="journey-line-wrap">
+              <span class="journey-line" style="background: {{ block.settings.line_color }}"></span>
+              <span class="journey-dot" style="background: {{ block.settings.line_color }}"></span>
+            </div>
+
+            <h3 class="journey-title">{{ block.settings.title }}</h3>
+            <p class="journey-desc">{{ block.settings.desc }}</p>
+
+          </div>
+        {% endfor %}
+      </div>
+
+      <div>
+        {{ section.settings.bottom_desc }}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.journey-sec {
+  width: 100%;
+}
+
+.journey-bg {
+  background-image: url({{ section.settings.bg_desktop | image_url }});
+  background-size: cover;
+  background-position: center;
+  padding: 140px 20px;
+}
+
+.journey-container {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+.journey-heading {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.journey-subheading {
+  font-size: 15px;
+  margin-bottom: 60px;
+}
+
+.journey-grid {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.journey-card {
+  flex: 1;
+  text-align: left;
+}
+
+.journey-line-wrap {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  margin-bottom: 20px;
+}
+
+.journey-line {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  height: 2px;
+  width: 100%;
+}
+
+.journey-dot {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.journey-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.journey-desc {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .journey-bg {
+    background-image: url({{ section.settings.bg_mobile | image_url }});
+    padding: 140px 16px;
+  }
+
+  .journey-grid {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .journey-heading {
+    font-size: 32px;
+  }
+
+  .journey-line {
+    width: 100%;
+  }
+}
+</style>

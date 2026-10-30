@@ -1,0 +1,102 @@
+{% doc %}
+  @prompt
+    generate a section for putting a button for redirection, we wanted to use this for whatsapp redirection, user lands on this page and click on the button and redirect on the whatsapp. 
+    Fields required - Button name, Button redirection
+    Button color is primary cta 
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-whatsapp-redirect-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    text-align: {{ block.settings.alignment }};
+  }
+
+  .ai-whatsapp-redirect-{{ ai_gen_id }}__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 28px;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.button_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    font-family: {{ block.settings.button_font.family }}, sans-serif;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+
+  .ai-whatsapp-redirect-{{ ai_gen_id }}__button:hover {
+    background-color: {{ block.settings.button_hover_color }};
+    border-color: {{ block.settings.button_hover_color }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+
+  .ai-whatsapp-redirect-{{ ai_gen_id }}__button:focus-visible {
+    outline: 3px solid {{ block.settings.focus_color }};
+    outline-offset: 3px;
+  }
+
+  .ai-whatsapp-redirect-{{ ai_gen_id }}__icon {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-whatsapp-redirect-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-whatsapp-redirect-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.button_link != blank and block.settings.button_label != blank %}
+    <a class="ai-whatsapp-redirect-{{ ai_gen_id }}__button" href="{{ block.settings.button_link }}" target="_blank" rel="noopener noreferrer" aria-label="{{ block.settings.button_label | escape }}">
+      <svg class="ai-whatsapp-redirect-{{ ai_gen_id }}__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.1-1.2-6.1-3.5-8.3ZM12.1 21.6h-.1c-1.7 0-3.4-.5-4.9-1.3l-.3-.2-3.9 1 1-3.8-.2-.4a9.7 9.7 0 0 1-1.5-5.2C2.2 6.4 6.6 2 12.1 2c2.6 0 5 1 6.9 2.9a9.7 9.7 0 0 1 2.9 6.9c0 5.4-4.4 9.8-9.8 9.8Zm5.4-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.6-.8-2.7-1.4-3.8-3.2-.3-.5.3-.5.8-1.7.1-.2 0-.4 0-.6l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.1 3.1 1.3 3.3c.2.2 2.2 3.4 5.4 4.8.8.3 1.4.5 1.9.7.8.2 1.5.2 2 .1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.5Z"/>
+      </svg>
+      <span>{{ block.settings.button_label | escape }}</span>
+    </a>
+  {% endif %}
+</div>
+
+{% if block.settings.button_link != blank %}
+  <script>
+    window.location.replace({{ block.settings.button_link | json }});
+  </script>
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "WhatsApp button",
+  "settings": [
+    { "type": "text", "id": "button_label", "label": "Button name", "default": "Chat with us on WhatsApp" },
+    { "type": "url", "id": "button_link", "label": "Button redirection" },
+    { "type": "range", "id": "desktop_width_percent", "label": "Desktop width", "min": 50, "max": 100, "step": 5, "unit": "%", "default": 100 },
+    { "type": "select", "id": "alignment", "label": "Alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
+    { "type": "font_picker", "id": "button_font", "label": "Button font", "default": "nunito_n4" },
+    { "type": "range", "id": "button_font_size", "label": "Font size", "min": 14, "max": 20, "step": 1, "unit": "px", "default": 16 },
+    { "type": "color", "id": "button_color", "label": "Button color", "default": "#000000" },
+    { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "button_hover_color", "label": "Hover color", "default": "#333333" },
+    { "type": "color", "id": "button_hover_text_color", "label": "Hover text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "focus_color", "label": "Focus outline", "default": "#000000" },
+    { "type": "range", "id": "border_width", "label": "Border width", "min": 0, "max": 4, "step": 1, "unit": "px", "default": 1 },
+    { "type": "range", "id": "border_radius", "label": "Corner radius", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 6 }
+  ],
+  "presets": [{ "name": "WhatsApp button" }],
+  "tag": null,
+  "class": "whatsapp-button-block"
+}
+{% endschema %}

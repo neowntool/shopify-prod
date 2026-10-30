@@ -1,0 +1,822 @@
+{% assign product = all_products[section.settings.product] %}
+
+<div class="giftpro-wrapper">
+
+  <!-- PRODUCT -->
+  <div class="giftpro-product-box">
+    <h2>{{ product.title }}</h2>
+  </div>
+
+  <!-- LOCATION -->
+  {% assign locations = "Mumbai,Out Of Mumbai" | split: "," %}
+  <div class="giftpro-step">
+    <h3>SELECT RECIPIENT’S LOCATION</h3>
+    <div class="giftpro-options">
+      {% for item in locations %}
+        <button class="giftpro-btn {% if forloop.first %}active{% endif %}" data-type="location" data-value="{{ item }}">
+          {{ item }}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- PLAN -->
+  {% assign plans = "Book Regular Plan,Book Sibling Plan (3+3),Book Sibling Plan (5+5),Toy + Book Plan,Toy Regular Plan" | split: "," %}
+  <div class="giftpro-step">
+    <h3>SELECT YOUR GIFT PLAN</h3>
+     <p id="plan-description" class="plan-desc"></p>
+    <div class="giftpro-options">
+     
+      {% for item in plans %}
+        <button class="giftpro-btn {% if forloop.first %}active{% endif %}" data-type="plan" data-value="{{ item }}">
+          {{ item }}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- DURATION -->
+  {% assign durations = "3 Months,6 Months,12 Months" | split: "," %}
+  <div class="giftpro-step">
+    <h3>SELECT DURATION</h3>
+    <div class="giftpro-options">
+      {% for item in durations %}
+        <button class="giftpro-btn {% if forloop.first %}active{% endif %}" data-type="duration" data-value="{{ item }}">
+          {{ item }}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+
+ 
+
+  <!-- GIFT TYPE -->
+{% assign gift_types = "Digital Gift Card,Physical Gift Card" | split: "," %}
+<div class="giftpro-step">
+  <h3>CHOOSE GIFT TYPE</h3>
+  
+  <div class="giftpro-options">
+    {% for item in gift_types %}
+      <button class="giftpro-btn gift-type {% if forloop.first %}active{% endif %}" 
+              data-type="giftType"
+              data-value="{{ item }}">
+        {{ item }}
+      </button>
+    {% endfor %}
+
+  </div>
+
+  <!-- ✅ NOTE -->
+  <div id="physical-note" style="margin-top:10px; padding:8px 12px; background:#f5f5f5; border-radius:6px; font-size:13px;">
+    📦 Physical Gift Card will be delivered to the gifter's address.
+  </div>
+</div>
+
+<script>
+ document.querySelectorAll('.giftpro-btn').forEach(btn => {
+  btn.addEventListener('click', function () {
+
+    let type = this.dataset.type;
+
+    // ✅ store selection
+    if (type) {
+      selections[type] = this.dataset.value;
+    }
+
+    // ✅ active class toggle
+    let parent = this.closest('.giftpro-options');
+    parent.querySelectorAll('.giftpro-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+
+    // ✅ LOCATION FILTER
+    if (type === "location") {
+      filterPlansByLocation();
+    }
+
+    // ✅ show note only when Physical Gift Card is selected
+    if (type === "giftType") {
+      const note = document.getElementById("physical-note");
+      note.style.display = selections.giftType === "Physical Gift Card" ? "block" : "none";
+    }
+
+    // ✅ update UI
+    toggleForm();
+    updatePrice();
+    updatePlanDescription();
+  });
+});
+
+
+/* =========================
+   PLAN FILTER FUNCTION
+========================= */
+
+function filterPlansByLocation() {
+  const allPlanButtons = document.querySelectorAll('[data-type="plan"]');
+
+  allPlanButtons.forEach((btn, index) => {
+    if (selections.location === "Out Of Mumbai") {
+      if (index < 3) {
+        btn.style.display = "inline-block";
+      } else {
+        btn.style.display = "none";
+      }
+    } else {
+      btn.style.display = "inline-block";
+    }
+  });
+
+  // ✅ auto select first visible
+  let visiblePlans = [...allPlanButtons].filter(btn => btn.style.display !== "none");
+
+  if (visiblePlans.length > 0) {
+    allPlanButtons.forEach(b => b.classList.remove('active'));
+    visiblePlans[0].classList.add('active');
+    selections.plan = visiblePlans[0].dataset.value;
+  }
+}
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+// run UI updates
+toggleForm();
+updatePrice();
+updatePlanDescription();
+filterPlansByLocation();
+</script>
+
+  <!-- FORM -->
+  <div id="giftpro-form" class="giftpro-form">
+    <h3>RECIPIENT’S DETAILS</h3>
+    <p class="giftpro-note">Recipient’s will receive gift card on email</p>
+
+    <input type="text" id="recipient_name" placeholder="Recipient’s Name">
+    <input type="email" id="recipient_email" placeholder="Recipient’s Email" required>
+    <input type="tel" id="recipient_phone" placeholder="Recipient’s Phone Number" maxlength="10" inputmode="numeric" pattern="[0-9]{10}">
+    <textarea id="gift_message" placeholder="Write your message here"></textarea>
+    <input type="text" id="sender_name" placeholder="Sender's Name">
+  </div>
+
+<div class="giftpro-price-box">
+  Total Price: <span id="giftpro-price"></span>
+</div>
+
+  <!-- BUTTON -->
+  <button id="giftpro-add-to-cart" class="giftpro-main-btn">Continue</button>
+
+</div>
+
+
+
+
+{% comment %} new {% endcomment %}
+
+
+
+ <div class="plans-wrapper">
+
+  <h3 class="plans-title">OUR PLANS</h3>
+  <p class="plans-note">Note: Toys can be gifted within Mumbai only</p>
+<div class="plans-table-wrapper">
+  <div class="plans-table">
+    <div class="plans-row plans-header">
+      <div>Plan</div>
+      <div>3 Months</div>
+      <div>6 Months</div>
+      <div>12 Months</div>
+    </div>
+
+    <div class="plans-row">
+      <div>Book Regular Plan</div>
+      <div>1,399</div>
+      <div>2,399</div>
+      <div>4,199</div>
+    </div>
+
+    <div class="plans-row">
+      <div>Book Sibling Plan (3+3)</div>
+      <div>1,699</div>
+      <div>2,799</div>
+      <div>5,199</div>
+    </div>
+
+    <div class="plans-row">
+      <div>Book Sibling Plan (5+5)</div>
+      <div>2,299</div>
+      <div>3,799</div>
+      <div>6,999</div>
+    </div>
+
+    <div class="plans-row">
+      <div>Toy+Book Plan</div>
+      <div>2,399</div>
+      <div>4,499</div>
+      <div>7,999</div>
+    </div>
+
+    <div class="plans-row">
+      <div>Toy Regular Plan</div>
+      <div>2,599</div>
+      <div>4,799</div>
+      <div>8,399</div>
+    </div>
+  </div>
+</div>
+
+  <div class="plans-footer">
+    <p><strong>Outside Mumbai:</strong> Delivery + Pick-up charges apply</p>
+    <ul>
+      <li>5 Books OR 3+3 Books: ₹80/MONTH</li>
+      <li>5+5 Books: ₹160/MONTH</li>
+    </ul>
+   <p class="delivery" id="delivery-date"></p>
+
+<script>
+function formatDate(date) {
+  const options = { month: 'short', day: '2-digit' };
+  return date.toLocaleDateString('en-US', options);
+}
+
+let today = new Date();
+
+// start = today + 3 days
+let startDate = new Date();
+startDate.setDate(today.getDate() + 3);
+
+// end = today + 7 days (you can adjust)
+let endDate = new Date();
+endDate.setDate(today.getDate() + 7);
+
+document.getElementById("delivery-date").innerHTML =
+  "🚚 Estimated Delivery: " + formatDate(startDate) + " - " + formatDate(endDate);
+</script>
+  </div>
+
+</div>
+
+
+<script>
+
+const variants = {{ product.variants | json }};
+
+let selections = {
+  location: document.querySelector('[data-type="location"].active')?.dataset.value,
+  plan: document.querySelector('[data-type="plan"].active')?.dataset.value,
+  duration: document.querySelector('[data-type="duration"].active')?.dataset.value,
+  giftType: document.querySelector('.gift-type.active')?.dataset.value
+};
+
+// ✅ FIND VARIANT
+function getSelectedVariant() {
+  return variants.find(v => {
+
+    let options = [v.option1, v.option2, v.option3].filter(Boolean);
+
+    return (
+      options.includes(selections.plan) &&
+      options.includes(selections.duration) &&
+      options.includes(selections.location) // ✅ ADD THIS LINE
+    );
+
+  });
+}
+
+// UI plan + duration → library/subscription variant ID (line item property only)
+const planVariantMap = {
+  "Book Regular Plan|3 Months": 44393369305362,
+  "Book Regular Plan|6 Months": 45440633209106,
+  "Book Regular Plan|12 Months": 45440633241874,
+  "Book Sibling Plan (3+3)|3 Months": 46510654390546,
+  "Book Sibling Plan (3+3)|6 Months": 46510654521618,
+  "Book Sibling Plan (3+3)|12 Months": 47613284811026,
+  "Book Sibling Plan (5+5)|3 Months": 47599342223634,
+  "Book Sibling Plan (5+5)|6 Months": 47599342256402,
+  "Book Sibling Plan (5+5)|12 Months": 47613284843794,
+  "Toy + Book Plan|3 Months": 48989945135378,
+  "Toy + Book Plan|6 Months": 48989945168146,
+  "Toy + Book Plan|12 Months": 48989945200914,
+  "Toy Regular Plan|3 Months": 47743238504722,
+  "Toy Regular Plan|6 Months": 48989887758610,
+  "Toy Regular Plan|12 Months": 48989887791378
+};
+
+function getConfiguredVariantId() {
+  const key = `${selections.plan}|${selections.duration}`;
+  const id = planVariantMap[key];
+  return id ? Number(id) : null;
+}
+
+// ✅ UPDATE PRICE
+function updatePrice() {
+  let variant = getSelectedVariant();
+
+  if (variant && variant.price !== undefined && variant.price !== null) {
+    let price = variant.price / 100;
+
+    document.getElementById("giftpro-price").innerText =
+      "₹" + price.toLocaleString();
+
+  } else {
+    document.getElementById("giftpro-price").innerText = "—";
+  }
+}
+
+// ✅ PLAN DESCRIPTION (NEW 🔥)
+function updatePlanDescription() {
+  let text = "";
+
+  switch (selections.plan) {
+    case "Toy + Book Plan":
+      text = "3 toys and 2 books per month";
+      break;
+
+    case "Book Sibling Plan (3+3)":
+      text = "3 books per month per child (Total 6 books)";
+      break;
+
+    case "Book Sibling Plan (5+5)":
+      text = "5 books per month per child (Total 10 books)";
+      break;
+
+    case "Book Regular Plan":
+      text = "5 books per month";
+      break;
+
+    case "Toy Regular Plan":
+      text = "4 toys per month";
+      break;
+
+    case "Book Sibling Plan":
+      text = "Sibling plan available in multiple combinations";
+      break;
+
+    default:
+      text = "";
+  }
+
+  let el = document.getElementById("plan-description");
+  if (el) el.innerText = text;
+}
+
+
+//new
+function filterPlansByLocation() {
+  const allPlanButtons = document.querySelectorAll('[data-type="plan"]');
+
+  allPlanButtons.forEach((btn, index) => {
+    if (selections.location === "Out Of Mumbai") {
+      if (index < 3) {
+        btn.style.display = "inline-block";
+      } else {
+        btn.style.display = "none";
+      }
+    } else {
+      btn.style.display = "inline-block";
+    }
+  });
+
+  // auto select first visible
+  let firstVisible = [...allPlanButtons].find(btn => btn.style.display !== "none");
+
+  if (firstVisible) {
+    allPlanButtons.forEach(b => b.classList.remove('active'));
+    firstVisible.classList.add('active');
+    selections.plan = firstVisible.dataset.value;
+  }
+
+  updatePrice();
+  updatePlanDescription();
+}
+//end
+
+// ✅ SHOW / HIDE FORM
+function toggleForm() {
+  if (selections.giftType && selections.giftType.includes("Digital")) {
+    document.getElementById('giftpro-form').style.display = 'block';
+  } else {
+    document.getElementById('giftpro-form').style.display = 'none';
+  }
+}
+
+// ✅ CLICK HANDLER
+document.querySelectorAll('.giftpro-btn').forEach(btn => {
+  btn.addEventListener('click', function () {
+
+    let type = this.dataset.type;
+
+    if (type) {
+      selections[type] = this.dataset.value;
+    }
+
+    if (this.classList.contains('gift-type')) {
+      selections.giftType = this.dataset.value;
+    }
+
+    // active toggle
+    let parent = this.closest('.giftpro-options');
+    parent.querySelectorAll('.giftpro-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+
+    // ✅ ONLY HERE call filter (for location only)
+    if (type === "location") {
+      filterPlansByLocation();
+    }
+
+    toggleForm();
+    updatePrice();
+    updatePlanDescription();
+  });
+});
+
+// ✅ INITIAL LOAD
+toggleForm();
+updatePrice();
+updatePlanDescription();
+filterPlansByLocation(); // ✅ NEW
+
+// ✅ ADD TO CART (FIXED - SINGLE EVENT ONLY)
+document.getElementById('giftpro-add-to-cart').addEventListener('click', function (e) {
+
+  let variant = getSelectedVariant();
+  let configuredVariantId = getConfiguredVariantId();
+
+  if (!variant || !configuredVariantId) {
+    alert("Please select valid options");
+    return;
+  }
+
+  let props = {
+    "Location": selections.location,
+    "Plan": selections.plan,
+    "Duration": selections.duration,
+    "Gift Type": selections.giftType,
+    "Variant ID": configuredVariantId
+  };
+
+  // DIGITAL DATA
+  if (selections.giftType && selections.giftType.includes("Digital")) {
+    const recipientEmail = document.getElementById('recipient_email').value.trim();
+    const recipientPhone = document.getElementById('recipient_phone').value.trim();
+
+    if (!recipientEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipientEmail)) {
+      alert("Please enter a valid recipient email");
+      return;
+    }
+
+    if (!/^\d{10}$/.test(recipientPhone)) {
+      alert("Please enter a valid 10-digit phone number");
+      return;
+    }
+
+    props["Recipient Name"] = document.getElementById('recipient_name').value;
+    props["Recipient Email"] = recipientEmail;
+    props["Recipient Phone"] = recipientPhone;
+    props["Message"] = document.getElementById('gift_message').value;
+    props["Sender Name"] = document.getElementById('sender_name').value;
+  }
+
+  // GOKWIK BUY NOW
+  if (typeof onBuyNowClick === "function") {
+    onBuyNowClick(e, false, [
+      {
+        id: variant.id,
+        quantity: 1,
+        properties: props
+      }
+    ]);
+  } else {
+    window.location.href = "/checkout";
+  }
+
+});
+
+
+
+
+
+
+// for out of mumbai
+
+
+</script>
+
+
+
+<style>
+  #physical-note {
+  display: none;
+}
+  .plan-desc {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #844DFF;
+  text-align: center;
+   font-family: var(--font-stack-body);
+}
+.giftpro-wrapper {
+  max-width: 800px;
+  margin: auto;
+  padding: 60px 0px;
+}
+
+.giftpro-product-box {
+  text-align: center;
+}
+.giftpro-product-box h2{
+font-weight: 800;
+font-style: ExtraBold;
+font-size: 44px;
+leading-trim: NONE;
+line-height: 125%;
+letter-spacing: 0px;
+text-align: center;
+}
+
+.giftpro-product-img {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 12px;
+  margin: auto;
+}
+
+.giftpro-step {
+  margin: 35px 0;
+  text-align: center;
+}
+
+.giftpro-step h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 18px;
+  leading-trim: NONE;
+  line-height: 125%;
+  letter-spacing: 0px;
+  text-align: center;
+  font-family: var(--font-stack-body);
+}
+
+.giftpro-step h3::before,
+.giftpro-step h3::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+.giftpro-price-box{
+text-align: center;
+padding-bottom: 8px;
+font-size: 16px;
+font-weight: 700;
+}
+
+.giftpro-form h3{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.giftpro-form h3::before,
+.giftpro-form h3::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+
+.giftpro-options {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.giftpro-btn {
+  padding: 11px 32px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+}
+
+.giftpro-btn.active {
+  background: #DBE95D;
+  border-color: #DBE95D;
+}
+
+.giftpro-form {
+  margin-top: 20px;
+  padding: 0px 22px;
+}
+
+.giftpro-form input,
+.giftpro-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 13px;
+}
+
+.giftpro-form textarea {
+  height: 90px;
+}
+
+.giftpro-note {
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}
+
+.giftpro-main-btn {
+  width: 60%;
+  margin: auto;
+  padding: 13px;
+  background: #ff1a96;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+}
+
+
+/* Standard */
+.giftpro-form input::placeholder,
+.giftpro-form textarea::placeholder {
+  color: #787878;   /* gray */
+  opacity: 1;
+}
+
+/* Chrome / Safari */
+.giftpro-form input::-webkit-input-placeholder,
+.giftpro-form textarea::-webkit-input-placeholder {
+  color: #787878;
+}
+
+/* Firefox */
+.giftpro-form input::-moz-placeholder,
+.giftpro-form textarea::-moz-placeholder {
+  color: #787878;
+}
+
+/* IE */
+.giftpro-form input:-ms-input-placeholder,
+.giftpro-form textarea:-ms-input-placeholder {
+  color: #787878;
+}
+
+
+@media(max-width: 600px){
+  .giftpro-options {
+    {% comment %} flex-direction: column; {% endcomment %}
+  }
+}
+
+
+
+.plans-table-wrapper {
+  width: 100%;
+  overflow-x: auto;   /* 👈 only table scroll */
+}
+
+.plans-table {
+  min-width: 600px;   /* 👈 keeps layout intact */
+}
+
+/* prevent full section scroll */
+.plans-wrapper {
+  overflow: hidden;
+}
+
+.plans-wrapper {
+  max-width: 800px;
+  margin: 10px auto 40px auto;
+  text-align: center;
+}
+
+.plans-title {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: var(--font-stack-body);
+}
+
+.plans-note {
+  color: #BD3028;
+  margin-bottom: 10px;
+  font-family: var(--font-stack-body);
+}
+
+.plans-table {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.plans-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  border-bottom: 1px solid #ddd;
+}
+
+.plans-row div {
+  padding: 16px;
+  border-right: 1px solid #ddd;
+}
+
+.plans-row div:last-child {
+  border-right: none;
+}
+
+.plans-header {
+  background: #826AEC;
+  color: #fff;
+  font-weight: 600;
+}
+
+.plans-footer {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.plans-footer ul {
+  margin: 10px 0;
+  padding-left: 18px;
+  text-align: left;
+  display: inline-block;
+}
+
+.delivery {
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+/* MOBILE FIX - KEEP SAME TABLE */
+@media (max-width: 600px) {
+
+
+  .giftpro-wrapper {
+    padding-top: 0px;
+}
+
+  .plans-wrapper {
+    overflow-x: auto; /* 👈 horizontal scroll */
+  }
+
+  .plans-table {
+    min-width: 400px; /* 👈 keeps structure same */
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .plans-row {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  }
+
+  .plans-row div {
+    padding: 8px;
+    font-size: 11px;
+  }
+
+  .plans-title {
+    font-size: 16px;
+  }
+
+}
+
+</style>
+
+{% schema %}
+{
+  "name": "Gift Builder",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Select Product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift Builder"
+    }
+  ]
+}
+{% endschema %}

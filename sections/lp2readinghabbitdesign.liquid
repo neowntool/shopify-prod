@@ -1,0 +1,220 @@
+{% schema %}
+{
+  "name": "Reading Habit Design",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "DESIGNED FOR HABIT"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "Reading doesn’t happen by willpower. It happens by design."
+    }
+  ],
+  "blocks": [
+   {
+  "type": "feature",
+  "name": "Feature",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    }
+  ]
+}
+  ],
+  "presets": [
+    {
+      "name": "Reading Habit Design"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="rhd-section">
+  <div class="rhd-container">
+
+    <div class="rhd-header">
+      <div class="rhd-subheading">
+        {{ section.settings.subheading }}
+      </div>
+
+      <h2 class="rhd-heading">
+        {{ section.settings.heading }}
+      </h2>
+    </div>
+
+    <div class="rhd-features">
+      {% for block in section.blocks %}
+        <div class="rhd-feature" {{ block.shopify_attributes }}>
+
+          <div class="rhd-icon">
+  {% if block.settings.icon %}
+    <img
+      src="{{ block.settings.icon | image_url: width: 80 }}"
+      alt="{{ block.settings.title }}"
+      loading="lazy"
+      width="40"
+      height="40"
+    >
+  {% endif %}
+</div>
+
+          <div class="rhd-content">
+            <h3 class="rhd-title">
+              {{ block.settings.title }}
+            </h3>
+
+            <div class="rhd-description">
+              {{ block.settings.description }}
+            </div>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+.rhd-section{
+  padding:40px 20px;
+}
+
+.rhd-container{
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.rhd-header{
+  text-align:center;
+  max-width:850px;
+  margin:0 auto 60px;
+}
+
+.rhd-subheading{
+  font-size:14px;
+  text-transform:uppercase;
+  color:#888;
+  letter-spacing:1px;
+  margin-bottom:12px;
+}
+
+.rhd-heading{
+  margin:0;
+  color:#3d3d3d;
+  font-size:44px;
+  line-height:1.05;
+  font-weight:700;
+}
+
+.rhd-features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:40px;
+}
+
+.rhd-feature{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+}
+
+.rhd-icon{
+  width:52px;
+  height:52px;
+  min-width:52px;
+  border-radius:50%;
+  background:#f7e6ee;
+  padding:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.rhd-icon img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.rhd-title{
+  margin:0 0 8px;
+  font-size:15px;
+  color:#333;
+  font-weight:700;
+  line-height:1.4;
+}
+
+.rhd-description{
+  color:#777;
+  font-size:15px;
+  line-height:1.6;
+}
+
+/* Tablet */
+@media screen and (max-width: 990px){
+
+  .rhd-heading{
+    font-size:44px;
+  }
+
+  .rhd-features{
+    grid-template-columns:1fr;
+    gap:30px;
+    max-width:700px;
+    margin:0 auto;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 767px){
+
+  .rhd-section{
+    padding:40px 15px;
+  }
+
+  .rhd-heading{
+    font-size:29px;
+  }
+
+  .rhd-header{
+    margin-bottom:40px;
+    text-align: left;
+  }
+
+  .rhd-feature{
+    gap:12px;
+  }
+
+  .rhd-title{
+    font-size:15px;
+  }
+
+  .rhd-description{
+    font-size:14px;
+  }
+
+  .rhd-icon{
+    width:58px;
+    height:58px;
+    min-width:60px;
+  }
+}
+</style>

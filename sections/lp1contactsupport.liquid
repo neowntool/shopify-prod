@@ -1,0 +1,247 @@
+<section class="lumora-cta-section">
+  <div class="page-width">
+
+    <div class="lumora-cta-top">
+
+      {% if section.settings.heading != blank %}
+        <h2 class="lumora-cta-heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <div class="lumora-cta-subheading">
+          {{ section.settings.subheading }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.small_text != blank %}
+        <div class="lumora-cta-smalltext">
+          {{ section.settings.small_text }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.button_text != blank %}
+        <a
+          href="{{ section.settings.button_link }}"
+          class="lumora-cta-button"
+        >
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+
+    </div>
+
+    <div class="lumora-cta-whatsapp">
+
+      {% if section.settings.whatsapp_heading != blank %}
+        <h3 class="lumora-wa-heading">
+          {{ section.settings.whatsapp_heading }}
+        </h3>
+      {% endif %}
+
+      {% if section.settings.whatsapp_info != blank %}
+        <div class="lumora-wa-info">
+          {{ section.settings.whatsapp_info }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.whatsapp_btn_text != blank %}
+        <a
+          href="{{ section.settings.whatsapp_link }}"
+          class="lumora-wa-button"
+          target="_blank"
+        >
+          <img src="https://cdn.shopify.com/s/files/1/0687/8557/0066/files/logos_whatsapp-icon_9d3b2770-c2b1-4535-ac29-d3d2c0e697ad.png?v=1781680939" style="width: 26px;"/>
+          {{ section.settings.whatsapp_btn_text }}
+        </a>
+      {% endif %}
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+
+.lumora-cta-section{
+  padding:30px 20px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.lumora-cta-top{
+  text-align:center;
+  max-width:900px;
+  margin:0 auto;
+}
+
+.lumora-cta-heading{
+font-size: calc(((var(--font-h3-desktop)) / (var(--font-base-size))) * 1rem);
+        line-height: 1.278;
+  font-weight:700;
+  margin:0;
+}
+
+.lumora-cta-subheading{
+  margin-top:18px;
+  font-size:20px;
+  color:#9364FF;
+}
+
+.lumora-cta-smalltext{
+  margin-top:18px;
+  font-size:18px;
+  color:#666;
+}
+
+.lumora-cta-button{
+  display:inline-block;
+  margin-top:24px;
+  padding:14px 60px;
+  background:#FF4DAE;
+  color:#fff;
+  text-decoration:none;
+  border-radius:6px;
+  font-weight:700;
+}
+
+.lumora-cta-whatsapp{
+  max-width:760px;
+  margin:70px auto 0;
+  background:#FDFFE5;
+  border:1px solid #BCCF00;
+  border-radius:10px;
+  padding:30px;
+  text-align:center;
+}
+
+.lumora-wa-heading{
+  margin:0;
+  font-size:24px;
+  font-weight:700;
+}
+
+.lumora-wa-info{
+  margin-top:10px;
+  color:#666;
+  font-size:17px;
+}
+
+.lumora-wa-button{
+  margin-top:22px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 50px;
+  background:#39AE41;
+  color:#fff;
+  text-decoration:none;
+  border-radius:6px;
+  font-weight:700;
+}
+
+@media(max-width:749px){
+
+  .lumora-cta-section{
+    padding:30px 15px 0px;
+  }
+
+  .lumora-cta-heading{
+    font-size:34px;
+  }
+
+  .lumora-cta-subheading{
+    font-size:18px;
+  }
+
+  .lumora-cta-smalltext{
+    font-size:15px;
+  }
+
+  .lumora-wa-heading{
+    font-size:20px;
+  }
+
+  .lumora-wa-info{
+    font-size:14px;
+  }
+
+  .lumora-wa-button{
+    width:100%;
+    justify-content:center;
+  }
+
+  .lumora-cta-whatsapp{
+    padding:20px;
+    margin-top:40px;
+  }
+
+}
+
+</style>
+
+{% schema %}
+{
+  "name": "Final CTA + WhatsApp",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "One Day You'll Wish They Read More Than They Scrolled"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub Heading",
+      "default": "Start building a reading habit while they're still excited to learn."
+    },
+    {
+      "type": "text",
+      "id": "small_text",
+      "label": "Small Text",
+      "default": "Start from ₹1,299 • No deposit • Damage-friendly"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Start Reading Today"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_heading",
+      "label": "WhatsApp Heading",
+      "default": "Still not sure? Chat with us on WhatsApp"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_info",
+      "label": "WhatsApp Details",
+      "default": "+91 93244 55972 | Mon–Sat, 9am–6pm IST | Response within 1 hour"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_btn_text",
+      "label": "WhatsApp Button Text",
+      "default": "Chat on WhatsApp"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_link",
+      "label": "WhatsApp Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Final CTA + WhatsApp"
+    }
+  ]
+}
+{% endschema %}

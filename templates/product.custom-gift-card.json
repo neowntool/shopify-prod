@@ -1,0 +1,399 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "16341802176432806c": {
+      "type": "breadcrumb",
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "text_alignment": "center",
+        "hide_current": false,
+        "hide_on_mb": false,
+        "animations": "inherit"
+      }
+    },
+    "slider_n9iczm": {
+      "type": "slider",
+      "blocks": {
+        "slider_item_WFDHzc": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/gifting_web_banner_3_1.png",
+            "mb_background": "shopify://shop_images/gifting_mob_banner_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/products/neown-gift-subscription#shopify-section-template--25164235211026__gift_builder_eLyeVg",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_J7QFra": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/Gift_sibling_web_banner_7_1.png",
+            "mb_background": "shopify://shop_images/Gift_sibiling_mob_banner_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/products/neown-gift-subscription",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_iqxTw6": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/Gift_with_Neown.png",
+            "mb_background": "shopify://shop_images/Gift_with_Neown_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "#shopify-section-template--25074456559890__gift_builder_eLyeVg",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_ExndLj": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/Gift_sibling_web_banner_8_1.png",
+            "mb_background": "shopify://shop_images/Gift_sibling_web_banner_7_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slider_item_WFDHzc",
+        "slider_item_J7QFra",
+        "slider_item_iqxTw6",
+        "slider_item_ExndLj"
+      ],
+      "name": "Slideshow",
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 5,
+        "use_content_above": false,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "gift_builder_eLyeVg": {
+      "type": "gift-builder",
+      "name": "Gift Builder",
+      "settings": {
+        "product": "neown-gift-subscription"
+      }
+    },
+    "empty_space_era8Wn": {
+      "type": "empty-space",
+      "disabled": true,
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "show_divider_line": false,
+        "divider_style": "solid",
+        "divider_height": 10,
+        "padding_top": 30,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "disabled": true,
+          "settings": {
+            "show_saving": false,
+            "sale_badge_type": "percentage"
+          }
+        },
+        "text_rMg69m": {
+          "type": "text",
+          "settings": {
+            "text": "Borrow books like this with the neOwn Kids Book Library Subscription",
+            "text_style": "body"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "size_title": "Size"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "disabled": true,
+          "settings": {
+            "show_quantity_selector": true,
+            "show_atc_button": true,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "custom_liquid_Dkkyz9": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<!DOCTYPE html>\n<html>\n<head>\n    <style>\n        .myButton {\n            background-color: #0e1b4d; /* Dark blue background */\n            color: white; /* White text */\n            border: 2px solid #0e1b4d; /* Dark blue border */\n            border-radius: 12px; /* Rounded corners */\n            padding: 10px 20px; /* Top and bottom padding, left and right padding */\n            text-align: center; /* Centered text */\n            text-decoration: none; /* No underline */\n            display: block; /* Block display to fill the container */\n            width: 100%; /* Full width */\n            box-sizing: border-box; /* Include padding and border in the width */\n            font-size: 16px; /* Text size */\n            cursor: pointer; /* Pointer cursor on hover */\n        }\n    </style>\n</head>\n<body>\n    <a href=\"https://neown.in/products/neown-book-library-box-1\" class=\"myButton\">Subscribe Now</a>\n</body>\n</html>"
+          }
+        },
+        "collapsible_tab_6Qwipw": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product Description",
+            "content": "",
+            "liquid": "{{product.description}}",
+            "default_open": true
+          }
+        },
+        "addons": {
+          "type": "addons",
+          "settings": {
+            "show_atcp": false,
+            "show_ask_a_question": false,
+            "show_social": true
+          }
+        },
+        "shipping_hVtWBg": {
+          "type": "shipping",
+          "settings": {
+            "show_delivery_times": true,
+            "deliver_text": "Estimated Delivery:",
+            "deliver_days": "5",
+            "date_format": "%b %d",
+            "show_shipping_text": true,
+            "shipping_text": "<p><strong>Shipping Costs:</strong> FREE in Mumbai (Outside Mumbai: ₹100/month shipping charge)</p>"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "text_rMg69m",
+        "variant_picker",
+        "buy_buttons",
+        "custom_liquid_Dkkyz9",
+        "collapsible_tab_6Qwipw",
+        "addons",
+        "shipping_hVtWBg"
+      ],
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "layout": "layout-6",
+        "show_atwl": false,
+        "enable_history_state": true,
+        "enable_variant_group_images": false,
+        "disable_selected_variant_default": false,
+        "show_featured_media": true,
+        "show_zoom_button": true,
+        "enable_video_autoplay": false,
+        "show_nav_media_mobile": false,
+        "show_pagination_mobile": true,
+        "use_sticky_atc": false,
+        "use_sticky_atc_on_mobile": false,
+        "enable_dynamic_checkout": false,
+        "sticky_atc_wishtlist": false,
+        "sticky_atc_compare": false
+      }
+    },
+    "product-details-tabs": {
+      "type": "product-details-tabs",
+      "blocks": {
+        "description": {
+          "type": "description",
+          "settings": {
+            "header": "Product description"
+          }
+        },
+        "tab": {
+          "type": "tab",
+          "settings": {
+            "header": "Shipping & Return",
+            "content": "<p>Shipping cost is based on weight. Just add products to your cart and use the Shipping Calculator to see the shipping price.</p><p>We want you to be 100% satisfied with your purchase. Items can be returned or exchanged within 30 days of delivery.</p>",
+            "content_page": ""
+          }
+        },
+        "reviews": {
+          "type": "reviews",
+          "settings": {
+            "header": "Product reviews",
+            "container": "container",
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "description",
+        "tab",
+        "reviews"
+      ],
+      "disabled": true,
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "default_open": true,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "collapsible_tabs_Yq864N": {
+      "type": "collapsible-tabs",
+      "blocks": {
+        "item_RTYT3J": {
+          "type": "item",
+          "settings": {
+            "header": "Collapsible tab heading",
+            "text_size": "h5",
+            "content": "<p>Shipping cost is based on weight. Just add products to your cart and use the Shipping Calculator to see the shipping price.</p><p>We want you to be 100% satisfied with your purchase. Items can be returned or exchanged within 30 days of delivery.</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_3WpDxh": {
+          "type": "item",
+          "settings": {
+            "header": "Collapsible tab heading",
+            "text_size": "h5",
+            "content": "<p>Shipping cost is based on weight. Just add products to your cart and use the Shipping Calculator to see the shipping price.</p><p>We want you to be 100% satisfied with your purchase. Items can be returned or exchanged within 30 days of delivery.</p>",
+            "content_page": "",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "item_RTYT3J",
+        "item_3WpDxh"
+      ],
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "image_position": "left",
+        "column_gap": 100,
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "animations": "inherit",
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "16341802176432806c",
+    "slider_n9iczm",
+    "gift_builder_eLyeVg",
+    "empty_space_era8Wn",
+    "main",
+    "product-details-tabs",
+    "collapsible_tabs_Yq864N"
+  ]
+}
