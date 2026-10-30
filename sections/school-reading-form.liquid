@@ -5,6 +5,16 @@
 {% endif %}
 
 {% assign form_variant = form_product.selected_or_first_available_variant %}
+{% if section.settings.variant_title != blank %}
+  {% assign srp_variant_title = section.settings.variant_title | strip | downcase %}
+  {% for variant in form_product.variants %}
+    {% assign variant_title = variant.title | downcase %}
+    {% if variant_title == srp_variant_title %}
+      {% assign form_variant = variant %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 {% assign school_name = section.settings.school_name | default: 'S. M. Shetty International School and Jr College' %}
 {% assign srp_kicker = section.settings.kicker | default: '2 books a month for 3 months' %}
 {% assign srp_preschool = false %}
@@ -116,14 +126,15 @@
   </div>
 
   <div class="srp-accordion">
-    {% if form_product.description != blank %}
+    {% assign srp_about_content = section.settings.about_content | default: form_product.description %}
+    {% if srp_about_content != blank %}
       <details class="srp-acc-item" open>
         <summary class="srp-acc-summary">
           <span>{{ section.settings.about_heading | default: 'About this programme' }}</span>
           <span class="srp-acc-icon" aria-hidden="true"></span>
         </summary>
         <div class="srp-acc-body rte">
-          {{ form_product.description }}
+          {{ srp_about_content }}
         </div>
       </details>
     {% endif %}
@@ -695,6 +706,12 @@
     },
     {
       "type": "text",
+      "id": "variant_title",
+      "label": "Variant (optional)",
+      "info": "Exact variant name to sell, e.g. 3 months. Leave empty to use the first available variant."
+    },
+    {
+      "type": "text",
       "id": "kicker",
       "label": "Kicker text",
       "default": "2 books a month for 3 months"
@@ -732,6 +749,12 @@
       "id": "about_heading",
       "label": "About heading",
       "default": "About this programme"
+    },
+    {
+      "type": "richtext",
+      "id": "about_content",
+      "label": "About content (optional)",
+      "info": "Leave empty to show the product description."
     },
     {
       "type": "text",
