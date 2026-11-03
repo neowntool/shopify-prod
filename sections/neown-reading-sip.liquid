@@ -601,6 +601,43 @@
   var lastFailure = '';
   var verifying = false;
 
+  /* ---------- Meta purchase (Shopify custom event "sip_purchase") ---------- */
+  // Published once per Razorpay payment ID as soon as Razorpay reports success, for the Meta custom pixel
+  // (Settings → Customer events). event_id is the payment ID, so the pixel's Purchase and a server-side
+  // Conversions API Purchase sent with the same ID are deduplicated by Meta.
+  // Email and phone are only sent SHA-256 hashed (Meta's normalisation: lowercase email, 91 + 10-digit phone).
+  function sha256(s) {
+    if (!s || !window.crypto || !crypto.subtle || !window.TextEncoder) return Promise.resolve('');
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+    }).catch(function () { return ''; });
+  }
+  function publishPurchase(resp) {
+    var pid = resp && resp.razorpay_payment_id;
+    var sa = window.Shopify && window.Shopify.analytics;
+    if (!pid || !plan || !sa || typeof sa.publish !== 'function') return;
+    var key = 'neown_meta_sip_purchase_' + pid;
+    try { if (localStorage.getItem(key)) return; localStorage.setItem(key, '1'); } catch (e) {}
+    var d = values(), pp = planParams(plan);
+    Promise.all([sha256(d.email.toLowerCase()), sha256(d.phone ? '91' + d.phone : '')]).then(function (h) {
+      try {
+        sa.publish('sip_purchase', {
+          event_id: pid,
+          payment_id: pid,
+          subscription_id: resp.razorpay_subscription_id || (sub && sub.id) || '',
+          value: Number(plan.price) || 0,
+          currency: 'INR',
+          content_ids: [pp.plan_id],
+          content_name: plan.title,
+          content_type: 'product',
+          num_items: 1,
+          plan_type: pp.plan_type,
+          user_data: { em: h[0], ph: h[1] }
+        });
+      } catch (e) {}
+    });
+  }
+
   /* ---------- verify payment ---------- */
   // Saved before calling verify-payment, so a closed tab, reload or network drop doesn't lose the payment.
   var PENDING_KEY = 'neown_sip_pending_verify';
@@ -654,6 +691,7 @@
   function verified(v) { return ok2xx(v) && v.success !== false && v.verified !== false; }
 
   function verify(resp) {
+    publishPurchase(resp);
     verifying = true;
     savePending(resp);
     setBusy(true, 'Confirming your payment…');
