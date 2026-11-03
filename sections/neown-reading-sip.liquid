@@ -7,6 +7,9 @@
       utmParameters: from this page's utm_* query params, kept in sessionStorage ("neown_sip_utm") for the visit.
       If the backend rejects utmParameters (older deploy), the call is retried once without them.
     POST {backend}/razorpay/verify-payment       { paymentId, subscriptionId, signature }
+      Razorpay's response is saved in localStorage ("neown_sip_pending_verify") before this call and cleared once
+      the backend answers. Network errors, 429 and 5xx are retried; anything still pending is re-sent on the next
+      visit to a Reading SIP page. verify-payment is idempotent per payment ID.
 {%- endcomment -%}
 
 {%- liquid
@@ -598,22 +601,91 @@
   var lastFailure = '';
   var verifying = false;
 
+  /* ---------- verify payment ---------- */
+  // Saved before calling verify-payment, so a closed tab, reload or network drop doesn't lose the payment.
+  var PENDING_KEY = 'neown_sip_pending_verify';
+  var PENDING_MAX_AGE = 7 * 24 * 3600 * 1000;
+  var RESUME_AFTER = 2 * 60 * 1000;   // leave a just-started verify (or its keepalive request) to finish first
+  var VERIFY_DELAYS = [1500, 4000, 10000];
+
+  function savePending(resp) {
+    try {
+      localStorage.setItem(PENDING_KEY, JSON.stringify({
+        paymentId: resp.razorpay_payment_id, subscriptionId: resp.razorpay_subscription_id,
+        signature: resp.razorpay_signature, savedAt: Date.now()
+      }));
+    } catch (e) {}
+  }
+  function readPending() {
+    try {
+      var p = JSON.parse(localStorage.getItem(PENDING_KEY) || 'null');
+      if (p && p.paymentId && p.signature && Date.now() - p.savedAt < PENDING_MAX_AGE) return p;
+      if (p) localStorage.removeItem(PENDING_KEY);
+    } catch (e) {}
+    return null;
+  }
+  function clearPending() { try { localStorage.removeItem(PENDING_KEY); } catch (e) {} }
+
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function retryable(status) { return status === 429 || status >= 500; }
+
+  // keepalive lets the request finish if the customer leaves the page while it is in flight.
+  // Resolves with the backend's JSON (+ _status, _attempts); rejects only when every attempt hit a network error.
+  function postVerify(body) {
+    var attempt = 0;
+    function run() {
+      attempt++;
+      return fetch(backend + '/razorpay/verify-payment', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), keepalive: true
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) { j._status = r.status; return j; });
+      }).then(function (v) {
+        if (retryable(v._status) && attempt <= VERIFY_DELAYS.length) return wait(VERIFY_DELAYS[attempt - 1]).then(run);
+        v._attempts = attempt;
+        return v;
+      }, function (err) {
+        if (attempt <= VERIFY_DELAYS.length) return wait(VERIFY_DELAYS[attempt - 1]).then(run);
+        err.attempts = attempt;
+        throw err;
+      });
+    }
+    return run();
+  }
+  function verified(v) { return ok2xx(v) && v.success !== false && v.verified !== false; }
+
   function verify(resp) {
     verifying = true;
+    savePending(resp);
     setBusy(true, 'Confirming your payment…');
-    post('/razorpay/verify-payment', {
+    postVerify({
       paymentId: resp.razorpay_payment_id,
       subscriptionId: resp.razorpay_subscription_id,
       signature: resp.razorpay_signature
     }).then(function (v) {
       verifying = false;
-      if (ok2xx(v) && v.success !== false && v.verified !== false) { success(resp); return; }
+      // Anything but a retryable failure is final; keep the retryable ones for the next visit.
+      if (!retryable(v._status)) clearPending();
+      track('sip_verify_result', { verify_result: verified(v) ? 'verified' : 'rejected', http_status: v._status, attempts: v._attempts, resumed: false });
+      if (verified(v)) { success(resp); return; }
       backToDetails('err', 'We could not confirm the payment. If money was debited, your SIP is safe; please contact support with ID ' + resp.razorpay_payment_id + '.');
-    }).catch(function () {
+    }).catch(function (e) {
       verifying = false;
+      track('sip_verify_result', { verify_result: 'network_error', http_status: 0, attempts: e && e.attempts, resumed: false });
       backToDetails('err', 'Network issue while confirming. If money was debited, your SIP is safe. Reference: ' + resp.razorpay_payment_id);
     });
   }
+
+  // A verify left pending by an earlier visit (tab closed, network drop, backend error): send it again quietly.
+  function resumePendingVerify() {
+    var p = readPending();
+    if (!p || !backend || Date.now() - p.savedAt < RESUME_AFTER) return;
+    postVerify({ paymentId: p.paymentId, subscriptionId: p.subscriptionId, signature: p.signature })
+      .then(function (v) {
+        if (!retryable(v._status)) clearPending();
+        track('sip_verify_result', { verify_result: verified(v) ? 'verified' : 'rejected', http_status: v._status, attempts: v._attempts, resumed: true });
+      }, function () {});
+  }
+  resumePendingVerify();
 
   // Small receipt for the thank-you page (same browser tab only; nothing personal goes in the URL).
   function saveReceipt(resp) {
