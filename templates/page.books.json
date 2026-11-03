@@ -115,10 +115,10 @@
         "slider_item_YeQJYx": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/gifting_web_banner_12_1.png",
-            "mb_background": "shopify://shop_images/gifting_web_banner_12_1.png",
-            "schedule_start": "2026-10-30 17:00",
-            "schedule_end": "2026-10-31 23:59",
+            "background": "shopify://shop_images/gifting_web_banner_12_2_1.png",
+            "mb_background": "shopify://shop_images/gifting_web_banner_12_2_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
             "content_in_container": false,
             "content_position": "center middle",
             "text_alignment": "center",
