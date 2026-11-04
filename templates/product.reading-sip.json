@@ -489,7 +489,7 @@
             "audience": "siblings",
             "title": "Sibling 3 Books Plan",
             "book_count": 3,
-            "price": "799",
+            "price": "749",
             "razorpay_plan_id": "plan_TnI57gKIEdlabb",
             "badge": "",
             "featured": false
@@ -501,7 +501,7 @@
             "audience": "siblings",
             "title": "Sibling 5 Books Plan",
             "book_count": 5,
-            "price": "999",
+            "price": "899",
             "razorpay_plan_id": "plan_TnI5OB7v8lC0ut",
             "badge": "🔥 Most popular",
             "featured": true
@@ -513,7 +513,7 @@
             "audience": "siblings",
             "title": "Sibling 10 Books Plan",
             "book_count": 10,
-            "price": "1599",
+            "price": "1499",
             "razorpay_plan_id": "plan_TnI6BuK1gPk4B3",
             "badge": "",
             "featured": false
@@ -555,9 +555,9 @@
         "success_text": "Your Autopay is set up and your first month is paid. Open the neOwn app with the same mobile number to choose your books.",
         "success_cta_label": "Open the neOwn app",
         "success_cta_url": "",
-        "accent_color": "#5F35E8",
-        "highlight_color": "#EEFC74",
-        "cta_color": "#E945A9"
+        "accent_color": "#5f35e8",
+        "highlight_color": "#eefc74",
+        "cta_color": "#e945a9"
       }
     },
     "rich_text_hDDGtC": {
@@ -651,6 +651,7 @@
     },
     "custom_liquid_3DdeGF": {
       "type": "custom-liquid",
+      "disabled": true,
       "settings": {
         "custom_liquid": "<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Reviews Slider</title>\n</head>\n<style>\n\n    .reviews-container {\n      width: 90%;\n      max-width: 1000px;\n      background-color: white;\n      padding: 20px;\n      border-radius: 10px;\n      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n      text-align: center;\n      position: relative;\n      \n    }\n</style>\n<body>\n<div style=\"display: flex; justify-content: center; align-items: center;\">\n  <div class=\"reviews-container\"> \n    <!-- style=\"font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; width: 80%; max-width: 800px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; position: relative;\"> -->\n    <h2 style=\"margin-bottom: 20px; font-size: 1.5rem; font-weight: bold;\">What Mothers Have to Say</h2>\n    <div class=\"review-slide active\" style=\"display: block; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position:relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; margin: 20px auto\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Neha_Mathur.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n      <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Perfect books for my daughter</h3>\n      <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">Thank you so much neOwn for sending the perfect books to my daughter, according to her interest.</p>\n      <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Neha Mathur</p>\n    </div>\n    </div>\n\n    <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n\n      <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/FB_PP_2.png?v=1721648050\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n      <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">The quality of books are really good</h3>\n      <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">The process has also been very very smooth And my daughter really enjoyed reading all of them</p>\n      <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Parul Jalan</p>\n        </div>\n    </div>\n    <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Tara_Baluwala.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Seeing improvement in vocabulary, knowledge</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">My child really enjoys reading and she is able to find all the kind of books she wants at neOwn. I can see that she is improving her vocabulary, knowledge, etc.The experience has been very nice.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Tara Baluwala</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/FB_PP_2.png?v=1721648050\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">My young one loved the touch-n-feel books</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">The best part I liked is the drop n pick up service where parents of nuclear family like me is all that we need 😇 My young one loved the touch n feel books she wants the same book, no matter how many times she might have seen it 😀</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Bhavna Juthani</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Rashmi_Tibrewala_1.png?v=1721646421\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">I love neOwn!!</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">It truly helped me in making my child start reading.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Rashmi Tibrewala</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Vanshika_Sethi.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Virtual library has been good option</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">Library is a comfort place for my daughter and this virtual library has been good option for her virtually.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Vanshika Sethi</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px; position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/FB_PP_2.png?v=1721648050\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">I can see improvement 😊</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">The books are in great condition and the availability of books at the time of selection is also too good. I can see improvement in my child's focus on reading. She has started reading chapter books. And she enjoys the books she gets😊</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Parul Jalan</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px;position: relative;\">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%;margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Anusha_Gamidi.jpg?v=1721561925\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Thanks for the wonderful picks</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">She is so excited as usual to see the new books😃😃😃 Not just my daughter, I too am enjoying reading these books</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Anusha Gamidi</p>\n        </div>\n      </div>\n      <div class=\"review-slide\" style=\"display: none; text-align: center; padding: 20px; border-radius: 10px; background-color: #f8f0ff; margin: 0 auto; height: 350px;position: relative; \">\n        <div style=\"position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; margin: 20 auto\"\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/Bhagyashree_Gogte.jpg?v=1721561926\" alt=\"Reviewer Image\" style=\"width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover;\">\n        <h3 style=\"margin: 10px 0 5px; font-size: 1.2rem; font-weight: bold;\">Love the concept</h3>\n        <p style=\"font-size: 0.9rem; color: #555; margin-bottom: 10px;\">I am really happy with your services and I just love your concept of sharing resources.</p>\n        <p class=\"reviewer-name\" style=\"font-weight: bold; color: #C50076;\">Bhagyashree Gogte</p>\n        </div>\n      </div>\n\n    <div class=\"nav-buttons\" style=\"margin-top: 15px;\">\n      <button onclick=\"prevSlide()\" style=\"background-color: #8a2be2; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin: 0 5px;\">&lt;</button>\n      <button onclick=\"nextSlide()\" style=\"background-color: #8a2be2; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin: 0 5px;\">&gt;</button>\n    </div>\n  </div>\n  <script>\n    let currentIndex = 0;\n    const slides = document.querySelectorAll('.review-slide');\n\n    function showSlide(index) {\n      slides.forEach((slide, i) => {\n        slide.style.display = i === index ? 'block' : 'none';\n      });\n    }\n\n    function nextSlide() {\n      currentIndex = (currentIndex + 1) % slides.length;\n      showSlide(currentIndex);\n    }\n\n    function prevSlide() {\n      currentIndex = (currentIndex - 1 + slides.length) % slides.length;\n      showSlide(currentIndex);\n    }\n\n    // Auto-scroll functionality\n    setInterval(() => {\n      nextSlide();\n    }, 3000);\n  </script>\n</div>",
         "custom_class": ""
@@ -941,54 +942,6 @@
         "animations": "inherit"
       }
     },
-    "featured_collection_E4RFey": {
-      "type": "featured-collection",
-      "disabled": true,
-      "custom_css": [
-        "h2 {font-size: 24px;}",
-        ".m-product-card__title {font-size: 16px;}",
-        "img {object-fit: contain;}",
-        ".m-button {margin-top: 0px;}",
-        ".swiper-container {padding-bottom: 0px;}",
-        "@media (max-width: 767px) {.m-section-py {padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px; }}"
-      ],
-      "settings": {
-        "heading": "{{ section.settings.collection.title }}",
-        "heading_size": "h3",
-        "subheading": "",
-        "description": "",
-        "header_alignment": "center",
-        "color_scheme": "",
-        "container": "container-fluid",
-        "collection": "learn-to-read",
-        "enable_flashsale": false,
-        "show_countdown": false,
-        "product_to_show": 12,
-        "items_per_row": 5,
-        "item_gap": 30,
-        "pcard_layout": "",
-        "pcard_image_ratio": "",
-        "show_vendor": false,
-        "hide_title": false,
-        "enable_slider": true,
-        "show_pagination": false,
-        "show_navigation": false,
-        "show_button_on_header": true,
-        "button_type": "link",
-        "button_text": "View all",
-        "button_style": "m-button--link",
-        "button_size": "",
-        "infinite_load": false,
-        "max_page_load": 3,
-        "mobile_disable_slider": false,
-        "use_scroll_mobile": true,
-        "item_gap_mobile": 12,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "custom_class": "",
-        "animations": "inherit"
-      }
-    },
     "lp1benifits_ywxmNA": {
       "type": "lp1benifits",
       "blocks": {
@@ -1053,6 +1006,77 @@
       "settings": {
         "heading": "Everything in Your Subscription",
         "subheading": "Not just books — a complete reading ecosystem built for habit formation."
+      }
+    },
+    "lp1parentfacethis_pfRWCr": {
+      "type": "lp1parentfacethis",
+      "blocks": {
+        "problem_kyw6C4": {
+          "type": "problem",
+          "settings": {
+            "title": "We Invest EARLY",
+            "text": "We know that small, regular investments build something meaningful over time."
+          }
+        },
+        "problem_PyjR7w": {
+          "type": "problem",
+          "settings": {
+            "title": "We Know Habits Need CONSISTENCY",
+            "text": "But reading often depends on remembering to make it happen."
+          }
+        },
+        "problem_LxHDeM": {
+          "type": "problem",
+          "settings": {
+            "title": "We Know Our Children Keep GROWING",
+            "text": "So what we invest in today should grow with them."
+          }
+        },
+        "benefit_YwX38F": {
+          "type": "benefit",
+          "settings": {
+            "title": "Start SMALL",
+            "text": "The earlier you start, the longer your investment has to grow."
+          }
+        },
+        "benefit_9Br47i": {
+          "type": "benefit",
+          "settings": {
+            "title": "INVEST Regularly",
+            "text": "Small, monthly investments keep the reading habit going."
+          }
+        },
+        "benefit_3L8RLV": {
+          "type": "benefit",
+          "settings": {
+            "title": "STAY INVESTED",
+            "text": "Books grow with your child and the benefits compound over time."
+          }
+        },
+        "benefit_z9rVqW": {
+          "type": "benefit",
+          "disabled": true,
+          "settings": {
+            "title": "",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "problem_kyw6C4",
+        "problem_PyjR7w",
+        "problem_LxHDeM",
+        "benefit_YwX38F",
+        "benefit_9Br47i",
+        "benefit_3L8RLV",
+        "benefit_z9rVqW"
+      ],
+      "name": "Parent Problems",
+      "settings": {
+        "heading": "Every Indian Parent Faces This",
+        "subheading": "We invest in their future. But do we invest in their reading?",
+        "solution_heading": "neOwn Reading SIP",
+        "solution_text": "Solve all three problems with one SIP"
       }
     },
     "image_with_text_NYWtMe": {
@@ -1122,6 +1146,16 @@
         "padding_bottom": 0,
         "custom_class": "",
         "animations": "inherit"
+      }
+    },
+    "lp1buildbymom_tWpNc8": {
+      "type": "lp1buildbymom",
+      "name": "Story Gradient Section",
+      "settings": {
+        "image_label": "Kranti Gada",
+        "small_heading": "OUR STORY",
+        "heading": "Built by a mom who lived the problem",
+        "description": "Both her kids had screens. Only one was a reader. Kranti observed the difference long enough to figure out what it actually was..."
       }
     },
     "scrolling_promotion_ryJkEH": {
@@ -1843,10 +1877,11 @@
     "featured_collection_G3NWXe",
     "collection_list_zTY9f9",
     "featured_collection_xfRYXP",
-    "featured_collection_E4RFey",
     "lp1benifits_ywxmNA",
+    "lp1parentfacethis_pfRWCr",
     "image_with_text_NYWtMe",
     "rich_text_EqVprp",
+    "lp1buildbymom_tWpNc8",
     "scrolling_promotion_ryJkEH",
     "brands_list_VUULtN",
     "image_with_text_MqehdT",
