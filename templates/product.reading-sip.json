@@ -124,6 +124,7 @@
       "blocks": {
         "slider_item_Q9g4Xf": {
           "type": "slider_item",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/WhatsApp_Image_2026-10-12_at_18.32.29_1.jpg",
             "mb_background": "shopify://shop_images/MobileHero.jpg",
@@ -152,10 +153,42 @@
             "footer_button": "Shop Now",
             "footer_link": ""
           }
+        },
+        "slider_item_hGfqpG": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/to_grow_web_banner_4_1.png",
+            "mb_background": "shopify://shop_images/to_grow_mob_banner_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
         }
       },
       "block_order": [
-        "slider_item_Q9g4Xf"
+        "slider_item_Q9g4Xf",
+        "slider_item_hGfqpG"
       ],
       "name": "Slideshow",
       "settings": {
