@@ -11,7 +11,9 @@
   "sections": {
     "lpl_hero": {
       "type": "lpl-hero",
-      "settings": {},
+      "settings": {
+        "hide_image_mobile": true
+      },
       "blocks": {
         "lpl_hero_0": {
           "type": "trust",
@@ -131,7 +133,9 @@
     },
     "lpl_plans": {
       "type": "lpl-plans",
-      "settings": {},
+      "settings": {
+        "default_books": 3
+      },
       "blocks": {
         "lpl_plans_0": {
           "type": "plan",

@@ -56,7 +56,8 @@
       {%- endif -%}
     </div>
     {%- if hero_src -%}
-      <img src="{{ hero_src }}" alt="{{ s.image_alt | escape }}" fetchpriority="high" width="1200" height="804" class="mx-auto aspect-[16/10] w-full max-w-md rounded-[1.75rem] object-cover object-[60%_center] shadow-lift md:aspect-square md:max-w-none md:rounded-[2.5rem]">
+      {%- if s.hide_image_mobile -%}<style>@media (max-width: 767px){.lpl-hero-img-{{ section.id }}{display:none!important}}</style>{%- endif -%}
+      <img src="{{ hero_src }}" alt="{{ s.image_alt | escape }}" fetchpriority="high" width="1200" height="804" class="lpl-hero-img-{{ section.id }} mx-auto aspect-[16/10] w-full max-w-md rounded-[1.75rem] object-cover object-[60%_center] shadow-lift md:aspect-square md:max-w-none md:rounded-[2.5rem]">
     {%- endif -%}
   </div>
 </section>
@@ -135,6 +136,7 @@
     { "type": "text", "id": "cta_link", "label": "Button link", "info": "e.g. #plans to scroll to the plans section", "default": "#plans" },
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "text", "id": "image_fallback", "label": "Image from theme assets (used when no image is picked)", "default": "lpl-hero.jpg" },
+    { "type": "checkbox", "id": "hide_image_mobile", "label": "Hide the image on phones", "default": true },
     { "type": "text", "id": "image_alt", "label": "Image description", "default": "A girl reading a picture book on the living-room floor" },
     { "type": "header", "content": "Plan finder quiz" },
     { "type": "checkbox", "id": "show_quiz", "label": "Show plan finder", "default": true },
