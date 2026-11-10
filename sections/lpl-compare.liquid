@@ -1,0 +1,80 @@
+{%- unless template.suffix contains 'lovable' -%}{%- render 'lpl-assets' -%}{%- endunless -%}
+{%- liquid
+  assign s = section.settings
+  assign anchor = s.anchor | default: 'compare' | handleize
+  assign title_id = anchor | append: '-title'
+-%}
+<div class="lpl">
+<section id="{{ anchor }}" aria-labelledby="{{ anchor }}-title" class="scroll-mt-24">
+  <div class="mx-auto px-4 sm:px-6 mt-24 max-w-5xl md:mt-28">
+    <div data-shown="false" class="reveal reveal-blur">
+      {%- render 'lpl-heading', eyebrow: s.eyebrow, tone: s.tone, title: s.title, accent: s.accent, animate: s.animate, subtitle: s.subtitle, title_id: title_id -%}
+    </div>
+    <div data-shown="false" class="reveal reveal-blur overflow-x-auto rounded-[2rem] border border-border bg-background shadow-soft">
+      <table class="w-full min-w-[560px] text-center text-sm md:text-base">
+        {%- if s.caption != blank -%}<caption class="sr-only">{{ s.caption | escape }}</caption>{%- endif -%}
+        <thead>
+          <tr>
+            <th scope="col" class="p-4 text-left font-semibold text-muted-foreground"> </th>
+            <th scope="col" class="p-4 font-heading text-base font-bold md:text-lg bg-tint-pink text-ink-pink">{{ s.col1 | escape }}</th>
+            <th scope="col" class="p-4 font-heading text-base font-bold md:text-lg">{{ s.col2 | escape }}</th>
+            <th scope="col" class="p-4 font-heading text-base font-bold md:text-lg">{{ s.col3 | escape }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr class="border-t border-border" {{ block.shopify_attributes }}>
+              <th scope="row" class="p-4 text-left font-semibold">{{ block.settings.label | escape }}</th>
+              <td class="p-4 bg-tint-pink/50 font-bold">{% render 'lpl-compare-cell', value: block.settings.col1, highlight: true %}</td>
+              <td class="p-4 text-muted-foreground">{% render 'lpl-compare-cell', value: block.settings.col2 %}</td>
+              <td class="p-4 text-muted-foreground">{% render 'lpl-compare-cell', value: block.settings.col3 %}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+    {%- if s.note != blank -%}
+      <p class="mt-4 text-center text-xs text-muted-foreground">{{ s.note | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+</div>
+
+{% schema %}
+{
+  "name": "LP: Comparison table",
+  "tag": "div",
+  "class": "section-lpl",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section anchor (for #links)", "default": "compare" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Do the maths" },
+    { "type": "select", "id": "tone", "label": "Eyebrow colour", "default": "teal", "options": [
+      { "value": "pink", "label": "Pink" }, { "value": "violet", "label": "Violet" }, { "value": "cyan", "label": "Cyan" },
+      { "value": "lime", "label": "Lime" }, { "value": "orange", "label": "Orange" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "title", "label": "Heading", "default": "neOwn vs buying books vs the library" },
+    { "type": "checkbox", "id": "animate", "label": "Animate heading words", "default": false },
+    { "type": "text", "id": "accent", "label": "Gradient words in heading" },
+    { "type": "text", "id": "subtitle", "label": "Text under heading" },
+    { "type": "text", "id": "caption", "label": "Table description (screen readers)", "default": "Comparison of neOwn kids book subscription, buying new books and a local library" },
+    { "type": "text", "id": "col1", "label": "Column 1 (highlighted)", "default": "neOwn" },
+    { "type": "text", "id": "col2", "label": "Column 2", "default": "Buying new" },
+    { "type": "text", "id": "col3", "label": "Column 3", "default": "Local library" },
+    { "type": "text", "id": "note", "label": "Footnote", "default": "Buying new assumes ₹450 a book, the middle of the ₹400–₹600 range. neOwn price is the monthly plan for one child." },
+    { "type": "paragraph", "content": "In rows, type yes for ✓, no for ✗, - for a dash, or any text." }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Row label", "default": "Row" },
+        { "type": "text", "id": "col1", "label": "Column 1", "default": "yes" },
+        { "type": "text", "id": "col2", "label": "Column 2", "default": "no" },
+        { "type": "text", "id": "col3", "label": "Column 3", "default": "no" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "LP: Comparison table" }]
+}
+{% endschema %}

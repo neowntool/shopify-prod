@@ -1,0 +1,65 @@
+{%- comment -%}
+  Section heading for the LP (Lovable) sections: eyebrow pill, title, optional subtitle.
+  Params:
+    eyebrow   – pill text (optional)
+    tone      – pink | violet | cyan | lime | orange | teal
+    title     – heading text
+    accent    – words of the title shown with the brand gradient (optional; for a plain heading, the exact phrase)
+    animate   – true: words slide in one by one
+    subtitle  – text under the heading (optional)
+    title_id  – id for aria-labelledby (optional)
+    tag       – h1 | h2 (default h2)
+{%- endcomment -%}
+{%- liquid
+  assign tag = tag | default: 'h2'
+  case tone
+    when 'pink'
+      assign pill = 'bg-tint-pink text-ink-pink'
+    when 'violet'
+      assign pill = 'bg-tint-violet text-ink-violet'
+    when 'lime'
+      assign pill = 'bg-tint-lime text-ink-lime'
+    when 'orange'
+      assign pill = 'bg-tint-orange text-ink-orange'
+    when 'teal'
+      assign pill = 'bg-tint-cyan text-ink-teal'
+    else
+      assign pill = 'bg-tint-cyan text-ink-cyan'
+  endcase
+  assign accent_words = accent | strip | split: ' '
+  assign last_accent = accent_words | last
+-%}
+<div class="mb-12 flex flex-col md:mb-16 gap-4 md:justify-between items-center text-center md:flex-col md:items-center">
+  <div class="max-w-3xl space-y-3 mx-auto">
+    {%- if eyebrow != blank -%}
+      <span class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] md:text-[13px] {{ pill }}"><span aria-hidden="true" class="relative flex size-1.5"><span class="absolute inline-flex size-full animate-ping rounded-full bg-current opacity-60"></span><span class="relative inline-flex size-1.5 rounded-full bg-current"></span></span>{{ eyebrow | escape }}</span>
+    {%- endif -%}
+    {%- if animate -%}
+      <{{ tag }} data-shown="false" class="text-3xl font-bold leading-[1.1] text-balance md:text-5xl"{% if title_id != blank %} id="{{ title_id }}"{% endif %}>
+        {%- assign words = title | strip | split: ' ' -%}
+        {%- for word in words -%}
+          {%- assign delay = forloop.index0 | times: 60 -%}
+          {%- assign cls = '' -%}
+          {%- if accent_words contains word -%}
+            {%- assign cls = 'text-gradient fun' -%}
+            {%- if word == last_accent -%}{%- assign cls = 'text-gradient fun fun-last' -%}{%- endif -%}
+          {%- endif -%}
+          <span class="tw"><i{% if cls != '' %} class="{{ cls }}"{% endif %} style="transition-delay:{{ delay }}ms">{{ word | escape }}</i></span>{% unless forloop.last %} {% endunless %}
+        {%- endfor -%}
+      </{{ tag }}>
+    {%- else -%}
+      {%- liquid
+        assign title_html = title | escape
+        if accent != blank
+          assign accent_html = accent | strip | escape
+          assign accent_span = '<span class="text-gradient">' | append: accent_html | append: '</span>'
+          assign title_html = title_html | replace_first: accent_html, accent_span
+        endif
+      -%}
+      <{{ tag }} class="text-3xl font-bold leading-[1.1] text-balance md:text-5xl"><span{% if title_id != blank %} id="{{ title_id }}"{% endif %}>{{ title_html }}</span></{{ tag }}>
+    {%- endif -%}
+    {%- if subtitle != blank -%}
+      <p class="text-base leading-relaxed text-muted-foreground md:text-lg">{{ subtitle | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>

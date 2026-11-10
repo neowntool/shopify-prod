@@ -1,0 +1,40 @@
+{%- unless template.suffix contains 'lovable' -%}{%- render 'lpl-assets' -%}{%- endunless -%}
+{%- assign s = section.settings -%}
+<div class="lpl">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 mt-24 mb-16 md:mb-24">
+    <div data-shown="false" class="reveal reveal-blur">
+      <div class="relative overflow-hidden rounded-[2.5rem] bg-foreground px-6 py-20 text-center text-background md:px-16">
+        <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1 bg-[image:var(--gradient-rainbow)]"></div>
+        <div class="relative mx-auto max-w-2xl space-y-5">
+          <h2 class="text-3xl font-bold text-balance md:text-5xl">{{ s.title | escape }}</h2>
+          {%- if s.text != blank -%}<p class="text-lg text-background/70">{{ s.text | escape }}</p>{%- endif -%}
+          <div class="flex flex-wrap justify-center gap-3 pt-2">
+            {%- if s.button1_label != blank -%}
+              <a href="{{ s.button1_url }}" class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors bg-primary text-primary-foreground shadow hover:bg-primary/90 shine h-12 rounded-full px-7 text-base shadow-[var(--shadow-glow)]">{{ s.button1_label | escape }} {% render 'lpl-icon', name: 'arrow-right', class: 'size-4' %}</a>
+            {%- endif -%}
+            {%- if s.button2_label != blank -%}
+              <a href="{{ s.button2_url }}"{% if s.button2_url contains 'http' %} target="_blank" rel="noreferrer"{% endif %} class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-colors shadow-sm h-12 rounded-full bg-background px-7 text-base text-foreground hover:bg-background/90">{{ s.button2_label | escape }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "LP: Closing banner",
+  "tag": "div",
+  "class": "section-lpl",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Raise a reader, not a collector." },
+    { "type": "text", "id": "text", "label": "Text", "default": "75,000+ books, matched to their level, from ₹399 a month. No deposit." },
+    { "type": "text", "id": "button1_label", "label": "Button 1 label", "default": "Choose a plan" },
+    { "type": "text", "id": "button1_url", "label": "Button 1 link", "default": "#plans" },
+    { "type": "text", "id": "button2_label", "label": "Button 2 label", "default": "WhatsApp us" },
+    { "type": "text", "id": "button2_url", "label": "Button 2 link", "default": "https://wa.me/919324455972" }
+  ],
+  "presets": [{ "name": "LP: Closing banner" }]
+}
+{% endschema %}

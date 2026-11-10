@@ -1,0 +1,111 @@
+{%- unless template.suffix contains 'lovable' -%}{%- render 'lpl-assets' -%}{%- endunless -%}
+{%- liquid
+  assign s = section.settings
+  assign anchor = s.anchor | default: 'savings' | handleize
+  assign book_opts = s.book_options | split: ','
+-%}
+<div class="lpl">
+<div id="{{ anchor }}" class="scroll-mt-24" data-lpl-savings
+     data-avg-price="{{ s.avg_book_price }}"
+     data-kg-per-book="{{ s.kg_per_book }}"
+     data-default-books="{{ s.default_books }}"
+     data-default-months="{{ s.default_months }}"
+     data-month="{{ s.month_word | escape }}"
+     data-months="{{ s.months_word | escape }}"
+     data-estimate="{{ s.estimate_text | escape }}"
+     data-less="{{ s.less_text | escape }}"
+     data-kg="{{ s.kg_text | escape }}"
+     data-fallback-prices="{{ s.fallback_prices | escape }}">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 mt-20 scroll-mt-24 md:mt-28">
+    <div data-shown="false" class="reveal reveal-blur">
+      {%- render 'lpl-heading', eyebrow: s.eyebrow, tone: s.tone, title: s.title, accent: s.accent, animate: s.animate, subtitle: s.subtitle -%}
+    </div>
+    <div data-shown="false" class="reveal reveal-blur mx-auto grid max-w-5xl gap-4 md:grid-cols-[1.1fr_1fr]">
+      <div class="rounded-[2rem] bg-card p-6 md:p-8">
+        <p class="text-sm font-bold">{{ s.who_label | escape }}</p>
+        <div class="mt-3 grid grid-cols-2 gap-2">
+          <button type="button" aria-pressed="true" data-lpl-sv-kids="single" class="press rounded-2xl border-2 px-4 py-3 text-sm font-bold transition">{{ s.label_single | escape }}</button>
+          <button type="button" aria-pressed="false" data-lpl-sv-kids="siblings" class="press rounded-2xl border-2 px-4 py-3 text-sm font-bold transition">{{ s.label_siblings | escape }}</button>
+        </div>
+        <p class="mt-6 text-sm font-bold">{{ s.books_label | escape }}</p>
+        <div class="mt-3 grid grid-cols-3 gap-2">
+          {%- for n in book_opts -%}
+            <button type="button" aria-pressed="false" data-lpl-sv-books="{{ n | strip }}" class="press rounded-2xl border-2 py-3 font-heading text-lg font-bold transition">{{ n | strip }}</button>
+          {%- endfor -%}
+        </div>
+        <div class="mt-6 flex items-baseline justify-between">
+          <p class="text-sm font-bold">{{ s.months_label | escape }}</p>
+          <p class="font-heading text-lg font-bold" data-lpl-sv-months-out></p>
+        </div>
+        <input type="range" class="lpl-range mt-4" min="{{ s.min_months }}" max="{{ s.max_months }}" step="1" value="{{ s.default_months }}" aria-label="{{ s.months_label | escape }}" data-lpl-sv-months>
+        <p class="mt-6 text-xs text-muted-foreground" data-lpl-sv-estimate></p>
+      </div>
+      <div class="relative overflow-hidden rounded-[2rem] bg-foreground p-6 text-background md:p-8">
+        <p class="flex items-center gap-2 text-sm font-semibold text-background/70">{% render 'lpl-icon', name: 'wallet', class: 'size-4' %} {{ s.save_label | escape }}</p>
+        <p class="mt-1 font-heading text-5xl font-bold text-brand-lime md:text-6xl" data-lpl-sv-saved></p>
+        <p class="mt-1 text-sm text-background/70" data-lpl-sv-less></p>
+        <div class="mt-6 space-y-3">
+          <div>
+            <div class="flex justify-between text-xs font-semibold text-background/70"><span>{{ s.buying_label | escape }}</span><span data-lpl-sv-buying></span></div>
+            <div class="mt-1.5 h-2.5 overflow-hidden rounded-full bg-background/10"><div class="h-full rounded-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-background/40" style="width:100%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs font-semibold text-background/70"><span>{{ s.neown_label | escape }}</span><span data-lpl-sv-neown></span></div>
+            <div class="mt-1.5 h-2.5 overflow-hidden rounded-full bg-background/10"><div class="h-full rounded-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-brand-lime" data-lpl-sv-bar style="width:0%"></div></div>
+          </div>
+        </div>
+        <div class="mt-7 grid grid-cols-2 gap-3">
+          <div class="rounded-2xl bg-background/10 p-4">{% render 'lpl-icon', name: 'leaf', class: 'size-5 text-brand-lime' %}<p class="mt-2 font-heading text-2xl font-bold" data-lpl-sv-kg></p><p class="text-xs text-background/70">{{ s.paper_label | escape }}</p></div>
+          <div class="rounded-2xl bg-background/10 p-4">{% render 'lpl-icon', name: 'rotate-ccw', class: 'size-5 text-ink-cyan' %}<p class="mt-2 font-heading text-2xl font-bold" data-lpl-sv-count></p><p class="text-xs text-background/70">{{ s.shared_label | escape }}</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% schema %}
+{
+  "name": "LP: Savings calculator",
+  "tag": "div",
+  "class": "section-lpl",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section anchor (for #links)", "default": "savings" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Savings calculator" },
+    { "type": "select", "id": "tone", "label": "Eyebrow colour", "default": "lime", "options": [
+      { "value": "pink", "label": "Pink" }, { "value": "violet", "label": "Violet" }, { "value": "cyan", "label": "Cyan" },
+      { "value": "lime", "label": "Lime" }, { "value": "orange", "label": "Orange" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "title", "label": "Heading", "default": "See how much you'd save." },
+    { "type": "checkbox", "id": "animate", "label": "Animate heading words", "default": true },
+    { "type": "text", "id": "accent", "label": "Gradient words in heading", "default": "save." },
+    { "type": "text", "id": "subtitle", "label": "Text under heading", "default": "Compared with buying the same books new." },
+    { "type": "header", "content": "Labels" },
+    { "type": "text", "id": "who_label", "label": "\"Who's reading\" label", "default": "Who's reading?" },
+    { "type": "text", "id": "label_single", "label": "One child", "default": "One child" },
+    { "type": "text", "id": "label_siblings", "label": "Two kids", "default": "Two kids" },
+    { "type": "text", "id": "books_label", "label": "Books label", "default": "Books a month" },
+    { "type": "text", "id": "book_options", "label": "Book options (comma separated)", "default": "3,5,10" },
+    { "type": "text", "id": "months_label", "label": "Duration label", "default": "For how long?" },
+    { "type": "text", "id": "month_word", "label": "\"month\"", "default": "month" },
+    { "type": "text", "id": "months_word", "label": "\"months\"", "default": "months" },
+    { "type": "text", "id": "estimate_text", "label": "Estimate line", "info": "[count] books, [avg] price per book, [monthly] plan price", "default": "Estimate: [count] books at an average [avg] each vs the monthly plan at [monthly]/month." },
+    { "type": "text", "id": "save_label", "label": "Savings label", "default": "You'd save" },
+    { "type": "text", "id": "less_text", "label": "Savings line", "info": "[percent], [count], [buying]", "default": "[percent]% less than buying [count] books ([buying])" },
+    { "type": "text", "id": "buying_label", "label": "Buying label", "default": "Buying new" },
+    { "type": "text", "id": "neown_label", "label": "neOwn label", "default": "With neOwn" },
+    { "type": "text", "id": "kg_text", "label": "Paper figure", "info": "[kg] = kilograms", "default": "~[kg] kg" },
+    { "type": "text", "id": "paper_label", "label": "Paper label", "default": "of paper not bought new" },
+    { "type": "text", "id": "shared_label", "label": "Books shared label", "default": "books shared, zero clutter" },
+    { "type": "header", "content": "Numbers" },
+    { "type": "number", "id": "avg_book_price", "label": "Average price of a new book (₹)", "default": 450 },
+    { "type": "text", "id": "kg_per_book", "label": "Paper per book (kg)", "default": "0.3" },
+    { "type": "number", "id": "default_books", "label": "Books selected by default", "default": 5 },
+    { "type": "number", "id": "min_months", "label": "Minimum months", "default": 1 },
+    { "type": "number", "id": "max_months", "label": "Maximum months", "default": 24 },
+    { "type": "number", "id": "default_months", "label": "Months selected by default", "default": 12 },
+    { "type": "textarea", "id": "fallback_prices", "label": "Plan prices", "info": "Used only when this page has no Monthly plans section (its prices are used otherwise). One per line: single or siblings | books | price", "default": "single | 3 | 399\nsingle | 5 | 499\nsingle | 10 | 799\nsiblings | 3 | 749\nsiblings | 5 | 899\nsiblings | 10 | 1499" }
+  ],
+  "presets": [{ "name": "LP: Savings calculator" }]
+}
+{% endschema %}

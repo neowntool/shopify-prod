@@ -162,7 +162,10 @@
   html.sip-lock, html.sip-lock body { overflow: hidden !important; }
 </style>
 
+{%- comment -%} show_cards is compared with false so templates saved before the setting existed still show the cards. {%- endcomment -%}
+{%- if section.settings.show_cards == false -%}<style>#sip-{{ sid }}{display:none}</style>{%- else -%}
 <div id="choose-sip" style="position:relative;top:-90px;height:0;" aria-hidden="true"></div>
+{%- endif -%}
 <div id="sip-{{ sid }}" class="sip"
      data-backend="{{ section.settings.backend_url | escape }}"
      data-success-url="{{ section.settings.success_url | escape }}"
@@ -769,6 +772,15 @@
   // Deep link: ?plan=<razorpay_plan_id> opens that plan's details step directly.
   var qp = new URLSearchParams(location.search).get('plan');
   if (qp) cards.forEach(function (c) { if (c.dataset.planId === qp) { showAudience(c.dataset.aud); selectCard(c); openModal(c, 'deep_link'); } });
+
+  // Other sections on the page (e.g. the LP plan picker) open this popup for a plan:
+  // window.dispatchEvent(new CustomEvent('neown:sip-open', { detail: { planId, ctaLocation } }))
+  window.addEventListener('neown:sip-open', function (e) {
+    var id = e.detail && e.detail.planId;
+    cards.forEach(function (c) {
+      if (c.dataset.planId === id) { showAudience(c.dataset.aud); selectCard(c); openModal(c, (e.detail && e.detail.ctaLocation) || 'external'); }
+    });
+  });
 })();
 </script>
 
@@ -781,6 +793,7 @@
     { "type": "header", "content": "Connection" },
     { "type": "text", "id": "backend_url", "label": "Backend URL", "info": "Base URL only, no trailing slash. Dev: https://beta-dev-backend.neown.in" },
     { "type": "url", "id": "success_url", "label": "Redirect after success (optional)", "info": "Leave empty to show the success step inside the popup." },
+    { "type": "checkbox", "id": "show_cards", "label": "Show plan cards", "info": "Turn off on pages where another section (e.g. LP: Monthly plans) opens this payment popup.", "default": true },
     { "type": "header", "content": "Plan cards" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Choose Your SIP" },
     { "type": "textarea", "id": "subheading", "label": "Subheading (optional)" },

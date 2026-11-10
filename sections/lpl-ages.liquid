@@ -1,0 +1,114 @@
+{%- unless template.suffix contains 'lovable' -%}{%- render 'lpl-assets' -%}{%- endunless -%}
+{%- liquid
+  assign s = section.settings
+  assign anchor = s.anchor | default: 'ages' | handleize
+  assign tones = 'pink,violet,cyan,lime,orange,teal' | split: ','
+  assign age_count = 0
+-%}
+<div class="lpl">
+<div id="{{ anchor }}" class="scroll-mt-24" data-lpl-ages>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 mt-20 md:mt-28">
+    <div data-shown="false" class="reveal reveal-blur">
+      {%- render 'lpl-heading', eyebrow: s.eyebrow, tone: s.tone, title: s.title, accent: s.accent, animate: s.animate, subtitle: s.subtitle -%}
+    </div>
+    <div class="flex justify-center">
+      <div role="tablist" aria-label="{{ s.tabs_label | escape }}" class="inline-flex max-w-full gap-1 overflow-x-auto rounded-full bg-card p-1.5">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'age' -%}
+            {%- assign tone = tones[age_count] | default: 'pink' -%}
+            <button type="button" role="tab" aria-selected="{% if age_count == 0 %}true{% else %}false{% endif %}" data-lpl-age-tab="{{ age_count }}" data-tone="{{ tone }}" class="press shrink-0 rounded-full px-4 py-2.5 text-sm font-bold transition sm:px-6{% if age_count == 0 %} bg-ink-{{ tone }} text-background{% else %} text-muted-foreground hover:text-foreground{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</button>
+            {%- assign age_count = age_count | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+    {%- comment -%} Book blocks belong to the age tab block above them. {%- endcomment -%}
+    {%- assign panel = -1 -%}
+    {%- for age_block in section.blocks -%}
+      {%- if age_block.type != 'age' -%}{%- continue -%}{%- endif -%}
+      {%- assign panel = panel | plus: 1 -%}
+      <div class="mt-10 grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-bottom-3 duration-500 sm:grid-cols-3 lg:grid-cols-6" role="tabpanel" data-lpl-age-panel="{{ panel }}"{% if panel > 0 %} hidden{% endif %}>
+        {%- assign owner = -1 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'age' -%}{%- assign owner = owner | plus: 1 -%}{%- continue -%}{%- endif -%}
+          {%- if owner != panel -%}{%- continue -%}{%- endif -%}
+          {%- liquid
+            if block.settings.image != blank
+              assign img = block.settings.image | image_url: width: 500
+            elsif block.settings.image_fallback != blank
+              assign img = block.settings.image_fallback | asset_url
+            else
+              assign img = ''
+            endif
+            assign btone = block.settings.badge_tone
+          -%}
+          <figure class="lift relative rounded-2xl p-3 bg-card" data-lpl-age-item {{ block.shopify_attributes }}>
+            {%- if block.settings.badge != blank -%}<span class="absolute left-3 top-3 z-10 rounded-full px-2.5 py-0.5 text-[11px] font-bold bg-tint-{{ btone }} text-ink-{{ btone }}">{{ block.settings.badge | escape }}</span>{%- endif -%}
+            {%- if block.settings.link != blank %}<a href="{{ block.settings.link }}">{% endif -%}
+            {%- if img != blank -%}<img src="{{ img }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="500" height="667" class="aspect-[3/4] w-full rounded-lg object-cover shadow-[var(--shadow-book)]">{%- endif -%}
+            <figcaption class="mt-3 line-clamp-2 text-sm font-semibold">{{ block.settings.title | escape }}</figcaption>
+            {%- if block.settings.link != blank %}</a>{% endif -%}
+          </figure>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+    {%- if s.link1_label != blank or s.link2_label != blank -%}
+      <div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3">
+        {%- if s.link1_label != blank -%}<a href="{{ s.link1_url }}" class="group inline-flex items-center font-semibold text-primary">{{ s.link1_label | escape }} {% render 'lpl-icon', name: 'chevron-right', class: 'size-4 transition group-hover:translate-x-0.5' %}</a>{%- endif -%}
+        {%- if s.link2_label != blank -%}<a href="{{ s.link2_url }}" class="group inline-flex items-center font-semibold text-ink-orange">{{ s.link2_label | escape }} {% render 'lpl-icon', name: 'chevron-right', class: 'size-4 transition group-hover:translate-x-0.5' %}</a>{%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+</div>
+
+{% schema %}
+{
+  "name": "LP: Books by age",
+  "tag": "div",
+  "class": "section-lpl",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section anchor (for #links)", "default": "ages" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "For every age" },
+    { "type": "select", "id": "tone", "label": "Eyebrow colour", "default": "cyan", "options": [
+      { "value": "pink", "label": "Pink" }, { "value": "violet", "label": "Violet" }, { "value": "cyan", "label": "Cyan" },
+      { "value": "lime", "label": "Lime" }, { "value": "orange", "label": "Orange" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "title", "label": "Heading", "default": "The right books for every age." },
+    { "type": "checkbox", "id": "animate", "label": "Animate heading words", "default": true },
+    { "type": "text", "id": "accent", "label": "Gradient words in heading", "default": "every age." },
+    { "type": "text", "id": "subtitle", "label": "Text under heading", "default": "Tap an age to see what kids are reading." },
+    { "type": "text", "id": "tabs_label", "label": "Tabs accessible label", "default": "Child's age" },
+    { "type": "text", "id": "link1_label", "label": "Link 1 label", "default": "Browse books" },
+    { "type": "text", "id": "link1_url", "label": "Link 1 URL", "default": "#top-books" },
+    { "type": "text", "id": "link2_label", "label": "Link 2 label", "default": "See plans" },
+    { "type": "text", "id": "link2_url", "label": "Link 2 URL", "default": "#plans" }
+  ],
+  "blocks": [
+    {
+      "type": "age",
+      "name": "Age tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Tab label", "default": "6–8 yrs" },
+        { "type": "paragraph", "content": "Add Book blocks right after this tab; they show under it." }
+      ]
+    },
+    {
+      "type": "item",
+      "name": "Book",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Book title" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_fallback", "label": "Image from theme assets (used when no image is picked)" },
+        { "type": "url", "id": "link", "label": "Link (optional)" },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "Book" },
+        { "type": "select", "id": "badge_tone", "label": "Badge colour", "default": "violet", "options": [
+          { "value": "pink", "label": "Pink" }, { "value": "violet", "label": "Violet" }, { "value": "cyan", "label": "Cyan" },
+          { "value": "lime", "label": "Lime" }, { "value": "orange", "label": "Orange" }
+        ] }
+      ]
+    }
+  ],
+  "presets": [{ "name": "LP: Books by age" }]
+}
+{% endschema %}

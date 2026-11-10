@@ -1,0 +1,63 @@
+{%- unless template.suffix contains 'lovable' -%}{%- render 'lpl-assets' -%}{%- endunless -%}
+{%- liquid
+  assign s = section.settings
+  assign anchor = s.anchor | default: 'how' | handleize
+  assign title_id = anchor | append: '-title'
+  assign tones = 'pink,violet,cyan,lime,orange,teal' | split: ','
+-%}
+<div class="lpl">
+<section id="{{ anchor }}" aria-labelledby="{{ anchor }}-title" class="scroll-mt-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 mt-20 md:mt-28">
+    <div data-shown="false" class="reveal reveal-blur">
+      {%- render 'lpl-heading', eyebrow: s.eyebrow, tone: s.tone, title: s.title, accent: s.accent, animate: s.animate, subtitle: s.subtitle, title_id: title_id -%}
+    </div>
+    <div class="relative grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      {%- if s.show_line -%}
+        <svg aria-hidden="true" data-shown="false" viewBox="0 0 600 24" preserveAspectRatio="none" class="text-brand-violet/40 absolute left-[11%] right-[11%] top-2 hidden h-8 lg:block" fill="none"><path class="draw" style="--len:660" d="M4 16 C 60 2, 110 22, 170 12 S 280 2, 340 14 S 470 24, 596 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+      {%- endif -%}
+      {%- for block in section.blocks -%}
+        {%- assign tone = tones[forloop.index0] | default: 'pink' -%}
+        <div data-shown="false" style="transition-delay:{{ forloop.index0 | times: 120 }}ms" class="reveal reveal-blur group relative text-center" {{ block.shopify_attributes }}>
+          <p class="mx-auto inline-flex size-16 items-center justify-center rounded-full border border-border bg-background font-heading text-2xl font-bold shadow-soft text-ink-{{ tone }}">{{ forloop.index }}</p>
+          <h3 class="mt-3 text-xl font-bold">{{ block.settings.title | escape }}</h3>
+          <p class="mx-auto mt-2 max-w-xs leading-relaxed text-muted-foreground">{{ block.settings.text | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+</div>
+
+{% schema %}
+{
+  "name": "LP: How it works",
+  "tag": "div",
+  "class": "section-lpl",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section anchor (for #links)", "default": "how" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How it works" },
+    { "type": "select", "id": "tone", "label": "Eyebrow colour", "default": "teal", "options": [
+      { "value": "pink", "label": "Pink" }, { "value": "violet", "label": "Violet" }, { "value": "cyan", "label": "Cyan" },
+      { "value": "lime", "label": "Lime" }, { "value": "orange", "label": "Orange" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "title", "label": "Heading", "default": "How the book subscription works" },
+    { "type": "checkbox", "id": "animate", "label": "Animate heading words", "default": false },
+    { "type": "text", "id": "accent", "label": "Gradient words in heading" },
+    { "type": "text", "id": "subtitle", "label": "Text under heading" },
+    { "type": "checkbox", "id": "show_line", "label": "Show connecting line (desktop)", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Step title" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Step description" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "LP: How it works" }]
+}
+{% endschema %}

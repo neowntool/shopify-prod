@@ -113,6 +113,8 @@
   {% include 'pagefly-app-header' %}
 
   <script src='https://bridge.shopflo.com/js/shopflo.bundle.js' async></script>
+  {%- comment -%} LP (Lovable) templates load the lpl-* section assets once here instead of once per section. {%- endcomment -%}
+  {%- if template.suffix contains 'lovable' -%}{% render 'lpl-assets' %}{%- endif -%}
 </head>
 
   <body
