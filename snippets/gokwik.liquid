@@ -21,19 +21,6 @@
 
   <script src="https://{{ env }}.gokwik.co/merchant-integration/build/merchant.integration.js?v4" defer></script>
 
-  <script>
-    if ('${{ gaTag.ga4 }}' && '${{ gaTag.ga4 }}' !== 'undefined') {
-        const script = document.createElement('script');
-        script.src = "https://www.googletagmanager.com/gtag/js?id=${{ gaTag.ga4 }}";
-        script.defer = true;
-        document.head.appendChild(script);
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', {{ gaTag.ga4 }},{ 'groups': 'GA4','debug_mode':true });
-    }
-  </script>
-
 
 
   <script>
