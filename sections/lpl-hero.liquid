@@ -1,0 +1,181 @@
+{%- unless template.suffix contains 'lovable' -%}{%- render 'lpl-assets' -%}{%- endunless -%}
+{%- liquid
+  assign s = section.settings
+  if s.image != blank
+    assign hero_src = s.image | image_url: width: 1200
+  elsif s.image_fallback != blank
+    assign hero_src = s.image_fallback | asset_url
+  endif
+  assign accent_words = s.accent | strip | split: ' '
+  assign last_accent = accent_words | last
+-%}
+<div class="lpl" id="{{ s.anchor | default: 'top' | handleize }}">
+{%- if s.show_backdrop -%}{% render 'lpl-backdrop' %}{%- endif -%}
+<section aria-label="{{ s.aria_label | escape }}">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 grid items-center gap-8 pb-4 pt-8 text-center md:grid-cols-[1.15fr_0.85fr] md:gap-12 md:pt-14 md:text-left">
+    <div class="mx-auto max-w-3xl space-y-5 md:mx-0">
+      {%- if s.rating_text != blank -%}
+        <p class="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground">
+          {%- if s.show_stars -%}
+            <span class="flex text-ink-orange" aria-hidden="true">{% for i in (1..5) %}{% render 'lpl-icon', name: 'star', class: 'size-3.5 fill-current' %}{% endfor %}</span>
+          {%- endif -%}
+          {{ s.rating_text | escape }}
+        </p>
+      {%- endif -%}
+      <h1 data-shown="false" class="text-[2.1rem] font-bold leading-[1.08] text-balance sm:text-5xl lg:text-[3.5rem]">
+        {%- assign words = s.title | strip | split: ' ' -%}
+        {%- for word in words -%}
+          {%- assign delay = forloop.index0 | times: 60 -%}
+          {%- assign cls = '' -%}
+          {%- if accent_words contains word -%}
+            {%- assign cls = 'text-gradient fun' -%}
+            {%- if word == last_accent -%}{%- assign cls = 'text-gradient fun fun-last' -%}{%- endif -%}
+          {%- endif -%}
+          <span class="tw"><i{% if cls != '' %} class="{{ cls }}"{% endif %} style="transition-delay:{{ delay }}ms">{{ word | escape }}</i></span>{% unless forloop.last %} {% endunless %}
+        {%- endfor -%}
+      </h1>
+      {%- if s.text != blank -%}
+        <p class="mx-auto max-w-xl text-base font-medium text-foreground/80 md:mx-0 md:text-lg lpl-rte">{{ s.text }}</p>
+      {%- endif -%}
+      <div class="flex flex-col items-center gap-3 pt-1 md:items-start">
+        {%- if s.cta_label != blank -%}
+          <a href="{{ s.cta_link | default: '#plans' }}" class="inline-flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer transition-colors bg-primary text-primary-foreground shadow hover:bg-primary/90 shine press h-14 w-full max-w-xs rounded-full px-8 text-base font-bold shadow-[var(--shadow-glow)] sm:w-auto sm:max-w-none group">{{ s.cta_label | escape }}{% render 'lpl-icon', name: 'arrow-right', class: 'size-4 transition-transform group-hover:translate-x-1' %}</a>
+        {%- endif -%}
+        {%- if s.show_quiz -%}
+          <button type="button" data-lpl-quiz-open class="press group inline-flex items-center gap-2 rounded-full transition hover:-translate-y-0.5 h-auto border-0 bg-transparent px-2 py-1 text-sm font-semibold text-muted-foreground shadow-none hover:bg-transparent hover:text-foreground"><span class="inline-flex size-6 items-center justify-center rounded-full bg-ink-violet text-background">{% render 'lpl-icon', name: 'sparkles', class: 'size-3.5' %}</span>{{ s.quiz_label | escape }}{% if s.quiz_sub != blank %}<span class="text-muted-foreground">{{ s.quiz_sub | escape }}</span>{% endif %}{% render 'lpl-icon', name: 'arrow-right', class: 'size-4 transition group-hover:translate-x-0.5' %}</button>
+        {%- endif -%}
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs font-semibold text-foreground/80 md:justify-start md:text-sm">
+          {%- for block in section.blocks -%}
+            <li class="inline-flex items-center gap-1.5" {{ block.shopify_attributes }}>{% render 'lpl-icon', name: block.settings.icon, class: 'size-4' %} {{ block.settings.text | escape }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+    {%- if hero_src -%}
+      <img src="{{ hero_src }}" alt="{{ s.image_alt | escape }}" fetchpriority="high" width="1200" height="804" class="mx-auto aspect-[16/10] w-full max-w-md rounded-[1.75rem] object-cover object-[60%_center] shadow-lift md:aspect-square md:max-w-none md:rounded-[2.5rem]">
+    {%- endif -%}
+  </div>
+</section>
+
+{%- if s.show_quiz -%}
+  {%- comment -%} Plan finder: 3 questions, then suggests a plan from the LP plans section on this page. {%- endcomment -%}
+  {%- assign dot_tones = 'pink,violet,cyan,lime,orange,teal' | split: ',' -%}
+  <div class="lpl-quiz" data-lpl-quiz hidden
+       data-result-name="{{ s.result_name | escape }}"
+       data-who-single="{{ s.result_single | escape }}"
+       data-who-siblings="{{ s.result_siblings | escape }}"
+       data-price-suffix="{{ s.result_price_suffix | escape }}">
+    <div class="lpl-quiz__overlay" data-lpl-quiz-close></div>
+    <div class="lpl-quiz__dialog max-h-[92dvh] overflow-y-auto rounded-[2rem] bg-background p-6 sm:max-w-lg md:p-8" role="dialog" aria-modal="true" aria-label="{{ s.quiz_label | escape }}">
+      <button type="button" class="lpl-quiz__x" data-lpl-quiz-close aria-label="Close">{% render 'lpl-icon', name: 'x', class: 'size-4' %}</button>
+      <div class="flex gap-1.5 pr-8" aria-hidden="true">
+        {%- for i in (0..3) -%}<span class="h-1.5 flex-1 overflow-hidden rounded-full bg-muted"><span class="block h-full rounded-full transition-all duration-500 w-0" data-lpl-quiz-bar="{{ i }}"></span></span>{%- endfor -%}
+      </div>
+      {%- assign q_texts = s.q1_title | append: '||' | append: s.q2_title | append: '||' | append: s.q3_title | split: '||' -%}
+      {%- assign q_opts = s.q1_options | append: '||' | append: s.q2_options | append: '||' | append: s.q3_options | split: '||' -%}
+      {%- for qt in q_texts -%}
+        {%- assign qi = forloop.index0 -%}
+        <div class="mt-5" data-lpl-quiz-step="{{ qi }}"{% unless qi == 0 %} hidden{% endunless %}>
+          <p class="text-xs font-bold uppercase tracking-wider text-muted-foreground">{{ s.question_label | replace: '[n]', forloop.index | replace: '[total]', '3' | escape }}</p>
+          <p class="mt-1 font-heading text-2xl font-bold md:text-3xl">{{ qt | escape }}</p>
+          <div class="mt-6 grid gap-2.5{% if qi == 0 %} grid-cols-2{% endif %}">
+            {%- assign opts = q_opts[qi] | newline_to_br | split: '<br />' -%}
+            {%- for line in opts -%}
+              {%- assign parts = line | strip | split: '|' -%}
+              {%- if parts[0] == blank -%}{%- continue -%}{%- endif -%}
+              <button type="button" data-lpl-quiz-answer="{{ parts[2] | default: parts[0] | strip | escape }}" class="press group flex items-center gap-3 rounded-2xl border-2 border-border bg-background p-4 text-left transition duration-300 hover:-translate-y-0.5 hover:border-foreground/20">
+                {%- assign dot = forloop.index0 | modulo: 6 -%}
+                <span class="size-3 shrink-0 rounded-full transition group-hover:scale-125 bg-ink-{{ dot_tones[dot] }}"></span>
+                <span class="flex-1"><span class="block font-heading font-bold">{{ parts[0] | strip | escape }}</span>{% if parts[1] != blank %}<span class="block text-sm text-muted-foreground">{{ parts[1] | strip | escape }}</span>{% endif %}</span>
+                {% render 'lpl-icon', name: 'arrow-right', class: 'size-4 shrink-0 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100' %}
+              </button>
+            {%- endfor -%}
+          </div>
+          {%- if qi > 0 -%}
+            <button type="button" data-lpl-quiz-back class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-muted-foreground hover:text-foreground">{% render 'lpl-icon', name: 'arrow-left', class: 'size-4' %} {{ s.back_label | escape }}</button>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+      <div class="mt-5" data-lpl-quiz-step="result" hidden>
+        <p class="text-xs font-bold uppercase tracking-wider text-ink-violet">{{ s.result_eyebrow | escape }}</p>
+        <p class="mt-1 font-heading text-3xl font-bold" data-lpl-quiz-name></p>
+        <p class="mt-1 text-base font-semibold text-foreground" data-lpl-quiz-price></p>
+        <p class="mt-6 text-sm font-semibold">{{ s.result_books_label | escape }}</p>
+        <div class="mt-3 grid grid-cols-3 gap-3" data-lpl-quiz-books></div>
+        <div class="mt-7 grid gap-2.5 sm:grid-cols-2">
+          <button type="button" data-lpl-quiz-go class="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-primary text-primary-foreground shadow hover:bg-primary/90 shine h-12 rounded-full px-8 font-bold">{{ s.result_cta | escape }} {% render 'lpl-icon', name: 'arrow-right', class: 'size-4' %}</button>
+          <button type="button" data-lpl-quiz-restart class="inline-flex items-center justify-center gap-2 whitespace-nowrap h-12 rounded-full border-0 bg-muted px-8 font-semibold">{% render 'lpl-icon', name: 'rotate-ccw', class: 'size-4' %} {{ s.restart_label | escape }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "LP: Hero",
+  "tag": "div",
+  "class": "section-lpl",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section anchor (for #links)", "default": "top" },
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "Kids book subscription" },
+    { "type": "checkbox", "id": "show_backdrop", "label": "Show grid and doodles background behind the whole page", "default": true },
+    { "type": "checkbox", "id": "show_stars", "label": "Show 5 stars", "default": true },
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "Loved by 15,000+ Indian parents" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Big Reading. Small Spending." },
+    { "type": "text", "id": "accent", "label": "Gradient words in heading", "info": "Words from the heading, separated by spaces, exactly as written (with punctuation).", "default": "Small Spending." },
+    { "type": "inline_richtext", "id": "text", "label": "Text", "default": "75,000+ books, matched to your child's <strong>reading level</strong>. Swapped at your door every month." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "See plans · from ₹399/mo" },
+    { "type": "text", "id": "cta_link", "label": "Button link", "info": "e.g. #plans to scroll to the plans section", "default": "#plans" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_fallback", "label": "Image from theme assets (used when no image is picked)", "default": "lpl-hero.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Image description", "default": "A girl reading a picture book on the living-room floor" },
+    { "type": "header", "content": "Plan finder quiz" },
+    { "type": "checkbox", "id": "show_quiz", "label": "Show plan finder", "default": true },
+    { "type": "text", "id": "quiz_label", "label": "Link label", "default": "Find my perfect box" },
+    { "type": "text", "id": "quiz_sub", "label": "Link hint", "default": "· 3 quick taps" },
+    { "type": "text", "id": "question_label", "label": "Question counter", "info": "[n] = question number, [total] = 3", "default": "Question [n] of [total]" },
+    { "type": "text", "id": "q1_title", "label": "Question 1", "default": "How old is your child?" },
+    { "type": "textarea", "id": "q1_options", "label": "Question 1 answers", "info": "One per line: label | hint (optional). The answer number picks the matching age tab for sample books.", "default": "0–2 yrs\n3–5 yrs\n6–8 yrs\n9–12+ yrs" },
+    { "type": "text", "id": "q2_title", "label": "Question 2", "default": "Who's reading?" },
+    { "type": "textarea", "id": "q2_options", "label": "Question 2 answers", "info": "One per line: label | hint | single or siblings", "default": "One child | Books picked for one reader | single\nSiblings | Separate books for each child | siblings" },
+    { "type": "text", "id": "q3_title", "label": "Question 3", "default": "How many books a month?" },
+    { "type": "textarea", "id": "q3_options", "label": "Question 3 answers", "info": "One per line: label | hint | number of books", "default": "3 books a month | Just getting into reading | 3\n5 books a month | A steady reader | 5\n10 books a month | Finishes books fast | 10" },
+    { "type": "text", "id": "back_label", "label": "Back label", "default": "Back" },
+    { "type": "text", "id": "result_eyebrow", "label": "Result label", "default": "Your perfect box" },
+    { "type": "text", "id": "result_name", "label": "Result plan name", "info": "[books] = number of books, [who] = text below", "default": "Monthly plan · [books] books [who]" },
+    { "type": "text", "id": "result_single", "label": "[who] for one child", "default": "for one child" },
+    { "type": "text", "id": "result_siblings", "label": "[who] for siblings", "default": "for siblings" },
+    { "type": "text", "id": "result_price_suffix", "label": "Price suffix", "default": "/month" },
+    { "type": "text", "id": "result_books_label", "label": "Sample books line", "default": "A box like this could include" },
+    { "type": "text", "id": "result_cta", "label": "Result button", "default": "See this plan" },
+    { "type": "text", "id": "restart_label", "label": "Start over label", "default": "Start over" }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust point",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "wallet", "options": [
+          { "value": "wallet", "label": "Wallet" }, { "value": "truck", "label": "Truck" }, { "value": "shield-check", "label": "Shield" },
+          { "value": "check", "label": "Check" }, { "value": "star", "label": "Star" }, { "value": "leaf", "label": "Leaf" }, { "value": "sparkles", "label": "Sparkles" }
+        ] },
+        { "type": "text", "id": "text", "label": "Text", "default": "₹0 deposit" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LP: Hero",
+      "blocks": [
+        { "type": "trust", "settings": { "icon": "wallet", "text": "₹0 deposit" } },
+        { "type": "trust", "settings": { "icon": "truck", "text": "Pan-India delivery" } },
+        { "type": "trust", "settings": { "icon": "shield-check", "text": "Every book checked" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

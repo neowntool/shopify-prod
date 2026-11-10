@@ -1,0 +1,91 @@
+{%- unless template.suffix contains 'lovable' -%}{%- render 'lpl-assets' -%}{%- endunless -%}
+{%- liquid
+  assign s = section.settings
+  assign anchor = s.anchor | default: 'why' | handleize
+  assign title_id = anchor | append: '-title'
+  assign tones = 'pink,violet,cyan,lime,orange,teal' | split: ','
+  assign stat_i = 0
+  assign feature_i = 0
+-%}
+<div class="lpl">
+<section id="{{ anchor }}" aria-labelledby="{{ anchor }}-title" class="scroll-mt-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 mt-24 md:mt-28">
+    <div data-shown="false" class="reveal reveal-blur">
+      {%- render 'lpl-heading', eyebrow: s.eyebrow, tone: s.tone, title: s.title, accent: s.accent, animate: s.animate, subtitle: s.subtitle, title_id: title_id -%}
+    </div>
+    <div data-shown="false" class="reveal reveal-blur grid grid-cols-2 gap-3 rounded-[2rem] bg-card p-3 sm:gap-4 sm:p-5 md:p-8 lg:grid-cols-4">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'stat' -%}
+          <div class="rounded-2xl bg-background p-4 sm:p-5" {{ block.shopify_attributes }}>
+            <p class="font-heading text-3xl font-bold sm:text-4xl text-ink-{{ tones[stat_i] | default: 'pink' }}"><span class="tabular-nums" data-lpl-count="{{ block.settings.value | escape }}">{{ block.settings.value | escape }}</span></p>
+            <p class="mt-2 text-sm leading-snug text-muted-foreground">{{ block.settings.label | escape }}</p>
+          </div>
+          {%- assign stat_i = stat_i | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'feature' -%}
+          {%- liquid
+            assign tone = tones[feature_i] | default: 'pink'
+            assign badge = 'bg-tint-' | append: tone | append: ' text-ink-' | append: tone
+            if tone == 'teal'
+              assign badge = 'bg-tint-cyan text-ink-teal'
+            endif
+            assign delay = feature_i | modulo: 3 | times: 80
+            assign feature_i = feature_i | plus: 1
+          -%}
+          <div data-shown="false" style="transition-delay:{{ delay }}ms" class="reveal reveal-blur" {{ block.shopify_attributes }}>
+            <article class="lift h-full rounded-3xl border border-border bg-background p-6">
+              <span class="mb-4 inline-flex size-10 items-center justify-center rounded-xl font-heading text-sm font-bold {{ badge }}">{% if feature_i < 10 %}0{% endif %}{{ feature_i }}</span>
+              <h3 class="text-lg font-bold">{{ block.settings.title | escape }}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{{ block.settings.text | escape }}</p>
+            </article>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+</div>
+
+{% schema %}
+{
+  "name": "LP: Why parents switch",
+  "tag": "div",
+  "class": "section-lpl",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section anchor (for #links)", "default": "why" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why parents switch" },
+    { "type": "select", "id": "tone", "label": "Eyebrow colour", "default": "teal", "options": [
+      { "value": "pink", "label": "Pink" }, { "value": "violet", "label": "Violet" }, { "value": "cyan", "label": "Cyan" },
+      { "value": "lime", "label": "Lime" }, { "value": "orange", "label": "Orange" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "title", "label": "Heading", "default": "A children's book library built for curious minds." },
+    { "type": "checkbox", "id": "animate", "label": "Animate heading words", "default": false },
+    { "type": "text", "id": "accent", "label": "Gradient words in heading", "default": "curious minds" },
+    { "type": "text", "id": "subtitle", "label": "Text under heading", "default": "Reading a level above, without buying a new shelf every month." },
+    { "type": "paragraph", "content": "Stat numbers count up when they scroll into view (e.g. 85%, 60+, 20 min)." }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Number", "default": "85%" },
+        { "type": "text", "id": "label", "label": "Label", "default": "of neOwn kids finish their books" }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Reason",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Reason" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Short explanation" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "LP: Why parents switch" }]
+}
+{% endschema %}

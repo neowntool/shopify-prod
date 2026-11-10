@@ -1,0 +1,10 @@
+{%- comment -%}
+  Styles, font and script for the LP (Lovable) sections. Loaded once in layout/theme.liquid on templates whose name contains
+  "lovable"; elsewhere each lpl-* section renders it itself;
+  the browser loads each file once and lpl.js guards against running twice.
+{%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700;800&display=swap">
+{{ 'lpl.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lpl.js' | asset_url }}" defer></script>

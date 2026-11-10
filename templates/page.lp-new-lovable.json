@@ -1,0 +1,991 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "lpl_hero": {
+      "type": "lpl-hero",
+      "settings": {},
+      "blocks": {
+        "lpl_hero_0": {
+          "type": "trust",
+          "settings": {
+            "icon": "wallet",
+            "text": "₹0 deposit"
+          }
+        },
+        "lpl_hero_1": {
+          "type": "trust",
+          "settings": {
+            "icon": "truck",
+            "text": "Pan-India delivery"
+          }
+        },
+        "lpl_hero_2": {
+          "type": "trust",
+          "settings": {
+            "icon": "shield-check",
+            "text": "Every book checked"
+          }
+        }
+      },
+      "block_order": [
+        "lpl_hero_0",
+        "lpl_hero_1",
+        "lpl_hero_2"
+      ]
+    },
+    "lpl_books": {
+      "type": "lpl-books",
+      "settings": {},
+      "blocks": {
+        "lpl_books_0": {
+          "type": "book",
+          "settings": {
+            "title": "Geronimo Stilton #1: Lost Treasure of the Emerald Eye",
+            "image_fallback": "lpl-book-01.jpg"
+          }
+        },
+        "lpl_books_1": {
+          "type": "book",
+          "settings": {
+            "title": "Diary of a Wimpy Kid #16: Big Shot",
+            "image_fallback": "lpl-book-02.jpg"
+          }
+        },
+        "lpl_books_2": {
+          "type": "book",
+          "settings": {
+            "title": "Dog Man #13: Big Jim Begins",
+            "image_fallback": "lpl-book-03.jpg"
+          }
+        },
+        "lpl_books_3": {
+          "type": "book",
+          "settings": {
+            "title": "Wings of Fire #2: The Lost Heir",
+            "image_fallback": "lpl-book-04.jpg"
+          }
+        },
+        "lpl_books_4": {
+          "type": "book",
+          "settings": {
+            "title": "A Mammoth Mystery",
+            "image_fallback": "lpl-book-05.jpg"
+          }
+        },
+        "lpl_books_5": {
+          "type": "book",
+          "settings": {
+            "title": "Cat Kid Comic Club: Collaborations",
+            "image_fallback": "lpl-book-06.jpg"
+          }
+        },
+        "lpl_books_6": {
+          "type": "book",
+          "settings": {
+            "title": "The Wild Robot",
+            "image_fallback": "lpl-book-07.jpg"
+          }
+        },
+        "lpl_books_7": {
+          "type": "book",
+          "settings": {
+            "title": "Percy Jackson and the Sea of Monsters",
+            "image_fallback": "lpl-book-08.jpg"
+          }
+        },
+        "lpl_books_8": {
+          "type": "book",
+          "settings": {
+            "title": "Dog Man #11: Twenty Thousand Fleas Under the Sea",
+            "image_fallback": "lpl-book-09.jpg"
+          }
+        },
+        "lpl_books_9": {
+          "type": "book",
+          "settings": {
+            "title": "Amulet #1: The Stonekeeper",
+            "image_fallback": "lpl-book-10.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "lpl_books_0",
+        "lpl_books_1",
+        "lpl_books_2",
+        "lpl_books_3",
+        "lpl_books_4",
+        "lpl_books_5",
+        "lpl_books_6",
+        "lpl_books_7",
+        "lpl_books_8",
+        "lpl_books_9"
+      ]
+    },
+    "lpl_plans": {
+      "type": "lpl-plans",
+      "settings": {},
+      "blocks": {
+        "lpl_plans_0": {
+          "type": "plan",
+          "settings": {
+            "title": "3 Books Plan",
+            "audience": "single",
+            "books": 3,
+            "price": 399,
+            "razorpay_plan_id": "plan_TnI39ezajyuSUZ"
+          }
+        },
+        "lpl_plans_1": {
+          "type": "plan",
+          "settings": {
+            "title": "5 Books Plan",
+            "audience": "single",
+            "books": 5,
+            "price": 499,
+            "razorpay_plan_id": "plan_TnI3vMEHqnqrCb"
+          }
+        },
+        "lpl_plans_2": {
+          "type": "plan",
+          "settings": {
+            "title": "10 Books Plan",
+            "audience": "single",
+            "books": 10,
+            "price": 799,
+            "razorpay_plan_id": "plan_TnI4N7IKwbj0cM"
+          }
+        },
+        "lpl_plans_3": {
+          "type": "plan",
+          "settings": {
+            "title": "Sibling 3+3 Books Plan",
+            "audience": "siblings",
+            "books": 3,
+            "price": 749,
+            "razorpay_plan_id": "plan_TnI57gKIEdlabb"
+          }
+        },
+        "lpl_plans_4": {
+          "type": "plan",
+          "settings": {
+            "title": "Sibling 5+5 Books Plan",
+            "audience": "siblings",
+            "books": 5,
+            "price": 899,
+            "razorpay_plan_id": "plan_TnI5OB7v8lC0ut"
+          }
+        },
+        "lpl_plans_5": {
+          "type": "plan",
+          "settings": {
+            "title": "Sibling 10+10 Books Plan",
+            "audience": "siblings",
+            "books": 10,
+            "price": 1499,
+            "razorpay_plan_id": "plan_TnI6BuK1gPk4B3"
+          }
+        }
+      },
+      "block_order": [
+        "lpl_plans_0",
+        "lpl_plans_1",
+        "lpl_plans_2",
+        "lpl_plans_3",
+        "lpl_plans_4",
+        "lpl_plans_5"
+      ]
+    },
+    "lpl_how": {
+      "type": "lpl-how",
+      "settings": {},
+      "blocks": {
+        "lpl_how_0": {
+          "type": "step",
+          "settings": {
+            "title": "Start the monthly plan",
+            "text": "Pick 3, 5 or 10 books. ₹0 deposit."
+          }
+        },
+        "lpl_how_1": {
+          "type": "step",
+          "settings": {
+            "title": "Choose on the app",
+            "text": "Browse 75,000+ titles by reading level."
+          }
+        },
+        "lpl_how_2": {
+          "type": "step",
+          "settings": {
+            "title": "Delivered home",
+            "text": "At your door, anywhere in India."
+          }
+        },
+        "lpl_how_3": {
+          "type": "step",
+          "settings": {
+            "title": "Return & repeat",
+            "text": "Swap for a fresh set every month."
+          }
+        }
+      },
+      "block_order": [
+        "lpl_how_0",
+        "lpl_how_1",
+        "lpl_how_2",
+        "lpl_how_3"
+      ]
+    },
+    "lpl_ages": {
+      "type": "lpl-ages",
+      "settings": {},
+      "blocks": {
+        "lpl_ages_0": {
+          "type": "age",
+          "settings": {
+            "label": "0–2 yrs"
+          }
+        },
+        "lpl_ages_1": {
+          "type": "item",
+          "settings": {
+            "title": "Touch & feel board books",
+            "image_fallback": "lpl-age-0-2-b.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_2": {
+          "type": "item",
+          "settings": {
+            "title": "First words & shapes",
+            "image_fallback": "lpl-age-0-2-a.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_3": {
+          "type": "age",
+          "settings": {
+            "label": "3–5 yrs"
+          }
+        },
+        "lpl_ages_4": {
+          "type": "item",
+          "settings": {
+            "title": "Picture-book adventures",
+            "image_fallback": "lpl-age-3-5-a.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_5": {
+          "type": "item",
+          "settings": {
+            "title": "Rhyming read-alouds",
+            "image_fallback": "lpl-age-3-5-b.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_6": {
+          "type": "item",
+          "settings": {
+            "title": "Preschool Activity Books Bundle",
+            "image_fallback": "lpl-book-preschool.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_7": {
+          "type": "age",
+          "settings": {
+            "label": "6–8 yrs"
+          }
+        },
+        "lpl_ages_8": {
+          "type": "item",
+          "settings": {
+            "title": "Geronimo Stilton #1: Lost Treasure of the Emerald Eye",
+            "image_fallback": "lpl-book-01.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_9": {
+          "type": "item",
+          "settings": {
+            "title": "Dog Man #13: Big Jim Begins",
+            "image_fallback": "lpl-book-03.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_10": {
+          "type": "item",
+          "settings": {
+            "title": "A Mammoth Mystery",
+            "image_fallback": "lpl-book-05.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_11": {
+          "type": "item",
+          "settings": {
+            "title": "Cat Kid Comic Club: Collaborations",
+            "image_fallback": "lpl-book-06.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_12": {
+          "type": "item",
+          "settings": {
+            "title": "Dog Man #11: Twenty Thousand Fleas Under the Sea",
+            "image_fallback": "lpl-book-09.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_13": {
+          "type": "item",
+          "settings": {
+            "title": "Diary of a Wimpy Kid #16: Big Shot",
+            "image_fallback": "lpl-book-02.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_14": {
+          "type": "age",
+          "settings": {
+            "label": "9–12 yrs"
+          }
+        },
+        "lpl_ages_15": {
+          "type": "item",
+          "settings": {
+            "title": "Diary of a Wimpy Kid #16: Big Shot",
+            "image_fallback": "lpl-book-02.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_16": {
+          "type": "item",
+          "settings": {
+            "title": "Wings of Fire #2: The Lost Heir",
+            "image_fallback": "lpl-book-04.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_17": {
+          "type": "item",
+          "settings": {
+            "title": "Amulet #1: The Stonekeeper",
+            "image_fallback": "lpl-book-10.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_18": {
+          "type": "item",
+          "settings": {
+            "title": "Cat Kid Comic Club: Collaborations",
+            "image_fallback": "lpl-book-06.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_19": {
+          "type": "item",
+          "settings": {
+            "title": "Geronimo Stilton #1: Lost Treasure of the Emerald Eye",
+            "image_fallback": "lpl-book-01.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_20": {
+          "type": "item",
+          "settings": {
+            "title": "The Wild Robot",
+            "image_fallback": "lpl-book-07.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_21": {
+          "type": "age",
+          "settings": {
+            "label": "13–16 yrs"
+          }
+        },
+        "lpl_ages_22": {
+          "type": "item",
+          "settings": {
+            "title": "Percy Jackson and the Sea of Monsters",
+            "image_fallback": "lpl-book-08.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_23": {
+          "type": "item",
+          "settings": {
+            "title": "The Wild Robot",
+            "image_fallback": "lpl-book-07.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_24": {
+          "type": "item",
+          "settings": {
+            "title": "Wings of Fire #2: The Lost Heir",
+            "image_fallback": "lpl-book-04.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_25": {
+          "type": "item",
+          "settings": {
+            "title": "Amulet #1: The Stonekeeper",
+            "image_fallback": "lpl-book-10.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_26": {
+          "type": "item",
+          "settings": {
+            "title": "Diary of a Wimpy Kid #16: Big Shot",
+            "image_fallback": "lpl-book-02.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        },
+        "lpl_ages_27": {
+          "type": "item",
+          "settings": {
+            "title": "Geronimo Stilton #1: Lost Treasure of the Emerald Eye",
+            "image_fallback": "lpl-book-01.jpg",
+            "badge": "Book",
+            "badge_tone": "violet"
+          }
+        }
+      },
+      "block_order": [
+        "lpl_ages_0",
+        "lpl_ages_1",
+        "lpl_ages_2",
+        "lpl_ages_3",
+        "lpl_ages_4",
+        "lpl_ages_5",
+        "lpl_ages_6",
+        "lpl_ages_7",
+        "lpl_ages_8",
+        "lpl_ages_9",
+        "lpl_ages_10",
+        "lpl_ages_11",
+        "lpl_ages_12",
+        "lpl_ages_13",
+        "lpl_ages_14",
+        "lpl_ages_15",
+        "lpl_ages_16",
+        "lpl_ages_17",
+        "lpl_ages_18",
+        "lpl_ages_19",
+        "lpl_ages_20",
+        "lpl_ages_21",
+        "lpl_ages_22",
+        "lpl_ages_23",
+        "lpl_ages_24",
+        "lpl_ages_25",
+        "lpl_ages_26",
+        "lpl_ages_27"
+      ]
+    },
+    "lpl_compare": {
+      "type": "lpl-compare",
+      "settings": {},
+      "blocks": {
+        "lpl_compare_0": {
+          "type": "row",
+          "settings": {
+            "label": "5 books a month",
+            "col1": "₹499/mo",
+            "col2": "~₹2,250/mo",
+            "col3": "Varies"
+          }
+        },
+        "lpl_compare_1": {
+          "type": "row",
+          "settings": {
+            "label": "Choice of titles",
+            "col1": "75,000+",
+            "col2": "Whatever you buy",
+            "col3": "What's on the shelf"
+          }
+        },
+        "lpl_compare_2": {
+          "type": "row",
+          "settings": {
+            "label": "Matched to reading level",
+            "col1": "yes",
+            "col2": "no",
+            "col3": "no"
+          }
+        },
+        "lpl_compare_3": {
+          "type": "row",
+          "settings": {
+            "label": "Doorstep delivery & pick-up",
+            "col1": "yes",
+            "col2": "no",
+            "col3": "no"
+          }
+        },
+        "lpl_compare_4": {
+          "type": "row",
+          "settings": {
+            "label": "No clutter at home",
+            "col1": "yes",
+            "col2": "no",
+            "col3": "yes"
+          }
+        },
+        "lpl_compare_5": {
+          "type": "row",
+          "settings": {
+            "label": "Deposit",
+            "col1": "₹0",
+            "col2": "-",
+            "col3": "Varies"
+          }
+        }
+      },
+      "block_order": [
+        "lpl_compare_0",
+        "lpl_compare_1",
+        "lpl_compare_2",
+        "lpl_compare_3",
+        "lpl_compare_4",
+        "lpl_compare_5"
+      ]
+    },
+    "lpl_savings": {
+      "type": "lpl-savings",
+      "settings": {}
+    },
+    "lpl_reviews": {
+      "type": "lpl-reviews",
+      "settings": {},
+      "blocks": {
+        "lpl_reviews_0": {
+          "type": "review",
+          "settings": {
+            "quote": "My child really enjoys reading and she is able to find all the kind of books she wants at neOwn. I can see that she is improving her vocabulary, knowledge, etc. The experience has been very nice.",
+            "name": "Tara Baluwala",
+            "stars": 5
+          }
+        },
+        "lpl_reviews_1": {
+          "type": "review",
+          "settings": {
+            "quote": "The books are in great condition and the availability of books at the time of selection is also too good. I can see improvement in my child's focus on reading. She has started reading chapter books.",
+            "name": "Parul Jalan",
+            "stars": 5
+          }
+        },
+        "lpl_reviews_2": {
+          "type": "review",
+          "settings": {
+            "quote": "The best part I liked is the drop n pick up service — for parents of nuclear families like me, it's all we need. My young one loved the touch n feel books!",
+            "name": "neOwn parent",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "lpl_reviews_0",
+        "lpl_reviews_1",
+        "lpl_reviews_2"
+      ]
+    },
+    "lpl_why": {
+      "type": "lpl-why",
+      "settings": {},
+      "blocks": {
+        "lpl_why_0": {
+          "type": "stat",
+          "settings": {
+            "value": "85%",
+            "label": "of neOwn kids finish their books, vs 60% of new readers"
+          }
+        },
+        "lpl_why_1": {
+          "type": "stat",
+          "settings": {
+            "value": "60+",
+            "label": "books read a year, vs just 2 for the average child"
+          }
+        },
+        "lpl_why_2": {
+          "type": "stat",
+          "settings": {
+            "value": "20 min",
+            "label": "a day is all it takes to build the habit"
+          }
+        },
+        "lpl_why_3": {
+          "type": "stat",
+          "settings": {
+            "value": "50%",
+            "label": "bigger vocabulary for daily readers"
+          }
+        },
+        "lpl_why_4": {
+          "type": "feature",
+          "settings": {
+            "title": "Reading level, not just age",
+            "text": "Ages 0–15. Reading ahead? Pick from any shelf."
+          }
+        },
+        "lpl_why_5": {
+          "type": "feature",
+          "settings": {
+            "title": "Picks that learn your child",
+            "text": "Suggestions from their reading history."
+          }
+        },
+        "lpl_why_6": {
+          "type": "feature",
+          "settings": {
+            "title": "A real book expert",
+            "text": "Free book recommendations on WhatsApp, when you need them."
+          }
+        },
+        "lpl_why_7": {
+          "type": "feature",
+          "settings": {
+            "title": "The exact title you want",
+            "text": "Waitlist any book; it comes to you next."
+          }
+        },
+        "lpl_why_8": {
+          "type": "feature",
+          "settings": {
+            "title": "Clean, checked books",
+            "text": "Inspected and cleaned between families."
+          }
+        },
+        "lpl_why_9": {
+          "type": "feature",
+          "settings": {
+            "title": "No lock-in",
+            "text": "Change 3, 5 or 10 books anytime."
+          }
+        }
+      },
+      "block_order": [
+        "lpl_why_0",
+        "lpl_why_1",
+        "lpl_why_2",
+        "lpl_why_3",
+        "lpl_why_4",
+        "lpl_why_5",
+        "lpl_why_6",
+        "lpl_why_7",
+        "lpl_why_8",
+        "lpl_why_9"
+      ]
+    },
+    "lpl_safety": {
+      "type": "lpl-safety",
+      "settings": {},
+      "blocks": {
+        "lpl_safety_0": {
+          "type": "step",
+          "settings": {
+            "icon": "scan-search",
+            "title": "Checked on return",
+            "text": "Every book is inspected the moment it comes back. Anything broken, torn or missing pages is retired."
+          }
+        },
+        "lpl_safety_1": {
+          "type": "step",
+          "settings": {
+            "icon": "spray-can",
+            "title": "Deep cleaned",
+            "text": "Covers are wiped down with a child-safe, non-toxic disinfectant before every delivery."
+          }
+        },
+        "lpl_safety_2": {
+          "type": "step",
+          "settings": {
+            "icon": "sun",
+            "title": "Sealed & packed",
+            "text": "Cleaned items are packed fresh, so nothing is touched again before it reaches you."
+          }
+        },
+        "lpl_safety_3": {
+          "type": "step",
+          "settings": {
+            "icon": "package-check",
+            "title": "Doorstep swap",
+            "text": "We drop the new box and pick up the old one in the same visit."
+          }
+        },
+        "lpl_safety_4": {
+          "type": "badge",
+          "settings": {
+            "text": "Child-safe products only",
+            "tone": "lime"
+          }
+        },
+        "lpl_safety_5": {
+          "type": "badge",
+          "settings": {
+            "text": "Damaged items retired",
+            "tone": "orange"
+          }
+        },
+        "lpl_safety_6": {
+          "type": "badge",
+          "settings": {
+            "text": "No deposit, ever",
+            "tone": "teal"
+          }
+        }
+      },
+      "block_order": [
+        "lpl_safety_0",
+        "lpl_safety_1",
+        "lpl_safety_2",
+        "lpl_safety_3",
+        "lpl_safety_4",
+        "lpl_safety_5",
+        "lpl_safety_6"
+      ]
+    },
+    "lpl_faq": {
+      "type": "lpl-faq",
+      "settings": {},
+      "blocks": {
+        "lpl_faq_0": {
+          "type": "question",
+          "settings": {
+            "question": "Do you deliver all over India?",
+            "answer": "<p>Our Book Library delivers all over India. Delivery is free within Mumbai, Thane, Navi Mumbai and Mira-Bhayander; outside Mumbai there is an additional delivery charge.</p>"
+          }
+        },
+        "lpl_faq_1": {
+          "type": "question",
+          "settings": {
+            "question": "How does the library subscription work?",
+            "answer": "<ol><li>Start the monthly plan on our website.</li><li>Download the neOwn app to select your books.</li><li>They're delivered to you, and pickup &amp; exchange happens after a maximum of 30 days.</li><li>Return and repeat every month of your subscription!</li></ol>"
+          }
+        },
+        "lpl_faq_2": {
+          "type": "question",
+          "settings": {
+            "question": "How can I select my books?",
+            "answer": "<p>Once you've subscribed, download our app and pick any books you like. Not sure what to choose? Get free recommendations on WhatsApp.</p><p>Delivery takes 2–5 days within Mumbai and 4–8 days outside Mumbai.</p>"
+          }
+        },
+        "lpl_faq_3": {
+          "type": "question",
+          "settings": {
+            "question": "Is there any deposit or registration fee?",
+            "answer": "<p>No — there is no deposit or registration fee.</p>"
+          }
+        },
+        "lpl_faq_4": {
+          "type": "question",
+          "settings": {
+            "question": "Do you give refunds?",
+            "answer": "<p>Refunds are not provided. In an exceptional case where there's an error on neOwn's part and your subscription hasn't started yet, a refund may be issued at neOwn's discretion.</p>"
+          }
+        },
+        "lpl_faq_5": {
+          "type": "question",
+          "settings": {
+            "question": "What age groups do you cater to?",
+            "answer": "<p>Books for every age from 0 to 15 years.</p>"
+          }
+        },
+        "lpl_faq_6": {
+          "type": "question",
+          "settings": {
+            "question": "What if a book gets damaged?",
+            "answer": "<p>If the damage is minor and we can repair it, there's no charge. If it can't be circulated anymore, or is lost, we charge 40% of the MRP and you can keep the item.</p>"
+          }
+        },
+        "lpl_faq_7": {
+          "type": "question",
+          "settings": {
+            "question": "Are the books clean?",
+            "answer": "<p>All books, including board books, are cleaned by our team before and after every delivery so they're 100% sanitary. Every book is checked twice, and anything in poor condition is taken out of circulation.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "lpl_faq_0",
+        "lpl_faq_1",
+        "lpl_faq_2",
+        "lpl_faq_3",
+        "lpl_faq_4",
+        "lpl_faq_5",
+        "lpl_faq_6",
+        "lpl_faq_7"
+      ]
+    },
+    "lpl_cta": {
+      "type": "lpl-cta",
+      "settings": {}
+    },
+    "reading_sip_checkout": {
+      "type": "neown-reading-sip",
+      "blocks": {
+        "plan_XMaweV": {
+          "type": "plan",
+          "settings": {
+            "audience": "single",
+            "title": "3 Books Plan",
+            "book_count": 3,
+            "price": "399",
+            "razorpay_plan_id": "plan_TnI39ezajyuSUZ",
+            "badge": "",
+            "featured": false
+          }
+        },
+        "plan_AMRjC3": {
+          "type": "plan",
+          "settings": {
+            "audience": "single",
+            "title": "5 Books Plan",
+            "book_count": 5,
+            "price": "499",
+            "razorpay_plan_id": "plan_TnI3vMEHqnqrCb",
+            "badge": "🔥 Most popular",
+            "featured": true
+          }
+        },
+        "plan_UDDWGU": {
+          "type": "plan",
+          "settings": {
+            "audience": "single",
+            "title": "10 Books Plan",
+            "book_count": 10,
+            "price": "799",
+            "razorpay_plan_id": "plan_TnI4N7IKwbj0cM",
+            "badge": "",
+            "featured": false
+          }
+        },
+        "plan_XnTDBJ": {
+          "type": "plan",
+          "settings": {
+            "audience": "siblings",
+            "title": "Sibling 3+3 Books Plan",
+            "book_count": 3,
+            "price": "749",
+            "razorpay_plan_id": "plan_TnI57gKIEdlabb",
+            "badge": "",
+            "featured": false
+          }
+        },
+        "plan_EgPTYg": {
+          "type": "plan",
+          "settings": {
+            "audience": "siblings",
+            "title": "Sibling 5+5 Books Plan",
+            "book_count": 5,
+            "price": "899",
+            "razorpay_plan_id": "plan_TnI5OB7v8lC0ut",
+            "badge": "🔥 Most popular",
+            "featured": true
+          }
+        },
+        "plan_KxeqXb": {
+          "type": "plan",
+          "settings": {
+            "audience": "siblings",
+            "title": "Sibling 10+10 Books Plan",
+            "book_count": 10,
+            "price": "1499",
+            "razorpay_plan_id": "plan_TnI6BuK1gPk4B3",
+            "badge": "",
+            "featured": false
+          }
+        }
+      },
+      "block_order": [
+        "plan_XMaweV",
+        "plan_AMRjC3",
+        "plan_UDDWGU",
+        "plan_XnTDBJ",
+        "plan_EgPTYg",
+        "plan_KxeqXb"
+      ],
+      "name": "Neown Reading SIP",
+      "settings": {
+        "backend_url": "https://prod-backend.neown.in",
+        "success_url": "/pages/reading-sip-thank-you",
+        "heading": "Choose Your SIP",
+        "subheading": "",
+        "tab_single": "Single Child",
+        "tab_siblings": "Sibling Plan (2 Children)",
+        "per_month_label": "per month",
+        "per_child_label": "per month",
+        "per_child_short": "per month",
+        "show_per_book": true,
+        "card_subline": "books_year",
+        "cta_label": "Subscribe Now",
+        "perk_title": "Free delivery and pickup all over India",
+        "perk_text": "Auto-renews every month",
+        "note_heading": "Monthly & flexible",
+        "note_text": "Your subscription renews automatically every month through your payment mandate. You'll be charged your selected plan amount each month until you cancel. Cancel anytime.",
+        "renew_line": "Auto-renews every month · cancel anytime",
+        "details_heading": "Almost there!",
+        "details_sub": "Just a few details to get your subscription started.",
+        "continue_label": "Continue to Payment",
+        "trust_line": "Secure payment by Razorpay · UPI Autopay or card",
+        "success_heading": "You're subscribed!",
+        "success_text": "Your Autopay is set up and your first month is paid. Open the neOwn app with the same mobile number to choose your books.",
+        "success_cta_label": "Open the neOwn app",
+        "success_cta_url": "",
+        "accent_color": "#5f35e8",
+        "highlight_color": "#eefc74",
+        "cta_color": "#e945a9",
+        "show_cards": false
+      }
+    }
+  },
+  "order": [
+    "lpl_hero",
+    "lpl_books",
+    "lpl_plans",
+    "lpl_how",
+    "lpl_ages",
+    "lpl_compare",
+    "lpl_savings",
+    "lpl_reviews",
+    "lpl_why",
+    "lpl_safety",
+    "lpl_faq",
+    "lpl_cta",
+    "reading_sip_checkout"
+  ]
+}

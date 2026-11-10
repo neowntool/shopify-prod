@@ -1,0 +1,93 @@
+{%- unless template.suffix contains 'lovable' -%}{%- render 'lpl-assets' -%}{%- endunless -%}
+{%- liquid
+  assign s = section.settings
+  assign anchor = s.anchor | default: 'safety' | handleize
+  assign tones = 'pink,violet,cyan,lime,orange,teal' | split: ','
+  assign step_i = 0
+-%}
+<div class="lpl">
+<div id="{{ anchor }}" class="scroll-mt-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 mt-20 md:mt-28">
+    <div data-shown="false" class="reveal reveal-blur">
+      {%- render 'lpl-heading', eyebrow: s.eyebrow, tone: s.tone, title: s.title, accent: s.accent, animate: s.animate, subtitle: s.subtitle -%}
+    </div>
+    <div class="relative">
+      <span aria-hidden="true" class="absolute left-[10%] right-[10%] top-8 hidden h-0.5 bg-[image:var(--gradient-rainbow)] opacity-40 lg:block"></span>
+      <ol data-shown="false" class="stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step' -%}
+            {%- assign tone = tones[step_i] | default: 'pink' -%}
+            {%- assign step_i = step_i | plus: 1 -%}
+            <li class="lift group relative rounded-[2rem] bg-card p-6 text-center" {{ block.shopify_attributes }}>
+              <span class="relative mx-auto flex size-16 items-center justify-center rounded-full ring-8 ring-background transition duration-500 group-hover:scale-110 group-hover:rotate-6 bg-ink-{{ tone }} text-background">{% render 'lpl-icon', name: block.settings.icon, class: 'size-7' %}<span class="absolute -right-1 -top-1 flex size-6 items-center justify-center rounded-full bg-background font-heading text-xs font-bold text-foreground shadow-soft">{{ step_i }}</span></span>
+              <h3 class="mt-5 font-heading text-lg font-bold">{{ block.settings.title | escape }}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{{ block.settings.text | escape }}</p>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ol>
+    </div>
+    <div data-shown="false" class="reveal reveal-blur mt-8 flex flex-wrap justify-center gap-2">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'badge' -%}
+          {%- liquid
+            assign t = block.settings.tone
+            assign cls = 'bg-tint-' | append: t | append: ' text-ink-' | append: t
+            if t == 'teal'
+              assign cls = 'bg-tint-cyan text-ink-teal'
+            endif
+          -%}
+          <span class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold {{ cls }}" {{ block.shopify_attributes }}>{% render 'lpl-icon', name: 'shield-check', class: 'size-4' %}{{ block.settings.text | escape }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+</div>
+
+{% schema %}
+{
+  "name": "LP: Safety steps",
+  "tag": "div",
+  "class": "section-lpl",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section anchor (for #links)", "default": "safety" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Safety first" },
+    { "type": "select", "id": "tone", "label": "Eyebrow colour", "default": "teal", "options": [
+      { "value": "pink", "label": "Pink" }, { "value": "violet", "label": "Violet" }, { "value": "cyan", "label": "Cyan" },
+      { "value": "lime", "label": "Lime" }, { "value": "orange", "label": "Orange" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Clean, checked, and safe to read." },
+    { "type": "checkbox", "id": "animate", "label": "Animate heading words", "default": true },
+    { "type": "text", "id": "accent", "label": "Gradient words in heading", "default": "safe to read." },
+    { "type": "text", "id": "subtitle", "label": "Text under heading", "default": "What happens to every book between families." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "scan-search", "options": [
+          { "value": "scan-search", "label": "Inspect" }, { "value": "spray-can", "label": "Clean" }, { "value": "sun", "label": "Sun" },
+          { "value": "package-check", "label": "Package" }, { "value": "shield-check", "label": "Shield" }, { "value": "truck", "label": "Truck" },
+          { "value": "sparkles", "label": "Sparkles" }, { "value": "leaf", "label": "Leaf" }
+        ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Step title" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Step description" }
+      ]
+    },
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Child-safe products only" },
+        { "type": "select", "id": "tone", "label": "Colour", "default": "lime", "options": [
+          { "value": "pink", "label": "Pink" }, { "value": "violet", "label": "Violet" }, { "value": "cyan", "label": "Cyan" },
+          { "value": "lime", "label": "Lime" }, { "value": "orange", "label": "Orange" }, { "value": "teal", "label": "Teal" }
+        ] }
+      ]
+    }
+  ],
+  "presets": [{ "name": "LP: Safety steps" }]
+}
+{% endschema %}

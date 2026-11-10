@@ -1,0 +1,72 @@
+{%- unless template.suffix contains 'lovable' -%}{%- render 'lpl-assets' -%}{%- endunless -%}
+{%- liquid
+  assign s = section.settings
+  assign anchor = s.anchor | default: 'reviews' | handleize
+  assign quote_tones = 'text-ink-pink/20,text-ink-violet/20,text-ink-cyan/25' | split: ','
+-%}
+<div class="lpl">
+<div id="{{ anchor }}" class="scroll-mt-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 mt-20 md:mt-28">
+    <div data-shown="false" class="reveal reveal-blur">
+      {%- render 'lpl-heading', eyebrow: s.eyebrow, tone: s.tone, title: s.title, accent: s.accent, animate: s.animate, subtitle: s.subtitle -%}
+    </div>
+    <div data-shown="false" class="stagger grid gap-6 md:grid-cols-3">
+      {%- for block in section.blocks -%}
+        {%- assign qi = forloop.index0 | modulo: 3 -%}
+        {%- assign stars = block.settings.stars | default: 5 -%}
+        {%- assign quote_cls = 'absolute right-6 top-6 size-10 ' | append: quote_tones[qi] -%}
+        <div class="tilt h-full" {{ block.shopify_attributes }}>
+          <div class="lift sheen h-full rounded-3xl bg-card">
+            <figure class="relative flex h-full flex-col p-7">
+              {% render 'lpl-icon', name: 'quote', class: quote_cls %}
+              <div class="mb-3 flex gap-0.5 text-primary" aria-label="{{ stars }} out of 5 stars">{% for i in (1..stars) %}{% render 'lpl-icon', name: 'star', class: 'size-4 fill-current' %}{% endfor %}</div>
+              <blockquote class="flex-1 leading-relaxed">“{{ block.settings.quote | escape }}”</blockquote>
+              <figcaption class="mt-6 flex items-center gap-3 font-heading font-semibold">
+                {%- if block.settings.photo != blank -%}
+                  <img src="{{ block.settings.photo | image_url: width: 80 }}" alt="" width="40" height="40" loading="lazy" class="size-10 rounded-full object-cover">
+                {%- else -%}
+                  <span class="inline-flex size-10 items-center justify-center rounded-full bg-[image:var(--gradient-brand)] text-sm text-primary-foreground">{{ block.settings.name | slice: 0 }}</span>
+                {%- endif -%}
+                {{ block.settings.name | escape }}
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+</div>
+
+{% schema %}
+{
+  "name": "LP: Reviews",
+  "tag": "div",
+  "class": "section-lpl",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section anchor (for #links)", "default": "reviews" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Loved by parents" },
+    { "type": "select", "id": "tone", "label": "Eyebrow colour", "default": "cyan", "options": [
+      { "value": "pink", "label": "Pink" }, { "value": "violet", "label": "Violet" }, { "value": "cyan", "label": "Cyan" },
+      { "value": "lime", "label": "Lime" }, { "value": "orange", "label": "Orange" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Real results from real families" },
+    { "type": "checkbox", "id": "animate", "label": "Animate heading words", "default": true },
+    { "type": "text", "id": "accent", "label": "Gradient words in heading" },
+    { "type": "text", "id": "subtitle", "label": "Text under heading", "default": "See the difference when kids stay with neOwn for a year." }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Review", "default": "Review text" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Parent" },
+        { "type": "image_picker", "id": "photo", "label": "Photo (optional)", "info": "Without a photo, the first letter of the name is shown." },
+        { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 }
+      ]
+    }
+  ],
+  "presets": [{ "name": "LP: Reviews" }]
+}
+{% endschema %}

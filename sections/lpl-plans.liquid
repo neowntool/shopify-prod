@@ -1,0 +1,150 @@
+{%- unless template.suffix contains 'lovable' -%}{%- render 'lpl-assets' -%}{%- endunless -%}
+{%- liquid
+  assign s = section.settings
+  assign anchor = s.anchor | default: 'plans' | handleize
+  assign book_counts = ''
+  for block in section.blocks
+    assign bc = block.settings.books | append: ''
+    unless book_counts contains bc
+      assign book_counts = book_counts | append: bc | append: ','
+    endunless
+  endfor
+  # book options keep the order of the plan blocks (sort_natural would put 10 before 3)
+  assign book_list = book_counts | split: ','
+  assign checks = s.checks | newline_to_br | split: '<br />'
+-%}
+<div class="lpl">
+<section id="{{ anchor }}" aria-label="{{ s.aria_label | escape }}" class="mt-16 scroll-mt-20 md:mt-20"
+         data-lpl-plans
+         data-default-audience="{{ s.default_audience }}"
+         data-default-books="{{ s.default_books }}"
+         data-label-single="{{ s.label_single | escape }}"
+         data-label-siblings="{{ s.label_siblings | escape }}"
+         data-each="{{ s.each_label | escape }}"
+         data-books-word="{{ s.books_word | escape }}"
+         data-checkout="{{ s.checkout }}"
+         data-fallback-url="{{ s.fallback_url | default: '/pages/neown-reading-sip' }}">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="mx-auto max-w-2xl space-y-8">
+      <div class="space-y-4 text-center">
+        <div class="[&>div]:mb-0 md:[&>div]:mb-0">
+          {%- render 'lpl-heading', eyebrow: s.eyebrow, tone: s.tone, title: s.title, accent: s.accent, animate: s.animate, subtitle: s.subtitle -%}
+        </div>
+        {%- if s.checks != blank -%}
+          <ul class="flex flex-col items-center gap-2 text-sm font-semibold sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-5 md:text-base">
+            {%- for c in checks -%}
+              {%- if c != blank -%}<li class="flex items-center gap-2">{% render 'lpl-icon', name: 'check', class: 'size-4 text-ink-lime', stroke: 3 %} {{ c | strip | escape }}</li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      <div class="space-y-7 rounded-[2rem] bg-brand-green p-6 text-foreground shadow-lift md:p-8">
+        <fieldset>
+          <legend class="mb-3 text-sm font-bold uppercase tracking-wider text-foreground/70">{{ s.who_label | escape }}</legend>
+          <div role="radiogroup" class="flex flex-wrap gap-3">
+            <button type="button" role="radio" aria-checked="false" data-lpl-aud="single" class="rounded-2xl border-2 px-5 py-3 font-semibold transition duration-300">{{ s.label_single | escape }}</button>
+            <button type="button" role="radio" aria-checked="false" data-lpl-aud="siblings" class="rounded-2xl border-2 px-5 py-3 font-semibold transition duration-300">{{ s.label_siblings | escape }}</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="mb-3 text-sm font-bold uppercase tracking-wider text-foreground/70">{{ s.books_label | escape }}</legend>
+          <div role="radiogroup" class="flex flex-wrap gap-3">
+            {%- for n in book_list -%}
+              {%- if n != blank -%}<button type="button" role="radio" aria-checked="false" data-lpl-books="{{ n }}" class="rounded-2xl border-2 px-5 py-3 font-semibold transition duration-300">{{ n }} {{ s.books_word | escape }}</button>{%- endif -%}
+            {%- endfor -%}
+          </div>
+        </fieldset>
+        <div class="flex flex-wrap items-end justify-between gap-4 border-t border-foreground/20 pt-6">
+          <div>
+            <p class="text-sm text-foreground/70" data-lpl-plan-summary></p>
+            <p class="font-heading text-5xl font-bold"><span data-lpl-plan-price></span><span class="text-lg font-medium text-foreground/70">{{ s.per_month | escape }}</span></p>
+          </div>
+          <a href="{{ s.fallback_url | default: '/pages/neown-reading-sip' }}" data-lpl-plan-cta class="inline-flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer transition-colors bg-primary text-primary-foreground shadow hover:bg-primary/90 h-12 rounded-full shine px-7 text-base font-bold shadow-[var(--shadow-glow)]">{{ s.cta_label | escape }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="application/json" data-lpl-plan-data>
+    [
+      {%- for block in section.blocks -%}
+        {"audience": {{ block.settings.audience | json }}, "books": {{ block.settings.books | json }}, "price": {{ block.settings.price | json }}, "planId": {{ block.settings.razorpay_plan_id | strip | json }}, "title": {{ block.settings.title | json }}}{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  </script>
+</section>
+{%- if s.show_bar -%}
+  {%- comment -%} Phone-only bar that slides in once the visitor has scrolled past the hero, and hides while the plans are on screen. {%- endcomment -%}
+  <div data-lpl-sticky-bar class="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 px-4 py-3 shadow-soft backdrop-blur-xl transition duration-500 md:hidden pointer-events-none translate-y-full">
+    <div class="flex items-center gap-3">
+      <div class="min-w-0 flex-1 leading-tight">
+        <p class="font-heading text-base font-bold">{{ s.bar_title | escape }}</p>
+        {%- if s.bar_text != blank -%}<p class="text-xs text-muted-foreground">{{ s.bar_text | escape }}</p>{%- endif -%}
+      </div>
+      <a href="{{ s.bar_link | default: '#plans' }}" class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm cursor-pointer transition-colors bg-primary text-primary-foreground shadow hover:bg-primary/90 py-2 shine h-11 rounded-full px-5 font-bold">{{ s.bar_button | escape }}</a>
+    </div>
+  </div>
+{%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "LP: Monthly plans",
+  "tag": "div",
+  "class": "section-lpl",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section anchor (for #links)", "default": "plans" },
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "Monthly book subscription plan and prices" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Monthly plan" },
+    { "type": "select", "id": "tone", "label": "Eyebrow colour", "default": "lime", "options": [
+      { "value": "pink", "label": "Pink" }, { "value": "violet", "label": "Violet" }, { "value": "cyan", "label": "Cyan" },
+      { "value": "lime", "label": "Lime" }, { "value": "orange", "label": "Orange" }, { "value": "teal", "label": "Teal" }
+    ] },
+    { "type": "text", "id": "title", "label": "Heading", "default": "A small monthly investment in a lifelong reader" },
+    { "type": "checkbox", "id": "animate", "label": "Animate heading words", "default": true },
+    { "type": "text", "id": "accent", "label": "Gradient words in heading", "default": "lifelong reader" },
+    { "type": "text", "id": "subtitle", "label": "Text under heading" },
+    { "type": "textarea", "id": "checks", "label": "Checklist (one per line)", "default": "Billed monthly, no lock-in\n75,000+ books on the app\n₹0 deposit, pan-India delivery" },
+    { "type": "text", "id": "who_label", "label": "\"Who's reading\" label", "default": "Who's reading?" },
+    { "type": "text", "id": "label_single", "label": "Single child label", "default": "Single child" },
+    { "type": "text", "id": "label_siblings", "label": "Siblings label", "default": "Siblings" },
+    { "type": "text", "id": "books_label", "label": "\"Books per month\" label", "default": "Books per month" },
+    { "type": "text", "id": "books_word", "label": "Word after the number of books", "default": "books" },
+    { "type": "text", "id": "each_label", "label": "Siblings suffix in summary", "default": " each" },
+    { "type": "text", "id": "per_month", "label": "Price suffix", "default": "/month" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Start monthly plan" },
+    { "type": "select", "id": "default_audience", "label": "Selected by default", "default": "single", "options": [
+      { "value": "single", "label": "Single child" }, { "value": "siblings", "label": "Siblings" }
+    ] },
+    { "type": "number", "id": "default_books", "label": "Books selected by default", "default": 5 },
+    { "type": "header", "content": "Checkout" },
+    { "type": "select", "id": "checkout", "label": "Button opens", "default": "popup", "options": [
+      { "value": "popup", "label": "Reading SIP payment popup on this page" },
+      { "value": "page", "label": "Reading SIP page with the plan selected" }
+    ], "info": "The popup needs a Reading SIP section on this page (its plan cards can be hidden). Without one, the button goes to the page below." },
+    { "type": "text", "id": "fallback_url", "label": "Reading SIP page URL", "default": "/pages/neown-reading-sip" },
+    { "type": "header", "content": "Sticky bar (phones)" },
+    { "type": "checkbox", "id": "show_bar", "label": "Show sticky \"See plans\" bar on phones", "default": true },
+    { "type": "text", "id": "bar_title", "label": "Bar title", "default": "From ₹399/month" },
+    { "type": "text", "id": "bar_text", "label": "Bar text", "default": "Monthly plan · ₹0 deposit" },
+    { "type": "text", "id": "bar_button", "label": "Bar button", "default": "See plans" },
+    { "type": "text", "id": "bar_link", "label": "Bar button link", "default": "#plans" }
+  ],
+  "blocks": [
+    {
+      "type": "plan",
+      "name": "Plan",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Plan name (shown in the payment popup)", "default": "5 Books Plan" },
+        { "type": "select", "id": "audience", "label": "Who's reading", "default": "single", "options": [
+          { "value": "single", "label": "Single child" }, { "value": "siblings", "label": "Siblings" }
+        ] },
+        { "type": "number", "id": "books", "label": "Books per month", "default": 5 },
+        { "type": "number", "id": "price", "label": "Monthly price (₹)", "info": "Must match the Razorpay plan amount.", "default": 499 },
+        { "type": "text", "id": "razorpay_plan_id", "label": "Razorpay plan ID", "info": "Same plan ID as in the Reading SIP section." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "LP: Monthly plans" }]
+}
+{% endschema %}

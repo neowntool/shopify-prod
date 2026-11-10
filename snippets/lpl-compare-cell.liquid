@@ -1,0 +1,8 @@
+{%- comment -%} Comparison table cell: yes → check, no → cross, - → dash, anything else is shown as text. {%- endcomment -%}
+{%- assign v = value | strip | downcase -%}
+{%- case v -%}
+  {%- when 'yes' -%}{% render 'lpl-icon', name: 'check', class: 'mx-auto size-5 text-ink-lime' %}
+  {%- when 'no' -%}{% render 'lpl-icon', name: 'x', class: 'mx-auto size-5 text-muted-foreground/60' %}
+  {%- when '-' -%}{% render 'lpl-icon', name: 'minus', class: 'mx-auto size-4 text-muted-foreground/60' %}
+  {%- else -%}<span>{{ value | strip | escape }}</span>
+{%- endcase -%}

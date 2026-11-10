@@ -1,0 +1,30 @@
+{%- comment -%}
+  One book in the LP book shelf. Params: title, img (URL), url (optional), tilt (index, alternates the tilt),
+  hidden (2 = the duplicated copy used for the marquee loop), attrs (block attributes, optional).
+{%- endcomment -%}
+{%- liquid
+  assign t = tilt | modulo: 3
+  case t
+    when 0
+      assign tilt_cls = '-rotate-2'
+    when 1
+      assign tilt_cls = 'rotate-1'
+    else
+      assign tilt_cls = 'rotate-0'
+  endcase
+-%}
+<li class="shrink-0 w-32 md:w-44"{% if hidden == 2 %} aria-hidden="true"{% endif %} {{ attrs }}>
+  {%- if url != blank %}<a href="{{ url }}"{% if hidden == 2 %} tabindex="-1"{% endif %}>{% endif -%}
+  <figure class="transition duration-500 hover:-translate-y-2 hover:rotate-0 {{ tilt_cls }}">
+    <div class="relative">
+      {%- if img != blank -%}
+        <img src="{{ img }}" alt="{{ title | escape }} book cover" loading="lazy" width="176" height="264" class="aspect-[2/3] w-full rounded-r-xl rounded-l-sm object-cover shadow-[var(--shadow-book)]">
+      {%- else -%}
+        <span class="block aspect-[2/3] w-full rounded-r-xl rounded-l-sm bg-card shadow-[var(--shadow-book)]"></span>
+      {%- endif -%}
+      <span aria-hidden="true" class="absolute inset-y-0 left-0 w-2 rounded-l-sm bg-gradient-to-r from-foreground/25 to-transparent"></span>
+    </div>
+    <figcaption class="mt-3 line-clamp-2 text-xs font-semibold md:text-sm">{{ title | escape }}</figcaption>
+  </figure>
+  {%- if url != blank %}</a>{% endif -%}
+</li>
