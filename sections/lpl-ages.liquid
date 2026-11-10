@@ -6,6 +6,8 @@
   assign age_count = 0
 -%}
 <div class="lpl">
+{%- assign phone_limit = s.phone_limit | default: 6 -%}
+<style>@media (max-width: 1023px){#shopify-section-{{ section.id }} [data-lpl-age-item]:nth-child(n+{{ phone_limit | plus: 1 }}){display:none!important}}</style>
 <div id="{{ anchor }}" class="scroll-mt-24" data-lpl-ages>
   <div class="mx-auto max-w-7xl px-4 sm:px-6 mt-20 md:mt-28">
     <div data-shown="false" class="reveal reveal-blur">
@@ -97,6 +99,7 @@
     { "type": "checkbox", "id": "animate", "label": "Animate heading words", "default": true },
     { "type": "text", "id": "accent", "label": "Gradient words in heading", "default": "every age." },
     { "type": "text", "id": "subtitle", "label": "Text under heading", "default": "Tap an age to see what kids are reading." },
+    { "type": "range", "id": "phone_limit", "label": "Books per tab on phones and tablets", "info": "Desktop shows the full number set on each age tab (6 per row).", "min": 2, "max": 12, "step": 1, "default": 6 },
     { "type": "text", "id": "tabs_label", "label": "Tabs accessible label", "default": "Child's age" },
     { "type": "text", "id": "link1_label", "label": "Link 1 label", "default": "Browse books" },
     { "type": "text", "id": "link1_url", "label": "Link 1 URL", "info": "Used when the selected age tab has no collection. With a collection, this link opens that collection.", "default": "#top-books" },
@@ -116,7 +119,7 @@
       "settings": [
         { "type": "text", "id": "label", "label": "Tab label", "default": "6–8 yrs" },
         { "type": "collection", "id": "collection", "label": "Collection", "info": "Shows this collection's books under the tab, and \"Browse books\" opens it." },
-        { "type": "range", "id": "limit", "label": "Number of books from the collection", "min": 2, "max": 12, "step": 1, "default": 6 },
+        { "type": "range", "id": "limit", "label": "Number of books from the collection", "info": "6 per row on desktop; use 12 for two rows.", "min": 2, "max": 12, "step": 1, "default": 12 },
         { "type": "paragraph", "content": "Without a collection, add Book blocks right after this tab; they show under it." }
       ]
     },

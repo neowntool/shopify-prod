@@ -256,7 +256,7 @@
           "settings": {
             "label": "0–2 yrs",
             "collection": "0-2-years",
-            "limit": 6
+            "limit": 12
           }
         },
         "lpl_ages_3": {
@@ -264,7 +264,7 @@
           "settings": {
             "label": "3–5 yrs",
             "collection": "3-5-years",
-            "limit": 6
+            "limit": 12
           }
         },
         "lpl_ages_7": {
@@ -272,7 +272,7 @@
           "settings": {
             "label": "6–8 yrs",
             "collection": "6-8-years",
-            "limit": 6
+            "limit": 12
           }
         },
         "lpl_ages_14": {
@@ -280,7 +280,7 @@
           "settings": {
             "label": "9–12 yrs",
             "collection": "9-12-years",
-            "limit": 6
+            "limit": 12
           }
         },
         "lpl_ages_21": {
@@ -288,7 +288,7 @@
           "settings": {
             "label": "13–16 yrs",
             "collection": "13-16-years",
-            "limit": 6
+            "limit": 12
           }
         }
       },
@@ -302,7 +302,9 @@
     },
     "lpl_compare": {
       "type": "lpl-compare",
-      "settings": {},
+      "settings": {
+        "eyebrow": "Do THE MATH"
+      },
       "blocks": {
         "lpl_compare_0": {
           "type": "row",
@@ -370,7 +372,9 @@
     },
     "lpl_savings": {
       "type": "lpl-savings",
-      "settings": {}
+      "settings": {
+        "default_books": 3
+      }
     },
     "lpl_reviews": {
       "type": "lpl-reviews",
