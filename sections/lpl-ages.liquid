@@ -16,18 +16,36 @@
         {%- for block in section.blocks -%}
           {%- if block.type == 'age' -%}
             {%- assign tone = tones[age_count] | default: 'pink' -%}
-            <button type="button" role="tab" aria-selected="{% if age_count == 0 %}true{% else %}false{% endif %}" data-lpl-age-tab="{{ age_count }}" data-tone="{{ tone }}" class="press shrink-0 rounded-full px-4 py-2.5 text-sm font-bold transition sm:px-6{% if age_count == 0 %} bg-ink-{{ tone }} text-background{% else %} text-muted-foreground hover:text-foreground{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</button>
+            <button type="button" role="tab" aria-selected="{% if age_count == 0 %}true{% else %}false{% endif %}" data-lpl-age-tab="{{ age_count }}" data-tone="{{ tone }}"{% if block.settings.collection != blank %} data-collection-url="{{ block.settings.collection.url }}"{% endif %} class="press shrink-0 rounded-full px-4 py-2.5 text-sm font-bold transition sm:px-6{% if age_count == 0 %} bg-ink-{{ tone }} text-background{% else %} text-muted-foreground hover:text-foreground{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</button>
             {%- assign age_count = age_count | plus: 1 -%}
           {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
-    {%- comment -%} Book blocks belong to the age tab block above them. {%- endcomment -%}
+    {%- comment -%}
+      Each age tab shows the books of its collection when one is picked; otherwise the Book blocks placed after it.
+    {%- endcomment -%}
     {%- assign panel = -1 -%}
     {%- for age_block in section.blocks -%}
       {%- if age_block.type != 'age' -%}{%- continue -%}{%- endif -%}
       {%- assign panel = panel | plus: 1 -%}
       <div class="mt-10 grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-bottom-3 duration-500 sm:grid-cols-3 lg:grid-cols-6" role="tabpanel" data-lpl-age-panel="{{ panel }}"{% if panel > 0 %} hidden{% endif %}>
+        {%- if age_block.settings.collection != blank -%}
+          {%- assign btone = s.collection_badge_tone -%}
+          {%- for product in age_block.settings.collection.products limit: age_block.settings.limit -%}
+            <figure class="lift relative rounded-2xl p-3 bg-card" data-lpl-age-item>
+              {%- if s.collection_badge != blank -%}<span class="absolute left-3 top-3 z-10 rounded-full px-2.5 py-0.5 text-[11px] font-bold bg-tint-{{ btone }} text-ink-{{ btone }}">{{ s.collection_badge | escape }}</span>{%- endif -%}
+              <a href="{{ product.url }}">
+                {%- if product.featured_image != blank -%}
+                  <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title | escape }}" loading="lazy" width="500" height="667" class="aspect-[3/4] w-full rounded-lg object-cover shadow-[var(--shadow-book)]">
+                {%- else -%}
+                  <span class="block aspect-[3/4] w-full rounded-lg bg-muted"></span>
+                {%- endif -%}
+                <figcaption class="mt-3 line-clamp-2 text-sm font-semibold">{{ product.title | escape }}</figcaption>
+              </a>
+            </figure>
+          {%- endfor -%}
+        {%- else -%}
         {%- assign owner = -1 -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'age' -%}{%- assign owner = owner | plus: 1 -%}{%- continue -%}{%- endif -%}
@@ -50,11 +68,12 @@
             {%- if block.settings.link != blank %}</a>{% endif -%}
           </figure>
         {%- endfor -%}
+        {%- endif -%}
       </div>
     {%- endfor -%}
     {%- if s.link1_label != blank or s.link2_label != blank -%}
       <div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3">
-        {%- if s.link1_label != blank -%}<a href="{{ s.link1_url }}" class="group inline-flex items-center font-semibold text-primary">{{ s.link1_label | escape }} {% render 'lpl-icon', name: 'chevron-right', class: 'size-4 transition group-hover:translate-x-0.5' %}</a>{%- endif -%}
+        {%- if s.link1_label != blank -%}<a href="{{ s.link1_url }}" data-lpl-age-browse data-default-href="{{ s.link1_url }}" class="group inline-flex items-center font-semibold text-primary">{{ s.link1_label | escape }} {% render 'lpl-icon', name: 'chevron-right', class: 'size-4 transition group-hover:translate-x-0.5' %}</a>{%- endif -%}
         {%- if s.link2_label != blank -%}<a href="{{ s.link2_url }}" class="group inline-flex items-center font-semibold text-ink-orange">{{ s.link2_label | escape }} {% render 'lpl-icon', name: 'chevron-right', class: 'size-4 transition group-hover:translate-x-0.5' %}</a>{%- endif -%}
       </div>
     {%- endif -%}
@@ -80,9 +99,15 @@
     { "type": "text", "id": "subtitle", "label": "Text under heading", "default": "Tap an age to see what kids are reading." },
     { "type": "text", "id": "tabs_label", "label": "Tabs accessible label", "default": "Child's age" },
     { "type": "text", "id": "link1_label", "label": "Link 1 label", "default": "Browse books" },
-    { "type": "text", "id": "link1_url", "label": "Link 1 URL", "default": "#top-books" },
+    { "type": "text", "id": "link1_url", "label": "Link 1 URL", "info": "Used when the selected age tab has no collection. With a collection, this link opens that collection.", "default": "#top-books" },
     { "type": "text", "id": "link2_label", "label": "Link 2 label", "default": "See plans" },
-    { "type": "text", "id": "link2_url", "label": "Link 2 URL", "default": "#plans" }
+    { "type": "text", "id": "link2_url", "label": "Link 2 URL", "default": "#plans" },
+    { "type": "header", "content": "Books from collections" },
+    { "type": "text", "id": "collection_badge", "label": "Badge on collection books", "default": "Book" },
+    { "type": "select", "id": "collection_badge_tone", "label": "Badge colour", "default": "violet", "options": [
+      { "value": "pink", "label": "Pink" }, { "value": "violet", "label": "Violet" }, { "value": "cyan", "label": "Cyan" },
+      { "value": "lime", "label": "Lime" }, { "value": "orange", "label": "Orange" }
+    ] }
   ],
   "blocks": [
     {
@@ -90,7 +115,9 @@
       "name": "Age tab",
       "settings": [
         { "type": "text", "id": "label", "label": "Tab label", "default": "6–8 yrs" },
-        { "type": "paragraph", "content": "Add Book blocks right after this tab; they show under it." }
+        { "type": "collection", "id": "collection", "label": "Collection", "info": "Shows this collection's books under the tab, and \"Browse books\" opens it." },
+        { "type": "range", "id": "limit", "label": "Number of books from the collection", "min": 2, "max": 12, "step": 1, "default": 6 },
+        { "type": "paragraph", "content": "Without a collection, add Book blocks right after this tab; they show under it." }
       ]
     },
     {

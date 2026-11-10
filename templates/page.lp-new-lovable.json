@@ -250,270 +250,50 @@
         "lpl_ages_0": {
           "type": "age",
           "settings": {
-            "label": "0–2 yrs"
-          }
-        },
-        "lpl_ages_1": {
-          "type": "item",
-          "settings": {
-            "title": "Touch & feel board books",
-            "image_fallback": "lpl-age-0-2-b.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_2": {
-          "type": "item",
-          "settings": {
-            "title": "First words & shapes",
-            "image_fallback": "lpl-age-0-2-a.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
+            "label": "0–2 yrs",
+            "collection": "0-2-years",
+            "limit": 6
           }
         },
         "lpl_ages_3": {
           "type": "age",
           "settings": {
-            "label": "3–5 yrs"
-          }
-        },
-        "lpl_ages_4": {
-          "type": "item",
-          "settings": {
-            "title": "Picture-book adventures",
-            "image_fallback": "lpl-age-3-5-a.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_5": {
-          "type": "item",
-          "settings": {
-            "title": "Rhyming read-alouds",
-            "image_fallback": "lpl-age-3-5-b.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_6": {
-          "type": "item",
-          "settings": {
-            "title": "Preschool Activity Books Bundle",
-            "image_fallback": "lpl-book-preschool.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
+            "label": "3–5 yrs",
+            "collection": "3-5-years",
+            "limit": 6
           }
         },
         "lpl_ages_7": {
           "type": "age",
           "settings": {
-            "label": "6–8 yrs"
-          }
-        },
-        "lpl_ages_8": {
-          "type": "item",
-          "settings": {
-            "title": "Geronimo Stilton #1: Lost Treasure of the Emerald Eye",
-            "image_fallback": "lpl-book-01.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_9": {
-          "type": "item",
-          "settings": {
-            "title": "Dog Man #13: Big Jim Begins",
-            "image_fallback": "lpl-book-03.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_10": {
-          "type": "item",
-          "settings": {
-            "title": "A Mammoth Mystery",
-            "image_fallback": "lpl-book-05.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_11": {
-          "type": "item",
-          "settings": {
-            "title": "Cat Kid Comic Club: Collaborations",
-            "image_fallback": "lpl-book-06.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_12": {
-          "type": "item",
-          "settings": {
-            "title": "Dog Man #11: Twenty Thousand Fleas Under the Sea",
-            "image_fallback": "lpl-book-09.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_13": {
-          "type": "item",
-          "settings": {
-            "title": "Diary of a Wimpy Kid #16: Big Shot",
-            "image_fallback": "lpl-book-02.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
+            "label": "6–8 yrs",
+            "collection": "6-8-years",
+            "limit": 6
           }
         },
         "lpl_ages_14": {
           "type": "age",
           "settings": {
-            "label": "9–12 yrs"
-          }
-        },
-        "lpl_ages_15": {
-          "type": "item",
-          "settings": {
-            "title": "Diary of a Wimpy Kid #16: Big Shot",
-            "image_fallback": "lpl-book-02.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_16": {
-          "type": "item",
-          "settings": {
-            "title": "Wings of Fire #2: The Lost Heir",
-            "image_fallback": "lpl-book-04.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_17": {
-          "type": "item",
-          "settings": {
-            "title": "Amulet #1: The Stonekeeper",
-            "image_fallback": "lpl-book-10.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_18": {
-          "type": "item",
-          "settings": {
-            "title": "Cat Kid Comic Club: Collaborations",
-            "image_fallback": "lpl-book-06.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_19": {
-          "type": "item",
-          "settings": {
-            "title": "Geronimo Stilton #1: Lost Treasure of the Emerald Eye",
-            "image_fallback": "lpl-book-01.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_20": {
-          "type": "item",
-          "settings": {
-            "title": "The Wild Robot",
-            "image_fallback": "lpl-book-07.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
+            "label": "9–12 yrs",
+            "collection": "9-12-years",
+            "limit": 6
           }
         },
         "lpl_ages_21": {
           "type": "age",
           "settings": {
-            "label": "13–16 yrs"
-          }
-        },
-        "lpl_ages_22": {
-          "type": "item",
-          "settings": {
-            "title": "Percy Jackson and the Sea of Monsters",
-            "image_fallback": "lpl-book-08.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_23": {
-          "type": "item",
-          "settings": {
-            "title": "The Wild Robot",
-            "image_fallback": "lpl-book-07.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_24": {
-          "type": "item",
-          "settings": {
-            "title": "Wings of Fire #2: The Lost Heir",
-            "image_fallback": "lpl-book-04.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_25": {
-          "type": "item",
-          "settings": {
-            "title": "Amulet #1: The Stonekeeper",
-            "image_fallback": "lpl-book-10.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_26": {
-          "type": "item",
-          "settings": {
-            "title": "Diary of a Wimpy Kid #16: Big Shot",
-            "image_fallback": "lpl-book-02.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
-          }
-        },
-        "lpl_ages_27": {
-          "type": "item",
-          "settings": {
-            "title": "Geronimo Stilton #1: Lost Treasure of the Emerald Eye",
-            "image_fallback": "lpl-book-01.jpg",
-            "badge": "Book",
-            "badge_tone": "violet"
+            "label": "13–16 yrs",
+            "collection": "13-16-years",
+            "limit": 6
           }
         }
       },
       "block_order": [
         "lpl_ages_0",
-        "lpl_ages_1",
-        "lpl_ages_2",
         "lpl_ages_3",
-        "lpl_ages_4",
-        "lpl_ages_5",
-        "lpl_ages_6",
         "lpl_ages_7",
-        "lpl_ages_8",
-        "lpl_ages_9",
-        "lpl_ages_10",
-        "lpl_ages_11",
-        "lpl_ages_12",
-        "lpl_ages_13",
         "lpl_ages_14",
-        "lpl_ages_15",
-        "lpl_ages_16",
-        "lpl_ages_17",
-        "lpl_ages_18",
-        "lpl_ages_19",
-        "lpl_ages_20",
-        "lpl_ages_21",
-        "lpl_ages_22",
-        "lpl_ages_23",
-        "lpl_ages_24",
-        "lpl_ages_25",
-        "lpl_ages_26",
-        "lpl_ages_27"
+        "lpl_ages_21"
       ]
     },
     "lpl_compare": {
