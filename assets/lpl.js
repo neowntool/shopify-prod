@@ -242,6 +242,11 @@
     if (!box || box.__lpl) return;
     box.__lpl = true;
     var tabs = $$(box, '[data-lpl-age-tab]');
+    var browse = box.querySelector('[data-lpl-age-browse]');
+    // "Browse books" opens the selected tab's collection, or the section's own link when the tab has none.
+    function pointBrowse(tab) {
+      if (browse) browse.href = (tab && tab.dataset.collectionUrl) || browse.dataset.defaultHref;
+    }
     tabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
         tabs.forEach(function (t) {
@@ -251,8 +256,10 @@
                         on ? ['text-muted-foreground', 'hover:text-foreground'] : ['bg-ink-' + tone, 'text-background']);
         });
         $$(box, '[data-lpl-age-panel]').forEach(function (p) { p.hidden = p.dataset.lplAgePanel !== tab.dataset.lplAgeTab; });
+        pointBrowse(tab);
       });
     });
+    pointBrowse(tabs[0]);
   }
 
   /* ---------- savings calculator ---------- */
