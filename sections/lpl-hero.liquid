@@ -11,6 +11,8 @@
 -%}
 <div class="lpl" id="{{ s.anchor | default: 'top' | handleize }}">
 {%- if s.show_backdrop -%}{% render 'lpl-backdrop' %}{%- endif -%}
+{%- comment -%} The theme's floating "Need Help" WhatsApp button is added in layout/theme.liquid for every page. {%- endcomment -%}
+{%- if s.hide_theme_whatsapp -%}<style>#whatsapp-widget{display:none!important}</style>{%- endif -%}
 <section aria-label="{{ s.aria_label | escape }}">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 grid items-center gap-8 pb-4 pt-8 text-center md:grid-cols-[1.15fr_0.85fr] md:gap-12 md:pt-14 md:text-left">
     <div class="mx-auto max-w-3xl space-y-5 md:mx-0">
@@ -123,6 +125,7 @@
     { "type": "text", "id": "anchor", "label": "Section anchor (for #links)", "default": "top" },
     { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "Kids book subscription" },
     { "type": "checkbox", "id": "show_backdrop", "label": "Show grid and doodles background behind the whole page", "default": true },
+    { "type": "checkbox", "id": "hide_theme_whatsapp", "label": "Hide the theme's WhatsApp \"Need Help\" button on this page", "default": true },
     { "type": "checkbox", "id": "show_stars", "label": "Show 5 stars", "default": true },
     { "type": "text", "id": "rating_text", "label": "Rating line", "default": "Loved by 15,000+ Indian parents" },
     { "type": "text", "id": "title", "label": "Heading", "default": "Big Reading. Small Spending." },
