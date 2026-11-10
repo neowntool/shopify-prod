@@ -58,8 +58,8 @@
         "slider_item_qLGnAp": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/books_diwali_web_banner_10_1.png",
-            "mb_background": "shopify://shop_images/books_diwali_web_banner_10_1.png",
+            "background": "shopify://shop_images/borrow_more_web_banner_8_1.png",
+            "mb_background": "shopify://shop_images/borrow_more_web_banner_8_1.png",
             "schedule_start": "2026-10-29 00:00",
             "schedule_end": "",
             "content_in_container": false,
@@ -89,8 +89,8 @@
         "slider_item_ReNGYH": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/gifting_web_banner_12_2_1.png",
-            "mb_background": "shopify://shop_images/gifting_web_banner_12_2_1.png",
+            "background": "shopify://shop_images/More_Reading_web_banner_2_3.png",
+            "mb_background": "shopify://shop_images/More_Reading_web_banner_2_3.png",
             "schedule_start": "",
             "schedule_end": "",
             "content_in_container": false,

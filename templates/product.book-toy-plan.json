@@ -58,9 +58,9 @@
         "slider_item_P7UQhm": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/toys_diwali_web_banner_14_1.png",
-            "mb_background": "shopify://shop_images/toys_diwali_web_banner_14_1.png",
-            "schedule_start": "2026-10-29 00:00",
+            "background": "shopify://shop_images/read_toys_web_banner_10_1.png",
+            "mb_background": "shopify://shop_images/read_toys_web_banner_10_1.png",
+            "schedule_start": "",
             "schedule_end": "",
             "content_in_container": false,
             "content_position": "center middle",

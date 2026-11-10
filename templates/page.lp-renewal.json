@@ -52,8 +52,8 @@
         "slider_item_hHcyeW": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/pre_diwali_1_banner_6_1.png",
-            "mb_background": "shopify://shop_images/pre_diwali_1_banner_6_1.png",
+            "background": "shopify://shop_images/More_Reading_web_banner_2_3.png",
+            "mb_background": "shopify://shop_images/More_Reading_web_banner_2_3.png",
             "schedule_start": "",
             "schedule_end": "",
             "content_in_container": false,
@@ -82,6 +82,7 @@
         },
         "slider_item_mhpqnP": {
           "type": "slider_item",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/gifting_web_banner_12_1.png",
             "mb_background": "shopify://shop_images/gifting_web_banner_12_1.png",

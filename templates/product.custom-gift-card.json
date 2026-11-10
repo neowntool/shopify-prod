@@ -26,8 +26,8 @@
         "slider_item_WFDHzc": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/gifting_web_banner_3_1.png",
-            "mb_background": "shopify://shop_images/gifting_mob_banner_1.png",
+            "background": "shopify://shop_images/gifting_web_banner_10_1.png",
+            "mb_background": "shopify://shop_images/gifting_mob_banner_4_1.png",
             "schedule_start": "",
             "schedule_end": "",
             "content_in_container": false,

@@ -86,9 +86,9 @@
         "slider_item_BqxHLb": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/books_diwali_web_banner_10_1.png",
-            "mb_background": "shopify://shop_images/books_diwali_mob_banner_1.png",
-            "schedule_start": "2026-10-29 00:00",
+            "background": "shopify://shop_images/borrow_more_web_banner_8_1.png",
+            "mb_background": "shopify://shop_images/borrow_more_mob_banner_1.png",
+            "schedule_start": "",
             "schedule_end": "",
             "content_in_container": true,
             "content_position": "right middle",
@@ -117,8 +117,8 @@
         "slider_item_XBrRWF": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/gifting_web_banner_12_2_1.png",
-            "mb_background": "shopify://shop_images/gifting_mob_banner_3_1.png",
+            "background": "shopify://shop_images/More_Reading_web_banner_2_3.png",
+            "mb_background": "shopify://shop_images/More_Reading_mob_banner_3.png",
             "schedule_start": "",
             "schedule_end": "",
             "content_in_container": true,
@@ -148,8 +148,8 @@
         "slider_item_8gzmUT": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/toys_diwali_web_banner_14_1.png",
-            "mb_background": "shopify://shop_images/toys_diwali_mob_banner_1.png",
+            "background": "shopify://shop_images/rent_toys_web_banner_9_1.png",
+            "mb_background": "shopify://shop_images/rent_toys_mob_banner_1.png",
             "schedule_start": "",
             "schedule_end": "",
             "content_in_container": true,
