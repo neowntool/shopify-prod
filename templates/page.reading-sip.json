@@ -156,6 +156,7 @@
       "settings": {
         "backend_url": "https://prod-backend.neown.in",
         "success_url": "/pages/reading-sip-thank-you",
+        "show_cards": true,
         "heading": "Choose Your SIP",
         "subheading": "",
         "tab_single": "Single Child",

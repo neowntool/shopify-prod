@@ -1,17 +1,61 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "thanks": {
       "type": "neown-reading-sip-thanks",
       "settings": {
+        "heading": "You're all set, [name]!",
+        "lead": "Your child's Reading SIP is active. Here's how to get your first set of books.",
+        "steps_heading": "Get started in the neOwn app",
+        "step1_title": "Download the app",
+        "step1_text": "Your child's Reading SIP is linked to your mobile number.",
+        "step2_title": "Add your child and address in the app",
+        "step2_text": "So we can suggest the right books and deliver to your door.",
+        "step3_title": "Select books for your child",
+        "step3_text": "Choose in the app by [date], or we'll curate a set for you.",
+        "select_days": 3,
         "playstore_link": "https://play.google.com/store/apps/details?id=com.neown",
         "appstore_link": "https://apps.apple.com/in/app/neown/id6483860525",
-        "help_text": "+91 93244 55972 · Mon–Sat, 9am–6pm IST",
+        "payment_heading": "Payment",
+        "no_receipt_text": "Your payment confirmation has been sent to you by SMS/email.",
+        "whatsapp_label": "Need help? Chat on WhatsApp",
         "whatsapp_link": "https://api.whatsapp.com/send/?phone=919324455972&text=Hi%2C+I+just+subscribed+to+Neown+Reading+SIP+and+need+help&type=phone_number&app_absent=0",
-        "fallback_url": "/pages/neown-reading-sip"
+        "help_text": "+91 93244 55972 · Mon–Sat, 9am–6pm IST",
+        "timeline_heading": "What happens next",
+        "tl1_title": "SIP active",
+        "tl1_text": "Payment done, Autopay set.",
+        "tl2_title": "Select books",
+        "tl2_text": "In the app, or we curate.",
+        "tl3_title": "Books delivered",
+        "tl3_text": "Your reading cycle starts.",
+        "tl4_title": "Monthly swap",
+        "tl4_text": "New books in, old ones picked up.",
+        "cycle_note": "Your monthly reading cycle starts on the day your books are delivered.",
+        "only_after_purchase": true,
+        "fallback_url": "/pages/neown-reading-sip",
+        "accent_color": "#5f35e8",
+        "highlight_color": "#eefc74"
+      }
+    },
+    "custom_liquid_PKUMAa": {
+      "type": "custom-liquid",
+      "name": "Custom liquid",
+      "settings": {
+        "custom_liquid": "<script>(function(){var EXP='reading_sip_lp_nov26';var v=null;try{v=localStorage.getItem('ab_'+EXP);}catch(e){}if(!v)return;window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('event','sip_signup_complete',{experiment_id:EXP,variant:v});})();</script>",
+        "custom_class": ""
       }
     }
   },
   "order": [
-    "thanks"
+    "thanks",
+    "custom_liquid_PKUMAa"
   ]
 }
