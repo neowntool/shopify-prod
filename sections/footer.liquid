@@ -5,6 +5,7 @@
 -%}
   <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
+{%- if section.settings.neown_style -%}{% render 'footer-style', section: section %}{%- endif -%}
 <m-footer class="m-footer m:block" data-section-type="footer" data-section-id="{{ section.id }}">
   {% render 'footer-blocks',
     blocks: section.blocks,
@@ -22,6 +23,13 @@
       "type": "paragraph",
       "content": "[Watch tutorial](https://foxecom.link/abZ4Ot)"
     },
+    { "type": "header", "content": "neOwn footer style" },
+    { "type": "checkbox", "id": "neown_style", "label": "Use the neOwn footer style", "info": "Geologica font and the colours below. Turn off to go back to the colour scheme.", "default": true },
+    { "type": "color", "id": "style_bg", "label": "Background", "default": "#2a0b6e" },
+    { "type": "color", "id": "style_bottom_bg", "label": "Bottom bar background", "default": "#1f0852" },
+    { "type": "color", "id": "style_text", "label": "Text", "default": "#e6defc" },
+    { "type": "color", "id": "style_heading", "label": "Headings", "default": "#ffffff" },
+    { "type": "color", "id": "style_accent", "label": "Link hover and accents", "default": "#ff4fb3" },
     {
       "type": "color_scheme",
       "id": "color_scheme",

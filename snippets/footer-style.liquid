@@ -1,0 +1,115 @@
+{%- comment -%}
+  Footer look: Geologica font, solid brand colours and spacing polish.
+  Only styles; every footer block, link and setting stays as it is. Turn off with "Use the neOwn footer style".
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign bg = s.style_bg | default: '#2a0b6e'
+  assign bottom_bg = s.style_bottom_bg | default: '#1f0852'
+  assign text = s.style_text | default: '#e6defc'
+  assign heading = s.style_heading | default: '#ffffff'
+  assign accent = s.style_accent | default: '#ff4fb3'
+-%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700&display=swap">
+<style>
+  #shopify-section-{{ section.id }} .m-footer {
+    --nf-bg: {{ bg }};
+    --nf-bottom-bg: {{ bottom_bg }};
+    --nf-text: {{ text }};
+    --nf-heading: {{ heading }};
+    --nf-accent: {{ accent }};
+    font-family: 'Geologica', sans-serif;
+    color: var(--nf-text);
+    background: var(--nf-bg);
+  }
+  #shopify-section-{{ section.id }} .m-footer *:not(svg):not(path) { font-family: 'Geologica', sans-serif; }
+  #shopify-section-{{ section.id }} .m-footer .m-footer--middle,
+  #shopify-section-{{ section.id }} .m-footer .m-footer--bottom {
+    background: var(--nf-bg) !important;
+    background-image: none !important;
+    color: var(--nf-text);
+    --color-text: var(--nf-text);
+    --color-heading: var(--nf-heading);
+    --color-sub-text: var(--nf-text);
+    --color-border: rgba(255,255,255,.14);
+  }
+  #shopify-section-{{ section.id }} .m-footer .m-footer--middle {
+    position: relative;
+    padding-top: 40px;
+    padding-bottom: 24px;
+  }
+  #shopify-section-{{ section.id }} .m-footer .m-footer--block { margin-bottom: 0; }
+  #shopify-section-{{ section.id }} .m-footer .m-footer--bottom-inner { padding-top: 8px; padding-bottom: 8px; }
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} .m-footer .m-footer--middle .m-footer--block { padding-top: 16px; padding-bottom: 16px; }
+  }
+  /* Thin brand stripe along the top edge */
+  #shopify-section-{{ section.id }} .m-footer .m-footer--middle::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
+    background: linear-gradient(90deg, var(--nf-accent), #8b5cf6 55%, #22d3ee);
+  }
+  #shopify-section-{{ section.id }} .m-footer .m-footer--bottom {
+    background: var(--nf-bottom-bg) !important;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  #shopify-section-{{ section.id }} .m-footer .m-footer--block-title {
+    color: var(--nf-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+  #shopify-section-{{ section.id }} .m-footer .m-accordion--item-icon,
+  #shopify-section-{{ section.id }} .m-footer .m-accordion--item-icon svg { color: var(--nf-heading); fill: currentColor; }
+  #shopify-section-{{ section.id }} .m-footer .block-text,
+  #shopify-section-{{ section.id }} .m-footer .block-text p,
+  #shopify-section-{{ section.id }} .m-footer .m-footer--block-content {
+    color: var(--nf-text);
+    font-size: 15px;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  #shopify-section-{{ section.id }} .m-footer .m-link-lists--item { margin-bottom: 6px; }
+  #shopify-section-{{ section.id }} .m-footer a,
+  #shopify-section-{{ section.id }} .m-footer .m-link {
+    color: var(--nf-text);
+    transition: color .2s ease, opacity .2s ease;
+  }
+  #shopify-section-{{ section.id }} .m-footer a:hover,
+  #shopify-section-{{ section.id }} .m-footer .m-link:hover { color: var(--nf-accent); }
+  #shopify-section-{{ section.id }} .m-footer .m-button--link:before,
+  #shopify-section-{{ section.id }} .m-footer .m-link:before,
+  #shopify-section-{{ section.id }} .m-footer .m-link:after { background-color: var(--nf-accent); }
+  #shopify-section-{{ section.id }} .m-footer .block-text a {
+    color: var(--nf-heading);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--nf-accent);
+    text-underline-offset: 3px;
+  }
+  #shopify-section-{{ section.id }} .m-footer .block-text img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    margin: 0 0 20px 0 !important;
+  }
+  #shopify-section-{{ section.id }} .m-footer .social-media-links a,
+  #shopify-section-{{ section.id }} .m-footer .social-media-links svg { color: var(--nf-heading); fill: currentColor; }
+  #shopify-section-{{ section.id }} .m-footer .social-media-links--item {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 999px;
+    background: rgba(255,255,255,.08);
+    transition: background .2s ease;
+  }
+  #shopify-section-{{ section.id }} .m-footer .social-media-links--item:hover { background: var(--nf-accent); }
+  #shopify-section-{{ section.id }} .m-footer .m-footer__copyright { color: var(--nf-text); opacity: .8; font-size: 14px; }
+  #shopify-section-{{ section.id }} .m-footer .m-payment-icons--list svg { border-radius: 4px; }
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} .m-footer .m-footer--middle { padding-top: 44px; padding-bottom: 28px; }
+    #shopify-section-{{ section.id }} .m-footer .m-footer--block { border-color: rgba(255,255,255,.12); }
+    #shopify-section-{{ section.id }} .m-footer .block-text img { margin: 0 auto 18px !important; }
+  }
+</style>
