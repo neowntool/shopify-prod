@@ -18,7 +18,7 @@
       "type": "custom-liquid",
       "name": "Custom liquid",
       "settings": {
-        "custom_liquid": "<script>(function(){var EXP='monthly_pack_lp_nov26';var VARIANT='control';window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}try{localStorage.setItem('ab_'+EXP,VARIANT);}catch(e){}gtag('set','user_properties',{reading_sip_lp_variant:VARIANT});gtag('event','ab_variant_view',{experiment_id:EXP,variant:VARIANT});document.addEventListener('click',function(e){var el=e.target.closest('a, button');if(!el)return;var label=(el.innerText||'').trim().slice(0,60);if(!label)return;gtag('event','ab_cta_click',{experiment_id:EXP,variant:VARIANT,cta_label:label,cta_href:el.getAttribute('href')||''});});})();</script>",
+        "custom_liquid": "<script>(function(){var EXP='monthly_pack_lp_nov26';var VARIANT='control';var GA='G-B70XH9DVX1';window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}try{localStorage.setItem('ab_'+EXP,VARIANT);}catch(e){}var n=0;(function wait(){if(window.google_tag_manager&&window.google_tag_manager[GA]){gtag('set','user_properties',{reading_sip_lp_variant:VARIANT});gtag('event','ab_variant_view',{send_to:GA,experiment_id:EXP,variant:VARIANT,user_properties:{reading_sip_lp_variant:VARIANT}});}else if(n++<60){setTimeout(wait,250);}})();document.addEventListener('click',function(e){var el=e.target.closest('a, button');if(!el)return;var label=(el.innerText||'').trim().slice(0,60);if(!label)return;gtag('event','ab_cta_click',{send_to:GA,experiment_id:EXP,variant:VARIANT,cta_label:label,cta_href:el.getAttribute('href')||''});});})();</script>",
         "custom_class": ""
       }
     },
