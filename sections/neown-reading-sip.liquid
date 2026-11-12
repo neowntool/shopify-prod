@@ -145,9 +145,6 @@
   #sip-modal-{{ sid }} .sip-btn:disabled { background: #d9d9dd; color: #9b9aa2; cursor: not-allowed; }
   #sip-modal-{{ sid }} .sip-btn.is-busy { background: var(--sip-cta); color: #fff; opacity: .75; cursor: progress; }
   #sip-modal-{{ sid }} .sip-trust { text-align: center; font-size: 12.5px; color: var(--sip-muted); margin: 12px 0 0; }
-  #sip-modal-{{ sid }} .sip-paytip { display: flex; gap: 10px; align-items: flex-start; margin: 2px 0 10px; padding: 8px 12px; border-radius: 10px; background: #f3f0fe; color: #4a3a8c; font-size: 12.5px; line-height: 1.4; align-items: center; }
-  #sip-modal-{{ sid }} .sip-paytip svg { flex: none; margin-top: 1px; }
-  #sip-modal-{{ sid }} .sip-paytip strong { font-weight: 600; }
   #sip-modal-{{ sid }} .sip-msg { margin-top: 14px; padding: 12px 14px; border-radius: 10px; font-size: 14px; line-height: 1.45; }
   #sip-modal-{{ sid }} .sip-msg:empty { display: none; }
   #sip-modal-{{ sid }} .sip-msg.err { background: #fdecea; color: var(--sip-err); }
@@ -282,12 +279,6 @@
           <input id="sip-email-{{ sid }}" name="email" type="email" placeholder="Enter your email address" autocomplete="email" required>
           <div class="sip-ferr" data-for="email"></div>
         </div>
-        {%- if section.settings.pay_tip != blank -%}
-          <div class="sip-paytip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>
-            <span>{%- if section.settings.pay_tip_title != blank -%}<strong>{{ section.settings.pay_tip_title | escape }}</strong> {% endif -%}{{ section.settings.pay_tip | escape }}</span>
-          </div>
-        {%- endif -%}
         <button type="submit" class="sip-btn" data-continue disabled>{{ section.settings.continue_label | escape }} &rarr;</button>
         {%- if section.settings.trust_line != blank -%}<p class="sip-trust">{{ section.settings.trust_line | escape }}</p>{%- endif -%}
       </form>
@@ -854,8 +845,6 @@
     { "type": "text", "id": "details_sub", "label": "Text", "default": "Just a few details to get your subscription started." },
     { "type": "text", "id": "continue_label", "label": "Button", "default": "Continue to Payment" },
     { "type": "text", "id": "trust_line", "label": "Line under button", "default": "Secure payment by Razorpay · UPI Autopay or card" },
-    { "type": "text", "id": "pay_tip_title", "label": "Payment tip: title", "default": "Paying by UPI app?" },
-    { "type": "textarea", "id": "pay_tip", "label": "Payment tip: text", "info": "Shown above the button. Leave empty to hide.", "default": "Approve it, then come back here to finish." },
     { "type": "header", "content": "Popup: confirming payment" },
     { "type": "text", "id": "confirm_heading", "label": "Confirming screen: heading", "default": "Confirming your payment…" },
     { "type": "text", "id": "confirm_text", "label": "Confirming screen: text", "default": "This takes a few seconds. Please don't close or refresh this page." },
