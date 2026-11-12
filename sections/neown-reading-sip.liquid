@@ -145,11 +145,21 @@
   #sip-modal-{{ sid }} .sip-btn:disabled { background: #d9d9dd; color: #9b9aa2; cursor: not-allowed; }
   #sip-modal-{{ sid }} .sip-btn.is-busy { background: var(--sip-cta); color: #fff; opacity: .75; cursor: progress; }
   #sip-modal-{{ sid }} .sip-trust { text-align: center; font-size: 12.5px; color: var(--sip-muted); margin: 12px 0 0; }
+  #sip-modal-{{ sid }} .sip-paytip { display: flex; gap: 10px; align-items: flex-start; margin: 4px 0 12px; padding: 11px 13px; border-radius: 10px; background: #f3f0fe; color: #4a3a8c; font-size: 13px; line-height: 1.45; }
+  #sip-modal-{{ sid }} .sip-paytip svg { flex: none; margin-top: 1px; }
+  #sip-modal-{{ sid }} .sip-paytip strong { font-weight: 600; }
   #sip-modal-{{ sid }} .sip-msg { margin-top: 14px; padding: 12px 14px; border-radius: 10px; font-size: 14px; line-height: 1.45; }
   #sip-modal-{{ sid }} .sip-msg:empty { display: none; }
   #sip-modal-{{ sid }} .sip-msg.err { background: #fdecea; color: var(--sip-err); }
   #sip-modal-{{ sid }} .sip-msg.info { background: #f3f0fe; color: #4a3a8c; }
   #sip-modal-{{ sid }} .sip-done { text-align: center; padding: 8px 0 4px; }
+  #sip-modal-{{ sid }} .sip-confirm { text-align: center; padding: 18px 0 10px; }
+  #sip-modal-{{ sid }} .sip-spin { width: 56px; height: 56px; margin: 0 auto 18px; border-radius: 50%; border: 4px solid color-mix(in srgb, var(--sip-accent) 18%, transparent); border-top-color: var(--sip-accent); animation: sip-spin .9s linear infinite; }
+  #sip-modal-{{ sid }} .sip-confirm.is-ok .sip-spin { border-color: var(--sip-ok); border-top-color: var(--sip-ok); animation-duration: 1.6s; }
+  #sip-modal-{{ sid }} .sip-confirm .sip-step-sub { margin-bottom: 6px; }
+  #sip-modal-{{ sid }} .sip-confirm-ref { font-size: 12px; color: var(--sip-muted); margin: 10px 0 0; }
+  @keyframes sip-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { #sip-modal-{{ sid }} .sip-spin { animation-duration: 3s; } }
   #sip-modal-{{ sid }} .sip-tick { width: 64px; height: 64px; border-radius: 50%; background: #e8f6ee; color: var(--sip-ok); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px; }
   #sip-modal-{{ sid }} .sip-done .sip-step-sub { margin-bottom: 20px; }
   #sip-modal-{{ sid }} .sip-done a.sip-btn { display: flex; align-items: center; justify-content: center; text-decoration: none; }
@@ -272,9 +282,22 @@
           <input id="sip-email-{{ sid }}" name="email" type="email" placeholder="Enter your email address" autocomplete="email" required>
           <div class="sip-ferr" data-for="email"></div>
         </div>
+        {%- if section.settings.pay_tip != blank -%}
+          <div class="sip-paytip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>
+            <span>{%- if section.settings.pay_tip_title != blank -%}<strong>{{ section.settings.pay_tip_title | escape }}</strong> {% endif -%}{{ section.settings.pay_tip | escape }}</span>
+          </div>
+        {%- endif -%}
         <button type="submit" class="sip-btn" data-continue disabled>{{ section.settings.continue_label | escape }} &rarr;</button>
         {%- if section.settings.trust_line != blank -%}<p class="sip-trust">{{ section.settings.trust_line | escape }}</p>{%- endif -%}
       </form>
+    </div>
+
+    <div class="sip-step sip-confirm" data-step="4" hidden role="status" aria-live="polite">
+      <div class="sip-spin" aria-hidden="true"></div>
+      <h3 data-confirm-h>{{ section.settings.confirm_heading | escape }}</h3>
+      <p class="sip-step-sub" data-confirm-t>{{ section.settings.confirm_text | escape }}</p>
+      <p class="sip-confirm-ref" data-confirm-ref></p>
     </div>
 
     <div class="sip-step sip-done" data-step="3" hidden>
@@ -371,6 +394,21 @@
     modal.querySelectorAll('.sip-step').forEach(function (s) { s.hidden = Number(s.dataset.step) !== (n === 2 ? 1 : n); });
     setIndicator(n);
     clearMsg();
+  }
+  // "Confirming your payment" screen, shown from Razorpay's success callback until the thank-you page loads.
+  var confirmEl = modal.querySelector('.sip-confirm');
+  var CONFIRM_TEXT = {
+    h: {{ section.settings.confirm_heading | json }}, t: {{ section.settings.confirm_text | json }},
+    okH: {{ section.settings.confirm_ok_heading | json }}, okT: {{ section.settings.confirm_ok_text | json }}
+  };
+  function showConfirming(paymentId, ok) {
+    modal.querySelectorAll('.sip-step').forEach(function (s) { s.hidden = s !== confirmEl; });
+    setIndicator(2);
+    clearMsg();
+    confirmEl.classList.toggle('is-ok', !!ok);
+    confirmEl.querySelector('[data-confirm-h]').textContent = ok ? CONFIRM_TEXT.okH : CONFIRM_TEXT.h;
+    confirmEl.querySelector('[data-confirm-t]').textContent = ok ? CONFIRM_TEXT.okT : CONFIRM_TEXT.t;
+    confirmEl.querySelector('[data-confirm-ref]').textContent = paymentId ? 'Payment ID: ' + paymentId : '';
   }
   function setIndicator(n) {
     modal.querySelectorAll('[data-ind]').forEach(function (li) {
@@ -698,6 +736,7 @@
     verifying = true;
     savePending(resp);
     setBusy(true, 'Confirming your payment…');
+    showConfirming(resp.razorpay_payment_id, false);
     postVerify({
       paymentId: resp.razorpay_payment_id,
       subscriptionId: resp.razorpay_subscription_id,
@@ -749,7 +788,7 @@
     var url = root.dataset.successUrl;
     // Going to the thank-you page: keep the popup on the details step (not "You're subscribed"),
     // so pressing Back never lands on a stuck success sheet.
-    if (url) { setBusy(true, 'Taking you to your next steps\u2026'); window.location.href = url; return; }
+    if (url) { setBusy(true, 'Taking you to your next steps\u2026'); showConfirming(resp && resp.razorpay_payment_id, true); window.location.href = url; return; }
     goStep(3);
   }
 
@@ -815,6 +854,13 @@
     { "type": "text", "id": "details_sub", "label": "Text", "default": "Just a few details to get your subscription started." },
     { "type": "text", "id": "continue_label", "label": "Button", "default": "Continue to Payment" },
     { "type": "text", "id": "trust_line", "label": "Line under button", "default": "Secure payment by Razorpay · UPI Autopay or card" },
+    { "type": "text", "id": "pay_tip_title", "label": "Payment tip: title", "default": "Paying with a UPI app?" },
+    { "type": "textarea", "id": "pay_tip", "label": "Payment tip: text", "info": "Shown above the button. Leave empty to hide.", "default": "After you approve in GPay, PhonePe or Paytm, come back to this page and wait for the confirmation. Please don't close this page." },
+    { "type": "header", "content": "Popup: confirming payment" },
+    { "type": "text", "id": "confirm_heading", "label": "Confirming screen: heading", "default": "Confirming your payment…" },
+    { "type": "text", "id": "confirm_text", "label": "Confirming screen: text", "default": "This takes a few seconds. Please don't close or refresh this page." },
+    { "type": "text", "id": "confirm_ok_heading", "label": "Confirmed screen: heading", "info": "Shown while the thank-you page opens.", "default": "Payment confirmed!" },
+    { "type": "text", "id": "confirm_ok_text", "label": "Confirmed screen: text", "default": "Taking you to your next steps…" },
     { "type": "header", "content": "Popup: success" },
     { "type": "text", "id": "success_heading", "label": "Heading", "default": "You're subscribed!" },
     { "type": "textarea", "id": "success_text", "label": "Text", "default": "Your Autopay is set up and your first month is paid. Open the neOwn app with the same mobile number to choose your books." },
