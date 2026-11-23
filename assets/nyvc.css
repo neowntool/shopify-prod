@@ -302,3 +302,141 @@
   .nyvc-root .nyvc-about-text p { margin: 0; }
   .nyvc-root .nyvc-final p { margin: 0; }
   @media (max-width: 767px) { .nyvc-root .nyvc-rubric h3 { max-width: 130px; } }
+
+  /* ---------- Registration popup (Figma "Reg form" 240:1209 and "OTP" 240:1287) ---------- */
+  html.nyvc-reg-open { overflow: hidden; }
+  .nyvc-root.nyvc-reg { position: fixed; inset: 0; z-index: 2147483000; display: flex; align-items: center; justify-content: center; padding: 16px; background: transparent; }
+  .nyvc-root.nyvc-reg[hidden] { display: none !important; }
+  .nyvc-root .nyvc-reg-backdrop { position: absolute; inset: 0; background: rgba(26, 25, 47, .55); }
+  .nyvc-root .nyvc-reg-dialog { position: relative; width: min(699px, 100%); max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; background: #fff; border-radius: 16px; padding: 22px 28px 28px; box-shadow: 0 20px 60px rgba(0,0,0,.2); outline: none; }
+  .nyvc-root .nyvc-reg-dialog.is-otp { width: min(800px, 100%); }
+  .nyvc-root .nyvc-reg-x { position: absolute; top: 18px; right: 20px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: 0; background: transparent; color: #6a6a6a; border-radius: 8px; cursor: pointer; padding: 0; }
+  .nyvc-root .nyvc-reg-x:hover { background: #f3f3f3; }
+  .nyvc-root .nyvc-reg-steps { display: flex; align-items: center; justify-content: center; gap: 4px; margin: 4px 40px 26px; font-size: 12px; line-height: 1.25; color: #9a9a9a; }
+  .nyvc-root .nyvc-reg-steps li { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+  .nyvc-root .nyvc-reg-steps li.is-active { color: var(--nyvc-purple); }
+  .nyvc-root .nyvc-reg-dot { width: 12px; height: 12px; border: 1px solid currentColor; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; line-height: 1; }
+  .nyvc-root .nyvc-reg-steps-line { width: 72px; height: 1px; background: linear-gradient(90deg, var(--nyvc-purple), #c9c9c9); }
+  .nyvc-root .nyvc-reg-dialog.is-otp .nyvc-reg-steps-line { background: var(--nyvc-purple); }
+  .nyvc-root .nyvc-visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .nyvc-root .nyvc-reg-form { display: flex; flex-direction: column; gap: 18px; }
+  .nyvc-root .nyvc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .nyvc-root .nyvc-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .nyvc-root .nyvc-field label { font-size: 14px; font-weight: 600; line-height: 1.25; color: #1f1f1f; }
+  .nyvc-root .nyvc-field label span { color: #e0245e; }
+  .nyvc-root .nyvc-field input, .nyvc-root .nyvc-field select { width: 100%; height: 42px; margin: 0; padding: 0 12px; border: 1px solid #dedede; border-radius: 8px; background: #fff; font-family: inherit; font-size: 14px; color: var(--nyvc-ink); box-shadow: none; outline: none; -webkit-appearance: none; appearance: none; transition: border-color .15s ease, box-shadow .15s ease; }
+  .nyvc-root .nyvc-field input::placeholder { color: #a3a3a3; font-size: 13px; }
+  .nyvc-root .nyvc-field input:focus, .nyvc-root .nyvc-field select:focus { border-color: var(--nyvc-purple); box-shadow: 0 0 0 3px rgba(103,48,239,.12); }
+  .nyvc-root .nyvc-field .is-invalid { border-color: #e0245e; }
+  .nyvc-root .nyvc-select { position: relative; }
+  .nyvc-root .nyvc-select::after { content: ""; position: absolute; right: 14px; top: 50%; width: 7px; height: 7px; border-right: 1.6px solid #555; border-bottom: 1.6px solid #555; transform: translateY(-70%) rotate(45deg); pointer-events: none; }
+  .nyvc-root .nyvc-select select { padding-right: 36px; cursor: pointer; }
+  .nyvc-root .nyvc-select select:invalid, .nyvc-root .nyvc-select select option[value=""] { color: #a3a3a3; }
+  .nyvc-root .nyvc-select select option { color: var(--nyvc-ink); }
+  .nyvc-root .nyvc-phone { display: flex; align-items: center; height: 42px; border: 1px solid #dedede; border-radius: 8px; transition: border-color .15s ease, box-shadow .15s ease; }
+  .nyvc-root .nyvc-phone:focus-within { border-color: var(--nyvc-purple); box-shadow: 0 0 0 3px rgba(103,48,239,.12); }
+  .nyvc-root .nyvc-phone-cc { padding: 0 12px; font-size: 14px; color: var(--nyvc-ink); border-right: 1px solid #dedede; line-height: 22px; }
+  .nyvc-root .nyvc-phone input { height: 40px; border: 0 !important; box-shadow: none !important; }
+  .nyvc-root .nyvc-phone:has(.is-invalid) { border-color: #e0245e; }
+  .nyvc-root .nyvc-err { margin: 0; font-size: 12px; line-height: 1.3; color: #e0245e; }
+  .nyvc-root .nyvc-err:empty { display: none; }
+  .nyvc-root .nyvc-err--form { text-align: center; }
+  .nyvc-root .nyvc-reg-divider { display: flex; align-items: center; gap: 16px; margin: 6px 0 -2px; font-size: 15px; font-weight: 600; color: var(--nyvc-purple); }
+  .nyvc-root .nyvc-reg-divider::before, .nyvc-root .nyvc-reg-divider::after { content: ""; flex: 1; height: 1px; background: #e3e3e3; }
+  .nyvc-root .nyvc-reg-btn { width: 100%; height: 46px; margin-top: 6px; border: 0; border-radius: 8px; background: var(--nyvc-purple); color: #fff; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s ease, filter .2s ease; }
+  .nyvc-root .nyvc-reg-btn:hover:not(:disabled) { filter: brightness(.95); }
+  .nyvc-root .nyvc-reg-btn:disabled { background: #d9d9d9; color: #9a9a9a; cursor: not-allowed; }
+  .nyvc-root .nyvc-reg-btn[aria-busy="true"] { background: var(--nyvc-purple); color: #fff; opacity: .85; cursor: progress; }
+
+  .nyvc-root .nyvc-reg-otp { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .nyvc-root .nyvc-otp-title { margin: 0; font-size: 15px; font-weight: 500; text-align: center; color: #1f1f1f; }
+  .nyvc-root .nyvc-otp-phone { color: var(--nyvc-purple); font-weight: 500; white-space: nowrap; }
+  .nyvc-root .nyvc-otp-boxes { display: flex; gap: 12px; }
+  .nyvc-root .nyvc-otp-boxes input { width: 40px; height: 40px; margin: 0; padding: 0; border: 1px solid #c9bcff; border-radius: 6px; background: var(--nyvc-purple-10); text-align: center; font-family: inherit; font-size: 18px; font-weight: 600; color: var(--nyvc-ink); outline: none; box-shadow: none; -webkit-appearance: none; }
+  .nyvc-root .nyvc-otp-boxes input:focus { border-color: var(--nyvc-purple); box-shadow: 0 0 0 3px rgba(103,48,239,.15); background: #fff; }
+  .nyvc-root .nyvc-otp-boxes input.is-invalid { border-color: #e0245e; }
+  .nyvc-root .nyvc-otp-links { display: flex; justify-content: space-between; width: 312px; max-width: 100%; margin-top: -6px; }
+  .nyvc-root .nyvc-otp-link { display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; padding: 2px 0; font-family: inherit; font-size: 12px; color: var(--nyvc-purple); cursor: pointer; }
+  .nyvc-root .nyvc-otp-link:disabled { color: #9a9a9a; cursor: default; }
+  .nyvc-root .nyvc-otp-ok { margin: -6px 0 0; font-size: 12px; color: #1a8f4c; }
+  .nyvc-root .nyvc-otp-ok:empty { display: none; }
+  .nyvc-root .nyvc-reg-otp .nyvc-reg-btn { margin-top: 4px; }
+  .nyvc-reg-editor-note { margin: 0; padding: 12px 16px; background: #fff7d6; font: 13px/1.4 sans-serif; color: #5c4a00; text-align: center; }
+
+  @media (max-width: 767px) {
+    .nyvc-root.nyvc-reg { align-items: flex-end; padding: 0; }
+    .nyvc-root .nyvc-reg-dialog, .nyvc-root .nyvc-reg-dialog.is-otp { width: 100%; max-height: 94vh; max-height: 94dvh; border-radius: 16px 16px 0 0; padding: 18px 16px 24px; padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+    .nyvc-root .nyvc-reg-steps { margin: 2px 36px 22px; font-size: 11px; }
+    .nyvc-root .nyvc-reg-steps-line { width: 28px; }
+    .nyvc-root .nyvc-reg-x { top: 12px; right: 10px; }
+    .nyvc-root .nyvc-row { grid-template-columns: 1fr; gap: 18px; }
+    .nyvc-root .nyvc-field input, .nyvc-root .nyvc-field select { font-size: 16px; }
+    .nyvc-root .nyvc-phone-cc { font-size: 16px; }
+    .nyvc-root .nyvc-otp-boxes { gap: 8px; }
+    .nyvc-root .nyvc-otp-boxes input { width: 42px; height: 46px; }
+    .nyvc-root .nyvc-otp-links { width: 300px; }
+  }
+
+  /* ---------- Thank-you page (Figma "Thank you" 240:2615) ---------- */
+  .nyvc-root .nyvc-confirm { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; gap: 32px; min-height: 440px; padding: 40px 48px; border-radius: 24px; background: linear-gradient(90deg, #fff 0%, #fdffee 55%, #f4fbc8 100%); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
+  .nyvc-root .nyvc-confirm-blob { left: -330px; top: -300px; transform: rotate(160deg); opacity: .95; }
+  .nyvc-root .nyvc-confirm-main { position: relative; z-index: 1; flex: 1 1 auto; min-width: 0; max-width: 800px; display: flex; flex-direction: column; align-items: flex-start; }
+  .nyvc-root .nyvc-confirm-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9999px; background: var(--nyvc-purple); color: #fff; font-size: 13px; font-weight: 600; line-height: 1.2; }
+  .nyvc-root .nyvc-confirm-h { margin: 20px 0 10px; font-size: 40px; font-weight: 800; line-height: 1.15; color: #2b2b2b; letter-spacing: 0; text-transform: none; }
+  .nyvc-root .nyvc-confirm-text { font-size: 18px; font-weight: 500; line-height: 1.35; color: var(--nyvc-ink); max-width: 640px; }
+  .nyvc-root .nyvc-confirm-pill { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 5px 12px; border-radius: 9999px; background: var(--nyvc-purple-10); color: var(--nyvc-purple); font-size: 12px; line-height: 1.2; }
+  .nyvc-root .nyvc-confirm-details { align-self: stretch; margin: 28px 0 0; padding: 20px 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; border-radius: 12px; background: linear-gradient(90deg, #e6e0ff 0%, #ececec 100%); }
+  .nyvc-root .nyvc-confirm-details[hidden] { display: none; }
+  .nyvc-root .nyvc-confirm-details dt { font-size: 11px; line-height: 1.25; color: var(--nyvc-muted); }
+  .nyvc-root .nyvc-confirm-details dd { margin: 4px 0 0; font-size: 15px; font-weight: 500; line-height: 1.3; color: var(--nyvc-ink); overflow-wrap: anywhere; }
+  .nyvc-root .nyvc-confirm-logo { position: relative; z-index: 1; flex: none; width: 420px; display: flex; justify-content: center; }
+  .nyvc-root .nyvc-confirm-logo .nyvc-logo { width: 400px; height: 342px; }
+  .nyvc-root .nyvc-confirm-spark { position: absolute; top: -10px; right: 0; width: 26px; height: 26px; }
+
+  .nyvc-root .nyvc-wa { display: flex; align-items: center; gap: 20px; padding: 28px 32px; border: 1px solid var(--nyvc-line); border-radius: 20px; background: linear-gradient(90deg, #fff 55%, #eaf8ea 100%); }
+  .nyvc-root .nyvc-wa-ic { flex: none; align-self: flex-start; width: 44px; height: 44px; border-radius: 10px; background: #e8f5e9; display: flex; align-items: center; justify-content: center; }
+  .nyvc-root .nyvc-wa-text { flex: 1 1 auto; min-width: 0; }
+  .nyvc-root .nyvc-wa-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 9999px; background: #4caf50; color: #fff; font-size: 11px; line-height: 1.3; }
+  .nyvc-root .nyvc-wa h2 { margin: 8px 0 6px; font-size: 26px; font-weight: 700; line-height: 1.25; color: #2b2b2b; letter-spacing: 0; text-transform: none; }
+  .nyvc-root .nyvc-wa p { max-width: 640px; font-size: 15px; line-height: 1.35; color: var(--nyvc-muted); }
+  .nyvc-root .nyvc-wa-btn { flex: none; width: min(400px, 36%); height: 56px; margin-left: auto; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; background: #4caf50; color: #fff; font-size: 15px; font-weight: 600; transition: filter .2s ease; }
+  .nyvc-root .nyvc-wa-btn:hover { filter: brightness(.95); }
+
+  .nyvc-root .nyvc-next { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+  .nyvc-root .nyvc-next-card { border-radius: 24px; padding: 36px 40px; display: flex; flex-direction: column; }
+  .nyvc-root .nyvc-next-card--app { background: #ffe1f3; }
+  .nyvc-root .nyvc-next-card--prompt { background: #f4fcc0; }
+  .nyvc-root .nyvc-next-card h2 { font-size: 30px; font-weight: 800; line-height: 1.2; color: #2b2b2b; letter-spacing: 0; text-transform: none; }
+  .nyvc-root .nyvc-next-card--app p { max-width: 430px; margin: 14px 0 24px; font-size: 15px; line-height: 1.35; color: var(--nyvc-muted); }
+  .nyvc-root .nyvc-stores--lg { transform: scale(1.6); transform-origin: left top; margin-bottom: 21px; }
+  .nyvc-root .nyvc-next-prompts { margin-top: 20px; display: flex; flex-direction: column; gap: 16px; }
+  .nyvc-root .nyvc-next-prompt[hidden] { display: none; }
+  .nyvc-root .nyvc-prompt--plain { background: rgba(255,255,255,.8) !important; padding: 18px 20px 14px; }
+  .nyvc-root .nyvc-prompt-foot { margin-top: 4px !important; text-align: center; font-size: 12px !important; font-weight: 600; color: var(--nyvc-purple) !important; }
+
+  @media (max-width: 1199px) {
+    .nyvc-root .nyvc-confirm { padding: 32px; }
+    .nyvc-root .nyvc-confirm-logo { width: 300px; }
+    .nyvc-root .nyvc-confirm-logo .nyvc-logo { width: 290px; height: 248px; }
+    .nyvc-root .nyvc-wa-btn { width: 220px; }
+  }
+  @media (max-width: 767px) {
+    .nyvc-root .nyvc-confirm { margin: 0 16px; flex-direction: column-reverse; align-items: stretch; gap: 8px; min-height: 0; padding: 20px 16px 24px; border-radius: 20px; }
+    .nyvc-root .nyvc-confirm-logo { width: 100%; }
+    .nyvc-root .nyvc-confirm-logo .nyvc-logo { position: relative; left: auto; top: auto; width: 200px; height: 171px; }
+    .nyvc-root .nyvc-wa-pill { font-size: 10px; padding: 3px 8px; }
+    .nyvc-root .nyvc-confirm-blob { left: -300px; top: -330px; }
+    .nyvc-root .nyvc-confirm-h { margin-top: 16px; font-size: 30px; }
+    .nyvc-root .nyvc-confirm-text { font-size: 15px; }
+    .nyvc-root .nyvc-confirm-details { grid-template-columns: 1fr; gap: 12px; padding: 16px; margin-top: 20px; }
+    .nyvc-root .nyvc-wa { margin: 0 16px; flex-wrap: wrap; padding: 20px 16px; gap: 14px; background: linear-gradient(180deg, #fff 60%, #eaf8ea 100%); }
+    .nyvc-root .nyvc-wa-text { flex-basis: calc(100% - 58px); }
+    .nyvc-root .nyvc-wa h2 { font-size: 20px; }
+    .nyvc-root .nyvc-wa p { font-size: 14px; }
+    .nyvc-root .nyvc-wa-btn { width: 100%; height: 50px; }
+    .nyvc-root .nyvc-next { margin: 0 16px; grid-template-columns: 1fr; gap: 16px; }
+    .nyvc-root .nyvc-next-card { padding: 24px 20px; border-radius: 20px; }
+    .nyvc-root .nyvc-next-card h2 { font-size: 22px; }
+    .nyvc-root .nyvc-stores--lg { transform: scale(1.35); margin-bottom: 13px; }
+  }

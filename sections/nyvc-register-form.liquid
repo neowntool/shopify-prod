@@ -1,0 +1,143 @@
+{%- render 'nyvc-styles' -%}
+{%- liquid
+  assign s = section.settings
+  assign schools = s.schools | newline_to_br | split: '<br />'
+  assign standards = s.standards | split: ','
+  assign thank_you = s.thank_you_url | default: '/pages/nyvc-thank-you'
+-%}
+<div class="nyvc-root nyvc-reg" id="nyvc-reg-{{ section.id }}" hidden
+  data-nyvc-reg
+  data-endpoint="{{ s.script_url | strip | escape }}"
+  data-thank-you="{{ thank_you | escape }}"
+  data-design-mode="{{ request.design_mode }}">
+  <div class="nyvc-reg-backdrop" data-nyvc-close></div>
+  <div class="nyvc-reg-dialog" role="dialog" aria-modal="true" aria-labelledby="nyvc-reg-title-{{ section.id }}" tabindex="-1">
+    <button type="button" class="nyvc-reg-x" data-nyvc-close aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <ol class="nyvc-reg-steps" aria-label="Registration steps">
+      <li class="is-active" data-step-dot="1"><span class="nyvc-reg-dot">1</span>{{ s.step1_label | escape }}</li>
+      <li class="nyvc-reg-steps-line" aria-hidden="true"></li>
+      <li data-step-dot="2"><span class="nyvc-reg-dot">2</span>{{ s.step2_label | escape }}</li>
+    </ol>
+    <h2 class="nyvc-visually-hidden" id="nyvc-reg-title-{{ section.id }}">{{ s.title | escape }}</h2>
+
+    {%- comment -%} Step 1: details {%- endcomment -%}
+    <form class="nyvc-reg-form" data-step="1" novalidate>
+      <div class="nyvc-field">
+        <label for="nyvc-child-{{ section.id }}">Child's Full Name <span aria-hidden="true">*</span></label>
+        <input id="nyvc-child-{{ section.id }}" name="child_name" type="text" placeholder="e.g. Aarav Sharma" autocomplete="off" maxlength="80" required>
+        <p class="nyvc-err" data-err="child_name"></p>
+      </div>
+      <div class="nyvc-field">
+        <label for="nyvc-dob-{{ section.id }}">{{ s.dob_label | escape }} <span aria-hidden="true">*</span></label>
+        <input id="nyvc-dob-{{ section.id }}" name="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY" maxlength="10" autocomplete="off" required>
+        <p class="nyvc-err" data-err="dob"></p>
+      </div>
+      <div class="nyvc-row">
+        <div class="nyvc-field">
+          <label for="nyvc-school-{{ section.id }}">School Name <span aria-hidden="true">*</span></label>
+          <div class="nyvc-select">
+            <select id="nyvc-school-{{ section.id }}" name="school" required>
+              <option value="">Select school</option>
+              {%- for school in schools -%}
+                {%- assign sc = school | strip -%}
+                {%- if sc != blank -%}<option value="{{ sc | escape }}">{{ sc | escape }}</option>{%- endif -%}
+              {%- endfor -%}
+            </select>
+          </div>
+          <p class="nyvc-err" data-err="school"></p>
+        </div>
+        <div class="nyvc-field">
+          <label for="nyvc-std-{{ section.id }}">Standard / Grade <span aria-hidden="true">*</span></label>
+          <div class="nyvc-select">
+            <select id="nyvc-std-{{ section.id }}" name="standard" required>
+              <option value="">Select standard</option>
+              {%- for std in standards -%}
+                {%- assign st = std | strip -%}
+                {%- if st != blank -%}<option value="{{ st | escape }}">{{ st | escape }}</option>{%- endif -%}
+              {%- endfor -%}
+            </select>
+          </div>
+          <p class="nyvc-err" data-err="standard"></p>
+        </div>
+      </div>
+      <div class="nyvc-field">
+        <label for="nyvc-div-{{ section.id }}">Division / Section <span aria-hidden="true">*</span></label>
+        <input id="nyvc-div-{{ section.id }}" name="division" type="text" placeholder="e.g. Division A / D" maxlength="20" autocomplete="off" required>
+        <p class="nyvc-err" data-err="division"></p>
+      </div>
+
+      <p class="nyvc-reg-divider"><span>Parent or guardian details</span></p>
+
+      <div class="nyvc-field">
+        <label for="nyvc-parent-{{ section.id }}">Parent or Guardian Name <span aria-hidden="true">*</span></label>
+        <input id="nyvc-parent-{{ section.id }}" name="parent_name" type="text" placeholder="Enter your name" autocomplete="name" maxlength="80" required>
+        <p class="nyvc-err" data-err="parent_name"></p>
+      </div>
+      <div class="nyvc-field">
+        <label for="nyvc-email-{{ section.id }}">Email Address <span aria-hidden="true">*</span></label>
+        <input id="nyvc-email-{{ section.id }}" name="email" type="email" placeholder="Enter your email address" autocomplete="email" maxlength="120" required>
+        <p class="nyvc-err" data-err="email"></p>
+      </div>
+      <div class="nyvc-field">
+        <label for="nyvc-phone-{{ section.id }}">Phone Number <span aria-hidden="true">*</span></label>
+        <div class="nyvc-phone">
+          <span class="nyvc-phone-cc">+91</span>
+          <input id="nyvc-phone-{{ section.id }}" name="phone" type="tel" inputmode="numeric" placeholder="Enter 10-digit mobile number" autocomplete="tel-national" maxlength="10" required>
+        </div>
+        <p class="nyvc-err" data-err="phone"></p>
+      </div>
+      <p class="nyvc-err nyvc-err--form" data-err="form" role="alert"></p>
+      <button type="submit" class="nyvc-reg-btn" disabled>{{ s.details_button | escape }}</button>
+    </form>
+
+    {%- comment -%} Step 2: OTP {%- endcomment -%}
+    <form class="nyvc-reg-otp" data-step="2" hidden novalidate>
+      <p class="nyvc-otp-title">Enter the OTP you received on your <span class="nyvc-otp-phone" data-otp-phone></span></p>
+      <div class="nyvc-otp-boxes" role="group" aria-label="6-digit OTP">
+        {%- for i in (1..6) -%}
+          <input type="text" inputmode="numeric" pattern="[0-9]*" aria-label="Digit {{ i }}" {% if i == 1 %}autocomplete="one-time-code"{% else %}autocomplete="off"{% endif %} data-otp>
+        {%- endfor -%}
+      </div>
+      <div class="nyvc-otp-links">
+        <button type="button" class="nyvc-otp-link" data-edit-phone>Edit Phone Number
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13 4h7v0M20 13v7H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <button type="button" class="nyvc-otp-link" data-resend disabled><span data-resend-label>Resend OTP</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <p class="nyvc-err nyvc-err--form" data-err="otp" role="alert"></p>
+      <p class="nyvc-otp-ok" data-otp-info role="status"></p>
+      <button type="submit" class="nyvc-reg-btn" disabled>{{ s.otp_button | escape }}</button>
+    </form>
+  </div>
+</div>
+{%- if request.design_mode and s.script_url == blank -%}
+  <p class="nyvc-reg-editor-note">NYVC registration form: add the Apps Script web app URL in this section's settings to turn on OTP and saving.</p>
+{%- endif -%}
+<script src="{{ 'nyvc-register.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "NYVC: Registration form",
+  "tag": "div",
+  "class": "section-nyvc",
+  "settings": [
+    { "type": "paragraph", "content": "Popup that opens from any button linking to #nyvc-form (the Register buttons on this page). It is hidden until opened." },
+    { "type": "text", "id": "script_url", "label": "Registration script URL", "info": "The Google Apps Script web app URL (https://script.google.com/macros/s/…/exec)." },
+    { "type": "url", "id": "thank_you_url", "label": "Thank-you page", "info": "Blank uses /pages/nyvc-thank-you." },
+    { "type": "textarea", "id": "schools", "label": "Schools (one per line)", "default": "The Cathedral & John Connon School" },
+    { "type": "text", "id": "standards", "label": "Standards (comma separated)", "default": "Standard 3, Standard 4, Standard 5, Standard 6, Standard 7, Standard 8" },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "title", "label": "Form title (for screen readers)", "default": "Register for the neOwn Young Voices Championship" },
+    { "type": "text", "id": "step1_label", "label": "Step 1 label", "default": "Enter Details" },
+    { "type": "text", "id": "step2_label", "label": "Step 2 label", "default": "Verify Phone Number" },
+    { "type": "text", "id": "dob_label", "label": "Date of birth label", "default": "Date of Birth" },
+    { "type": "text", "id": "details_button", "label": "Details button", "default": "Verify Phone Number" },
+    { "type": "text", "id": "otp_button", "label": "OTP button", "default": "Verify Phone Number" }
+  ],
+  "presets": [{ "name": "NYVC: Registration form" }]
+}
+{% endschema %}

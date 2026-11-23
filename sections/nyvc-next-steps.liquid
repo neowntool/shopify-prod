@@ -1,0 +1,83 @@
+{%- render 'nyvc-styles' -%}
+{%- assign s = section.settings -%}
+<div class="nyvc-root nyvc--last" id="nyvc-{{ section.id }}">
+  <div class="nyvc-wrap">
+    <section class="nyvc-next" aria-label="{{ s.aria_label | escape }}">
+      <div class="nyvc-next-card nyvc-next-card--app">
+        <h2>{{ s.app_heading | escape }}</h2>
+        {%- if s.app_text != blank -%}<p>{{ s.app_text }}</p>{%- endif -%}
+        {% render 'nyvc-store-badges', play_url: s.play_url, app_url: s.app_url, size: 'large' %}
+      </div>
+      <div class="nyvc-next-card nyvc-next-card--prompt">
+        <h2>{{ s.prompt_heading | escape }}</h2>
+        <div class="nyvc-next-prompts" data-nyvc-prompts>
+          {%- for block in section.blocks -%}
+            <div class="nyvc-next-prompt" data-standards="{{ block.settings.standards | downcase | escape }}">
+              {%- render 'nyvc-prompt-card', b: block.settings, attrs: block.shopify_attributes, extra_class: 'nyvc-prompt--plain', footer: block.settings.footer -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+  (function () {
+    var wrap = document.querySelector('#nyvc-{{ section.id }} [data-nyvc-prompts]');
+    if (!wrap) return;
+    var data = null;
+    try { data = JSON.parse(sessionStorage.getItem('nyvc_registration') || localStorage.getItem('nyvc_registration') || 'null'); } catch (e) {}
+    var std = data && data.standard ? String(data.standard).toLowerCase().trim() : '';
+    if (!std) return; /* no registration in this browser: show every category */
+    var items = [].slice.call(wrap.querySelectorAll('.nyvc-next-prompt'));
+    var match = items.filter(function (el) {
+      return el.getAttribute('data-standards').split(',').map(function (x) { return x.trim(); }).indexOf(std) !== -1;
+    });
+    if (!match.length) return;
+    items.forEach(function (el) { el.hidden = match.indexOf(el) === -1; });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "NYVC: Next steps",
+  "tag": "div",
+  "class": "section-nyvc",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "Your next steps" },
+    { "type": "header", "content": "App card" },
+    { "type": "text", "id": "app_heading", "label": "Heading", "default": "1. Download the neOwn app" },
+    { "type": "inline_richtext", "id": "app_text", "label": "Text", "default": "Choose two books from the neOwn Young Voices Championship catalogue in the app." },
+    { "type": "url", "id": "play_url", "label": "Google Play link", "info": "Blank uses the neOwn app on Google Play." },
+    { "type": "url", "id": "app_url", "label": "App Store link", "info": "Blank uses the neOwn app on the App Store." },
+    { "type": "header", "content": "Prompt card" },
+    { "type": "text", "id": "prompt_heading", "label": "Heading", "default": "2. See your video prompt" },
+    { "type": "paragraph", "content": "Shows the category whose standards include the child's standard from the form. If there is no registration in the browser, all categories show." }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "text", "id": "standards", "label": "Standards in this category", "default": "Standard 3, Standard 4", "info": "Comma separated, written exactly as in the registration form." },
+        { "type": "select", "id": "color", "label": "Badge colour", "default": "yellow", "options": [
+          { "value": "pink", "label": "Pink" },
+          { "value": "yellow", "label": "Yellow" },
+          { "value": "cyan", "label": "Cyan" }
+        ] },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "CATEGORY I" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Standards 3–4:" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "text", "id": "view_label", "label": "First button label", "default": "View Prompt" },
+        { "type": "url", "id": "view_url", "label": "First button link" },
+        { "type": "text", "id": "pdf_label", "label": "Second button label", "default": "Download PDF" },
+        { "type": "url", "id": "pdf_url", "label": "Second button link" },
+        { "type": "text", "id": "pdf_file", "label": "Or PDF file URL", "info": "Paste a link from Content > Files. Used instead of the link above." },
+        { "type": "text", "id": "footer", "label": "Small text under the card", "default": "2 Minute Video • Deadline: as per your school" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "NYVC: Next steps", "blocks": [{ "type": "category" }] }]
+}
+{% endschema %}

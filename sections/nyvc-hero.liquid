@@ -1,7 +1,7 @@
 {%- render 'nyvc-styles' -%}
 {%- liquid
   assign s = section.settings
-  assign register_url = s.register_url | default: '#nyvc-register'
+  assign register_url = s.register_url | default: '#nyvc-form'
   assign submit_url = s.submit_url | default: '#nyvc-register'
 -%}
 {%- if s.hide_theme_whatsapp -%}<style>#whatsapp-widget{display:none!important}</style>{%- endif -%}
@@ -75,7 +75,7 @@
     { "type": "inline_richtext", "id": "tagline", "label": "Tagline", "default": "A reading and speaking championship that celebrates young readers and their ideas." },
     { "type": "header", "content": "Buttons" },
     { "type": "text", "id": "register_label", "label": "Register button label", "default": "Register Now" },
-    { "type": "url", "id": "register_url", "label": "Register button link", "info": "Blank scrolls to the Register section." },
+    { "type": "url", "id": "register_url", "label": "Register button link", "info": "Blank opens the registration form." },
     { "type": "text", "id": "submit_label", "label": "Submit button label", "default": "Submit Your Video" },
     { "type": "url", "id": "submit_url", "label": "Submit button link", "info": "Blank scrolls to the Register section." },
     { "type": "header", "content": "Who can participate" },

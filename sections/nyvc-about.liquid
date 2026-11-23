@@ -10,7 +10,7 @@
       {%- if s.cta_text != blank or s.button_label != blank -%}
         <div class="nyvc-final">
           {%- if s.cta_text != blank -%}<p>{{ s.cta_text }}</p>{%- endif -%}
-          {%- if s.button_label != blank -%}<a class="nyvc-final-btn" href="{{ s.button_url | default: '#nyvc-register' }}">{{ s.button_label | escape }}</a>{%- endif -%}
+          {%- if s.button_label != blank -%}<a class="nyvc-final-btn" href="{{ s.button_url | default: '#nyvc-form' }}">{{ s.button_label | escape }}</a>{%- endif -%}
         </div>
       {%- endif -%}
     </section>
@@ -28,7 +28,7 @@
     { "type": "header", "content": "Final call to action" },
     { "type": "inline_richtext", "id": "cta_text", "label": "Text", "default": "Ready to participate? Register above and begin your Young Voices Championship journey." },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Register here" },
-    { "type": "url", "id": "button_url", "label": "Button link", "info": "Blank scrolls to the Register section." }
+    { "type": "url", "id": "button_url", "label": "Button link", "info": "Blank opens the registration form." }
   ],
   "presets": [{ "name": "NYVC: About and final CTA" }]
 }

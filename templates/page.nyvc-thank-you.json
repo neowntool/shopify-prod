@@ -1,0 +1,67 @@
+{
+  "sections": {
+    "nyvc_confirm": {
+      "type": "nyvc-confirm",
+      "settings": {}
+    },
+    "nyvc_whatsapp": {
+      "type": "nyvc-whatsapp",
+      "settings": {}
+    },
+    "nyvc_next": {
+      "type": "nyvc-next-steps",
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "standards": "Standard 3, Standard 4",
+            "color": "pink",
+            "badge": "CATEGORY I",
+            "title": "Standards 3–4:",
+            "text": "Focus on vivid character descriptions, emotional moments, and expressive reading aloud.",
+            "footer": "2 Minute Video • Deadline: as per your school"
+          }
+        },
+        "category_2": {
+          "type": "category",
+          "settings": {
+            "standards": "Standard 5, Standard 6",
+            "color": "yellow",
+            "badge": "CATEGORY II",
+            "title": "Standards 5–6:",
+            "text": "Explore personal perspectives, thematic connections, and how the narrative moved you.",
+            "footer": "2 Minute Video • Deadline: as per your school"
+          }
+        },
+        "category_3": {
+          "type": "category",
+          "settings": {
+            "standards": "Standard 7, Standard 8",
+            "color": "cyan",
+            "badge": "CATEGORY III",
+            "title": "Standards 7–8:",
+            "text": "Critique overarching plot arcs, author viewpoints, and ethical or real-world reflections.",
+            "footer": "2 Minute Video • Deadline: as per your school"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "category_2",
+        "category_3"
+      ],
+      "settings": {}
+    },
+    "main": {
+      "type": "page",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "nyvc_confirm",
+    "nyvc_whatsapp",
+    "nyvc_next",
+    "main"
+  ]
+}

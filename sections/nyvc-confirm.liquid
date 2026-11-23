@@ -1,0 +1,70 @@
+{%- render 'nyvc-styles' -%}
+{%- assign s = section.settings -%}
+<div class="nyvc-root nyvc--first" id="nyvc-{{ section.id }}">
+  <div class="nyvc-wrap">
+    <section class="nyvc-confirm" aria-labelledby="nyvc-h-{{ section.id }}">
+      <img class="nyvc-blob nyvc-blob--yellow nyvc-confirm-blob" src="{{ 'nyvc-blob-yellow.svg' | asset_url }}" alt="" aria-hidden="true">
+      <div class="nyvc-confirm-main">
+        {%- if s.badge != blank -%}
+          <span class="nyvc-confirm-badge">
+            <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#fff"/><path d="M4.5 8.2l2.3 2.3 4.7-4.8" fill="none" stroke="#6730ef" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {{ s.badge | escape }}
+          </span>
+        {%- endif -%}
+        <h1 class="nyvc-confirm-h" id="nyvc-h-{{ section.id }}">{{ s.heading | escape }}</h1>
+        {%- if s.text != blank -%}<p class="nyvc-confirm-text">{{ s.text }}</p>{%- endif -%}
+        {%- if s.pill != blank -%}
+          <span class="nyvc-confirm-pill">
+            <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#6730ef"/><path d="M8 4.5v7M4.5 8h7" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+            {{ s.pill | escape }}
+          </span>
+        {%- endif -%}
+        <dl class="nyvc-confirm-details" data-nyvc-details hidden>
+          <div><dt>{{ s.label_name | escape }}</dt><dd data-nyvc-field="child_name"></dd></div>
+          <div><dt>{{ s.label_standard | escape }}</dt><dd data-nyvc-field="standard"></dd></div>
+          <div><dt>{{ s.label_school | escape }}</dt><dd data-nyvc-field="school"></dd></div>
+        </dl>
+      </div>
+      <div class="nyvc-confirm-logo">
+        <img class="nyvc-confirm-spark" src="{{ 'nyvc-star4.svg' | asset_url }}" alt="" aria-hidden="true">
+        <div class="nyvc-logo">
+          <img src="{{ 'nyvc-logo.png' | asset_url }}" alt="neOwn Young Voices Championship" width="635" height="635">
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+  (function () {
+    var box = document.querySelector('#nyvc-{{ section.id }} [data-nyvc-details]');
+    if (!box) return;
+    var data = null;
+    try { data = JSON.parse(sessionStorage.getItem('nyvc_registration') || localStorage.getItem('nyvc_registration') || 'null'); } catch (e) {}
+    if (!data || !data.child_name) return;
+    ['child_name', 'standard', 'school'].forEach(function (k) {
+      var el = box.querySelector('[data-nyvc-field="' + k + '"]');
+      if (el) el.textContent = data[k] || '';
+    });
+    box.hidden = false;
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "NYVC: Confirmation",
+  "tag": "div",
+  "class": "section-nyvc",
+  "settings": [
+    { "type": "paragraph", "content": "The student name, standard and school show only after a registration in the same browser." },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Registration Confirmed" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "You're registered!" },
+    { "type": "inline_richtext", "id": "text", "label": "Text", "default": "Your registration for the neOwn Young Voices Championship is complete." },
+    { "type": "text", "id": "pill", "label": "Small pill", "default": "You're all set to begin your Young Voices journey!" },
+    { "type": "header", "content": "Details labels" },
+    { "type": "text", "id": "label_name", "label": "Student name", "default": "Student Name" },
+    { "type": "text", "id": "label_standard", "label": "Standard", "default": "Standard" },
+    { "type": "text", "id": "label_school", "label": "School", "default": "School" }
+  ],
+  "presets": [{ "name": "NYVC: Confirmation" }]
+}
+{% endschema %}

@@ -1,9 +1,5 @@
 {%- render 'nyvc-styles' -%}
-{%- liquid
-  assign s = section.settings
-  assign play_url = s.play_url | default: 'https://play.google.com/store/apps/details?id=com.neown'
-  assign app_url = s.app_url | default: 'https://apps.apple.com/in/app/neown/id6483860525'
--%}
+{%- assign s = section.settings -%}
 <div class="nyvc-root" id="nyvc-{{ section.id }}">
   <div class="nyvc-wrap">
     <section class="nyvc-how" aria-labelledby="nyvc-h-{{ section.id }}">
@@ -24,20 +20,10 @@
               <h3>{{ b.title | escape }}</h3>
               {%- if b.text != blank -%}<p>{{ b.text }}</p>{%- endif -%}
             </div>
-            {%- if b.show_app_badges -%}
-              <div class="nyvc-stores">
-                <a class="nyvc-store" href="{{ play_url }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
-                  <img class="nyvc-store-ic nyvc-store-ic--play" src="{{ 'nyvc-playstore.svg' | asset_url }}" alt="">
-                  <span class="nyvc-store-txt"><span class="nyvc-store-small">GET IT ON</span><img class="nyvc-store-word" src="{{ 'nyvc-googleplay-word.svg' | asset_url }}" alt=""></span>
-                </a>
-                <a class="nyvc-store" href="{{ app_url }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
-                  <img class="nyvc-store-ic nyvc-store-ic--apple" src="{{ 'nyvc-apple.svg' | asset_url }}" alt="">
-                  <span class="nyvc-store-txt nyvc-store-txt--apple"><span class="nyvc-store-tiny">Download on the</span><span class="nyvc-store-big">App Store</span></span>
-                </a>
-              </div>
-            {%- endif -%}
+            {%- if b.show_app_badges -%}{% render 'nyvc-store-badges', play_url: s.play_url, app_url: s.app_url %}{%- endif -%}
             {%- if b.button_label != blank -%}
-              <a class="nyvc-btn nyvc-btn--step" href="{{ b.button_url | default: '#nyvc-register' }}"><span>{{ b.button_label | escape }}</span><img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-purple.svg' | asset_url }}" alt="" aria-hidden="true"></a>
+              {%- if b.button_action == 'form' -%}{%- assign step_href = '#nyvc-form' -%}{%- else -%}{%- assign step_href = b.button_url | default: '#nyvc-register' -%}{%- endif -%}
+              <a class="nyvc-btn nyvc-btn--step" href="{{ step_href }}"><span>{{ b.button_label | escape }}</span><img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-purple.svg' | asset_url }}" alt="" aria-hidden="true"></a>
             {%- endif -%}
           </div>
         {%- endfor -%}
@@ -75,6 +61,10 @@
         { "type": "inline_richtext", "id": "text", "label": "Text", "info": "Bold text shows in dark grey, like \"2 books\" in the design." },
         { "type": "checkbox", "id": "show_app_badges", "label": "Show Google Play and App Store badges", "default": false },
         { "type": "text", "id": "button_label", "label": "Button label" },
+        { "type": "select", "id": "button_action", "label": "Button opens", "default": "link", "options": [
+          { "value": "form", "label": "Registration form" },
+          { "value": "link", "label": "Link below" }
+        ] },
         { "type": "url", "id": "button_url", "label": "Button link", "info": "Blank scrolls to the Register section." }
       ]
     }

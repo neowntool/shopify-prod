@@ -1,0 +1,18 @@
+{%- comment -%}
+  Google Play + App Store badges (NYVC design). Used by nyvc-steps and nyvc-next-steps.
+  Params: play_url, app_url (optional; blank uses the neOwn app), size: 'large' for the thank-you page.
+{%- endcomment -%}
+{%- liquid
+  assign play = play_url | default: 'https://play.google.com/store/apps/details?id=com.neown'
+  assign app = app_url | default: 'https://apps.apple.com/in/app/neown/id6483860525'
+-%}
+<div class="nyvc-stores{% if size == 'large' %} nyvc-stores--lg{% endif %}">
+  <a class="nyvc-store" href="{{ play }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+    <img class="nyvc-store-ic nyvc-store-ic--play" src="{{ 'nyvc-playstore.svg' | asset_url }}" alt="">
+    <span class="nyvc-store-txt"><span class="nyvc-store-small">GET IT ON</span><img class="nyvc-store-word" src="{{ 'nyvc-googleplay-word.svg' | asset_url }}" alt=""></span>
+  </a>
+  <a class="nyvc-store" href="{{ app }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
+    <img class="nyvc-store-ic nyvc-store-ic--apple" src="{{ 'nyvc-apple.svg' | asset_url }}" alt="">
+    <span class="nyvc-store-txt nyvc-store-txt--apple"><span class="nyvc-store-tiny">Download on the</span><span class="nyvc-store-big">App Store</span></span>
+  </a>
+</div>

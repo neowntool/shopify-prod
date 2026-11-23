@@ -9,32 +9,7 @@
       </div>
       <div class="nyvc-prompt-grid">
         {%- for block in section.blocks -%}
-          {%- assign b = block.settings -%}
-          {%- liquid
-            case b.color
-              when 'yellow'
-                assign tone = 2
-              when 'cyan'
-                assign tone = 3
-              else
-                assign tone = 1
-            endcase
-          -%}
-          <div class="nyvc-prompt nyvc-prompt--{{ tone }}" {{ block.shopify_attributes }}>
-            {%- if b.badge != blank -%}<span class="nyvc-prompt-badge">{{ b.badge | escape }}</span>{%- endif -%}
-            <h3>{{ b.title | escape }}</h3>
-            {%- if b.text != blank -%}<p>{{ b.text | escape }}</p>{%- endif -%}
-            <div class="nyvc-prompt-btns">
-              {%- if b.view_label != blank -%}
-                <a class="nyvc-btn nyvc-btn--outline" href="{{ b.view_url | default: '#' }}"{% if b.view_url != blank %} target="_blank" rel="noopener"{% endif %}><span>{{ b.view_label | escape }}</span><img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-purple.svg' | asset_url }}" alt="" aria-hidden="true"></a>
-              {%- endif -%}
-              {%- if b.pdf_label != blank -%}
-                {%- assign pdf_href = b.pdf_url -%}
-                {%- if b.pdf_file != blank -%}{%- assign pdf_href = b.pdf_file -%}{%- endif -%}
-                <a class="nyvc-btn nyvc-btn--outline" href="{{ pdf_href | default: '#' }}"{% if pdf_href != blank %} target="_blank" rel="noopener" download{% endif %}><span>{{ b.pdf_label | escape }}</span><img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-purple.svg' | asset_url }}" alt="" aria-hidden="true"></a>
-              {%- endif -%}
-            </div>
-          </div>
+          {%- render 'nyvc-prompt-card', b: block.settings, attrs: block.shopify_attributes -%}
         {%- endfor -%}
       </div>
     </section>

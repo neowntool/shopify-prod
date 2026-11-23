@@ -16,7 +16,8 @@
             "icon": "register",
             "title": "Register",
             "text": "Register below 3 days from the workshop conducted in your school.",
-            "button_label": "Register Now"
+            "button_label": "Register Now",
+            "button_action": "form"
           }
         },
         "nyvc_steps_2": {
@@ -77,7 +78,8 @@
             "note": "Please submit only one entry. If you face a technical issue and need to submit another video, contact us at [contact number].",
             "button_label": "Register Now",
             "style": "purple",
-            "icon": "form"
+            "icon": "form",
+            "button_action": "form"
           }
         },
         "nyvc_cta_2": {
@@ -441,6 +443,10 @@
       "type": "page",
       "disabled": true,
       "settings": {}
+    },
+    "nyvc_register": {
+      "type": "nyvc-register-form",
+      "settings": {}
     }
   },
   "order": [
@@ -455,6 +461,7 @@
     "nyvc_checklist",
     "nyvc_faq",
     "nyvc_about",
+    "nyvc_register",
     "main"
   ]
 }
