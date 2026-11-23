@@ -1,0 +1,84 @@
+{%- render 'nyvc-styles' -%}
+{%- liquid
+  assign s = section.settings
+  assign play_url = s.play_url | default: 'https://play.google.com/store/apps/details?id=com.neown'
+  assign app_url = s.app_url | default: 'https://apps.apple.com/in/app/neown/id6483860525'
+-%}
+<div class="nyvc-root" id="nyvc-{{ section.id }}">
+  <div class="nyvc-wrap">
+    <section class="nyvc-how" aria-labelledby="nyvc-h-{{ section.id }}">
+      <h2 class="nyvc-h2" id="nyvc-h-{{ section.id }}">{{ s.heading | escape }}</h2>
+      <div class="nyvc-how-grid">
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          <div class="nyvc-step" {{ block.shopify_attributes }}>
+            <div class="nyvc-step-head">
+              <span class="nyvc-step-no">{{ forloop.index }}</span>
+              {%- if b.icon_image != blank -%}
+                {{ b.icon_image | image_url: width: 48 | image_tag: alt: '', width: 22, height: 22 }}
+              {%- elsif b.icon != 'none' -%}
+                <img src="{{ 'nyvc-step-' | append: b.icon | append: '.svg' | asset_url }}" alt="" height="16" style="height:{% if b.icon == 'announce' %}22{% else %}16{% endif %}px;width:auto">
+              {%- endif -%}
+            </div>
+            <div class="nyvc-step-body">
+              <h3>{{ b.title | escape }}</h3>
+              {%- if b.text != blank -%}<p>{{ b.text }}</p>{%- endif -%}
+            </div>
+            {%- if b.show_app_badges -%}
+              <div class="nyvc-stores">
+                <a class="nyvc-store" href="{{ play_url }}" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+                  <img class="nyvc-store-ic nyvc-store-ic--play" src="{{ 'nyvc-playstore.svg' | asset_url }}" alt="">
+                  <span class="nyvc-store-txt"><span class="nyvc-store-small">GET IT ON</span><img class="nyvc-store-word" src="{{ 'nyvc-googleplay-word.svg' | asset_url }}" alt=""></span>
+                </a>
+                <a class="nyvc-store" href="{{ app_url }}" target="_blank" rel="noopener" aria-label="Download on the App Store">
+                  <img class="nyvc-store-ic nyvc-store-ic--apple" src="{{ 'nyvc-apple.svg' | asset_url }}" alt="">
+                  <span class="nyvc-store-txt nyvc-store-txt--apple"><span class="nyvc-store-tiny">Download on the</span><span class="nyvc-store-big">App Store</span></span>
+                </a>
+              </div>
+            {%- endif -%}
+            {%- if b.button_label != blank -%}
+              <a class="nyvc-btn nyvc-btn--step" href="{{ b.button_url | default: '#nyvc-register' }}"><span>{{ b.button_label | escape }}</span><img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-purple.svg' | asset_url }}" alt="" aria-hidden="true"></a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </section>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NYVC: How it works",
+  "tag": "div",
+  "class": "section-nyvc",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How it works" },
+    { "type": "url", "id": "play_url", "label": "Google Play link", "info": "Blank uses the neOwn app on Google Play." },
+    { "type": "url", "id": "app_url", "label": "App Store link", "info": "Blank uses the neOwn app on the App Store." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "register", "options": [
+          { "value": "register", "label": "Register" },
+          { "value": "books", "label": "Book" },
+          { "value": "video", "label": "Video" },
+          { "value": "upload", "label": "Upload" },
+          { "value": "announce", "label": "Announcement" },
+          { "value": "none", "label": "None" }
+        ] },
+        { "type": "image_picker", "id": "icon_image", "label": "Custom icon", "info": "Overrides the icon above." },
+        { "type": "text", "id": "title", "label": "Title", "default": "Step title" },
+        { "type": "inline_richtext", "id": "text", "label": "Text", "info": "Bold text shows in dark grey, like \"2 books\" in the design." },
+        { "type": "checkbox", "id": "show_app_badges", "label": "Show Google Play and App Store badges", "default": false },
+        { "type": "text", "id": "button_label", "label": "Button label" },
+        { "type": "url", "id": "button_url", "label": "Button link", "info": "Blank scrolls to the Register section." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "NYVC: How it works", "blocks": [{ "type": "step" }, { "type": "step" }, { "type": "step" }] }]
+}
+{% endschema %}

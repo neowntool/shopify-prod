@@ -1,0 +1,40 @@
+{%- render 'nyvc-styles' -%}
+{%- assign s = section.settings -%}
+<div class="nyvc-root" id="nyvc-{{ section.id }}">
+  <div class="nyvc-wrap">
+    <section class="nyvc-card nyvc-judge" aria-labelledby="nyvc-h-{{ section.id }}">
+      <div class="nyvc-head">
+        <h2 class="nyvc-h2" id="nyvc-h-{{ section.id }}">{{ s.heading | escape }}</h2>
+        {%- if s.subheading != blank -%}<p class="nyvc-sub">{{ s.subheading | escape }}</p>{%- endif -%}
+      </div>
+      <ol class="nyvc-rubric">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}><span class="nyvc-rubric-no">{{ forloop.index }}</span><h3>{{ block.settings.title | escape }}</h3></li>
+        {%- endfor -%}
+      </ol>
+    </section>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NYVC: Judging criteria",
+  "tag": "div",
+  "class": "section-nyvc",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How will the videos be judged?" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Entries will be evaluated based on the following criteria. Age-appropriate expectations will apply for each category" }
+  ],
+  "blocks": [
+    {
+      "type": "criterion",
+      "name": "Criterion",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Understanding of the book" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "NYVC: Judging criteria", "blocks": [{ "type": "criterion" }, { "type": "criterion" }, { "type": "criterion" }] }]
+}
+{% endschema %}

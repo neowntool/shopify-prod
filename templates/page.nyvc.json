@@ -1,15 +1,441 @@
 {
   "sections": {
-    "nyvc": {
-      "type": "nyvc",
-      "blocks": {
-        "school_1": { "type": "school", "settings": {} },
-        "school_2": { "type": "school", "settings": {} },
-        "school_3": { "type": "school", "settings": {} },
-        "school_4": { "type": "school", "settings": {} }
-      },
-      "block_order": ["school_1", "school_2", "school_3", "school_4"],
+    "nyvc_hero": {
+      "type": "nyvc-hero",
       "settings": {}
+    },
+    "nyvc_steps": {
+      "type": "nyvc-steps",
+      "settings": {
+        "heading": "How it works"
+      },
+      "blocks": {
+        "nyvc_steps_1": {
+          "type": "step",
+          "settings": {
+            "icon": "register",
+            "title": "Register",
+            "text": "Register below 3 days from the workshop conducted in your school.",
+            "button_label": "Register Now"
+          }
+        },
+        "nyvc_steps_2": {
+          "type": "step",
+          "settings": {
+            "icon": "books",
+            "title": "Choose your books",
+            "text": "Select <strong>2 books</strong> from the neOwn Young Voices Championship catalogue on the neOwn app.",
+            "show_app_badges": true,
+            "button_label": ""
+          }
+        },
+        "nyvc_steps_3": {
+          "type": "step",
+          "settings": {
+            "icon": "video",
+            "title": "Read and record",
+            "text": "Choose any one of your selected books and record a video responding to the prompt for your category.",
+            "button_label": ""
+          }
+        },
+        "nyvc_steps_4": {
+          "type": "step",
+          "settings": {
+            "icon": "upload",
+            "title": "Submit your video",
+            "text": "Click below to submit your video.",
+            "button_label": "Submit Your Video"
+          }
+        },
+        "nyvc_steps_5": {
+          "type": "step",
+          "settings": {
+            "icon": "announce",
+            "title": "Await result announcement",
+            "text": "Results will be posted on the website and will be emailed to all participants who qualify for the Grand Finale",
+            "button_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "nyvc_steps_1",
+        "nyvc_steps_2",
+        "nyvc_steps_3",
+        "nyvc_steps_4",
+        "nyvc_steps_5"
+      ]
+    },
+    "nyvc_cta": {
+      "type": "nyvc-cta",
+      "settings": {},
+      "blocks": {
+        "nyvc_cta_1": {
+          "type": "column",
+          "settings": {
+            "heading": "Register Your Child",
+            "subheading": "Complete the registration form to participate in the Young Voice Championship",
+            "note": "Please submit only one entry. If you face a technical issue and need to submit another video, contact us at [contact number].",
+            "button_label": "Register Now",
+            "style": "purple",
+            "icon": "form"
+          }
+        },
+        "nyvc_cta_2": {
+          "type": "column",
+          "settings": {
+            "heading": "Submit your video",
+            "subheading": "Once you have read your selected book and prepared your response, submit your video using the link below.",
+            "note": "Please submit only one entry. If you face a technical issue and need to submit another video, contact us at [contact number].",
+            "button_label": "Submit Your Video",
+            "style": "pink",
+            "icon": "video"
+          }
+        }
+      },
+      "block_order": [
+        "nyvc_cta_1",
+        "nyvc_cta_2"
+      ]
+    },
+    "nyvc_journey": {
+      "type": "nyvc-journey",
+      "settings": {},
+      "blocks": {
+        "nyvc_journey_1": {
+          "type": "stage",
+          "settings": {
+            "icon": "video",
+            "tag": "Stage 01",
+            "title": "Video submissions and judging",
+            "text": "Submit your video by your school's deadline. Entries will be reviewed by the championship team.",
+            "date": "School-wise deadlines"
+          }
+        },
+        "nyvc_journey_2": {
+          "type": "stage",
+          "settings": {
+            "icon": "finalists",
+            "tag": "Stage 02",
+            "title": "Selection of finalists",
+            "text": "Selected students from each school will be informed directly",
+            "date": "By 31 December 2026"
+          }
+        },
+        "nyvc_journey_3": {
+          "type": "stage",
+          "settings": {
+            "icon": "training",
+            "tag": "Stage 03",
+            "title": "Online training",
+            "text": "120 Finalists will receive online training from IVY Spires and a Harvard Debate Council certificate",
+            "date": "Dec 2026/Jan 2027"
+          }
+        },
+        "nyvc_journey_4": {
+          "type": "stage",
+          "settings": {
+            "icon": "finale",
+            "tag": "Grand Finale",
+            "title": "In-person grand finale",
+            "text": "Finalists will come together in Mumbai to showcase their skills, and compete for prizes.",
+            "date": "January 2027 (TBA)"
+          }
+        }
+      },
+      "block_order": [
+        "nyvc_journey_1",
+        "nyvc_journey_2",
+        "nyvc_journey_3",
+        "nyvc_journey_4"
+      ]
+    },
+    "nyvc_dates": {
+      "type": "nyvc-dates",
+      "settings": {},
+      "blocks": {
+        "nyvc_dates_1": {
+          "type": "school",
+          "settings": {}
+        },
+        "nyvc_dates_2": {
+          "type": "school",
+          "settings": {}
+        },
+        "nyvc_dates_3": {
+          "type": "school",
+          "settings": {}
+        },
+        "nyvc_dates_4": {
+          "type": "school",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "nyvc_dates_1",
+        "nyvc_dates_2",
+        "nyvc_dates_3",
+        "nyvc_dates_4"
+      ]
+    },
+    "nyvc_prompts": {
+      "type": "nyvc-prompts",
+      "settings": {
+        "subheading": "Find the prompt for your standard group below. Your video must respond to the prompt for your category and be about one of the two books you selected from the neOwn Young Voices Championship catalogue on the neOwn app."
+      },
+      "blocks": {
+        "nyvc_prompts_1": {
+          "type": "category",
+          "settings": {
+            "color": "pink",
+            "badge": "CATEGORY I",
+            "title": "Standards 3–4:",
+            "text": "Focus on vivid character descriptions, emotional moments, and expressive reading aloud."
+          }
+        },
+        "nyvc_prompts_2": {
+          "type": "category",
+          "settings": {
+            "color": "yellow",
+            "badge": "CATEGORY II",
+            "title": "Standards 5–6:",
+            "text": "Explore personal perspectives, thematic connections, and how the narrative moved you."
+          }
+        },
+        "nyvc_prompts_3": {
+          "type": "category",
+          "settings": {
+            "color": "cyan",
+            "badge": "CATEGORY III",
+            "title": "Standards 7–8:",
+            "text": "Critique overarching plot arcs, author viewpoints, and ethical or real-world reflections."
+          }
+        }
+      },
+      "block_order": [
+        "nyvc_prompts_1",
+        "nyvc_prompts_2",
+        "nyvc_prompts_3"
+      ]
+    },
+    "nyvc_judging": {
+      "type": "nyvc-judging",
+      "settings": {},
+      "blocks": {
+        "nyvc_judging_1": {
+          "type": "criterion",
+          "settings": {
+            "title": "Understanding of the book"
+          }
+        },
+        "nyvc_judging_2": {
+          "type": "criterion",
+          "settings": {
+            "title": "Original thinking"
+          }
+        },
+        "nyvc_judging_3": {
+          "type": "criterion",
+          "settings": {
+            "title": "Clarity of expression"
+          }
+        },
+        "nyvc_judging_4": {
+          "type": "criterion",
+          "settings": {
+            "title": "Relevance to the prompt"
+          }
+        },
+        "nyvc_judging_5": {
+          "type": "criterion",
+          "settings": {
+            "title": "Engagement and delivery"
+          }
+        }
+      },
+      "block_order": [
+        "nyvc_judging_1",
+        "nyvc_judging_2",
+        "nyvc_judging_3",
+        "nyvc_judging_4",
+        "nyvc_judging_5"
+      ]
+    },
+    "nyvc_guidelines": {
+      "type": "nyvc-guidelines",
+      "settings": {},
+      "blocks": {
+        "nyvc_guidelines_1": {
+          "type": "item",
+          "settings": {
+            "icon": "duration",
+            "label": "Duration:",
+            "text": "Maximum two minutes."
+          }
+        },
+        "nyvc_guidelines_2": {
+          "type": "item",
+          "settings": {
+            "icon": "language",
+            "label": "Language:",
+            "text": "English."
+          }
+        },
+        "nyvc_guidelines_3": {
+          "type": "item",
+          "settings": {
+            "icon": "format",
+            "label": "Format:",
+            "text": "Vertical video, in portrait orientation (9:16), suitable for mobile viewing."
+          }
+        },
+        "nyvc_guidelines_4": {
+          "type": "item",
+          "settings": {
+            "icon": "filesize",
+            "label": "File size:",
+            "text": "Less than 100 MB."
+          }
+        },
+        "nyvc_guidelines_5": {
+          "type": "item",
+          "settings": {
+            "icon": "book",
+            "label": "Book:",
+            "text": "Choose one of the two books selected through the neOwn app."
+          }
+        },
+        "nyvc_guidelines_6": {
+          "type": "item",
+          "settings": {
+            "icon": "prompt",
+            "label": "Prompt:",
+            "text": "Respond to the category-specific prompt given above."
+          }
+        }
+      },
+      "block_order": [
+        "nyvc_guidelines_1",
+        "nyvc_guidelines_2",
+        "nyvc_guidelines_3",
+        "nyvc_guidelines_4",
+        "nyvc_guidelines_5",
+        "nyvc_guidelines_6"
+      ]
+    },
+    "nyvc_checklist": {
+      "type": "nyvc-checklist",
+      "settings": {},
+      "blocks": {
+        "nyvc_checklist_1": {
+          "type": "tip",
+          "settings": {
+            "text": "Help your child find a quiet, well-lit space."
+          }
+        },
+        "nyvc_checklist_2": {
+          "type": "tip",
+          "settings": {
+            "text": "Keep the camera steady and position it so your child's face is clearly visible."
+          }
+        },
+        "nyvc_checklist_3": {
+          "type": "tip",
+          "settings": {
+            "text": "Make sure the child's voice can be heard clearly."
+          }
+        },
+        "nyvc_checklist_4": {
+          "type": "tip",
+          "settings": {
+            "text": "Ask your child to speak naturally and look towards the camera."
+          }
+        },
+        "nyvc_checklist_5": {
+          "type": "tip",
+          "settings": {
+            "text": "Encourage your child to share their own ideas and opinions."
+          }
+        },
+        "nyvc_checklist_6": {
+          "type": "tip",
+          "settings": {
+            "text": "Check the final video and file size before uploading."
+          }
+        },
+        "nyvc_checklist_7": {
+          "type": "tip",
+          "settings": {
+            "text": "Keep the video within the two-minute limit."
+          }
+        }
+      },
+      "block_order": [
+        "nyvc_checklist_1",
+        "nyvc_checklist_2",
+        "nyvc_checklist_3",
+        "nyvc_checklist_4",
+        "nyvc_checklist_5",
+        "nyvc_checklist_6",
+        "nyvc_checklist_7"
+      ]
+    },
+    "nyvc_faq": {
+      "type": "lp1faq",
+      "settings": {
+        "style": "compact",
+        "heading": "Frequently asked questions",
+        "subheading": ""
+      },
+      "blocks": {
+        "nyvc_faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I choose any book?",
+            "answer": "<p>Choose two books from the <strong><em>neOwn Young Voices Championship</em></strong> catalogue on the neOwn app. Your video must be about one of those two books.</p>"
+          }
+        },
+        "nyvc_faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "When do I need to submit my video?",
+            "answer": "<p>Check the deadline listed for your school in the Important Dates table.</p>"
+          }
+        },
+        "nyvc_faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Which prompt should I answer?",
+            "answer": "<p>Use the prompt listed for your standard group above.</p>"
+          }
+        },
+        "nyvc_faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "What happens after I submit my video?",
+            "answer": "<p>Entries will be reviewed by the championship team. Selected participants will be contacted with details of the next round.</p>"
+          }
+        },
+        "nyvc_faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can my parent help me make the video?",
+            "answer": "<p>Yes. A parent can help with recording and uploading, but the ideas and spoken response must be yours.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "nyvc_faq_1",
+        "nyvc_faq_2",
+        "nyvc_faq_3",
+        "nyvc_faq_4",
+        "nyvc_faq_5"
+      ]
+    },
+    "nyvc_about": {
+      "type": "nyvc-about",
+      "settings": {
+        "body": "<p>neOwn is India's 1st app-based children's book library operating out of Mumbai, with 15,000+ active subscribers and 25,000+ families served across the country. neOwn currently houses a curated collection of 75,000+ physical books from leading publishers, including Scholastic, HarperCollins, Penguin, Hachette, and many others, that are circulated to kids homes across the country.</p><p>As a holistic initiative to help parents raise confident kids, neOwn offers a Book Library, Toy Library, and a free monthly Reading Challenge accessible to all via the neOwn app. neOwn regularly hosts free book exploration sessions and has conducted 90+ editions in the last 2 years. With a community of parents and a comprehensive ecosystem of reading resources, neOwn is building India's largest platform for encouraging kids to build a reading habit.</p>"
+      }
     },
     "main": {
       "type": "page",
@@ -17,6 +443,18 @@
       "settings": {}
     }
   },
-  "order": ["nyvc", "main"]
+  "order": [
+    "nyvc_hero",
+    "nyvc_steps",
+    "nyvc_cta",
+    "nyvc_journey",
+    "nyvc_dates",
+    "nyvc_prompts",
+    "nyvc_judging",
+    "nyvc_guidelines",
+    "nyvc_checklist",
+    "nyvc_faq",
+    "nyvc_about",
+    "main"
+  ]
 }
-

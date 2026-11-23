@@ -1,0 +1,89 @@
+{%- render 'nyvc-styles' -%}
+{%- liquid
+  assign s = section.settings
+  assign register_url = s.register_url | default: '#nyvc-register'
+  assign submit_url = s.submit_url | default: '#nyvc-register'
+-%}
+{%- if s.hide_theme_whatsapp -%}<style>#whatsapp-widget{display:none!important}</style>{%- endif -%}
+<div class="nyvc-root nyvc--first" id="nyvc-{{ section.id }}">
+  <div class="nyvc-wrap">
+    <section class="nyvc-hero" aria-label="{{ s.logo_alt | escape }}">
+      <img class="nyvc-blob nyvc-blob--cyan" src="{{ 'nyvc-blob-cyan.svg' | asset_url }}" alt="" aria-hidden="true">
+      <img class="nyvc-blob nyvc-blob--yellow" src="{{ 'nyvc-blob-yellow.svg' | asset_url }}" alt="" aria-hidden="true">
+      <span class="nyvc-tick nyvc-desk" style="left:1.74%;top:51.8%;width:0.84%;height:0.85%;--r:-101.83deg;--k:-2.57deg"><img src="{{ 'nyvc-tL1.svg' | asset_url }}" alt=""></span>
+      <span class="nyvc-tick nyvc-desk" style="left:2.26%;top:47.13%;width:0.73%;height:1.54%;--r:-101.83deg;--k:-2.57deg"><img src="{{ 'nyvc-tL2.svg' | asset_url }}" alt=""></span>
+      <span class="nyvc-tick nyvc-desk" style="left:4.2%;top:44.57%;width:0.41%;height:1.73%;--r:-101.83deg;--k:-2.57deg"><img src="{{ 'nyvc-tL3.svg' | asset_url }}" alt=""></span>
+
+      <div class="nyvc-hero-inner">
+        <span class="nyvc-tick nyvc-desk" style="left:49.28%;top:4.86%;width:1.06%;height:2.25%;--r:-104.8deg;--k:2.13deg"><img src="{{ 'nyvc-taA1.svg' | asset_url }}" alt=""></span>
+        <span class="nyvc-tick nyvc-desk" style="left:49.85%;top:2.16%;width:1.04%;height:2.75%;--r:-104.8deg;--k:2.13deg"><img src="{{ 'nyvc-taA2.svg' | asset_url }}" alt=""></span>
+        <span class="nyvc-tick nyvc-desk" style="left:48.64%;top:7.87%;width:1.13%;height:1.36%;--r:-104.8deg;--k:2.13deg"><img src="{{ 'nyvc-taA3.svg' | asset_url }}" alt=""></span>
+
+        <div class="nyvc-hero-left">
+          <div class="nyvc-hero-top">
+            <div class="nyvc-hero-brand">
+              <div class="nyvc-logo">
+                {%- if s.logo != blank -%}
+                  {{ s.logo | image_url: width: 700 | image_tag: alt: s.logo_alt, width: 635, height: 635 }}
+                {%- else -%}
+                  <img src="{{ 'nyvc-logo.png' | asset_url }}" alt="{{ s.logo_alt | escape }}" width="635" height="635">
+                {%- endif -%}
+              </div>
+              <div class="nyvc-art nyvc-art--mobile" aria-hidden="true">{% render 'nyvc-art', photo: s.photo %}</div>
+            </div>
+            {%- if s.tagline != blank -%}<p class="nyvc-hero-tagline">{{ s.tagline }}</p>{%- endif -%}
+            <div class="nyvc-hero-ctas">
+              {%- if s.register_label != blank -%}
+                <a class="nyvc-btn nyvc-btn--hero nyvc-btn--primary" href="{{ register_url }}">
+                  <img class="nyvc-btn-ic" src="{{ 'nyvc-ic-doc-white.svg' | asset_url }}" alt="" aria-hidden="true">
+                  <span>{{ s.register_label | escape }}</span>
+                  <img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-white.svg' | asset_url }}" alt="" aria-hidden="true">
+                </a>
+              {%- endif -%}
+              {%- if s.submit_label != blank -%}
+                <a class="nyvc-btn nyvc-btn--hero nyvc-btn--soft" href="{{ submit_url }}">
+                  <img class="nyvc-btn-ic" src="{{ 'nyvc-ic-video-purple.svg' | asset_url }}" alt="" aria-hidden="true">
+                  <span>{{ s.submit_label | escape }}</span>
+                  <img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-purple.svg' | asset_url }}" alt="" aria-hidden="true">
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+          {%- if s.who_title != blank or s.who_text != blank -%}
+            <div class="nyvc-who">
+              {%- if s.who_title != blank -%}<p class="nyvc-who-title">{{ s.who_title | escape }}</p>{%- endif -%}
+              {%- if s.who_text != blank -%}<p class="nyvc-who-text">{{ s.who_text | escape }}</p>{%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="nyvc-art nyvc-art--desktop" aria-hidden="true">{% render 'nyvc-art', photo: s.photo %}</div>
+      </div>
+    </section>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NYVC: Hero",
+  "tag": "div",
+  "class": "section-nyvc",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo", "info": "Blank uses the Young Voices Championship logo." },
+    { "type": "text", "id": "logo_alt", "label": "Logo alt text", "default": "neOwn Young Voices Championship" },
+    { "type": "image_picker", "id": "photo", "label": "Photo", "info": "Square cut-out on a transparent background. Blank uses the design photo." },
+    { "type": "inline_richtext", "id": "tagline", "label": "Tagline", "default": "A reading and speaking championship that celebrates young readers and their ideas." },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "register_label", "label": "Register button label", "default": "Register Now" },
+    { "type": "url", "id": "register_url", "label": "Register button link", "info": "Blank scrolls to the Register section." },
+    { "type": "text", "id": "submit_label", "label": "Submit button label", "default": "Submit Your Video" },
+    { "type": "url", "id": "submit_url", "label": "Submit button link", "info": "Blank scrolls to the Register section." },
+    { "type": "header", "content": "Who can participate" },
+    { "type": "text", "id": "who_title", "label": "Title", "default": "Who can participate?" },
+    { "type": "text", "id": "who_text", "label": "Text", "default": "Students in Standards 3–8 from participating schools in Mumbai can register." },
+    { "type": "header", "content": "Page" },
+    { "type": "checkbox", "id": "hide_theme_whatsapp", "label": "Hide the theme's WhatsApp \"Need Help\" button on this page", "default": false }
+  ],
+  "presets": [{ "name": "NYVC: Hero" }]
+}
+{% endschema %}

@@ -1,4 +1,4 @@
-<section class="jrfaq-section">
+<section class="jrfaq-section{% if section.settings.style == 'compact' %} jrfaq-section--compact{% endif %}">
   <div class="jrfaq-container">
 
     <div class="jrfaq-header">
@@ -132,12 +132,46 @@
     margin-top:10px;
   }
 }
+/* Compact style (used on the NYVC page): left heading, smaller text, matches the NYVC design */
+.jrfaq-section--compact{ padding:24px 40px; font-family:'Geologica',sans-serif; }
+.jrfaq-section--compact .jrfaq-container{ max-width:1312px; }
+.jrfaq-section--compact .jrfaq-header{ text-align:left; margin-bottom:24px; }
+.jrfaq-section--compact .jrfaq-header h2{ font-family:inherit; font-size:28px; line-height:1.25; font-weight:700; color:#1a192f; margin:0 0 4px; letter-spacing:0; text-transform:none; }
+.jrfaq-section--compact .jrfaq-header p{ font-size:16px; line-height:1.25; color:#6a6a6a; }
+.jrfaq-section--compact .jrfaq-header p:empty{ display:none; }
+.jrfaq-section--compact .jrfaq-grid{ grid-template-columns:repeat(2,minmax(0,650px)); gap:12px; }
+.jrfaq-section--compact .jrfaq-card{ border:.4px solid #795ff5; border-radius:8px; padding:12px; min-height:78px; }
+.jrfaq-section--compact .jrfaq-title-wrap{ gap:12px; margin-bottom:5px; align-items:flex-start; }
+.jrfaq-section--compact .jrfaq-icon{ width:17px; font-family:inherit; font-size:26px; font-weight:800; color:#6730ef; text-align:center; }
+.jrfaq-section--compact .jrfaq-title-wrap h3{ font-family:inherit; font-size:14px; line-height:1.25; font-weight:700; color:#404040; letter-spacing:0; text-transform:none; padding-top:4px; }
+.jrfaq-section--compact .jrfaq-content{ padding-left:29px; margin-top:-6px; font-size:12px; line-height:1.25; color:#6a6a6a; }
+.jrfaq-section--compact .jrfaq-content p{ margin:0; }
+.jrfaq-section--compact .jrfaq-content strong{ color:#404040; }
+@media(max-width:1199px){ .jrfaq-section--compact{ padding-left:24px; padding-right:24px; } .jrfaq-section--compact .jrfaq-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:767px){
+  .jrfaq-section--compact{ padding:20px 16px; }
+  .jrfaq-section--compact .jrfaq-header h2{ font-size:24px; }
+  .jrfaq-section--compact .jrfaq-grid{ grid-template-columns:1fr; }
+  .jrfaq-section--compact .jrfaq-card{ min-height:0; }
+  .jrfaq-section--compact .jrfaq-title-wrap h3{ font-size:14px; }
+  .jrfaq-section--compact .jrfaq-content{ padding-left:29px; margin-top:-6px; }
+}
 </style>
 
 {% schema %}
 {
   "name": "JR FAQ Grid",
   "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "default": "standard",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "compact", "label": "Compact (left heading, smaller text)" }
+      ]
+    },
     {
       "type": "text",
       "id": "heading",

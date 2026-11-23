@@ -1,0 +1,66 @@
+{%- render 'nyvc-styles' -%}
+{%- assign s = section.settings -%}
+<div class="nyvc-root" id="nyvc-{{ section.id }}">
+  <div class="nyvc-wrap">
+    <section class="nyvc-card nyvc-journey" aria-labelledby="nyvc-h-{{ section.id }}">
+      <div class="nyvc-head">
+        <h2 class="nyvc-h2" id="nyvc-h-{{ section.id }}">{{ s.heading | escape }}</h2>
+        {%- if s.subheading != blank -%}<p class="nyvc-sub">{{ s.subheading | escape }}</p>{%- endif -%}
+      </div>
+      <ol class="nyvc-stages">
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          {%- unless forloop.first -%}<li class="nyvc-stage-arrow" aria-hidden="true"><img src="{{ 'nyvc-j-arrow.svg' | asset_url }}" alt=""></li>{%- endunless -%}
+          <li class="nyvc-stage" {{ block.shopify_attributes }}>
+            <div class="nyvc-stage-top">
+              <span class="nyvc-stage-ic">
+                {%- if b.icon_image != blank -%}
+                  {{ b.icon_image | image_url: width: 48 | image_tag: alt: '', width: 22, height: 22 }}
+                {%- else -%}
+                  <img src="{{ 'nyvc-j-' | append: b.icon | append: '.svg' | asset_url }}" alt="" style="height:{% case b.icon %}{% when 'finalists' %}12{% when 'training' or 'finale' %}18{% else %}16{% endcase %}px;width:auto">
+                {%- endif -%}
+              </span>
+              {%- if b.tag != blank -%}<span class="nyvc-stage-tag">{{ b.tag | escape }}</span>{%- endif -%}
+            </div>
+            <h3>{{ b.title | escape }}</h3>
+            {%- if b.text != blank -%}<p>{{ b.text | escape }}</p>{%- endif -%}
+            {%- if b.date != blank -%}<span class="nyvc-stage-date">{{ b.date | escape }}</span>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+    </section>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NYVC: Journey",
+  "tag": "div",
+  "class": "section-nyvc",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your journey to the grand finale" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "The championship continues beyond video submission. Here's what happens next." }
+  ],
+  "blocks": [
+    {
+      "type": "stage",
+      "name": "Stage",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "video", "options": [
+          { "value": "video", "label": "Video" },
+          { "value": "finalists", "label": "People" },
+          { "value": "training", "label": "Graduation cap" },
+          { "value": "finale", "label": "Trophy" }
+        ] },
+        { "type": "image_picker", "id": "icon_image", "label": "Custom icon", "info": "Overrides the icon above." },
+        { "type": "text", "id": "tag", "label": "Label (top right)", "default": "Stage 01" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Stage title" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "text", "id": "date", "label": "Date pill" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "NYVC: Journey", "blocks": [{ "type": "stage" }, { "type": "stage" }, { "type": "stage" }, { "type": "stage" }] }]
+}
+{% endschema %}

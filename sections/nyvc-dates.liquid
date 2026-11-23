@@ -1,0 +1,65 @@
+{%- render 'nyvc-styles' -%}
+{%- assign s = section.settings -%}
+<div class="nyvc-root" id="nyvc-{{ section.id }}">
+  <div class="nyvc-wrap">
+    <section class="nyvc-dates" aria-labelledby="nyvc-h-{{ section.id }}">
+      <div class="nyvc-head">
+        <h2 class="nyvc-h2" id="nyvc-h-{{ section.id }}">{{ s.heading | escape }}</h2>
+        {%- if s.subheading != blank -%}<p class="nyvc-sub">{{ s.subheading | escape }}</p>{%- endif -%}
+      </div>
+      <div class="nyvc-dates-box">
+        <div class="nyvc-table-scroll">
+          <table class="nyvc-table">
+            <thead>
+              <tr><th scope="col">{{ s.col_school | escape }}</th><th scope="col">{{ s.col_workshop | escape }}</th><th scope="col">{{ s.col_closes | escape }}</th><th scope="col">{{ s.col_deadline | escape }}</th></tr>
+            </thead>
+            <tbody>
+              {%- for block in section.blocks -%}
+                <tr {{ block.shopify_attributes }}>
+                  <th scope="row">{{ block.settings.school | escape }}</th>
+                  <td>{{ block.settings.workshop | escape }}</td>
+                  <td>{{ block.settings.closes | escape }}</td>
+                  <td>{{ block.settings.deadline | escape }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+        {%- if s.note != blank -%}
+          <p class="nyvc-dates-note"><img src="{{ 'nyvc-ic-info.svg' | asset_url }}" alt="" width="17" height="17"><span>{{ s.note }}</span></p>
+        {%- endif -%}
+      </div>
+    </section>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NYVC: Important dates",
+  "tag": "div",
+  "class": "section-nyvc",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Important dates" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Dates vary by school. Please check your school’s schedule before registering." },
+    { "type": "header", "content": "Table columns" },
+    { "type": "text", "id": "col_school", "label": "Column 1", "default": "School" },
+    { "type": "text", "id": "col_workshop", "label": "Column 2", "default": "Workshop date" },
+    { "type": "text", "id": "col_closes", "label": "Column 3", "default": "Registration closes" },
+    { "type": "text", "id": "col_deadline", "label": "Column 4", "default": "Video submission deadline" },
+    { "type": "inline_richtext", "id": "note", "label": "Note under the table", "default": "Registration closes three days after your school’s workshop. Please refer to the table above for your deadlines." }
+  ],
+  "blocks": [
+    {
+      "type": "school",
+      "name": "School dates",
+      "settings": [
+        { "type": "text", "id": "school", "label": "School", "default": "[School name]" },
+        { "type": "text", "id": "workshop", "label": "Workshop date", "default": "[Date]" },
+        { "type": "text", "id": "closes", "label": "Registration closes", "default": "[Date]" },
+        { "type": "text", "id": "deadline", "label": "Video submission deadline", "default": "[Date]" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "NYVC: Important dates", "blocks": [{ "type": "school" }, { "type": "school" }, { "type": "school" }, { "type": "school" }] }]
+}
+{% endschema %}

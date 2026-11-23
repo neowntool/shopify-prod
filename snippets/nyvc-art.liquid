@@ -4,7 +4,11 @@
   markup scales down for the mobile hero. Used by sections/nyvc.liquid.
 {%- endcomment -%}
 <img class="nyvc-art-glow" src="{{ 'nyvc-glow.svg' | asset_url }}" alt="">
-<img class="nyvc-art-girl" src="{{ 'nyvc-girl.png' | asset_url }}" alt="" width="1026" height="1026" loading="eager" fetchpriority="high">
+{%- if photo != blank -%}
+  {{ photo | image_url: width: 1100 | image_tag: class: 'nyvc-art-girl', alt: '', loading: 'eager', fetchpriority: 'high', widths: '400, 700, 1100' }}
+{%- else -%}
+  <img class="nyvc-art-girl" src="{{ 'nyvc-girl.png' | asset_url }}" alt="" width="1026" height="1026" loading="eager" fetchpriority="high">
+{%- endif -%}
 <span class="nyvc-art-rot nyvc-art-crown" style="--r:-5.81deg"><span><img src="{{ 'nyvc-crown.svg' | asset_url }}" alt=""></span></span>
 <span class="nyvc-art-rot nyvc-art-bulb" style="--r:-21.82deg"><span>
   <img src="{{ 'nyvc-bulb1.svg' | asset_url }}" alt="" style="left:20.83%;top:20.83%;width:58.34%;height:79.17%">
