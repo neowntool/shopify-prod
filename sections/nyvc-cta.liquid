@@ -9,7 +9,7 @@
           {%- if b.subheading != blank -%}<p class="nyvc-cta2-sub">{{ b.subheading | escape }}</p>{%- endif -%}
           {%- if b.note != blank -%}<p class="nyvc-cta2-note">{{ b.note }}</p>{%- endif -%}
           {%- if b.button_label != blank -%}
-            <a class="nyvc-btn nyvc-btn--big nyvc-btn--{% if b.style == 'pink' %}pink{% else %}primary{% endif %}" href="{% if b.button_action == 'form' %}#nyvc-form{% else %}{{ b.button_url | default: '#nyvc-register' }}{% endif %}">
+            <a class="nyvc-btn nyvc-btn--big nyvc-btn--{% if b.style == 'pink' %}pink{% else %}primary{% endif %}" href="{% if b.button_action == 'form' %}#nyvc-form{% elsif b.button_action == 'upload' %}#nyvc-upload{% else %}{{ b.button_url | default: '#nyvc-register' }}{% endif %}">
               <img class="nyvc-btn-ic" src="{% if b.icon == 'video' %}{{ 'nyvc-ic-video-white.svg' | asset_url }}{% else %}{{ 'nyvc-ic-doc-white.svg' | asset_url }}{% endif %}" alt="" aria-hidden="true">
               <span>{{ b.button_label | escape }}</span>
               <img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-white.svg' | asset_url }}" alt="" aria-hidden="true">
@@ -42,6 +42,7 @@
         { "type": "text", "id": "button_label", "label": "Button label", "default": "Register Now" },
         { "type": "select", "id": "button_action", "label": "Button opens", "default": "link", "options": [
           { "value": "form", "label": "Registration form" },
+          { "value": "upload", "label": "Video upload" },
           { "value": "link", "label": "Link below" }
         ] },
         { "type": "url", "id": "button_url", "label": "Button link" },

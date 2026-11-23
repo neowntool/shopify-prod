@@ -1,14 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "nyvc_hero": {
       "type": "nyvc-hero",
-      "settings": {}
+      "settings": {
+        "logo_alt": "neOwn Young Voices Championship",
+        "tagline": "A reading and speaking championship that celebrates young readers and their ideas.",
+        "register_label": "Register Now",
+        "register_url": "",
+        "submit_label": "Submit Your Video",
+        "submit_url": "",
+        "who_title": "Who can participate?",
+        "who_text": "Students in Standards 3–8 from participating schools in Mumbai can register.",
+        "hide_theme_whatsapp": false
+      }
     },
     "nyvc_steps": {
       "type": "nyvc-steps",
-      "settings": {
-        "heading": "How it works"
-      },
       "blocks": {
         "nyvc_steps_1": {
           "type": "step",
@@ -16,8 +32,10 @@
             "icon": "register",
             "title": "Register",
             "text": "Register below 3 days from the workshop conducted in your school.",
+            "show_app_badges": false,
             "button_label": "Register Now",
-            "button_action": "form"
+            "button_action": "form",
+            "button_url": ""
           }
         },
         "nyvc_steps_2": {
@@ -27,7 +45,9 @@
             "title": "Choose your books",
             "text": "Select <strong>2 books</strong> from the neOwn Young Voices Championship catalogue on the neOwn app.",
             "show_app_badges": true,
-            "button_label": ""
+            "button_label": "",
+            "button_action": "link",
+            "button_url": ""
           }
         },
         "nyvc_steps_3": {
@@ -36,7 +56,10 @@
             "icon": "video",
             "title": "Read and record",
             "text": "Choose any one of your selected books and record a video responding to the prompt for your category.",
-            "button_label": ""
+            "show_app_badges": false,
+            "button_label": "",
+            "button_action": "link",
+            "button_url": ""
           }
         },
         "nyvc_steps_4": {
@@ -45,7 +68,10 @@
             "icon": "upload",
             "title": "Submit your video",
             "text": "Click below to submit your video.",
-            "button_label": "Submit Your Video"
+            "show_app_badges": false,
+            "button_label": "Submit Your Video",
+            "button_action": "upload",
+            "button_url": ""
           }
         },
         "nyvc_steps_5": {
@@ -54,7 +80,10 @@
             "icon": "announce",
             "title": "Await result announcement",
             "text": "Results will be posted on the website and will be emailed to all participants who qualify for the Grand Finale",
-            "button_label": ""
+            "show_app_badges": false,
+            "button_label": "",
+            "button_action": "link",
+            "button_url": ""
           }
         }
       },
@@ -64,11 +93,15 @@
         "nyvc_steps_3",
         "nyvc_steps_4",
         "nyvc_steps_5"
-      ]
+      ],
+      "settings": {
+        "heading": "How it works",
+        "play_url": "",
+        "app_url": ""
+      }
     },
     "nyvc_cta": {
       "type": "nyvc-cta",
-      "settings": {},
       "blocks": {
         "nyvc_cta_1": {
           "type": "column",
@@ -77,9 +110,10 @@
             "subheading": "Complete the registration form to participate in the Young Voice Championship",
             "note": "Please submit only one entry. If you face a technical issue and need to submit another video, contact us at [contact number].",
             "button_label": "Register Now",
+            "button_action": "form",
+            "button_url": "",
             "style": "purple",
-            "icon": "form",
-            "button_action": "form"
+            "icon": "form"
           }
         },
         "nyvc_cta_2": {
@@ -89,6 +123,8 @@
             "subheading": "Once you have read your selected book and prepared your response, submit your video using the link below.",
             "note": "Please submit only one entry. If you face a technical issue and need to submit another video, contact us at [contact number].",
             "button_label": "Submit Your Video",
+            "button_action": "upload",
+            "button_url": "",
             "style": "pink",
             "icon": "video"
           }
@@ -97,11 +133,14 @@
       "block_order": [
         "nyvc_cta_1",
         "nyvc_cta_2"
-      ]
+      ],
+      "settings": {
+        "anchor": "nyvc-register",
+        "aria_label": "Register or submit your video"
+      }
     },
     "nyvc_journey": {
       "type": "nyvc-journey",
-      "settings": {},
       "blocks": {
         "nyvc_journey_1": {
           "type": "stage",
@@ -149,27 +188,50 @@
         "nyvc_journey_2",
         "nyvc_journey_3",
         "nyvc_journey_4"
-      ]
+      ],
+      "settings": {
+        "heading": "Your journey to the grand finale",
+        "subheading": "The championship continues beyond video submission. Here's what happens next."
+      }
     },
     "nyvc_dates": {
       "type": "nyvc-dates",
-      "settings": {},
       "blocks": {
         "nyvc_dates_1": {
           "type": "school",
-          "settings": {}
+          "settings": {
+            "school": "[School name]",
+            "workshop": "[Date]",
+            "closes": "[Date]",
+            "deadline": "[Date]"
+          }
         },
         "nyvc_dates_2": {
           "type": "school",
-          "settings": {}
+          "settings": {
+            "school": "[School name]",
+            "workshop": "[Date]",
+            "closes": "[Date]",
+            "deadline": "[Date]"
+          }
         },
         "nyvc_dates_3": {
           "type": "school",
-          "settings": {}
+          "settings": {
+            "school": "[School name]",
+            "workshop": "[Date]",
+            "closes": "[Date]",
+            "deadline": "[Date]"
+          }
         },
         "nyvc_dates_4": {
           "type": "school",
-          "settings": {}
+          "settings": {
+            "school": "[School name]",
+            "workshop": "[Date]",
+            "closes": "[Date]",
+            "deadline": "[Date]"
+          }
         }
       },
       "block_order": [
@@ -177,13 +239,19 @@
         "nyvc_dates_2",
         "nyvc_dates_3",
         "nyvc_dates_4"
-      ]
+      ],
+      "settings": {
+        "heading": "Important dates",
+        "subheading": "Dates vary by school. Please check your school’s schedule before registering.",
+        "col_school": "School",
+        "col_workshop": "Workshop date",
+        "col_closes": "Registration closes",
+        "col_deadline": "Video submission deadline",
+        "note": "Registration closes three days after your school’s workshop. Please refer to the table above for your deadlines."
+      }
     },
     "nyvc_prompts": {
       "type": "nyvc-prompts",
-      "settings": {
-        "subheading": "Find the prompt for your standard group below. Your video must respond to the prompt for your category and be about one of the two books you selected from the neOwn Young Voices Championship catalogue on the neOwn app."
-      },
       "blocks": {
         "nyvc_prompts_1": {
           "type": "category",
@@ -191,7 +259,12 @@
             "color": "pink",
             "badge": "CATEGORY I",
             "title": "Standards 3–4:",
-            "text": "Focus on vivid character descriptions, emotional moments, and expressive reading aloud."
+            "text": "Focus on vivid character descriptions, emotional moments, and expressive reading aloud.",
+            "view_label": "View Prompt",
+            "view_url": "",
+            "pdf_label": "Download PDF",
+            "pdf_url": "",
+            "pdf_file": ""
           }
         },
         "nyvc_prompts_2": {
@@ -200,7 +273,12 @@
             "color": "yellow",
             "badge": "CATEGORY II",
             "title": "Standards 5–6:",
-            "text": "Explore personal perspectives, thematic connections, and how the narrative moved you."
+            "text": "Explore personal perspectives, thematic connections, and how the narrative moved you.",
+            "view_label": "View Prompt",
+            "view_url": "",
+            "pdf_label": "Download PDF",
+            "pdf_url": "",
+            "pdf_file": ""
           }
         },
         "nyvc_prompts_3": {
@@ -209,7 +287,12 @@
             "color": "cyan",
             "badge": "CATEGORY III",
             "title": "Standards 7–8:",
-            "text": "Critique overarching plot arcs, author viewpoints, and ethical or real-world reflections."
+            "text": "Critique overarching plot arcs, author viewpoints, and ethical or real-world reflections.",
+            "view_label": "View Prompt",
+            "view_url": "",
+            "pdf_label": "Download PDF",
+            "pdf_url": "",
+            "pdf_file": ""
           }
         }
       },
@@ -217,11 +300,14 @@
         "nyvc_prompts_1",
         "nyvc_prompts_2",
         "nyvc_prompts_3"
-      ]
+      ],
+      "settings": {
+        "heading": "Video prompts",
+        "subheading": "Find the prompt for your standard group below. Your video must respond to the prompt for your category and be about one of the two books you selected from the neOwn Young Voices Championship catalogue on the neOwn app."
+      }
     },
     "nyvc_judging": {
       "type": "nyvc-judging",
-      "settings": {},
       "blocks": {
         "nyvc_judging_1": {
           "type": "criterion",
@@ -260,11 +346,14 @@
         "nyvc_judging_3",
         "nyvc_judging_4",
         "nyvc_judging_5"
-      ]
+      ],
+      "settings": {
+        "heading": "How will the videos be judged?",
+        "subheading": "Entries will be evaluated based on the following criteria. Age-appropriate expectations will apply for each category"
+      }
     },
     "nyvc_guidelines": {
       "type": "nyvc-guidelines",
-      "settings": {},
       "blocks": {
         "nyvc_guidelines_1": {
           "type": "item",
@@ -322,11 +411,13 @@
         "nyvc_guidelines_4",
         "nyvc_guidelines_5",
         "nyvc_guidelines_6"
-      ]
+      ],
+      "settings": {
+        "heading": "Video submission guidelines"
+      }
     },
     "nyvc_checklist": {
       "type": "nyvc-checklist",
-      "settings": {},
       "blocks": {
         "nyvc_checklist_1": {
           "type": "tip",
@@ -379,15 +470,14 @@
         "nyvc_checklist_5",
         "nyvc_checklist_6",
         "nyvc_checklist_7"
-      ]
+      ],
+      "settings": {
+        "heading": "Before you record",
+        "note": "Parents may help with recording and uploading. However, the child's ideas and spoken response should be their own."
+      }
     },
     "nyvc_faq": {
       "type": "lp1faq",
-      "settings": {
-        "style": "compact",
-        "heading": "Frequently asked questions",
-        "subheading": ""
-      },
       "blocks": {
         "nyvc_faq_1": {
           "type": "faq",
@@ -431,12 +521,36 @@
         "nyvc_faq_3",
         "nyvc_faq_4",
         "nyvc_faq_5"
-      ]
+      ],
+      "settings": {
+        "style": "compact",
+        "heading": "Frequently asked questions",
+        "subheading": ""
+      }
     },
     "nyvc_about": {
       "type": "nyvc-about",
       "settings": {
-        "body": "<p>neOwn is India's 1st app-based children's book library operating out of Mumbai, with 15,000+ active subscribers and 25,000+ families served across the country. neOwn currently houses a curated collection of 75,000+ physical books from leading publishers, including Scholastic, HarperCollins, Penguin, Hachette, and many others, that are circulated to kids homes across the country.</p><p>As a holistic initiative to help parents raise confident kids, neOwn offers a Book Library, Toy Library, and a free monthly Reading Challenge accessible to all via the neOwn app. neOwn regularly hosts free book exploration sessions and has conducted 90+ editions in the last 2 years. With a community of parents and a comprehensive ecosystem of reading resources, neOwn is building India's largest platform for encouraging kids to build a reading habit.</p>"
+        "heading": "About neOwn",
+        "body": "<p>neOwn is India's 1st app-based children's book library operating out of Mumbai, with 15,000+ active subscribers and 25,000+ families served across the country. neOwn currently houses a curated collection of 75,000+ physical books from leading publishers, including Scholastic, HarperCollins, Penguin, Hachette, and many others, that are circulated to kids homes across the country.</p><p>As a holistic initiative to help parents raise confident kids, neOwn offers a Book Library, Toy Library, and a free monthly Reading Challenge accessible to all via the neOwn app. neOwn regularly hosts free book exploration sessions and has conducted 90+ editions in the last 2 years. With a community of parents and a comprehensive ecosystem of reading resources, neOwn is building India's largest platform for encouraging kids to build a reading habit.</p>",
+        "cta_text": "Ready to participate? Register above and begin your Young Voices Championship journey.",
+        "button_label": "Register here",
+        "button_url": ""
+      }
+    },
+    "nyvc_register": {
+      "type": "nyvc-register-form",
+      "settings": {
+        "script_url": "https://script.google.com/macros/s/AKfycbykkd-ZpmRocuepRgZaENvEW6HUvx90nEM4j5HTsstk1ZdyCBKcqfnJ2lLgP4YRrxs/exec",
+        "thank_you_url": "https://neown.in/pages/nyvc-thank-you",
+        "schools": "The Cathedral & John Connon School",
+        "standards": "Standard 3, Standard 4, Standard 5, Standard 6, Standard 7, Standard 8",
+        "title": "Register for the neOwn Young Voices Championship",
+        "step1_label": "Enter Details",
+        "step2_label": "Verify Phone Number",
+        "dob_label": "Date of Birth",
+        "details_button": "Verify Phone Number",
+        "otp_button": "Verify Phone Number"
       }
     },
     "main": {
@@ -444,8 +558,8 @@
       "disabled": true,
       "settings": {}
     },
-    "nyvc_register": {
-      "type": "nyvc-register-form",
+    "nyvc_upload": {
+      "type": "nyvc-upload-form",
       "settings": {}
     }
   },
@@ -462,6 +576,7 @@
     "nyvc_faq",
     "nyvc_about",
     "nyvc_register",
+    "nyvc_upload",
     "main"
   ]
 }

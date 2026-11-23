@@ -1,0 +1,139 @@
+{%- render 'nyvc-styles' -%}
+{%- assign s = section.settings -%}
+<div class="nyvc-root nyvc-reg nyvc-up" id="nyvc-up-{{ section.id }}" hidden
+  data-nyvc-upload
+  data-endpoint="{{ s.script_url | strip | escape }}"
+  data-open="{{ s.accept_uploads }}"
+  data-closed-message="{{ s.closed_message | escape }}">
+  <div class="nyvc-reg-backdrop" data-nyvc-close></div>
+  <div class="nyvc-reg-dialog" role="dialog" aria-modal="true" aria-labelledby="nyvc-up-title-{{ section.id }}" tabindex="-1">
+    <button type="button" class="nyvc-reg-x" data-nyvc-close aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <ol class="nyvc-reg-steps" aria-label="Upload steps">
+      <li class="is-active" data-step-dot="1"><span class="nyvc-reg-dot">1</span>{{ s.step1_label | escape }}</li>
+      <li class="nyvc-reg-steps-line" aria-hidden="true"></li>
+      <li data-step-dot="2"><span class="nyvc-reg-dot">2</span>{{ s.step2_label | escape }}</li>
+    </ol>
+    <h2 class="nyvc-visually-hidden" id="nyvc-up-title-{{ section.id }}">{{ s.title | escape }}</h2>
+
+    {%- comment -%} Step 1a: phone {%- endcomment -%}
+    <form class="nyvc-reg-form" data-up="phone" novalidate>
+      <div class="nyvc-up-head">
+        <p class="nyvc-up-h">{{ s.phone_heading | escape }}</p>
+        {%- if s.phone_text != blank -%}<p class="nyvc-up-sub">{{ s.phone_text | escape }}</p>{%- endif -%}
+      </div>
+      <div class="nyvc-field">
+        <label for="nyvc-up-phone-{{ section.id }}">Phone Number <span aria-hidden="true">*</span></label>
+        <div class="nyvc-phone">
+          <span class="nyvc-phone-cc">+91</span>
+          <input id="nyvc-up-phone-{{ section.id }}" name="phone" type="tel" inputmode="numeric" placeholder="Enter 10-digit mobile number" autocomplete="tel-national" maxlength="10" required>
+        </div>
+        <p class="nyvc-err" data-err="phone"></p>
+      </div>
+      <div class="nyvc-err nyvc-err--form" data-err="lookup" role="alert"></div>
+      <button type="submit" class="nyvc-reg-btn" disabled>{{ s.phone_button | escape }}</button>
+    </form>
+
+    {%- comment -%} Step 1b: OTP {%- endcomment -%}
+    <form class="nyvc-reg-otp" data-up="otp" hidden novalidate>
+      <p class="nyvc-otp-title">Enter the OTP you received on your <span class="nyvc-otp-phone" data-otp-phone></span></p>
+      <div class="nyvc-otp-boxes" role="group" aria-label="6-digit OTP">
+        {%- for i in (1..6) -%}
+          <input type="text" inputmode="numeric" pattern="[0-9]*" aria-label="Digit {{ i }}" {% if i == 1 %}autocomplete="one-time-code"{% else %}autocomplete="off"{% endif %} data-otp>
+        {%- endfor -%}
+      </div>
+      <div class="nyvc-otp-links">
+        <button type="button" class="nyvc-otp-link" data-edit-phone>Edit Phone Number
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13 4h7v0M20 13v7H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <button type="button" class="nyvc-otp-link" data-resend disabled><span data-resend-label>Resend OTP</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <p class="nyvc-err nyvc-err--form" data-err="otp" role="alert"></p>
+      <p class="nyvc-otp-ok" data-otp-info role="status"></p>
+      <button type="submit" class="nyvc-reg-btn" disabled>{{ s.otp_button | escape }}</button>
+    </form>
+
+    {%- comment -%} Step 2: choose the video {%- endcomment -%}
+    <form class="nyvc-reg-form nyvc-up-form" data-up="file" hidden novalidate>
+      <div class="nyvc-up-head">
+        <p class="nyvc-up-h">{{ s.upload_heading | escape }}</p>
+      </div>
+      <fieldset class="nyvc-up-kids" data-kids>
+        <legend class="nyvc-up-label">Uploading for</legend>
+        <div class="nyvc-up-kid-list" data-kid-list></div>
+      </fieldset>
+      <div class="nyvc-up-drop" data-drop>
+        <input class="nyvc-visually-hidden" id="nyvc-up-file-{{ section.id }}" type="file" accept="video/*" data-file-input>
+        <label for="nyvc-up-file-{{ section.id }}" class="nyvc-up-drop-inner" data-drop-empty>
+          <img src="{{ 'nyvc-ic-video-purple.svg' | asset_url }}" alt="" width="36" height="36" aria-hidden="true">
+          <span class="nyvc-up-drop-h">Choose your video</span>
+          <span class="nyvc-up-drop-sub">or drag and drop it here</span>
+          <span class="nyvc-up-hint" data-size-hint>{{ s.file_hint | escape }}</span>
+        </label>
+        <div class="nyvc-up-chosen" data-drop-file hidden>
+          <img src="{{ 'nyvc-ic-video-purple.svg' | asset_url }}" alt="" width="28" height="28" aria-hidden="true">
+          <div class="nyvc-up-chosen-text">
+            <span class="nyvc-up-chosen-name" data-file-name></span>
+            <span class="nyvc-up-chosen-size" data-file-size></span>
+          </div>
+          <label for="nyvc-up-file-{{ section.id }}" class="nyvc-otp-link nyvc-up-change" data-change>Change</label>
+        </div>
+      </div>
+      <div class="nyvc-up-progress" data-progress hidden>
+        <div class="nyvc-up-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Upload progress"><span data-bar></span></div>
+        <p class="nyvc-up-progress-text"><strong data-pct>0%</strong> <span data-progress-text>Uploading… please keep this window open.</span></p>
+      </div>
+      {%- if s.upload_note != blank -%}<p class="nyvc-up-note">{{ s.upload_note }}</p>{%- endif -%}
+      <div class="nyvc-err nyvc-err--form" data-err="file" role="alert"></div>
+      <button type="submit" class="nyvc-reg-btn" disabled>{{ s.upload_button | escape }}</button>
+    </form>
+
+    {%- comment -%} Done {%- endcomment -%}
+    <div class="nyvc-up-done" data-up="done" hidden>
+      <span class="nyvc-up-done-ic" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <p class="nyvc-up-h" tabindex="-1" data-done-heading>{{ s.done_heading | escape }}</p>
+      <p class="nyvc-up-sub" data-done-text></p>
+      <dl class="nyvc-up-done-details">
+        <div><dt>File</dt><dd data-done-file></dd></div>
+        <div><dt>Received</dt><dd data-done-time></dd></div>
+      </dl>
+      {%- if s.done_text != blank -%}<p class="nyvc-up-note">{{ s.done_text }}</p>{%- endif -%}
+      <button type="button" class="nyvc-reg-btn" data-nyvc-close>Done</button>
+    </div>
+  </div>
+</div>
+<script src="{{ 'nyvc-upload.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "NYVC: Video upload",
+  "tag": "div",
+  "class": "section-nyvc",
+  "settings": [
+    { "type": "paragraph", "content": "Popup that opens from any button linking to #nyvc-upload (the Submit Your Video buttons). Only registered phone numbers get an OTP, and each school's last date comes from the \"Video Deadlines\" tab in the registrations sheet." },
+    { "type": "checkbox", "id": "accept_uploads", "label": "Accept video uploads", "default": false, "info": "Turn on once the updated Apps Script is deployed. While off, the popup says video submission opens soon." },
+    { "type": "text", "id": "closed_message", "label": "Message while uploads are off", "default": "Video submission opens soon. Please check back closer to your school's deadline." },
+    { "type": "text", "id": "script_url", "label": "Script URL", "info": "Blank uses the URL from the NYVC: Registration form section on this page." },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "title", "label": "Popup title (for screen readers)", "default": "Submit your video for the neOwn Young Voices Championship" },
+    { "type": "text", "id": "step1_label", "label": "Step 1 label", "default": "Verify Phone Number" },
+    { "type": "text", "id": "step2_label", "label": "Step 2 label", "default": "Upload Video" },
+    { "type": "text", "id": "phone_heading", "label": "Phone step heading", "default": "Submit your video" },
+    { "type": "text", "id": "phone_text", "label": "Phone step text", "default": "Enter the phone number you used to register. We'll send an OTP to confirm it's you." },
+    { "type": "text", "id": "phone_button", "label": "Phone step button", "default": "Send OTP" },
+    { "type": "text", "id": "otp_button", "label": "OTP button", "default": "Verify Phone Number" },
+    { "type": "text", "id": "upload_heading", "label": "Upload step heading", "default": "Upload your video" },
+    { "type": "text", "id": "file_hint", "label": "File hint", "default": "Vertical (9:16) video, up to 2 minutes" },
+    { "type": "inline_richtext", "id": "upload_note", "label": "Upload step note", "default": "Please submit only one entry. If you upload again, we'll use the latest video." },
+    { "type": "text", "id": "upload_button", "label": "Upload button", "default": "Upload Video" },
+    { "type": "text", "id": "done_heading", "label": "Success heading", "default": "Video submitted!" },
+    { "type": "inline_richtext", "id": "done_text", "label": "Success note", "default": "Results will be posted on the website and emailed to the families of children who qualify for the Grand Finale." }
+  ],
+  "presets": [{ "name": "NYVC: Video upload" }]
+}
+{% endschema %}

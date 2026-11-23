@@ -22,7 +22,7 @@
             </div>
             {%- if b.show_app_badges -%}{% render 'nyvc-store-badges', play_url: s.play_url, app_url: s.app_url %}{%- endif -%}
             {%- if b.button_label != blank -%}
-              {%- if b.button_action == 'form' -%}{%- assign step_href = '#nyvc-form' -%}{%- else -%}{%- assign step_href = b.button_url | default: '#nyvc-register' -%}{%- endif -%}
+              {%- if b.button_action == 'form' -%}{%- assign step_href = '#nyvc-form' -%}{%- elsif b.button_action == 'upload' -%}{%- assign step_href = '#nyvc-upload' -%}{%- else -%}{%- assign step_href = b.button_url | default: '#nyvc-register' -%}{%- endif -%}
               <a class="nyvc-btn nyvc-btn--step" href="{{ step_href }}"><span>{{ b.button_label | escape }}</span><img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-purple.svg' | asset_url }}" alt="" aria-hidden="true"></a>
             {%- endif -%}
           </div>
@@ -63,6 +63,7 @@
         { "type": "text", "id": "button_label", "label": "Button label" },
         { "type": "select", "id": "button_action", "label": "Button opens", "default": "link", "options": [
           { "value": "form", "label": "Registration form" },
+          { "value": "upload", "label": "Video upload" },
           { "value": "link", "label": "Link below" }
         ] },
         { "type": "url", "id": "button_url", "label": "Button link", "info": "Blank scrolls to the Register section." }

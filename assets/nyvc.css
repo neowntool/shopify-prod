@@ -366,6 +366,65 @@
   .nyvc-root .nyvc-reg-otp .nyvc-reg-btn { margin-top: 4px; }
   .nyvc-reg-editor-note { margin: 0; padding: 12px 16px; background: #fff7d6; font: 13px/1.4 sans-serif; color: #5c4a00; text-align: center; }
 
+  /* ---------- Video upload popup (reuses the registration popup styles) ---------- */
+  .nyvc-root .nyvc-up .nyvc-reg-dialog, .nyvc-root.nyvc-up .nyvc-reg-dialog, .nyvc-root.nyvc-up .nyvc-reg-dialog.is-otp { width: min(620px, 100%); }
+  .nyvc-root.nyvc-up .nyvc-reg-steps[hidden] { display: none; }
+  .nyvc-root .nyvc-up-head { text-align: center; }
+  .nyvc-root .nyvc-up-h { margin: 0; font-size: 22px; font-weight: 700; line-height: 1.25; color: #1f1f1f; outline: none; }
+  .nyvc-root .nyvc-up-sub { margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: var(--nyvc-muted); }
+  .nyvc-root .nyvc-up-note { margin: 0; font-size: 12px; line-height: 1.45; color: var(--nyvc-muted); text-align: center; }
+  .nyvc-root .nyvc-up-notice-link { display: block; width: fit-content; margin-top: 8px; font-weight: 600; color: var(--nyvc-purple); text-decoration: underline; }
+  .nyvc-root .nyvc-err--form.is-info strong { display: block; }
+  .nyvc-root .nyvc-up-form { gap: 16px; }
+  .nyvc-root .nyvc-up-kids { margin: 0; padding: 0; border: 0; min-width: 0; }
+  .nyvc-root .nyvc-up-label { padding: 0; margin-bottom: 8px; font-size: 14px; font-weight: 600; color: #1f1f1f; }
+  .nyvc-root .nyvc-up-kid-list { display: flex; flex-direction: column; gap: 8px; }
+  .nyvc-root .nyvc-up-kid { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid #dedede; border-radius: 10px; cursor: pointer; transition: border-color .15s ease, background .15s ease; }
+  .nyvc-root .nyvc-up-kid:has(input:checked) { border-color: var(--nyvc-purple); background: var(--nyvc-purple-10); }
+  .nyvc-root .nyvc-up-kid input { flex: none; width: 18px; height: 18px; margin: 0; accent-color: var(--nyvc-purple); }
+  .nyvc-root .nyvc-up-kid.is-closed { cursor: not-allowed; opacity: .6; }
+  .nyvc-root .nyvc-up-kid-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .nyvc-root .nyvc-up-kid-text strong { font-size: 15px; font-weight: 600; color: var(--nyvc-ink); }
+  .nyvc-root .nyvc-up-kid-text span { font-size: 12px; color: var(--nyvc-muted); overflow-wrap: anywhere; }
+  .nyvc-root .nyvc-up-kid-note { flex: none; font-size: 11px; color: var(--nyvc-purple); text-align: right; }
+  .nyvc-root .nyvc-up-kid.is-closed .nyvc-up-kid-note { color: #e0245e; }
+  .nyvc-root .nyvc-up-kids.is-single .nyvc-up-kid input { display: none; }
+  .nyvc-root .nyvc-up-drop { border: 1.5px dashed #c9bcff; border-radius: 12px; background: #faf8ff; transition: border-color .15s ease, background .15s ease; }
+  .nyvc-root .nyvc-up-drop.is-drag { border-color: var(--nyvc-purple); background: var(--nyvc-purple-10); }
+  .nyvc-root .nyvc-up-drop.has-file { border-style: solid; background: #fff; }
+  .nyvc-root .nyvc-up-drop:focus-within { border-color: var(--nyvc-purple); box-shadow: 0 0 0 3px rgba(103,48,239,.12); }
+  .nyvc-root .nyvc-up-drop-inner { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 28px 16px; text-align: center; cursor: pointer; }
+  .nyvc-root .nyvc-up-drop-inner[hidden], .nyvc-root .nyvc-up-chosen[hidden] { display: none; }
+  .nyvc-root .nyvc-up-drop-inner img { margin-bottom: 6px; }
+  .nyvc-root .nyvc-up-drop-h { font-size: 15px; font-weight: 600; color: var(--nyvc-purple); }
+  .nyvc-root .nyvc-up-drop-sub { font-size: 13px; color: var(--nyvc-muted); }
+  .nyvc-root .nyvc-up-hint { margin-top: 6px; font-size: 12px; color: #8a8a8a; }
+  .nyvc-root .nyvc-up-chosen { display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
+  .nyvc-root .nyvc-up-chosen-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .nyvc-root .nyvc-up-chosen-name { font-size: 14px; font-weight: 600; color: var(--nyvc-ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .nyvc-root .nyvc-up-chosen-size { font-size: 12px; color: var(--nyvc-muted); }
+  .nyvc-root .nyvc-up-change { flex: none; font-size: 13px; font-weight: 600; text-decoration: underline; }
+  .nyvc-root .nyvc-up-form.is-uploading .nyvc-up-change, .nyvc-root .nyvc-up-form.is-uploading .nyvc-up-kid { pointer-events: none; }
+  .nyvc-root .nyvc-up-form.is-uploading .nyvc-up-change { visibility: hidden; }
+  .nyvc-root .nyvc-up-progress[hidden] { display: none; }
+  .nyvc-root .nyvc-up-bar { height: 8px; border-radius: 9999px; background: #ece7fd; overflow: hidden; }
+  .nyvc-root .nyvc-up-bar span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--nyvc-purple); transition: width .3s ease; }
+  .nyvc-root .nyvc-up-progress-text { margin: 8px 0 0; font-size: 13px; color: var(--nyvc-muted); text-align: center; }
+  .nyvc-root .nyvc-up-progress-text strong { color: var(--nyvc-purple); }
+  .nyvc-root .nyvc-reg-btn.is-cancel { background: #fff; color: #e0245e; border: 1px solid #f3b6c9; }
+  .nyvc-root .nyvc-up-done { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 8px 0 0; text-align: center; }
+  .nyvc-root .nyvc-up-done[hidden] { display: none; }
+  .nyvc-root .nyvc-up-done-ic { width: 64px; height: 64px; border-radius: 9999px; background: #1a8f4c; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 8px #e3f4ea; margin-bottom: 6px; }
+  .nyvc-root .nyvc-up-done-details { align-self: stretch; margin: 6px 0 0; padding: 14px 18px; display: grid; grid-template-columns: 1fr auto; gap: 16px; border-radius: 12px; background: linear-gradient(90deg, #e6e0ff 0%, #ececec 100%); text-align: left; }
+  .nyvc-root .nyvc-up-done-details dt { font-size: 11px; color: var(--nyvc-muted); }
+  .nyvc-root .nyvc-up-done-details dd { margin: 4px 0 0; font-size: 13px; font-weight: 500; color: var(--nyvc-ink); overflow-wrap: anywhere; }
+  @media (max-width: 767px) {
+    .nyvc-root.nyvc-up .nyvc-reg-dialog, .nyvc-root.nyvc-up .nyvc-reg-dialog.is-otp { width: 100%; }
+    .nyvc-root .nyvc-up-h { font-size: 19px; }
+    .nyvc-root .nyvc-up-drop-inner { padding: 22px 12px; }
+    .nyvc-root .nyvc-up-done-details { grid-template-columns: 1fr; gap: 10px; }
+  }
+
   @media (max-width: 767px) {
     .nyvc-root.nyvc-reg { align-items: flex-end; padding: 0; }
     .nyvc-root .nyvc-reg-dialog, .nyvc-root .nyvc-reg-dialog.is-otp { width: 100%; max-height: 94vh; max-height: 94dvh; border-radius: 16px 16px 0 0; padding: 18px 16px 24px; padding-bottom: max(24px, env(safe-area-inset-bottom)); }

@@ -2,7 +2,7 @@
 {%- liquid
   assign s = section.settings
   assign register_url = s.register_url | default: '#nyvc-form'
-  assign submit_url = s.submit_url | default: '#nyvc-register'
+  assign submit_url = s.submit_url | default: '#nyvc-upload'
 -%}
 {%- if s.hide_theme_whatsapp -%}<style>#whatsapp-widget{display:none!important}</style>{%- endif -%}
 <div class="nyvc-root nyvc--first" id="nyvc-{{ section.id }}">
@@ -77,7 +77,7 @@
     { "type": "text", "id": "register_label", "label": "Register button label", "default": "Register Now" },
     { "type": "url", "id": "register_url", "label": "Register button link", "info": "Blank opens the registration form." },
     { "type": "text", "id": "submit_label", "label": "Submit button label", "default": "Submit Your Video" },
-    { "type": "url", "id": "submit_url", "label": "Submit button link", "info": "Blank scrolls to the Register section." },
+    { "type": "url", "id": "submit_url", "label": "Submit button link", "info": "Blank opens the video upload popup." },
     { "type": "header", "content": "Who can participate" },
     { "type": "text", "id": "who_title", "label": "Title", "default": "Who can participate?" },
     { "type": "text", "id": "who_text", "label": "Text", "default": "Students in Standards 3–8 from participating schools in Mumbai can register." },
