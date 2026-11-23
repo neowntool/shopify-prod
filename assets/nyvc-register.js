@@ -69,30 +69,32 @@
   function val(name) { var el = form.elements[name]; return el ? String(el.value || '').trim() : ''; }
   function setErr(name, msg) {
     var p = root.querySelector('[data-err="' + name + '"]');
-    if (p) p.textContent = msg || '';
+    if (p) { p.textContent = msg || ''; p.classList.remove('is-info'); }
     var el = form.elements[name];
     if (el && el.setAttribute) {
       el.classList.toggle('is-invalid', !!msg);
       if (msg) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
     }
   }
-  function ageFrom(dob) {
+  /* Returns a helpful message if the date of birth is not usable, or '' if it is fine. */
+  function dobProblem(dob) {
     var m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(dob);
-    if (!m) return null;
+    if (!m) return 'Enter the date of birth as DD/MM/YYYY, for example 15/08/2015.';
     var d = new Date(+m[3], +m[2] - 1, +m[1]);
-    if (d.getDate() !== +m[1] || d.getMonth() !== +m[2] - 1) return null;
-    var now = new Date(), age = now.getFullYear() - d.getFullYear();
+    if (d.getDate() !== +m[1] || d.getMonth() !== +m[2] - 1) return 'This date does not exist. Check the day and month (DD/MM/YYYY).';
+    var now = new Date();
+    if (d > now) return 'The date of birth cannot be in the future.';
+    var age = now.getFullYear() - d.getFullYear();
     if (now.getMonth() < d.getMonth() || (now.getMonth() === d.getMonth() && now.getDate() < d.getDate())) age--;
-    return age;
+    if (age < 4) return 'The child must be at least 4 years old. Check the year of birth.';
+    if (age > 18) return 'The championship is for school students up to 18 years old. Check the year of birth.';
+    return '';
   }
   function check(name) {
     var v = val(name);
     switch (name) {
       case 'child_name': return v.length >= 2 ? '' : "Enter the child's full name.";
-      case 'dob':
-        var age = ageFrom(v);
-        if (age === null) return 'Enter the date of birth as DD/MM/YYYY.';
-        return age >= 4 && age <= 18 ? '' : 'Please check the date of birth.';
+      case 'dob': return dobProblem(v);
       case 'school': return v ? '' : 'Select the school.';
       case 'standard': return v ? '' : 'Select the standard.';
       case 'division': return v ? '' : 'Enter the division or section.';
@@ -132,8 +134,9 @@
     if (firstBad) { form.elements[firstBad].focus(); return; }
     if (!endpoint) { setErr('form', 'Registration is not open yet. Please try again later.'); return; }
     busy(detailsBtn, true, 'Sending OTP…');
-    call({ action: 'send_otp', phone: val('phone') }).then(function (r) {
+    call({ action: 'send_otp', phone: val('phone'), child_name: val('child_name') }).then(function (r) {
       busy(detailsBtn, false);
+      if (!r.ok && r.error === 'already_registered') { alreadyRegistered(r.message); return; }
       if (!r.ok) { setErr(r.error === 'invalid_phone' ? 'phone' : 'form', r.message); return; }
       root.querySelector('[data-otp-phone]').textContent = '+91 ' + val('phone');
       clearOtp();
@@ -235,6 +238,7 @@
       if (!r.ok) {
         busy(otpBtn, false);
         if (r.error === 'invalid_form' && r.field) { showStep(1); setErr(r.field, r.message); return; }
+        if (r.error === 'already_registered') { stopResendTimer(); showStep(1); alreadyRegistered(r.message); return; }
         setOtpErr(r.message);
         return;
       }
@@ -247,6 +251,18 @@
       location.href = url;
     }, function () { busy(otpBtn, false); setOtpErr('Could not connect. Please check your internet and try again.'); });
   });
+
+  /* Same phone + child name is already in the sheet: say so instead of sending an OTP. */
+  function alreadyRegistered(msg) {
+    var box = root.querySelector('[data-err="form"]');
+    box.textContent = '';
+    box.classList.add('is-info');
+    var strong = document.createElement('strong');
+    strong.textContent = 'Already registered';
+    box.appendChild(strong);
+    box.appendChild(document.createTextNode(msg || 'This child is already registered with this phone number.'));
+    box.scrollIntoView({ block: 'nearest' });
+  }
 
   /* ---------- helpers ---------- */
   function busy(btn, on, label) {

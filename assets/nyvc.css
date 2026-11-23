@@ -342,6 +342,8 @@
   .nyvc-root .nyvc-err { margin: 0; font-size: 12px; line-height: 1.3; color: #e0245e; }
   .nyvc-root .nyvc-err:empty { display: none; }
   .nyvc-root .nyvc-err--form { text-align: center; }
+  .nyvc-root .nyvc-err--form.is-info { padding: 12px 14px; border-radius: 8px; background: #f2edfe; border: 1px solid #d9ccfb; color: var(--nyvc-ink); font-size: 13px; line-height: 1.45; text-align: left; }
+  .nyvc-root .nyvc-err--form.is-info strong { display: block; margin-bottom: 2px; color: var(--nyvc-purple); font-size: 14px; }
   .nyvc-root .nyvc-reg-divider { display: flex; align-items: center; gap: 16px; margin: 6px 0 -2px; font-size: 15px; font-weight: 600; color: var(--nyvc-purple); }
   .nyvc-root .nyvc-reg-divider::before, .nyvc-root .nyvc-reg-divider::after { content: ""; flex: 1; height: 1px; background: #e3e3e3; }
   .nyvc-root .nyvc-reg-btn { width: 100%; height: 46px; margin-top: 6px; border: 0; border-radius: 8px; background: var(--nyvc-purple); color: #fff; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s ease, filter .2s ease; }

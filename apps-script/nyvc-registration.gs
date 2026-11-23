@@ -56,6 +56,10 @@ function sendOtp_(body) {
   var mobile = cleanMobile_(body.phone);
   if (!mobile) return { ok: false, error: 'invalid_phone', message: 'Enter a valid 10-digit mobile number.' };
 
+  // Don't spend an OTP on someone who is already registered.
+  var childName = clean_(body.child_name, 80);
+  if (childName && findExisting_(sheet_(), { phone: mobile, childName: childName })) return alreadyRegistered_(childName);
+
   var limit = rateLimit_('send', mobile, [[30, 1, 'Please wait 30 seconds before requesting another OTP.'], [3600, 5, 'Too many OTP requests for this number. Please try again in an hour.']]);
   if (limit) return limit;
   var global = rateLimit_('send', 'all', [[3600, 400, 'We are getting a lot of requests right now. Please try again shortly.']]);
@@ -131,8 +135,8 @@ function register_(body) {
   lock.waitLock(20000);
   try {
     var sheet = sheet_();
-    var existing = findExisting_(sheet, data);
-    if (existing) return { ok: true, id: existing, duplicate: true };
+    if (data.id && findById_(sheet, data.id)) return { ok: true, id: data.id }; // same browser retrying a save that worked
+    if (findExisting_(sheet, data)) return alreadyRegistered_(data.childName);
 
     var id = data.id || ('NYVC-' + Utilities.getUuid().slice(0, 8).toUpperCase());
     var now = Utilities.formatDate(new Date(), 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss');
@@ -148,9 +152,8 @@ function register_(body) {
 
 function validate_(d) {
   if (!d.childName || d.childName.length < 2) return { field: 'child_name', message: "Enter the child's full name." };
-  if (!/^\d{2}\/\d{2}\/\d{4}$/.test(d.dob) || ageFromDob_(d.dob) === '') return { field: 'dob', message: 'Enter the date of birth as DD/MM/YYYY.' };
-  var age = ageFromDob_(d.dob);
-  if (age < 4 || age > 18) return { field: 'dob', message: 'Please check the date of birth.' };
+  var dobMsg = dobProblem_(d.dob);
+  if (dobMsg) return { field: 'dob', message: dobMsg };
   if (!d.school) return { field: 'school', message: 'Select the school.' };
   if (!d.standard) return { field: 'standard', message: 'Select the standard.' };
   if (!d.division) return { field: 'division', message: 'Enter the division or section.' };
@@ -160,18 +163,45 @@ function validate_(d) {
   return null;
 }
 
-/** Same client retry (same registration ID) or same phone + child already registered. */
+/** Same phone number + same child name already in the sheet (siblings on one phone are allowed). */
 function findExisting_(sheet, d) {
   var last = sheet.getLastRow();
   if (last < 2) return null;
   var rows = sheet.getRange(2, 2, last - 1, 10).getValues(); // B..K
-  var child = d.childName.toLowerCase();
+  var child = normName_(d.childName);
   for (var i = 0; i < rows.length; i++) {
     var r = rows[i];
-    if (d.id && String(r[0]) === d.id) return String(r[0]);
-    if (String(r[9]).replace(/\D/g, '').slice(-10) === d.phone && String(r[1]).toLowerCase() === child) return String(r[0]);
+    if (String(r[9]).replace(/\D/g, '').slice(-10) === d.phone && normName_(r[1]) === child) return String(r[0]);
   }
   return null;
+}
+
+function findById_(sheet, id) {
+  var last = sheet.getLastRow();
+  if (last < 2) return false;
+  return sheet.getRange(2, 2, last - 1, 1).getValues().some(function (r) { return String(r[0]) === id; });
+}
+
+function normName_(v) { return String(v || '').toLowerCase().replace(/\s+/g, ' ').trim(); }
+
+function alreadyRegistered_(childName) {
+  return {
+    ok: false, error: 'already_registered',
+    message: childName + ' is already registered with this phone number, so you don\'t need to register again. To change any details, please contact the neOwn team.'
+  };
+}
+
+/** Returns a helpful message if the date of birth is not usable, or '' if it is fine. */
+function dobProblem_(dob) {
+  var m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(dob || '');
+  if (!m) return 'Enter the date of birth as DD/MM/YYYY, for example 15/08/2015.';
+  var d = new Date(+m[3], +m[2] - 1, +m[1]);
+  if (d.getDate() !== +m[1] || d.getMonth() !== +m[2] - 1) return 'This date does not exist. Check the day and month (DD/MM/YYYY).';
+  if (d > new Date()) return 'The date of birth cannot be in the future.';
+  var age = ageFromDob_(dob);
+  if (age < 4) return 'The child must be at least 4 years old. Check the year of birth.';
+  if (age > 18) return 'The championship is for school students up to 18 years old. Check the year of birth.';
+  return '';
 }
 
 /* ---------- Helpers ---------- */
