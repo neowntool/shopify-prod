@@ -25,10 +25,9 @@
       "blocks": {
         "slider_item_4q4W9b": {
           "type": "slider_item",
-          "disabled": true,
           "settings": {
-            "background": "shopify://shop_images/More_Play_web_banner_5_2.png",
-            "mb_background": "shopify://shop_images/More_Play_web_banner_5_2.png",
+            "background": "shopify://shop_images/Rent_premium_toys_web_1.png",
+            "mb_background": "shopify://shop_images/Rent_premium_toys_web_1.png",
             "schedule_start": "2026-10-16 00:00",
             "schedule_end": "",
             "content_in_container": false,
@@ -60,8 +59,39 @@
           "settings": {
             "background": "shopify://shop_images/read_toys_web_banner_10_1.png",
             "mb_background": "shopify://shop_images/read_toys_web_banner_10_1.png",
-            "schedule_start": "2026-10-29 00:00",
-            "schedule_end": "",
+            "schedule_start": "2026-11-01 00:00",
+            "schedule_end": "2026-11-12 23:59",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_VNnCxV": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/toys_web_banner_11_1.png",
+            "mb_background": "shopify://shop_images/toys_web_banner_11_1.png",
+            "schedule_start": "2026-11-13 00:00",
+            "schedule_end": "2026-11-16 23:59",
             "content_in_container": false,
             "content_position": "center middle",
             "text_alignment": "center",
@@ -152,10 +182,9 @@
         },
         "slider_item_wzx4CE": {
           "type": "slider_item",
-          "disabled": true,
           "settings": {
-            "background": "shopify://shop_images/Double_the_fun_combo_web_2_1_0676e5d6-829d-42b0-b389-8ba3719483a5.png",
-            "mb_background": "shopify://shop_images/Double_the_fun_combo_web_2_1_0676e5d6-829d-42b0-b389-8ba3719483a5.png",
+            "background": "shopify://shop_images/Double_the_fun_web_3_1_1.png",
+            "mb_background": "shopify://shop_images/Double_the_fun_web_3_1_1.png",
             "schedule_start": "",
             "schedule_end": "",
             "content_in_container": false,
@@ -279,6 +308,7 @@
       "block_order": [
         "slider_item_4q4W9b",
         "slider_item_EWyWMy",
+        "slider_item_VNnCxV",
         "slider_item_nHHiEx",
         "slider_item_664BV8",
         "slider_item_wzx4CE",

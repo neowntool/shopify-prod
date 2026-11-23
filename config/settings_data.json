@@ -30,7 +30,7 @@
     "img_overlay_opacity": 20,
     "spacing_sections": 70,
     "spacing_sections_mobile": 20,
-    "animations": "none",
+    "animations": "fade-in",
     "pcard_layout": "5",
     "pcard_alignment": "center",
     "pcard_image_ratio": "original",

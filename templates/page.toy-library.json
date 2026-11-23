@@ -49,13 +49,13 @@
             "footer_link": ""
           }
         },
-        "slider_item_g483ER": {
+        "slider_item_XYX8PP": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/read_toys_web_banner_10_1.png",
-            "mb_background": "shopify://shop_images/read_toys_web_banner_10_1.png",
-            "schedule_start": "",
-            "schedule_end": "",
+            "background": "shopify://shop_images/toys_web_banner_11_1.png",
+            "mb_background": "shopify://shop_images/toys_web_banner_11_1.png",
+            "schedule_start": "2026-11-13 00:00",
+            "schedule_end": "2026-11-16 23:59",
             "content_in_container": false,
             "content_position": "right middle",
             "text_alignment": "center",
@@ -82,7 +82,6 @@
         },
         "slider_item_CYtATw": {
           "type": "slider_item",
-          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/Rent_premium_toys_web_2_2.png",
             "mb_background": "shopify://shop_images/Rent_premium_toys_web_2_2.png",
@@ -337,7 +336,7 @@
       },
       "block_order": [
         "slider_item_cf3XeF",
-        "slider_item_g483ER",
+        "slider_item_XYX8PP",
         "slider_item_CYtATw",
         "slider_item_7AyBtP",
         "slider_item_GNc6xy",

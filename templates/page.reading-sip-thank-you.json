@@ -47,9 +47,10 @@
     },
     "custom_liquid_PKUMAa": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "Custom liquid",
       "settings": {
-        "custom_liquid": "<script>(function(){var EXP='reading_sip_lp_nov26';var v=null;try{v=localStorage.getItem('ab_'+EXP);}catch(e){}if(!v)return;window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('event','sip_signup_complete',{experiment_id:EXP,variant:v});})();</script>",
+        "custom_liquid": "<script>(function(){var EXP='monthly_pack_lp_nov26';var v=null;try{v=localStorage.getItem('ab_'+EXP);}catch(e){}if(!v)return;window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('event','sip_signup_complete',{experiment_id:EXP,variant:v});})();</script>",
         "custom_class": ""
       }
     }

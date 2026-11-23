@@ -19,13 +19,12 @@
     "slider_bUa3Kb": {
       "type": "slider",
       "blocks": {
-        "slider_item_qw4FxJ": {
+        "slider_item_BqxHLb": {
           "type": "slider_item",
-          "disabled": true,
           "settings": {
-            "background": "shopify://shop_images/kids_read_web_banner_12_1.png",
-            "mb_background": "shopify://shop_images/kids_read_mob_banner_1.png",
-            "schedule_start": "2026-10-01 00:00",
+            "background": "shopify://shop_images/borrow_more_web_banner_8_1.png",
+            "mb_background": "shopify://shop_images/borrow_more_mob_banner_1.png",
+            "schedule_start": "2026-11-01 00:00",
             "schedule_end": "",
             "content_in_container": true,
             "content_position": "right middle",
@@ -35,39 +34,7 @@
             "subheading": "",
             "title": "",
             "description": "",
-            "image_link": "shopify://pages/books",
-            "button_text": "",
-            "button_link": "",
-            "button_style": "m-button--primary",
-            "button_size": "sf__btn-small",
-            "second_button_text": "",
-            "second_button_link": "",
-            "second_button_style": "m-button--primary",
-            "second_button_size": "",
-            "show_footer": false,
-            "footer_alignment": "end",
-            "footer_text": "New Collection",
-            "footer_button": "Shop Now",
-            "footer_link": ""
-          }
-        },
-        "slider_item_kULjQF": {
-          "type": "slider_item",
-          "disabled": true,
-          "settings": {
-            "background": "shopify://shop_images/Reading_Day_web_banner_4_1.png",
-            "mb_background": "shopify://shop_images/Reading_Day_mob_banner_1.png",
-            "schedule_start": "2026-10-15 19:21",
-            "schedule_end": "2026-10-28 23:59",
-            "content_in_container": true,
-            "content_position": "right middle",
-            "text_alignment": "right",
-            "text_size": "medium",
-            "text_color": "black",
-            "subheading": "",
-            "title": "",
-            "description": "",
-            "image_link": "#shopify-section-template--25164233408786__custom_liquid_LNQdMe",
+            "image_link": "#m-featured-product-template--25164233408786__new_featured_product_A6jXkX",
             "button_text": "",
             "button_link": "",
             "button_style": "m-button--primary",
@@ -83,12 +50,12 @@
             "footer_link": ""
           }
         },
-        "slider_item_BqxHLb": {
+        "slider_item_kULjQF": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/borrow_more_web_banner_8_1.png",
-            "mb_background": "shopify://shop_images/borrow_more_mob_banner_1.png",
-            "schedule_start": "",
+            "background": "shopify://shop_images/Rent_premium_toys_web_1.png",
+            "mb_background": "shopify://shop_images/Rent_premium_toys_mob.png",
+            "schedule_start": "2026-10-15 19:21",
             "schedule_end": "",
             "content_in_container": true,
             "content_position": "right middle",
@@ -98,7 +65,7 @@
             "subheading": "",
             "title": "",
             "description": "",
-            "image_link": "#shopify-section-template--25164233408786__custom_liquid_LNQdMe",
+            "image_link": "https://neown.in/pages/toys#m-featured-product-template--25164234653970__new_featured_product_TNkHwt",
             "button_text": "",
             "button_link": "",
             "button_style": "m-button--primary",
@@ -145,13 +112,78 @@
             "footer_link": ""
           }
         },
+        "slider_item_QpjiWG": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/books_web_banner_14_2.png",
+            "mb_background": "shopify://shop_images/books_mob_banner_1.png",
+            "schedule_start": "2026-11-13 00:00",
+            "schedule_end": "2026-11-16 23:59",
+            "content_in_container": true,
+            "content_position": "right middle",
+            "text_alignment": "right",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "#shopify-section-template--25164233408786__custom_liquid_LNQdMe",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
         "slider_item_8gzmUT": {
           "type": "slider_item",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/rent_toys_web_banner_9_1.png",
             "mb_background": "shopify://shop_images/rent_toys_mob_banner_1.png",
-            "schedule_start": "",
-            "schedule_end": "",
+            "schedule_start": "2026-11-01 00:00",
+            "schedule_end": "2026-11-12 23:59",
+            "content_in_container": true,
+            "content_position": "right middle",
+            "text_alignment": "right",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/pages/toys",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "sf__btn-small",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        },
+        "slider_item_NENLyX": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/toys_web_banner_11_1.png",
+            "mb_background": "shopify://shop_images/toy_mob_banner_1.png",
+            "schedule_start": "2026-11-13 00:00",
+            "schedule_end": "2026-11-16 23:59",
             "content_in_container": true,
             "content_position": "right middle",
             "text_alignment": "right",
@@ -370,11 +402,12 @@
         }
       },
       "block_order": [
-        "slider_item_qw4FxJ",
-        "slider_item_kULjQF",
         "slider_item_BqxHLb",
+        "slider_item_kULjQF",
         "slider_item_XBrRWF",
+        "slider_item_QpjiWG",
         "slider_item_8gzmUT",
+        "slider_item_NENLyX",
         "slider_item_jHAgft",
         "slider_item_CPmb9T",
         "slider_item_GB7BQk",
@@ -434,6 +467,7 @@
     },
     "custom_hero_banner_bLnBkW": {
       "type": "custom-hero-banner",
+      "disabled": true,
       "name": "Neown Style Section",
       "settings": {
         "bg_image": "shopify://shop_images/As_seen_on_National_TV_Desktop_1_2.webp",
@@ -527,6 +561,7 @@
         "image_G3EQVa",
         "image_xMzDmi"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "Brands list",
       "settings": {
@@ -555,6 +590,7 @@
     },
     "custom_liquid_LNQdMe": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "Custom liquid",
       "settings": {
         "custom_liquid": "<div class=\"x9-btn-wrap\">\n  <a href=\"https://neown.in/#m-featured-product-template--25164233408786__new_featured_product_A6jXkX\" class=\"x9-btn x9-btn-solid\">See Plans</a>\n  <a href=\"/collections/popular-books\"class=\"x9-btn x9-btn-outline\">Browse Books</a>\n</div>",
@@ -607,6 +643,7 @@
         "quote_mYDnbp",
         "quote_T9fDtb"
       ],
+      "disabled": true,
       "name": "Parent Quote Slider",
       "settings": {
         "section_bg": "shopify://shop_images/The_Hidden_Struggles_Every_Parent_Faces_Desktop.webp",
@@ -949,69 +986,6 @@
         "button_link": ""
       }
     },
-    "slider_gn3dEQ": {
-      "type": "slider",
-      "blocks": {
-        "slider_item_3UniEc": {
-          "type": "slider_item",
-          "settings": {
-            "background": "shopify://shop_images/Why_Rent_desktop_1.png",
-            "mb_background": "shopify://shop_images/Why_rent_Mobile_1.png",
-            "schedule_start": "",
-            "schedule_end": "",
-            "content_in_container": false,
-            "content_position": "left middle",
-            "text_alignment": "left",
-            "text_size": "medium",
-            "text_color": "black",
-            "subheading": "",
-            "title": "",
-            "description": "",
-            "image_link": "",
-            "button_text": "",
-            "button_link": "",
-            "button_style": "m-button--primary",
-            "button_size": "",
-            "second_button_text": "",
-            "second_button_link": "",
-            "second_button_style": "m-button--primary",
-            "second_button_size": "",
-            "show_footer": false,
-            "footer_alignment": "end",
-            "footer_text": "",
-            "footer_button": "",
-            "footer_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "slider_item_3UniEc"
-      ],
-      "custom_css": [],
-      "name": "Slideshow",
-      "settings": {
-        "container": "w-full",
-        "slideshow_height": "adapt",
-        "show_overlay": false,
-        "dots_position": "bottom",
-        "dots_color": "dark",
-        "show_dots": false,
-        "show_arrows": false,
-        "autorotate": false,
-        "autorotate_speed": 5,
-        "use_content_above": false,
-        "custom_class": "",
-        "animations": "inherit"
-      }
-    },
-    "custom_liquid_8kAeFW": {
-      "type": "custom-liquid",
-      "name": "Custom liquid",
-      "settings": {
-        "custom_liquid": "<!-- Still Confused Section -->\n<div class=\"scx-wrapper\">\n  <h2 class=\"m-section__heading h2 mb-4\">Still Confused?</h2>\n\n  <a href=\"https://api.whatsapp.com/send/?phone=919324455972&text=Hi%2C+can+you+tell+me+about+neOwn+Subscriptions%3F&type=phone_number&app_absent=0\" target=\"_blank\" class=\"scx-whatsapp-btn\">\n      <img\n            src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/logos_whatsapp-icon.png?v=1769157724\"/>\n    <span class=\"scx-btn-text\">Talk with Experts</span>\n  </a>\n</div>\n\n<style>\n  .scx-wrapper {\n    text-align: center;\n    padding: 32px 16px;\n    background-color: #ffffff;\n  }\n\n  .scx-heading {\n    font-size: 42px;\n    font-weight: 700;\n    color: #222222;\n    margin-bottom: 20px;\n  }\n\n  .scx-whatsapp-btn {\n    display: inline-flex;\n    align-items: center;\n    gap: 10px;\n    padding: 12px 36px;\n    background-color: #7437FF;\n    color: #ffffff;\n    text-decoration: none;\n    border-radius: 8px;\n    font-size: 14px;\n    font-weight: 600;\n    transition: background-color 0.25s ease, transform 0.2s ease;\n  }\n\n  .scx-wa-icon {\n    font-size: 18px;\n    line-height: 1;\n  }\n\n  .scx-btn-text {\n    white-space: nowrap;\n  }\n</style>",
-        "custom_class": ""
-      }
-    },
     "product_tabs_je4Ace": {
       "type": "product-tabs",
       "blocks": {
@@ -1074,6 +1048,69 @@
         "padding_bottom": 0,
         "custom_class": "",
         "animations": "inherit"
+      }
+    },
+    "slider_gn3dEQ": {
+      "type": "slider",
+      "blocks": {
+        "slider_item_3UniEc": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/Why_Rent_desktop_1.png",
+            "mb_background": "shopify://shop_images/Why_rent_Mobile_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "left middle",
+            "text_alignment": "left",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slider_item_3UniEc"
+      ],
+      "custom_css": [],
+      "name": "Slideshow",
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": false,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_content_above": false,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "custom_liquid_8kAeFW": {
+      "type": "custom-liquid",
+      "name": "Custom liquid",
+      "settings": {
+        "custom_liquid": "<!-- Still Confused Section -->\n<div class=\"scx-wrapper\">\n  <h2 class=\"m-section__heading h2 mb-4\">Still Confused?</h2>\n\n  <a href=\"https://api.whatsapp.com/send/?phone=919324455972&text=Hi%2C+can+you+tell+me+about+neOwn+Subscriptions%3F&type=phone_number&app_absent=0\" target=\"_blank\" class=\"scx-whatsapp-btn\">\n      <img\n            src=\"https://cdn.shopify.com/s/files/1/0687/8557/0066/files/logos_whatsapp-icon.png?v=1769157724\"/>\n    <span class=\"scx-btn-text\">Talk with Experts</span>\n  </a>\n</div>\n\n<style>\n  .scx-wrapper {\n    text-align: center;\n    padding: 32px 16px;\n    background-color: #ffffff;\n  }\n\n  .scx-heading {\n    font-size: 42px;\n    font-weight: 700;\n    color: #222222;\n    margin-bottom: 20px;\n  }\n\n  .scx-whatsapp-btn {\n    display: inline-flex;\n    align-items: center;\n    gap: 10px;\n    padding: 12px 36px;\n    background-color: #7437FF;\n    color: #ffffff;\n    text-decoration: none;\n    border-radius: 8px;\n    font-size: 14px;\n    font-weight: 600;\n    transition: background-color 0.25s ease, transform 0.2s ease;\n  }\n\n  .scx-wa-icon {\n    font-size: 18px;\n    line-height: 1;\n  }\n\n  .scx-btn-text {\n    white-space: nowrap;\n  }\n</style>",
+        "custom_class": ""
       }
     },
     "workbooks_fun_section_UFdFRT": {
@@ -1537,9 +1574,9 @@
     "slider_qzHMJm",
     "easy_steps_Fam73g",
     "reviews_sec_e7cTxA",
+    "product_tabs_je4Ace",
     "slider_gn3dEQ",
     "custom_liquid_8kAeFW",
-    "product_tabs_je4Ace",
     "workbooks_fun_section_UFdFRT",
     "real_results_stats_nkDFXa",
     "slider_HmzWPb",

@@ -21,10 +21,10 @@
           "type": "slider_item",
           "disabled": true,
           "settings": {
-            "background": "shopify://shop_images/Worth_Repeating_web_banner_3_1.png",
-            "mb_background": "shopify://shop_images/Worth_Repeating_web_banner_3_1.png",
-            "schedule_start": "2026-10-16 00:00",
-            "schedule_end": "2026-10-21 23:59",
+            "background": "shopify://shop_images/reading_stop_web_banner_13.png",
+            "mb_background": "shopify://shop_images/reading_stop_web_banner_13.png",
+            "schedule_start": "2026-11-13 00:00",
+            "schedule_end": "",
             "content_in_container": false,
             "content_position": "center middle",
             "text_alignment": "center",
@@ -150,7 +150,7 @@
           "settings": {
             "background": "shopify://shop_images/reading_stop_web_banner_13_1.png",
             "mb_background": "shopify://shop_images/reading_stop_web_banner_13_1.png",
-            "schedule_start": "",
+            "schedule_start": "2026-11-16",
             "schedule_end": "",
             "content_in_container": false,
             "content_position": "right middle",
@@ -210,6 +210,7 @@
         },
         "slider_item_Rp3bez": {
           "type": "slider_item",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/PHL_web_4_1.png",
             "mb_background": "shopify://shop_images/PHL_web_4_1.png",

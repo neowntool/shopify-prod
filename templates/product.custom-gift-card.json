@@ -26,9 +26,9 @@
         "slider_item_WFDHzc": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/gifting_web_banner_10_1.png",
-            "mb_background": "shopify://shop_images/gifting_mob_banner_4_1.png",
-            "schedule_start": "",
+            "background": "shopify://shop_images/gifting_web_banner_10.png",
+            "mb_background": "shopify://shop_images/gifting_web_banner_10.png",
+            "schedule_start": "2026-11-13 00:00",
             "schedule_end": "",
             "content_in_container": false,
             "content_position": "center middle",
@@ -55,6 +55,38 @@
           }
         },
         "slider_item_J7QFra": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
+            "background": "shopify://shop_images/Gift_sibling_web_banner_7_1.png",
+            "mb_background": "shopify://shop_images/Gift_sibiling_mob_banner_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "https://neown.in/products/neown-gift-subscription",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_eaxUQV": {
           "type": "slider_item",
           "disabled": true,
           "settings": {
@@ -154,6 +186,7 @@
       "block_order": [
         "slider_item_WFDHzc",
         "slider_item_J7QFra",
+        "slider_item_eaxUQV",
         "slider_item_iqxTw6",
         "slider_item_ExndLj"
       ],

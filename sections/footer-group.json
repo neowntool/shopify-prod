@@ -66,6 +66,12 @@
       ],
       "custom_css": [],
       "settings": {
+        "neown_style": true,
+        "style_bg": "#2a0b6e",
+        "style_bottom_bg": "#1f0852",
+        "style_text": "#e6defc",
+        "style_heading": "#ffffff",
+        "style_accent": "#ff4fb3",
         "color_scheme": "scheme-0b006005-90d2-420f-ab5b-04df0dc2de47",
         "design": "footer-3",
         "container": "container-fluid",

@@ -52,8 +52,8 @@
         "slider_item_wz9J7M": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/read_toys_web_banner_10_1.png",
-            "mb_background": "shopify://shop_images/read_toys_web_banner_10_1.png",
+            "background": "shopify://shop_images/Rent_premium_toys_web_1.png",
+            "mb_background": "shopify://shop_images/Rent_premium_toys_web_1.png",
             "schedule_start": "",
             "schedule_end": "",
             "content_in_container": false,
@@ -84,10 +84,10 @@
           "type": "slider_item",
           "disabled": true,
           "settings": {
-            "background": "shopify://shop_images/independence_discount_web_banner_4_1.png",
-            "mb_background": "shopify://shop_images/independence_discount_web_banner_4_1.png",
-            "schedule_start": "2026-08-13 00:00",
-            "schedule_end": "2026-08-16 23:59",
+            "background": "shopify://shop_images/toys_web_banner_11_1.png",
+            "mb_background": "shopify://shop_images/toys_web_banner_11_1.png",
+            "schedule_start": "2026-11-13 00:00",
+            "schedule_end": "2026-11-16 23:59",
             "content_in_container": false,
             "content_position": "center middle",
             "text_alignment": "center",
