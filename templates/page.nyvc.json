@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "nyvc": {
+      "type": "nyvc",
+      "blocks": {
+        "school_1": { "type": "school", "settings": {} },
+        "school_2": { "type": "school", "settings": {} },
+        "school_3": { "type": "school", "settings": {} },
+        "school_4": { "type": "school", "settings": {} }
+      },
+      "block_order": ["school_1", "school_2", "school_3", "school_4"],
+      "settings": {}
+    },
+    "main": {
+      "type": "page",
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": ["nyvc", "main"]
+}
+
