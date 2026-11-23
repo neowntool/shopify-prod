@@ -553,13 +553,30 @@
         "otp_button": "Verify Phone Number"
       }
     },
+    "nyvc_upload": {
+      "type": "nyvc-upload-form",
+      "settings": {
+        "accept_uploads": true,
+        "closed_message": "Video submission opens soon. Please check back closer to your school's deadline.",
+        "script_url": "",
+        "title": "Submit your video for the neOwn Young Voices Championship",
+        "step1_label": "Verify Phone Number",
+        "step2_label": "Upload Video",
+        "phone_heading": "Submit your video",
+        "phone_text": "Enter the phone number you used to register. We'll send an OTP to confirm it's you.",
+        "phone_button": "Send OTP",
+        "otp_button": "Verify Phone Number",
+        "upload_heading": "Upload your video",
+        "file_hint": "Vertical (9:16) video, up to 2 minutes",
+        "upload_note": "Please submit only one entry. If you upload again, we'll use the latest video.",
+        "upload_button": "Upload Video",
+        "done_heading": "Video submitted!",
+        "done_text": "Results will be posted on the website and emailed to the families of children who qualify for the Grand Finale."
+      }
+    },
     "main": {
       "type": "page",
       "disabled": true,
-      "settings": {}
-    },
-    "nyvc_upload": {
-      "type": "nyvc-upload-form",
       "settings": {}
     }
   },
