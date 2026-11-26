@@ -31,7 +31,7 @@
           "settings": {
             "icon": "register",
             "title": "Register",
-            "text": "Register below 3 days from the workshop conducted in your school.",
+            "text": "Register within 3 days from the date on which the workshop is conducted in your school.",
             "show_app_badges": false,
             "button_label": "Register Now",
             "button_action": "form",
@@ -42,20 +42,20 @@
           "type": "step",
           "settings": {
             "icon": "books",
-            "title": "Choose your books",
-            "text": "Select <strong>2 books</strong> from the neOwn Young Voices Championship catalogue on the neOwn app.",
+            "title": "Get a neOwn Subscription",
+            "text": "neOwn creates a FREE one month library subscription at the time of registration. Use your registered number to login to the neOwn app.",
             "show_app_badges": true,
             "button_label": "",
             "button_action": "link",
             "button_url": ""
           }
         },
-        "nyvc_steps_3": {
+        "step_C6TB38": {
           "type": "step",
           "settings": {
-            "icon": "video",
-            "title": "Read and record",
-            "text": "Choose any one of your selected books and record a video responding to the prompt for your category.",
+            "icon": "books",
+            "title": "Read & Record",
+            "text": "Select <strong>2 books</strong> from the neOwn Young Voices Championship catalogue on the neOwn app. Use ANY one and record a video responding to the prompt for your category.&nbsp;",
             "show_app_badges": false,
             "button_label": "",
             "button_action": "link",
@@ -67,7 +67,7 @@
           "settings": {
             "icon": "upload",
             "title": "Submit your video",
-            "text": "Click below to submit your video.",
+            "text": "Click below to submit your video. &nbsp;Check the video guidelines before submitting.&nbsp;",
             "show_app_badges": false,
             "button_label": "Submit Your Video",
             "button_action": "upload",
@@ -75,6 +75,98 @@
           }
         },
         "nyvc_steps_5": {
+          "type": "step",
+          "settings": {
+            "icon": "announce",
+            "title": "Await result announcement",
+            "text": "Results will be posted on the website and will be emailed to all participants who qualify for the Grand Finale.",
+            "show_app_badges": false,
+            "button_label": "",
+            "button_action": "link",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "nyvc_steps_1",
+        "nyvc_steps_2",
+        "step_C6TB38",
+        "nyvc_steps_4",
+        "nyvc_steps_5"
+      ],
+      "settings": {
+        "heading": "School Level",
+        "play_url": "",
+        "app_url": ""
+      }
+    },
+    "nyvc_steps_rYagar": {
+      "type": "nyvc-steps",
+      "blocks": {
+        "step_tUU3Cn": {
+          "type": "step",
+          "settings": {
+            "icon": "video",
+            "title": "Selection of Finalists",
+            "text": "&nbsp;2 kids per category (total 6 kids) per school will move to the finals. Total 120 kids will be selected for the <strong>Grand Finale</strong>",
+            "show_app_badges": false,
+            "button_label": "",
+            "button_action": "link",
+            "button_url": ""
+          }
+        },
+        "step_8byBxD": {
+          "type": "step",
+          "settings": {
+            "icon": "video",
+            "title": "FREE Online Training",
+            "text": "Ivy Spires, official partners of the Harvard Debating Council, will conduct a FREE Online Training for the 120 Finalists. All attendees receive certificates.&nbsp;",
+            "show_app_badges": false,
+            "button_label": "",
+            "button_action": "link",
+            "button_url": ""
+          }
+        },
+        "step_YcHehw": {
+          "type": "step",
+          "disabled": true,
+          "settings": {
+            "icon": "register",
+            "title": "Selection of Finalists",
+            "text": "2 kids per category (total 6 kids) per school will move to the finals",
+            "show_app_badges": false,
+            "button_label": "Register Now",
+            "button_action": "form",
+            "button_url": ""
+          }
+        },
+        "step_PtiGiw": {
+          "type": "step",
+          "disabled": true,
+          "settings": {
+            "icon": "books",
+            "title": "Choose your books",
+            "text": "Select <strong>2 books</strong> from the neOwn Young Voices Championship catalogue on the neOwn app.",
+            "show_app_badges": true,
+            "button_label": "",
+            "button_action": "link",
+            "button_url": ""
+          }
+        },
+        "step_mChXGw": {
+          "type": "step",
+          "disabled": true,
+          "settings": {
+            "icon": "upload",
+            "title": "Submit your video",
+            "text": "Click below to submit your video.",
+            "show_app_badges": false,
+            "button_label": "Submit Your Video",
+            "button_action": "upload",
+            "button_url": ""
+          }
+        },
+        "step_YKECqR": {
           "type": "step",
           "settings": {
             "icon": "announce",
@@ -88,14 +180,16 @@
         }
       },
       "block_order": [
-        "nyvc_steps_1",
-        "nyvc_steps_2",
-        "nyvc_steps_3",
-        "nyvc_steps_4",
-        "nyvc_steps_5"
+        "step_tUU3Cn",
+        "step_8byBxD",
+        "step_YcHehw",
+        "step_PtiGiw",
+        "step_mChXGw",
+        "step_YKECqR"
       ],
+      "disabled": true,
       "settings": {
-        "heading": "How it works",
+        "heading": "Grand Finale",
         "play_url": "",
         "app_url": ""
       }
@@ -108,7 +202,7 @@
           "settings": {
             "heading": "Register Your Child",
             "subheading": "Complete the registration form to participate in the Young Voice Championship",
-            "note": "Please submit only one entry. If you face a technical issue and need to submit another video, contact us at [contact number].",
+            "note": "Register separately for each participating child.",
             "button_label": "Register Now",
             "button_action": "form",
             "button_url": "",
@@ -121,7 +215,7 @@
           "settings": {
             "heading": "Submit your video",
             "subheading": "Once you have read your selected book and prepared your response, submit your video using the link below.",
-            "note": "Please submit only one entry. If you face a technical issue and need to submit another video, contact us at [contact number].",
+            "note": "Please submit only one entry. If you face a technical issue and need to submit another video, contact us at +91 93244 55972",
             "button_label": "Submit Your Video",
             "button_action": "upload",
             "button_url": "",
@@ -144,6 +238,7 @@
       "blocks": {
         "nyvc_journey_1": {
           "type": "stage",
+          "disabled": true,
           "settings": {
             "icon": "video",
             "tag": "Stage 01",
@@ -158,7 +253,7 @@
             "icon": "finalists",
             "tag": "Stage 02",
             "title": "Selection of finalists",
-            "text": "Selected students from each school will be informed directly",
+            "text": "2 kids per category from each school will move to the finals. Total 120 kids will be selected for the Grand Finale",
             "date": "By 31 December 2026"
           }
         },
@@ -167,8 +262,8 @@
           "settings": {
             "icon": "training",
             "tag": "Stage 03",
-            "title": "Online training",
-            "text": "120 Finalists will receive online training from IVY Spires and a Harvard Debate Council certificate",
+            "title": "FREE Online Training",
+            "text": "Ivy Spires, official partners of the Harvard Debating Council, will conduct a FREE Online Training for the 120 Finalists. All attendees receive certificates.",
             "date": "Dec 2026/Jan 2027"
           }
         },
@@ -178,7 +273,7 @@
             "icon": "finale",
             "tag": "Grand Finale",
             "title": "In-person grand finale",
-            "text": "Finalists will come together in Mumbai to showcase their skills, and compete for prizes.",
+            "text": "120 finalists will come together in Mumbai to showcase their skills, and compete for exciting prizes and one Rolling Trophy.",
             "date": "January 2027 (TBA)"
           }
         }
@@ -200,14 +295,15 @@
         "nyvc_dates_1": {
           "type": "school",
           "settings": {
-            "school": "[School name]",
-            "workshop": "[Date]",
-            "closes": "[Date]",
-            "deadline": "[Date]"
+            "school": "Rustomjee Cambridge International School (Thane)",
+            "workshop": "26 Nov 2026",
+            "closes": "29 Nov 2026",
+            "deadline": "10 Dec 2026"
           }
         },
         "nyvc_dates_2": {
           "type": "school",
+          "disabled": true,
           "settings": {
             "school": "[School name]",
             "workshop": "[Date]",
@@ -217,6 +313,7 @@
         },
         "nyvc_dates_3": {
           "type": "school",
+          "disabled": true,
           "settings": {
             "school": "[School name]",
             "workshop": "[Date]",
@@ -226,6 +323,7 @@
         },
         "nyvc_dates_4": {
           "type": "school",
+          "disabled": true,
           "settings": {
             "school": "[School name]",
             "workshop": "[Date]",
@@ -543,7 +641,7 @@
       "settings": {
         "script_url": "https://script.google.com/macros/s/AKfycbykkd-ZpmRocuepRgZaENvEW6HUvx90nEM4j5HTsstk1ZdyCBKcqfnJ2lLgP4YRrxs/exec",
         "thank_you_url": "https://neown.in/pages/nyvc-thank-you",
-        "schools": "The Cathedral & John Connon School",
+        "schools": "Rustomjee Cambridge International School (Thane)",
         "standards": "Standard 3, Standard 4, Standard 5, Standard 6, Standard 7, Standard 8",
         "title": "Register for the neOwn Young Voices Championship",
         "step1_label": "Enter Details",
@@ -583,6 +681,7 @@
   "order": [
     "nyvc_hero",
     "nyvc_steps",
+    "nyvc_steps_rYagar",
     "nyvc_cta",
     "nyvc_journey",
     "nyvc_dates",

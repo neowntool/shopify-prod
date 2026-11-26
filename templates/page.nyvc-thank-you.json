@@ -1,12 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "nyvc_confirm": {
       "type": "nyvc-confirm",
-      "settings": {}
+      "settings": {
+        "badge": "Registration Confirmed",
+        "heading": "You're registered!",
+        "text": "Your registration for the neOwn Young Voices Championship is complete.",
+        "pill": "You're all set to begin your Young Voices journey!",
+        "label_name": "Student Name",
+        "label_standard": "Standard",
+        "label_school": "School"
+      }
     },
     "nyvc_whatsapp": {
       "type": "nyvc-whatsapp",
-      "settings": {}
+      "settings": {
+        "pill": "Parent & Guardian Community • Broadcast & verified updates only (no spam)",
+        "heading": "Join WhatsApp Group for Official Communication",
+        "text": "Stay updated with important championship announcements, schedule reminders, live session links, and parent support.",
+        "button_label": "Join WhatsApp",
+        "link": "https://chat.whatsapp.com/D6nzF5crdsoCZ8dcnfYxGb?s=cl&p=a&iam=2"
+      }
     },
     "nyvc_next": {
       "type": "nyvc-next-steps",
@@ -19,6 +42,11 @@
             "badge": "CATEGORY I",
             "title": "Standards 3–4:",
             "text": "Focus on vivid character descriptions, emotional moments, and expressive reading aloud.",
+            "view_label": "View Prompt",
+            "view_url": "",
+            "pdf_label": "Download PDF",
+            "pdf_url": "",
+            "pdf_file": "",
             "footer": "2 Minute Video • Deadline: as per your school"
           }
         },
@@ -30,6 +58,11 @@
             "badge": "CATEGORY II",
             "title": "Standards 5–6:",
             "text": "Explore personal perspectives, thematic connections, and how the narrative moved you.",
+            "view_label": "View Prompt",
+            "view_url": "",
+            "pdf_label": "Download PDF",
+            "pdf_url": "",
+            "pdf_file": "",
             "footer": "2 Minute Video • Deadline: as per your school"
           }
         },
@@ -41,6 +74,11 @@
             "badge": "CATEGORY III",
             "title": "Standards 7–8:",
             "text": "Critique overarching plot arcs, author viewpoints, and ethical or real-world reflections.",
+            "view_label": "View Prompt",
+            "view_url": "",
+            "pdf_label": "Download PDF",
+            "pdf_url": "",
+            "pdf_file": "",
             "footer": "2 Minute Video • Deadline: as per your school"
           }
         }
@@ -50,7 +88,14 @@
         "category_2",
         "category_3"
       ],
-      "settings": {}
+      "settings": {
+        "aria_label": "Your next steps",
+        "app_heading": "1. Download the neOwn app",
+        "app_text": "Choose two books from the neOwn Young Voices Championship catalogue in the app.",
+        "play_url": "",
+        "app_url": "",
+        "prompt_heading": "2. See your video prompt"
+      }
     },
     "main": {
       "type": "page",
