@@ -35,6 +35,7 @@
   var kidsBox = fileForm.querySelector('[data-kids]');
   var kidList = fileForm.querySelector('[data-kid-list]');
   var progress = fileForm.querySelector('[data-progress]');
+  var consentBox = fileForm.querySelector('[data-consent]');
 
   var state = { token: null, kids: [], kidId: null, file: null, maxMb: 500, uploading: false, xhr: null, cancelled: false };
   var lastFocus = null, resendTimer = null;
@@ -352,7 +353,8 @@
     setProgress(0, f.size, 'Getting ready…');
     call({
       action: 'upload_start', token: state.token, child_id: state.kidId, file_name: f.name, size: f.size,
-      mime_type: f.type && /^video\//.test(f.type) ? f.type : guessType(f.name), origin: location.origin
+      mime_type: f.type && /^video\//.test(f.type) ? f.type : guessType(f.name), origin: location.origin,
+      promo_consent: consentBox ? consentBox.checked : false
     }).then(function (r) {
       if (state.cancelled) return;
       if (!r.ok) { fail(r); return; }

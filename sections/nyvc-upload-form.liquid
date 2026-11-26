@@ -86,6 +86,12 @@
         <div class="nyvc-up-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Upload progress"><span data-bar></span></div>
         <p class="nyvc-up-progress-text"><strong data-pct>0%</strong> <span data-progress-text>Uploading… please keep this window open.</span></p>
       </div>
+      {%- if s.consent_text != blank -%}
+        <label class="nyvc-up-consent">
+          <input type="checkbox" name="promo_consent" value="yes" data-consent{% if s.consent_default %} checked{% endif %}>
+          <span>{{ s.consent_text }}</span>
+        </label>
+      {%- endif -%}
       {%- if s.upload_note != blank -%}<p class="nyvc-up-note">{{ s.upload_note }}</p>{%- endif -%}
       <div class="nyvc-err nyvc-err--form" data-err="file" role="alert"></div>
       <button type="submit" class="nyvc-reg-btn" disabled>{{ s.upload_button | escape }}</button>
@@ -130,6 +136,8 @@
     { "type": "text", "id": "upload_heading", "label": "Upload step heading", "default": "Upload your video" },
     { "type": "text", "id": "file_hint", "label": "File hint", "default": "Vertical (9:16) video, up to 2 minutes" },
     { "type": "inline_richtext", "id": "upload_note", "label": "Upload step note", "default": "Please submit only one entry. If you upload again, we'll use the latest video." },
+    { "type": "inline_richtext", "id": "consent_text", "label": "Promotion consent text", "default": "I allow neOwn to share my child's video, first name and school on neOwn's website, social media and promotional material for the neOwn Young Voices Championship.", "info": "Optional for parents: unticking it doesn't stop the upload. Their answer is saved in the \"Promo Consent\" column of the Video Submissions tab. Leave blank to hide the checkbox." },
+    { "type": "checkbox", "id": "consent_default", "label": "Tick the consent box by default", "default": true },
     { "type": "text", "id": "upload_button", "label": "Upload button", "default": "Upload Video" },
     { "type": "text", "id": "done_heading", "label": "Success heading", "default": "Video submitted!" },
     { "type": "inline_richtext", "id": "done_text", "label": "Success note", "default": "Results will be posted on the website and emailed to the families of children who qualify for the Grand Finale." }

@@ -406,6 +406,8 @@
   .nyvc-root .nyvc-up-change { flex: none; font-size: 13px; font-weight: 600; text-decoration: underline; }
   .nyvc-root .nyvc-up-form.is-uploading .nyvc-up-change, .nyvc-root .nyvc-up-form.is-uploading .nyvc-up-kid { pointer-events: none; }
   .nyvc-root .nyvc-up-form.is-uploading .nyvc-up-change { visibility: hidden; }
+  .nyvc-root .nyvc-up-consent { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 10px; background: #faf8ff; font-size: 13px; line-height: 1.45; color: var(--nyvc-ink); cursor: pointer; }
+  .nyvc-root .nyvc-up-consent input { flex: none; width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--nyvc-purple); cursor: pointer; }
   .nyvc-root .nyvc-up-progress[hidden] { display: none; }
   .nyvc-root .nyvc-up-bar { height: 8px; border-radius: 9999px; background: #ece7fd; overflow: hidden; }
   .nyvc-root .nyvc-up-bar span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--nyvc-purple); transition: width .3s ease; }

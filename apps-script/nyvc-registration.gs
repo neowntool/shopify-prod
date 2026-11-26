@@ -241,7 +241,7 @@ var DEADLINES_SHEET = 'Video Deadlines';
 var SUBMISSIONS_SHEET = 'Video Submissions';
 var SUBMISSION_COLUMNS = [
   'Uploaded At (IST)', 'Registration ID', 'Child Name', 'School', 'Standard', 'Division / Section',
-  'Phone', 'File Name', 'Size (MB)', 'Drive Link', 'Latest'
+  'Phone', 'File Name', 'Size (MB)', 'Drive Link', 'Latest', 'Promo Consent'
 ];
 var MB = 1024 * 1024;
 var PROXY_CHUNK = 4 * MB; // multiple of 256 KB, as Drive requires
@@ -340,7 +340,8 @@ function uploadStart_(body) {
   }
   var uploadId = Utilities.getUuid();
   CacheService.getScriptCache().put('ups:' + uploadId, JSON.stringify({
-    token: String(body.token), url: url, size: size, mime: mime, name: name, folderId: folder.getId(), childId: kid.id
+    token: String(body.token), url: url, size: size, mime: mime, name: name, folderId: folder.getId(), childId: kid.id,
+    consent: body.promo_consent === true
   }), 21600);
   return { ok: true, upload_id: uploadId, upload_url: url, file_name: name, proxy_chunk: PROXY_CHUNK };
 }
@@ -410,7 +411,8 @@ function uploadFinish_(body) {
     }
     sheet.appendRow([
       now, up.childId, kid.childName || '', kid.school || '', kid.standard || '', kid.division || '',
-      kid.phone || '', file.getName(), Math.round(file.getSize() / MB * 10) / 10, file.getUrl(), 'Yes'
+      kid.phone || '', file.getName(), Math.round(file.getSize() / MB * 10) / 10, file.getUrl(), 'Yes',
+      up.consent ? 'Yes' : 'No'
     ].map(safeCell_));
   } finally {
     lock.releaseLock();
@@ -534,6 +536,10 @@ function submissionsSheet_() {
     sheet.setFrozenRows(1);
     sheet.getRange(1, 1, 1, SUBMISSION_COLUMNS.length).setFontWeight('bold');
     sheet.getRange('G:G').setNumberFormat('@');
+  }
+  // Tabs made before a column was added get the new heading.
+  if (sheet.getLastColumn() < SUBMISSION_COLUMNS.length) {
+    sheet.getRange(1, 1, 1, SUBMISSION_COLUMNS.length).setValues([SUBMISSION_COLUMNS]).setFontWeight('bold');
   }
   return sheet;
 }
