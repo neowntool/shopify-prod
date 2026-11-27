@@ -71,6 +71,7 @@ function sendTestEmail() {
   var r = regRows_(sheet, map).filter(function (x) { return x['Order Status'] === 'Sent' && x['Order No']; })[0];
   if (!r) throw new Error('No row with an order number yet.');
   var ctx = emailContext_();
+  if (ctx.error) throw new Error(ctx.error);
   var mail = buildEmail_(r, ctx);
   if (mail.missing) throw new Error('Fill ' + mail.missing + ' for "' + r['School'] + '" in the Video Deadlines tab first.');
   var me = Session.getEffectiveUser().getEmail();
@@ -149,11 +150,40 @@ function emailContext_() {
     else ctx.from = want;
   }
   try {
-    var res = UrlFetchApp.fetch(EMAIL.guide, { muteHttpExceptions: true });
-    if (res.getResponseCode() === 200) ctx.guide = res.getBlob().setName(EMAIL.guideName);
-  } catch (e) {}
-  if (!ctx.guide && !ctx.error) ctx.error = 'Could not download the Parent Guide PDF to attach.';
+    ctx.guide = guideBlob_();
+  } catch (e) {
+    if (!ctx.error) ctx.error = String(e.message || e).slice(0, 300);
+  }
   return ctx;
+}
+
+/** The Parent Guide PDF. Downloaded once and kept in Drive ("NYVC Parent Guide.pdf"), so emails never
+ *  depend on the download working; downloaded again only when EMAIL.guide changes. */
+function guideBlob_() {
+  var p = PropertiesService.getScriptProperties();
+  var id = p.getProperty('GUIDE_FILE_ID'), url = p.getProperty('GUIDE_FILE_URL');
+  if (id && url === EMAIL.guide) {
+    try { return DriveApp.getFileById(id).getBlob().setName(EMAIL.guideName); } catch (e) {} // deleted: download again
+  }
+  var last = '';
+  for (var i = 0; i < 3; i++) {
+    if (i) Utilities.sleep(1500 * i);
+    try {
+      var res = UrlFetchApp.fetch(EMAIL.guide, { muteHttpExceptions: true, followRedirects: true });
+      var code = res.getResponseCode(), blob = res.getBlob();
+      if (code === 200 && blob.getBytes().length > 1000) {
+        blob.setName(EMAIL.guideName).setContentType('application/pdf');
+        var file = DriveApp.createFile(blob.copyBlob().setName('NYVC Parent Guide.pdf'));
+        if (id) { try { DriveApp.getFileById(id).setTrashed(true); } catch (e) {} }
+        p.setProperties({ GUIDE_FILE_ID: file.getId(), GUIDE_FILE_URL: EMAIL.guide });
+        return blob;
+      }
+      last = 'HTTP ' + code;
+    } catch (e) {
+      last = String(e.message || e);
+    }
+  }
+  throw new Error('Could not download the Parent Guide PDF to attach (' + last + ').');
 }
 
 function mailOptions_(mail, ctx) {
