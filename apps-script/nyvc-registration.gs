@@ -11,6 +11,8 @@
  *    and each upload is logged in the "Video Submissions" tab.
  *  - "Video Deadlines" tab (made on first use): the team sets each school's last date there.
  *  - neOwn orders: each registration becomes an order through ORDER_API_URL (see "neOwn orders").
+ *  - Confirmation email: once a prod order number comes back, the parent gets the registration
+ *    email from contact@neown.in (see "Confirmation email"). Off until CONFIRMATION_EMAILS = on.
  *
  * Setup (once):
  *  1. Open the sheet → Extensions → Apps Script, paste this file, save.
@@ -20,7 +22,9 @@
  *     Optional: SHEET_NAME (default "Sheet1"), OTP_EXPIRY_MINUTES (default 10),
  *       VIDEO_FOLDER_ID (Drive folder for videos; default: a "NYVC Videos" folder it makes),
  *       MAX_VIDEO_MB (default 500),
- *       ORDER_API_URL (neOwn order API; dev or prod URL. Blank = orders are not sent).
+ *       ORDER_API_URL (neOwn order API; dev or prod URL. Blank = orders are not sent),
+       CONFIRMATION_EMAILS (on = email parents after the order; anything else = off),
+       EMAIL_FROM (default contact@neown.in).
  *  3. Select the "setup" function at the top and click Run once (approve access to Sheets, Drive
  *     and external requests). It creates the video tabs and the "NYVC Videos" Drive folder.
  *  4. Deploy → New deployment → Web app → Execute as: Me, Who has access: Anyone → Deploy.
@@ -34,7 +38,8 @@ var COLUMNS = [
   'Submitted At (IST)', 'Registration ID', 'Child Name', 'Date of Birth', 'Age (years)', 'Gender',
   'School', 'Standard', 'Division / Section', 'Parent / Guardian Name', 'Email', 'Phone',
   'Phone Verified', 'Page', 'UTM Source', 'UTM Medium', 'UTM Campaign',
-  'Order Status', 'Order No', 'Order Env', 'Order Synced At (IST)', 'Order Error', 'Order Attempts'
+  'Order Status', 'Order No', 'Order Env', 'Order Synced At (IST)', 'Order Error', 'Order Attempts',
+  'Email Status', 'Email Sent At (IST)', 'Email Error'
 ];
 
 /** Run once from the editor (select "setup" → Run): approves Drive access and makes the
@@ -670,7 +675,8 @@ function syncOrders_(max) {
       var res = sendOrder_(api, sheet, map, r, gender, env === api.env ? attempts : 0);
       if (res === 'Sent') sent++; else if (res === 'Failed') failed++; else checked++;
     }
-    return { ok: true, env: api.env, sent: sent, failed: failed, check: checked, waiting_for_gender: waiting };
+    var mail = api.env === 'prod' && emailsOn_() ? syncEmails_(started) : null;
+    return { ok: true, env: api.env, sent: sent, failed: failed, check: checked, waiting_for_gender: waiting, emails: mail };
   } finally {
     runLock.releaseLock();
   }
@@ -759,13 +765,240 @@ function sendNewOrder_(rowNo) {
       if (r['Order Status']) return;
       var gender = genderOf_(r['Gender']);
       if (!gender) return;
-      sendOrder_(api, sheet, map, r, gender, 0);
+      if (sendOrder_(api, sheet, map, r, gender, 0) === 'Sent' && api.env === 'prod' && emailsOn_()) {
+        var fresh = rowObj_(sheet.getRange(rowNo, 1, 1, map.__width).getValues()[0], map);
+        fresh.__row = rowNo;
+        sendConfirmation_(sheet, map, fresh, emailContext_());
+      }
     } finally {
       lock.releaseLock();
     }
   } catch (e) {
     console.error('sendNewOrder_ failed: ' + (e && e.stack || e));
   }
+}
+
+/* ---------- Confirmation email ----------
+ * Once a row's order is Sent on prod, the parent gets the registration confirmation email, with the
+ * Parent Guide PDF attached. Sent from EMAIL_FROM (default contact@neown.in): that address must be the
+ * Google account that owns this script, or a "Send mail as" address in that account's Gmail.
+ *
+ * Dates come from the "Video Deadlines" tab, per school (or the "All schools" row):
+ *   "Registration Close Date (DD/MM/YYYY)" → Select 2 books by; books reach the school 2 days later.
+ *   "Last Date for Video (DD/MM/YYYY)"     → Video submission deadline.
+ *
+ * Email Status: Sent · Waiting for dates (school's dates not filled yet; sent once they are) ·
+ *   No email · Failed (see Email Error; clear the status to try again) · Sending (stopped mid-send;
+ *   check the contact@ Sent folder before clearing) · Skip (typed by the team). Blank = not sent yet.
+ *
+ * To start: Script Properties → CONFIRMATION_EMAILS = on. Run sendTestEmail first (it goes to you).
+ */
+
+var EMAIL = {
+  whatsappGroup: 'https://chat.whatsapp.com/D6nzF5crdsoCZ8dcnfYxGb',
+  whatsappHelp: '+91 93244 55972',
+  whatsappHelpLink: 'https://wa.me/919324455972',
+  appAndroid: 'https://play.google.com/store/apps/details?id=com.neown',
+  appIos: 'https://apps.apple.com/in/app/neown/id6483860525',
+  guide: 'https://cdn.shopify.com/s/files/1/0687/8557/0066/files/neOwn_Young_Voices_Championship_-_Parent_Guide.pdf?v=1795780334',
+  guideName: 'neOwn_Young_Voices_Championship_-_Parent_Guide.pdf',
+  prompts: {
+    A: 'https://cdn.shopify.com/s/files/1/0687/8557/0066/files/neOwn_Young_Voices_Championship_Category_A_Grades_3_4.pdf?v=1795774634',
+    B: 'https://cdn.shopify.com/s/files/1/0687/8557/0066/files/neOwn_Young_Voices_ChampionshipCategory_B_Grades_5_6.pdf?v=1795774634',
+    C: 'https://cdn.shopify.com/s/files/1/0687/8557/0066/files/neOwn_Young_Voices_ChampionshipCategory_C_Grades_7_8.pdf?v=1795774634'
+  }
+};
+var CLOSE_DATE_HEADING = 'Registration Close Date (DD/MM/YYYY)';
+var VIDEO_DATE_HEADING = 'Last Date for Video (DD/MM/YYYY)';
+
+/** Run from the editor: sends the email for the first prod "Sent" row to YOU (not the parent), to check it.
+ *  Also the first run that asks for Gmail permission. Nothing is written to the sheet. */
+function sendTestEmail() {
+  var sheet = sheet_(), map = regMap_(sheet);
+  var r = regRows_(sheet, map).filter(function (x) { return x['Order Status'] === 'Sent' && x['Order No']; })[0];
+  if (!r) throw new Error('No row with an order number yet.');
+  var ctx = emailContext_();
+  var mail = buildEmail_(r, ctx);
+  if (mail.missing) throw new Error('Fill ' + mail.missing + ' for "' + r['School'] + '" in the Video Deadlines tab first.');
+  var me = Session.getEffectiveUser().getEmail();
+  GmailApp.sendEmail(me, '[TEST] ' + mail.subject, mail.text, mailOptions_(mail, ctx));
+  console.log('Test email for row ' + r.__row + ' sent to ' + me + ' from ' + (ctx.from || me));
+}
+
+/** Run from the editor: emails every row that is ready (prod order Sent, email not sent yet). */
+function sendAllEmails() {
+  if (!emailsOn_()) throw new Error('Set the CONFIRMATION_EMAILS script property to on first.');
+  var lock = LockService.getDocumentLock();
+  if (!lock.tryLock(5000)) throw new Error('Busy; try again in a minute.');
+  try { console.log(JSON.stringify(syncEmails_(Date.now()))); } finally { lock.releaseLock(); }
+}
+
+function emailsOn_() {
+  return String(PropertiesService.getScriptProperties().getProperty('CONFIRMATION_EMAILS') || '').trim().toLowerCase() === 'on';
+}
+
+/** Emails ready rows until ~5 minutes after `started`. Call while holding the document lock. */
+function syncEmails_(started) {
+  var out = { sent: 0, waiting_for_dates: 0, failed: 0, no_email: 0 };
+  var sheet = sheet_(), map = regMap_(sheet), ctx = null;
+  var rows = regRows_(sheet, map);
+  for (var i = 0; i < rows.length; i++) {
+    if (Date.now() - started > 5 * 60 * 1000) break;
+    var r = rows[i], st = String(r['Email Status'] || '');
+    if (r['Order Status'] !== 'Sent' || r['Order Env'] !== 'prod' || !r['Order No']) continue;
+    if (st && st !== 'Waiting for dates') continue;
+    ctx = ctx || emailContext_();
+    var res = sendConfirmation_(sheet, map, r, ctx);
+    var key = { 'Sent': 'sent', 'Waiting for dates': 'waiting_for_dates', 'Failed': 'failed', 'No email': 'no_email' }[res];
+    if (key) out[key]++;
+    if (res === 'Failed' && ctx.fatal) break; // e.g. sender not set up: every row would fail the same way
+  }
+  return out;
+}
+
+/** Sends one row's email and records the result. Returns the Email Status written. */
+function sendConfirmation_(sheet, map, r, ctx) {
+  var st = String(r['Email Status'] || '');
+  if (st && st !== 'Waiting for dates') return st;
+  var to = String(r['Email'] || '').trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) return setEmailCells_(sheet, map, r.__row, 'No email', 'No valid email address in the Email column.');
+  var mail = buildEmail_(r, ctx);
+  if (mail.missing) {
+    if (st !== 'Waiting for dates') setEmailCells_(sheet, map, r.__row, 'Waiting for dates', 'Fill ' + mail.missing + ' for this school in the Video Deadlines tab.');
+    return 'Waiting for dates';
+  }
+  if (ctx.error) { ctx.fatal = true; setEmailCells_(sheet, map, r.__row, '', ctx.error); return 'Failed'; } // status left blank: retried once fixed
+  setEmailCells_(sheet, map, r.__row, 'Sending', '');
+  SpreadsheetApp.flush(); // saved before sending, so a crash can't send it twice
+  try {
+    GmailApp.sendEmail(to, mail.subject, mail.text, mailOptions_(mail, ctx));
+  } catch (e) {
+    return setEmailCells_(sheet, map, r.__row, 'Failed', String(e.message || e).slice(0, 300));
+  }
+  return setEmailCells_(sheet, map, r.__row, 'Sent', '', new Date());
+}
+
+function setEmailCells_(sheet, map, rowNo, status, error, at) {
+  var v = { 'Email Status': status, 'Email Error': error };
+  if (at) v['Email Sent At (IST)'] = at;
+  setOrderCells_(sheet, map, rowNo, v);
+  return status;
+}
+
+/** Shared per run: the sender, the school dates and the Parent Guide PDF. */
+function emailContext_() {
+  var ctx = { dates: schoolDates_(), from: '', error: '' };
+  var want = (PropertiesService.getScriptProperties().getProperty('EMAIL_FROM') || 'contact@neown.in').trim().toLowerCase();
+  var me = String(Session.getEffectiveUser().getEmail() || '').toLowerCase();
+  if (want !== me) {
+    var aliases = GmailApp.getAliases().map(function (a) { return String(a).toLowerCase(); });
+    if (aliases.indexOf(want) === -1) ctx.error = want + ' is not a "Send mail as" address in the Gmail of ' + me + '. Add it there (Gmail → Settings → Accounts) or run the script from ' + want + '.';
+    else ctx.from = want;
+  }
+  try {
+    var res = UrlFetchApp.fetch(EMAIL.guide, { muteHttpExceptions: true });
+    if (res.getResponseCode() === 200) ctx.guide = res.getBlob().setName(EMAIL.guideName);
+  } catch (e) {}
+  if (!ctx.guide && !ctx.error) ctx.error = 'Could not download the Parent Guide PDF to attach.';
+  return ctx;
+}
+
+function mailOptions_(mail, ctx) {
+  var o = { htmlBody: mail.html, name: 'Team neOwn', attachments: [ctx.guide] };
+  if (ctx.from) { o.from = ctx.from; o.replyTo = ctx.from; }
+  return o;
+}
+
+/** Video Deadlines tab → { school: { close: 'yyyy-MM-dd', video: 'yyyy-MM-dd' } }, adding the close-date column if missing. */
+function schoolDates_() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(DEADLINES_SHEET) || (deadlines_(), SpreadsheetApp.getActiveSpreadsheet().getSheetByName(DEADLINES_SHEET));
+  var map = headerMap_(sheet, ['School', VIDEO_DATE_HEADING, CLOSE_DATE_HEADING]);
+  var tz = SpreadsheetApp.getActiveSpreadsheet().getSpreadsheetTimeZone();
+  var out = {};
+  var last = sheet.getLastRow();
+  if (last < 2) return out;
+  sheet.getRange(2, 1, last - 1, map.__width).getValues().forEach(function (v) {
+    var o = rowObj_(v, map), school = normName_(o['School']);
+    if (school) out[school] = { close: deadlineIso_(o[CLOSE_DATE_HEADING], tz), video: deadlineIso_(o[VIDEO_DATE_HEADING], tz) };
+  });
+  return out;
+}
+
+function categoryOf_(standard) {
+  var n = Number(String(standard || '').replace(/\D/g, ''));
+  return n === 3 || n === 4 ? 'A' : n === 5 || n === 6 ? 'B' : n === 7 || n === 8 ? 'C' : '';
+}
+
+function longDate_(iso, plusDays) {
+  var p = iso.split('-');
+  return Utilities.formatDate(new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]) + (plusDays || 0), 12), 'Asia/Kolkata', 'd MMMM yyyy');
+}
+
+function esc_(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+/** { subject, text, html } for a row, or { missing: 'what' } when a date or the category is unknown. */
+function buildEmail_(r, ctx) {
+  var schoolKey = normName_(r['School']);
+  var own = ctx.dates[schoolKey] || {}, all = ctx.dates['all schools'] || {};
+  var close = own.close || all.close, video = own.video || all.video;
+  var cat = categoryOf_(r['Standard']);
+  var missing = [];
+  if (!close) missing.push('"' + CLOSE_DATE_HEADING + '"');
+  if (!video) missing.push('"' + VIDEO_DATE_HEADING + '"');
+  if (!cat) return { missing: 'a Standard between 3 and 8 (Category A/B/C)' };
+  if (missing.length) return { missing: missing.join(' and ') };
+
+  var child = String(r['Child Name'] || '').trim();
+  var parent = String(r['Parent / Guardian Name'] || '').trim();
+  var std = 'Std ' + String(r['Standard'] || '').replace(/\D/g, '');
+  var school = String(r['School'] || '').trim();
+  var d = { books: longDate_(close), delivery: longDate_(close, 2), video: longDate_(video) };
+  var prompts = EMAIL.prompts[cat];
+  var subject = child + ' is registered for the neOwn Young Voices Championship!';
+
+  var text = [
+    'Hi ' + parent + ',', '',
+    'Welcome aboard! ' + child + ' (' + std + ', ' + school + ') is now registered for the neOwn Young Voices Championship in Category ' + cat + '.',
+    'Your free 1-month neOwn subscription is now active, and no additional fee is required.', '',
+    'Your key dates',
+    '- Select 2 books by: ' + d.books,
+    '- Books will be delivered to school: ' + d.delivery,
+    '- Video submission deadline: ' + d.video, '',
+    'What to do now',
+    '1. Join the official parents\' WhatsApp group: ' + EMAIL.whatsappGroup + '. All updates and clarifications are shared here.',
+    '2. Choose 2 books in the neOwn app. Download the neOwn App (Android: ' + EMAIL.appAndroid + ' | iPhone: ' + EMAIL.appIos + '). Log in with your registered mobile number, open the "Young Voices Championship" catalogue and select exactly 2 books. Both are compulsory. Books will be delivered to the school and have to be returned after 1 month.',
+    '3. Download your category prompts: ' + prompts + '. Your child will make the video on one of the two books, answering one prompt.', '',
+    'The full step-by-step guide is attached as a PDF, including recording tips and what happens after you submit. Please read it carefully.',
+    'Questions? WhatsApp us on ' + EMAIL.whatsappHelp + '.', '',
+    'Happy reading!', 'Team neOwn'
+  ].join('\n');
+
+  var a = function (href, label) { return '<a href="' + esc_(href) + '" style="color:#6c3bd1;font-weight:600;">' + esc_(label) + '</a>'; };
+  var p = function (h) { return '<p style="margin:0 0 14px;">' + h + '</p>'; };
+  var h3 = function (t) { return '<h3 style="margin:22px 0 10px;font-size:16px;color:#2b1a4f;">' + t + '</h3>'; };
+  var html = '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.55;color:#222;max-width:600px;">' +
+    p('Hi ' + esc_(parent) + ',') +
+    p('Welcome aboard! <strong>' + esc_(child) + '</strong> (' + esc_(std) + ', ' + esc_(school) + ') is now registered for the neOwn Young Voices Championship in <strong>Category ' + cat + '</strong>.') +
+    p('Your free 1-month neOwn subscription is now active, and no additional fee is required.') +
+    h3('Your key dates') +
+    '<ul style="margin:0 0 14px;padding-left:20px;">' +
+      '<li>Select 2 books by: <strong>' + d.books + '</strong></li>' +
+      '<li>Books will be delivered to school: <strong>' + d.delivery + '</strong></li>' +
+      '<li>Video submission deadline: <strong>' + d.video + '</strong></li>' +
+    '</ul>' +
+    h3('What to do now') +
+    '<ol style="margin:0 0 14px;padding-left:20px;">' +
+      '<li style="margin-bottom:10px;">Join the official parents\' WhatsApp group: ' + a(EMAIL.whatsappGroup, 'join here') + '. All updates and clarifications are shared here.</li>' +
+      '<li style="margin-bottom:10px;">Choose 2 books in the neOwn app. Download the neOwn App (' + a(EMAIL.appAndroid, 'Android') + ' | ' + a(EMAIL.appIos, 'iPhone') + '). Log in with your registered mobile number, open the "Young Voices Championship" catalogue and select exactly 2 books. Both are compulsory. Books will be delivered to the school and have to be returned after 1 month.</li>' +
+      '<li style="margin-bottom:10px;">Download your category prompts: ' + a(prompts, 'Category ' + cat + ' prompts (PDF)') + '. Your child will make the video on one of the two books, answering one prompt.</li>' +
+    '</ol>' +
+    p('The full step-by-step guide is attached as a PDF, including recording tips and what happens after you submit. Please read it carefully.') +
+    p('Questions? WhatsApp us on ' + a(EMAIL.whatsappHelpLink, EMAIL.whatsappHelp) + '.') +
+    p('Happy reading!<br>Team neOwn') +
+    '</div>';
+  return { subject: subject, text: text, html: html };
 }
 
 /* ---------- Columns by heading ----------
