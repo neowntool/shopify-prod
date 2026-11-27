@@ -25,8 +25,40 @@
       <a class="nyvc-btn nyvc-btn--outline" href="{{ b.view_url | default: '#' }}"{% if b.view_url != blank %} target="_blank" rel="noopener"{% endif %}><span>{{ b.view_label | escape }}</span><img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-purple.svg' | asset_url }}" alt="" aria-hidden="true"></a>
     {%- endif -%}
     {%- if b.pdf_label != blank -%}
-      <a class="nyvc-btn nyvc-btn--outline" href="{{ pdf_href | default: '#' }}"{% if pdf_href != blank %} target="_blank" rel="noopener" download{% endif %}><span>{{ b.pdf_label | escape }}</span><img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-purple.svg' | asset_url }}" alt="" aria-hidden="true"></a>
+      {%- assign pdf_name = pdf_href | split: '?' | first | split: '/' | last -%}
+      <a class="nyvc-btn nyvc-btn--outline" href="{{ pdf_href | default: '#' }}"{% if pdf_href != blank %} download="{{ pdf_name | escape }}" data-nyvc-download target="_blank" rel="noopener"{% endif %}><span>{{ b.pdf_label | escape }}</span><img class="nyvc-btn-arrow" src="{{ 'nyvc-ic-arrow-purple.svg' | asset_url }}" alt="" aria-hidden="true"></a>
     {%- endif -%}
   </div>
   {%- if footer != blank -%}<p class="nyvc-prompt-foot">{{ footer | escape }}</p>{%- endif -%}
 </div>
+{%- comment -%} Download buttons: the PDF lives on Shopify's CDN (another site), where browsers ignore
+  the download attribute and just open the file. Fetch it and save it as a file instead; if that
+  fails, the link opens the PDF as before. {%- endcomment -%}
+<script>
+  (function () {
+    if (window.__nyvcDownload) return;
+    window.__nyvcDownload = true;
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[data-nyvc-download]');
+      if (!a || !window.fetch || !window.URL || !URL.createObjectURL) return;
+      e.preventDefault();
+      if (a.getAttribute('aria-busy') === 'true') return;
+      a.setAttribute('aria-busy', 'true');
+      fetch(a.href).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.blob();
+      }).then(function (blob) {
+        var url = URL.createObjectURL(blob);
+        var tmp = document.createElement('a');
+        tmp.href = url;
+        tmp.download = a.getAttribute('download') || 'neOwn-Young-Voices-prompt.pdf';
+        document.body.appendChild(tmp);
+        tmp.click();
+        tmp.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+      }).catch(function () {
+        window.open(a.href, '_blank', 'noopener');
+      }).then(function () { a.removeAttribute('aria-busy'); });
+    });
+  })();
+</script>

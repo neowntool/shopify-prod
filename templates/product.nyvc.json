@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "nyvc_hero": {
@@ -350,9 +359,9 @@
             "title": "Standards 3–4:",
             "text": "Focus on vivid character descriptions, emotional moments, and expressive reading aloud.",
             "view_label": "View Prompt",
-            "view_url": "",
+            "view_url": "https://cdn.shopify.com/s/files/1/0687/8557/0066/files/neOwn_Young_Voices_Championship_Category_A_Grades_3_4.pdf?v=1795774634",
             "pdf_label": "Download PDF",
-            "pdf_url": "",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0687/8557/0066/files/neOwn_Young_Voices_Championship_Category_A_Grades_3_4.pdf?v=1795774634",
             "pdf_file": ""
           }
         },
@@ -364,9 +373,9 @@
             "title": "Standards 5–6:",
             "text": "Explore personal perspectives, thematic connections, and how the narrative moved you.",
             "view_label": "View Prompt",
-            "view_url": "",
+            "view_url": "https://cdn.shopify.com/s/files/1/0687/8557/0066/files/neOwn_Young_Voices_ChampionshipCategory_B_Grades_5_6.pdf?v=1795774634",
             "pdf_label": "Download PDF",
-            "pdf_url": "",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0687/8557/0066/files/neOwn_Young_Voices_ChampionshipCategory_B_Grades_5_6.pdf?v=1795774634",
             "pdf_file": ""
           }
         },
@@ -378,9 +387,9 @@
             "title": "Standards 7–8:",
             "text": "Critique overarching plot arcs, author viewpoints, and ethical or real-world reflections.",
             "view_label": "View Prompt",
-            "view_url": "",
+            "view_url": "https://cdn.shopify.com/s/files/1/0687/8557/0066/files/neOwn_Young_Voices_ChampionshipCategory_C_Grades_7_8.pdf?v=1795774634",
             "pdf_label": "Download PDF",
-            "pdf_url": "",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0687/8557/0066/files/neOwn_Young_Voices_ChampionshipCategory_C_Grades_7_8.pdf?v=1795774634",
             "pdf_file": ""
           }
         }
