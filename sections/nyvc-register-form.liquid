@@ -29,10 +29,23 @@
         <input id="nyvc-child-{{ section.id }}" name="child_name" type="text" placeholder="e.g. Aarav Sharma" autocomplete="off" maxlength="80" required>
         <p class="nyvc-err" data-err="child_name"></p>
       </div>
-      <div class="nyvc-field">
-        <label for="nyvc-dob-{{ section.id }}">{{ s.dob_label | escape }} <span aria-hidden="true">*</span></label>
-        <input id="nyvc-dob-{{ section.id }}" name="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY" maxlength="10" autocomplete="off" required>
-        <p class="nyvc-err" data-err="dob"></p>
+      <div class="nyvc-row">
+        <div class="nyvc-field">
+          <label for="nyvc-dob-{{ section.id }}">{{ s.dob_label | escape }} <span aria-hidden="true">*</span></label>
+          <input id="nyvc-dob-{{ section.id }}" name="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY" maxlength="10" autocomplete="off" required>
+          <p class="nyvc-err" data-err="dob"></p>
+        </div>
+        <div class="nyvc-field">
+          <label for="nyvc-gender-{{ section.id }}">Gender <span aria-hidden="true">*</span></label>
+          <div class="nyvc-select">
+            <select id="nyvc-gender-{{ section.id }}" name="gender" required>
+              <option value="">Select gender</option>
+              <option value="male">Boy</option>
+              <option value="female">Girl</option>
+            </select>
+          </div>
+          <p class="nyvc-err" data-err="gender"></p>
+        </div>
       </div>
       <div class="nyvc-row">
         <div class="nyvc-field">

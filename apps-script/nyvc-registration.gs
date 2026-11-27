@@ -10,6 +10,7 @@
  *    goes to Google Drive as NYVC Videos / School / Standard / "Child - Div X - date time.mp4",
  *    and each upload is logged in the "Video Submissions" tab.
  *  - "Video Deadlines" tab (made on first use): the team sets each school's last date there.
+ *  - neOwn orders: each registration becomes an order through ORDER_API_URL (see "neOwn orders").
  *
  * Setup (once):
  *  1. Open the sheet → Extensions → Apps Script, paste this file, save.
@@ -18,7 +19,8 @@
  *       MSG91_TEMPLATE_ID  your DLT-approved MSG91 OTP template ID
  *     Optional: SHEET_NAME (default "Sheet1"), OTP_EXPIRY_MINUTES (default 10),
  *       VIDEO_FOLDER_ID (Drive folder for videos; default: a "NYVC Videos" folder it makes),
- *       MAX_VIDEO_MB (default 500).
+ *       MAX_VIDEO_MB (default 500),
+ *       ORDER_API_URL (neOwn order API; dev or prod URL. Blank = orders are not sent).
  *  3. Select the "setup" function at the top and click Run once (approve access to Sheets, Drive
  *     and external requests). It creates the video tabs and the "NYVC Videos" Drive folder.
  *  4. Deploy → New deployment → Web app → Execute as: Me, Who has access: Anyone → Deploy.
@@ -31,13 +33,14 @@
 var COLUMNS = [
   'Submitted At (IST)', 'Registration ID', 'Child Name', 'Date of Birth', 'Age (years)',
   'School', 'Standard', 'Division / Section', 'Parent / Guardian Name', 'Email', 'Phone',
-  'Phone Verified', 'Page', 'UTM Source', 'UTM Medium', 'UTM Campaign'
+  'Phone Verified', 'Page', 'UTM Source', 'UTM Medium', 'UTM Campaign',
+  'Gender', 'Order Status', 'Order No', 'Order Env', 'Order Synced At (IST)', 'Order Error', 'Order Attempts'
 ];
 
 /** Run once from the editor (select "setup" → Run): approves Drive access and makes the
  *  "Video Deadlines" and "Video Submissions" tabs and the "NYVC Videos" Drive folder. */
 function setup() {
-  sheet_();
+  ensureOrderColumns_(sheet_());
   deadlines_();
   submissionsSheet_();
   console.log('Videos folder: ' + rootFolder_().getUrl());
@@ -134,6 +137,7 @@ function register_(body) {
   var data = {
     id: clean_(body.id, 40),
     childName: clean_(f.child_name, 80),
+    gender: clean_(f.gender, 10).toLowerCase(),
     dob: clean_(f.dob, 10),
     school: clean_(f.school, 120),
     standard: clean_(f.standard, 20),
@@ -167,18 +171,22 @@ function register_(body) {
     var now = Utilities.formatDate(new Date(), 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss');
     sheet.appendRow([
       now, id, data.childName, data.dob, ageFromDob_(data.dob), data.school, data.standard, data.division,
-      data.parentName, data.email, data.phone, 'Yes', data.page, data.utmSource, data.utmMedium, data.utmCampaign
+      data.parentName, data.email, data.phone, 'Yes', data.page, data.utmSource, data.utmMedium, data.utmCampaign,
+      data.gender === 'male' ? 'Male' : 'Female'
     ].map(safeCell_));
-    return { ok: true, id: id };
+    var rowNo = sheet.getLastRow();
   } finally {
     lock.releaseLock();
   }
+  sendNewOrder_(rowNo); // create the neOwn order now; the 10-minute timer retries if this fails
+  return { ok: true, id: id };
 }
 
 function validate_(d) {
   if (!d.childName || d.childName.length < 2) return { field: 'child_name', message: "Enter the child's full name." };
   var dobMsg = dobProblem_(d.dob);
   if (dobMsg) return { field: 'dob', message: dobMsg };
+  if (d.gender !== 'male' && d.gender !== 'female') return { field: 'gender', message: "Select the child's gender." };
   if (!d.school) return { field: 'school', message: 'Select the school.' };
   if (!d.standard) return { field: 'standard', message: 'Select the standard.' };
   if (!d.division) return { field: 'division', message: 'Enter the division or section.' };
@@ -573,6 +581,193 @@ function safeName_(s) {
 }
 
 function pad_(n) { return ('0' + n).slice(-2); }
+
+/* ---------- neOwn orders ----------
+ * Each registration row becomes a Young Voice Championship order in the neOwn system through
+ * ORDER_API_URL (script property). The URL decides the environment: a "dev-" host is dev,
+ * anything else is prod. A row sent to dev is sent again once the URL points to prod.
+ *
+ * The API is not idempotent (every call makes a new order and a new child), so each row is
+ * marked "Sending" before the call and is never resent automatically unless the API clearly
+ * answered with an error. If no answer came back, the row is marked "Check" for the team.
+ *
+ * Statuses: Sent · Failed (API answered with an error; retried up to 3 times) ·
+ *           Check (no answer; may or may not exist, look it up before clearing) ·
+ *           Waiting for gender · (blank = not sent yet). Clear the status to send a row again.
+ */
+
+var ORDER_COLS = { gender: 17, status: 18, orderNo: 19, env: 20, syncedAt: 21, error: 22, attempts: 23 };
+var ORDER_MAX_ATTEMPTS = 3;
+var ORDER_GAP_MS = 7000; // the API allows 10 calls a minute
+
+/** Run from the editor: sends ONE row (the first one ready), for a first test. */
+function sendOneOrder() {
+  var r = syncOrders_(1);
+  console.log(JSON.stringify(r));
+}
+
+/** Run from the editor: sends every row that is ready (stops after ~5 minutes; run again for more). */
+function sendAllOrders() {
+  var r = syncOrders_(1000);
+  console.log(JSON.stringify(r));
+}
+
+/** Run once from the editor: every 10 minutes, send rows that are ready (new ones, failures to retry). */
+function startOrderSync() {
+  stopOrderSync();
+  ScriptApp.newTrigger('orderSyncTick').timeBased().everyMinutes(10).create();
+  console.log('Order sync runs every 10 minutes.');
+}
+function stopOrderSync() {
+  ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() === 'orderSyncTick') ScriptApp.deleteTrigger(t); });
+}
+function orderSyncTick() { syncOrders_(1000); }
+
+function orderApi_() {
+  var url = PropertiesService.getScriptProperties().getProperty('ORDER_API_URL') || '';
+  if (!/^https:\/\//.test(url)) return null;
+  return { url: url, env: /\/\/dev[-.]/i.test(url) ? 'dev' : 'prod' };
+}
+
+/** Sends up to `max` ready rows. Never runs twice at the same time. */
+function syncOrders_(max) {
+  var api = orderApi_();
+  if (!api) return { ok: false, message: 'ORDER_API_URL script property is not set.' };
+  // A separate lock from registrations, so a long run never makes parents wait.
+  var runLock = LockService.getDocumentLock();
+  if (!runLock.tryLock(1000)) return { ok: false, message: 'Busy; try again in a minute.' };
+  var started = Date.now(), sent = 0, failed = 0, checked = 0, waiting = 0;
+  try {
+    var sheet = sheet_();
+    ensureOrderColumns_(sheet);
+    var last = sheet.getLastRow();
+    if (last < 2) return { ok: true, sent: 0 };
+    var rows = sheet.getRange(2, 1, last - 1, ORDER_COLS.attempts).getValues();
+    var stale = Date.now() - 10 * 60 * 1000;
+    for (var i = 0; i < rows.length && sent + failed < max; i++) {
+      if (Date.now() - started > 5 * 60 * 1000) break; // stay inside Apps Script's 6-minute limit
+      var r = rows[i], rowNo = i + 2;
+      var status = String(r[ORDER_COLS.status - 1] || ''), env = String(r[ORDER_COLS.env - 1] || '');
+      var attempts = Number(r[ORDER_COLS.attempts - 1] || 0);
+      if (!r[1]) continue;
+      if (status === 'Sending') { // stuck from a run that never finished
+        var at = r[ORDER_COLS.syncedAt - 1];
+        if (!(at instanceof Date) || at.getTime() < stale) { setOrderCells_(sheet, rowNo, { status: 'Check', error: 'No answer recorded from the API. Look the parent up in the neOwn system before clearing this.' }); checked++; }
+        continue;
+      }
+      if (status === 'Check') continue;
+      if (status === 'Sent' && env === api.env) continue;
+      if (status === 'Failed' && env === api.env && attempts >= ORDER_MAX_ATTEMPTS) continue;
+      var gender = String(r[ORDER_COLS.gender - 1] || '').trim().toLowerCase();
+      gender = { boy: 'male', m: 'male', girl: 'female', f: 'female' }[gender] || gender;
+      if (gender !== 'male' && gender !== 'female') {
+        if (status !== 'Waiting for gender') setOrderCells_(sheet, rowNo, { status: 'Waiting for gender', error: 'Fill the Gender column (Male or Female).' });
+        waiting++;
+        continue;
+      }
+      if (sent + failed > 0) Utilities.sleep(ORDER_GAP_MS);
+      var res = sendOrder_(api, sheet, rowNo, r, gender, env === api.env ? attempts : 0);
+      if (res === 'Sent') sent++; else if (res === 'Failed') failed++; else checked++;
+    }
+    return { ok: true, env: api.env, sent: sent, failed: failed, check: checked, waiting_for_gender: waiting };
+  } finally {
+    runLock.releaseLock();
+  }
+}
+
+function sendOrder_(api, sheet, rowNo, r, gender, attempts) {
+  var payload = {
+    user: { phone: String(r[10]).replace(/\D/g, '').slice(-10), name: String(r[8] || ''), email: String(r[9] || '') },
+    child: {
+      name: String(r[2]), gender: gender, dob: dobIso_(r[3]),
+      schoolName: String(r[5] || ''), standard: String(r[6] || '').replace(/\D/g, '')
+    }
+  };
+  if (!payload.user.email) delete payload.user.email;
+  if (!payload.child.dob) delete payload.child.dob;
+
+  setOrderCells_(sheet, rowNo, { status: 'Sending', env: api.env, syncedAt: new Date(), error: '', attempts: attempts + 1 });
+  SpreadsheetApp.flush(); // the mark must be saved before the call, so a crash can't cause a second order
+
+  var res;
+  try {
+    res = UrlFetchApp.fetch(api.url, { method: 'post', contentType: 'application/json', payload: JSON.stringify(payload), muteHttpExceptions: true });
+  } catch (e) {
+    setOrderCells_(sheet, rowNo, { status: 'Check', syncedAt: new Date(), error: 'No answer from the API (' + String(e.message || e).slice(0, 150) + '). Look the parent up in the neOwn system before clearing this.' });
+    return 'Check';
+  }
+  var code = res.getResponseCode(), text = res.getContentText(), body = {};
+  try { body = JSON.parse(text); } catch (e) {}
+  if (code >= 200 && code < 300 && body && body.success) {
+    setOrderCells_(sheet, rowNo, { status: 'Sent', orderNo: String(body.orderNo || ''), syncedAt: new Date(), error: '' });
+    return 'Sent';
+  }
+  setOrderCells_(sheet, rowNo, { status: 'Failed', syncedAt: new Date(), error: ('HTTP ' + code + ': ' + apiError_(body, text)).slice(0, 500) });
+  return 'Failed';
+}
+
+/** Readable message out of the API's validation error shape. */
+function apiError_(body, text) {
+  var m = body && body.message;
+  if (m && m.message && m.message.forEach) {
+    var out = [];
+    (function walk(list) {
+      list.forEach(function (x) {
+        var node = x.message && x.message.children ? x.message : x;
+        if (node.constraints) Object.keys(node.constraints).forEach(function (k) { out.push(node.constraints[k]); });
+        if (node.children && node.children.length) walk(node.children);
+      });
+    })(m.message);
+    if (out.length) return out.join('; ');
+  }
+  if (typeof m === 'string') return m;
+  return String(text || '').slice(0, 300);
+}
+
+function setOrderCells_(sheet, rowNo, v) {
+  Object.keys(v).forEach(function (k) {
+    var val = v[k];
+    if (k === 'syncedAt' && val instanceof Date) val = Utilities.formatDate(val, 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss');
+    sheet.getRange(rowNo, ORDER_COLS[k]).setValue(val);
+  });
+}
+
+/** DD/MM/YYYY (or a date cell) → YYYY-MM-DD. */
+function dobIso_(v) {
+  if (v instanceof Date && !isNaN(v)) return Utilities.formatDate(v, SpreadsheetApp.getActiveSpreadsheet().getSpreadsheetTimeZone(), 'yyyy-MM-dd');
+  var m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(String(v || '').trim());
+  return m ? m[3] + '-' + m[2] + '-' + m[1] : '';
+}
+
+/** Sheets made before these columns existed get the new headings. */
+function ensureOrderColumns_(sheet) {
+  var head = sheet.getRange(1, 1, 1, COLUMNS.length).getValues()[0];
+  if (head[COLUMNS.length - 1] !== COLUMNS[COLUMNS.length - 1]) {
+    sheet.getRange(1, 1, 1, COLUMNS.length).setValues([COLUMNS]).setFontWeight('bold');
+  }
+}
+
+/** Called right after a registration is saved: sends it at once (any failure is retried by the timer). */
+function sendNewOrder_(rowNo) {
+  try {
+    var api = orderApi_();
+    if (!api) return;
+    var lock = LockService.getDocumentLock();
+    if (!lock.tryLock(3000)) return; // a sync run is busy; the timer will pick it up
+    try {
+      var sheet = sheet_();
+      var r = sheet.getRange(rowNo, 1, 1, ORDER_COLS.attempts).getValues()[0];
+      if (r[ORDER_COLS.status - 1]) return;
+      var gender = String(r[ORDER_COLS.gender - 1] || '').toLowerCase();
+      if (gender !== 'male' && gender !== 'female') return;
+      sendOrder_(api, sheet, rowNo, r, gender, 0);
+    } finally {
+      lock.releaseLock();
+    }
+  } catch (e) {
+    console.error('sendNewOrder_ failed: ' + (e && e.stack || e));
+  }
+}
 
 /* ---------- Helpers ---------- */
 

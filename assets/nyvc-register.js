@@ -65,7 +65,7 @@
   }
 
   /* ---------- details form ---------- */
-  var fields = ['child_name', 'dob', 'school', 'standard', 'division', 'parent_name', 'email', 'phone'];
+  var fields = ['child_name', 'dob', 'gender', 'school', 'standard', 'division', 'parent_name', 'email', 'phone'];
   function val(name) { var el = form.elements[name]; return el ? String(el.value || '').trim() : ''; }
   function setErr(name, msg) {
     var p = root.querySelector('[data-err="' + name + '"]');
@@ -95,6 +95,7 @@
     switch (name) {
       case 'child_name': return v.length >= 2 ? '' : "Enter the child's full name.";
       case 'dob': return dobProblem(v);
+      case 'gender': return v ? '' : "Select the child's gender.";
       case 'school': return v ? '' : 'Select the school.';
       case 'standard': return v ? '' : 'Select the standard.';
       case 'division': return v ? '' : 'Enter the division or section.';
