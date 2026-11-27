@@ -280,7 +280,7 @@ function emailHtml_(v) {
     return '<div style="' + font + 'font-size:12px;line-height:16px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:' + P + ';padding:0 0 14px;">' + title + '</div>';
   };
 
-  return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>' +
+  return asciiHtml_('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>' +
   '<body style="margin:0;padding:0;background:#f4f1fb;">' +
   '<div style="display:none;max-height:0;overflow:hidden;opacity:0;">' + esc_(v.child) + ' is in, Category ' + v.cat + '. Your key dates and 3 quick next steps inside.</div>' +
   '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f1fb;"><tr><td align="center" style="padding:24px 12px;">' +
@@ -360,5 +360,10 @@ function emailHtml_(v) {
     '<a href="https://neown.in" style="color:#9a94ad;">neown.in</a>' +
   '</td></tr>' +
 
-  '</table></td></tr></table></body></html>';
+  '</table></td></tr></table></body></html>');
+}
+
+/** GmailApp garbles emojis (and other non-ASCII) in htmlBody, so each one goes in as an HTML code (&#127881;). */
+function asciiHtml_(html) {
+  return html.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\x00-\x7F]/g, function (c) { return '&#' + c.codePointAt(0) + ';'; });
 }
