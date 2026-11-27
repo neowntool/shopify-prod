@@ -808,6 +808,8 @@ var EMAIL = {
     C: 'https://cdn.shopify.com/s/files/1/0687/8557/0066/files/neOwn_Young_Voices_ChampionshipCategory_C_Grades_7_8.pdf?v=1795774634'
   }
 };
+EMAIL.logo = 'https://cdn.shopify.com/s/files/1/0687/8557/0066/files/newon_logo.png?v=1794374895';
+EMAIL.whatsappIcon = 'https://cdn.shopify.com/s/files/1/0687/8557/0066/files/logos_whatsapp-icon.png?v=1769157724';
 var CLOSE_DATE_HEADING = 'Registration Close Date (DD/MM/YYYY)';
 var VIDEO_DATE_HEADING = 'Last Date for Video (DD/MM/YYYY)';
 
@@ -975,30 +977,139 @@ function buildEmail_(r, ctx) {
     'Happy reading!', 'Team neOwn'
   ].join('\n');
 
-  var a = function (href, label) { return '<a href="' + esc_(href) + '" style="color:#6c3bd1;font-weight:600;">' + esc_(label) + '</a>'; };
-  var p = function (h) { return '<p style="margin:0 0 14px;">' + h + '</p>'; };
-  var h3 = function (t) { return '<h3 style="margin:22px 0 10px;font-size:16px;color:#2b1a4f;">' + t + '</h3>'; };
-  var html = '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.55;color:#222;max-width:600px;">' +
-    p('Hi ' + esc_(parent) + ',') +
-    p('Welcome aboard! <strong>' + esc_(child) + '</strong> (' + esc_(std) + ', ' + esc_(school) + ') is now registered for the neOwn Young Voices Championship in <strong>Category ' + cat + '</strong>.') +
-    p('Your free 1-month neOwn subscription is now active, and no additional fee is required.') +
-    h3('Your key dates') +
-    '<ul style="margin:0 0 14px;padding-left:20px;">' +
-      '<li>Select 2 books by: <strong>' + d.books + '</strong></li>' +
-      '<li>Books will be delivered to school: <strong>' + d.delivery + '</strong></li>' +
-      '<li>Video submission deadline: <strong>' + d.video + '</strong></li>' +
-    '</ul>' +
-    h3('What to do now') +
-    '<ol style="margin:0 0 14px;padding-left:20px;">' +
-      '<li style="margin-bottom:10px;">Join the official parents\' WhatsApp group: ' + a(EMAIL.whatsappGroup, 'join here') + '. All updates and clarifications are shared here.</li>' +
-      '<li style="margin-bottom:10px;">Choose 2 books in the neOwn app. Download the neOwn App (' + a(EMAIL.appAndroid, 'Android') + ' | ' + a(EMAIL.appIos, 'iPhone') + '). Log in with your registered mobile number, open the "Young Voices Championship" catalogue and select exactly 2 books. Both are compulsory. Books will be delivered to the school and have to be returned after 1 month.</li>' +
-      '<li style="margin-bottom:10px;">Download your category prompts: ' + a(prompts, 'Category ' + cat + ' prompts (PDF)') + '. Your child will make the video on one of the two books, answering one prompt.</li>' +
-    '</ol>' +
-    p('The full step-by-step guide is attached as a PDF, including recording tips and what happens after you submit. Please read it carefully.') +
-    p('Questions? WhatsApp us on ' + a(EMAIL.whatsappHelpLink, EMAIL.whatsappHelp) + '.') +
-    p('Happy reading!<br>Team neOwn') +
-    '</div>';
+  var html = emailHtml_({ parent: parent, child: child, std: std, school: school, cat: cat, prompts: prompts,
+    dates: [['Select 2 books by', close, 0], ['Books delivered to school', close, 2], ['Video submission deadline', video, 0]] });
   return { subject: subject, text: text, html: html };
+}
+
+/** Email HTML: tables and inline styles only, so Gmail, Outlook and phone mail apps show it the same. */
+function emailHtml_(v) {
+  var P = '#6730ef', P10 = '#efeaff', PINK = '#ff2fac', INK = '#2b2340', MUTED = '#6a6a7a', LINE = '#ece8f7';
+  var font = "font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;";
+  var btn = function (href, label, bg, color) {
+    return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="display:inline-table;margin:10px 8px 0 0;"><tr>' +
+      '<td style="border-radius:999px;background:' + bg + ';"><a href="' + esc_(href) + '" style="' + font + 'display:inline-block;padding:11px 20px;font-size:14px;font-weight:700;color:' + (color || '#ffffff') + ';text-decoration:none;border-radius:999px;">' + label + '</a></td>' +
+      '</tr></table>';
+  };
+  var parts = function (iso, plus) {
+    var p = iso.split('-'), dt = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]) + (plus || 0), 12);
+    return { day: Utilities.formatDate(dt, 'Asia/Kolkata', 'd'), mon: Utilities.formatDate(dt, 'Asia/Kolkata', 'MMM').toUpperCase(),
+      full: Utilities.formatDate(dt, 'Asia/Kolkata', 'EEEE, d MMMM yyyy') };
+  };
+  var dateRows = v.dates.map(function (d, i) {
+    var x = parts(d[1], d[2]);
+    return '<tr><td style="padding:' + (i ? '12px' : '0') + ' 0 0;">' +
+      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>' +
+        '<td width="58" valign="middle" style="width:58px;">' +
+          '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="58"><tr><td align="center" style="background:' + P + ';border-radius:12px;padding:8px 0;' + font + 'color:#ffffff;">' +
+            '<div style="font-size:22px;line-height:24px;font-weight:800;">' + x.day + '</div>' +
+            '<div style="font-size:11px;line-height:14px;font-weight:700;letter-spacing:1px;">' + x.mon + '</div>' +
+          '</td></tr></table>' +
+        '</td>' +
+        '<td valign="middle" style="padding-left:14px;' + font + '">' +
+          '<div style="font-size:15px;line-height:20px;font-weight:700;color:' + INK + ';">' + d[0] + '</div>' +
+          '<div style="font-size:13px;line-height:18px;color:' + MUTED + ';">' + x.full + '</div>' +
+        '</td></tr></table>' +
+      '</td></tr>';
+  }).join('');
+  var step = function (n, title, body, buttons) {
+    return '<tr><td style="padding:0 0 22px;">' +
+      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>' +
+        '<td width="40" valign="top" style="width:40px;">' +
+          '<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" valign="middle" width="30" height="30" style="width:30px;height:30px;border-radius:50%;background:' + PINK + ';' + font + 'font-size:15px;font-weight:800;color:#ffffff;">' + n + '</td></tr></table>' +
+        '</td>' +
+        '<td valign="top" style="' + font + '">' +
+          '<div style="font-size:16px;line-height:22px;font-weight:700;color:' + INK + ';padding-top:4px;">' + title + '</div>' +
+          '<div style="font-size:14px;line-height:21px;color:' + MUTED + ';padding-top:4px;">' + body + '</div>' +
+          (buttons || '') +
+        '</td></tr></table>' +
+      '</td></tr>';
+  };
+  var section = function (title) {
+    return '<div style="' + font + 'font-size:12px;line-height:16px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:' + P + ';padding:0 0 14px;">' + title + '</div>';
+  };
+
+  return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>' +
+  '<body style="margin:0;padding:0;background:#f4f1fb;">' +
+  '<div style="display:none;max-height:0;overflow:hidden;opacity:0;">' + esc_(v.child) + ' is in, Category ' + v.cat + '. Your key dates and 3 quick next steps inside.</div>' +
+  '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f1fb;"><tr><td align="center" style="padding:24px 12px;">' +
+  '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;">' +
+
+  // Header
+  '<tr><td align="center" style="background:' + P + ';border-radius:20px 20px 0 0;padding:30px 24px 34px;">' +
+    '<img src="' + EMAIL.logo + '" width="120" alt="neOwn" style="display:block;width:120px;height:auto;border:0;margin:0 auto 22px;">' +
+    '<div style="' + font + 'font-size:13px;line-height:18px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#dceb5f;">Young Voices Championship</div>' +
+    '<div style="' + font + 'font-size:30px;line-height:36px;font-weight:800;color:#ffffff;padding-top:8px;">You\'re registered! 🎉</div>' +
+  '</td></tr>' +
+
+  // Body
+  '<tr><td style="background:#ffffff;padding:28px 28px 8px;">' +
+    '<div style="' + font + 'font-size:16px;line-height:24px;color:' + INK + ';">Hi ' + esc_(v.parent) + ',</div>' +
+    '<div style="' + font + 'font-size:15px;line-height:23px;color:' + MUTED + ';padding-top:8px;">Welcome aboard! Here are the details of your registration.</div>' +
+
+    // Child card
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0 0;background:' + P10 + ';border-radius:16px;"><tr><td style="padding:20px 22px;">' +
+      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>' +
+        '<td valign="middle" style="' + font + '">' +
+          '<div style="font-size:12px;line-height:16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:' + P + ';">Participant</div>' +
+          '<div style="font-size:22px;line-height:28px;font-weight:800;color:' + INK + ';padding-top:4px;">' + esc_(v.child) + '</div>' +
+          '<div style="font-size:14px;line-height:20px;color:' + MUTED + ';padding-top:2px;">' + esc_(v.std) + ' · ' + esc_(v.school) + '</div>' +
+        '</td>' +
+        '<td valign="middle" align="right" width="84" style="width:84px;">' +
+          '<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="right"><tr><td align="center" style="background:' + PINK + ';border-radius:14px;padding:8px 12px;' + font + 'color:#ffffff;">' +
+            '<div style="font-size:10px;line-height:12px;font-weight:700;letter-spacing:1px;">CATEGORY</div>' +
+            '<div style="font-size:28px;line-height:32px;font-weight:800;">' + v.cat + '</div>' +
+          '</td></tr></table>' +
+        '</td></tr></table>' +
+    '</td></tr></table>' +
+
+    // Subscription
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:14px 0 0;"><tr><td style="border:1px dashed ' + P + ';border-radius:14px;padding:13px 16px;' + font + 'font-size:14px;line-height:21px;color:' + INK + ';">' +
+      '🎁 <strong>Your free 1-month neOwn subscription is now active.</strong> No additional fee is required.' +
+    '</td></tr></table>' +
+  '</td></tr>' +
+
+  // Key dates
+  '<tr><td style="background:#ffffff;padding:22px 28px 6px;">' +
+    '<div style="border-top:1px solid ' + LINE + ';padding-top:24px;">' + section('Your key dates') + '</div>' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">' + dateRows + '</table>' +
+  '</td></tr>' +
+
+  // Steps
+  '<tr><td style="background:#ffffff;padding:22px 28px 4px;">' +
+    '<div style="border-top:1px solid ' + LINE + ';padding-top:24px;">' + section('What to do now') + '</div>' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">' +
+      step(1, 'Join the parents\' WhatsApp group', 'All updates and clarifications are shared here.',
+        btn(EMAIL.whatsappGroup, 'Join WhatsApp group', '#25d366')) +
+      step(2, 'Choose 2 books in the neOwn app',
+        'Log in with your registered mobile number, open the <strong style="color:' + INK + ';">“Young Voices Championship”</strong> catalogue and select exactly 2 books. Both are compulsory. Books will be delivered to the school and have to be returned after 1 month.',
+        btn(EMAIL.appAndroid, 'Get it on Android', INK) + btn(EMAIL.appIos, 'Get it on iPhone', INK)) +
+      step(3, 'Download your category prompts', 'Your child will make the video on one of the two books, answering one prompt.',
+        btn(v.prompts, 'Category ' + v.cat + ' prompts (PDF)', P)) +
+    '</table>' +
+  '</td></tr>' +
+
+  // Guide
+  '<tr><td style="background:#ffffff;padding:0 28px 28px;">' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#fff4fb;border-radius:14px;"><tr><td style="padding:16px 18px;' + font + 'font-size:14px;line-height:21px;color:' + INK + ';">' +
+      '📎 <strong>The full step-by-step Parent Guide is attached</strong>, including recording tips and what happens after you submit. Please read it carefully.' +
+    '</td></tr></table>' +
+  '</td></tr>' +
+
+  // Help + sign-off
+  '<tr><td style="background:#ffffff;border-radius:0 0 20px 20px;padding:0 28px 30px;">' +
+    '<div style="border-top:1px solid ' + LINE + ';padding-top:22px;' + font + 'font-size:14px;line-height:22px;color:' + MUTED + ';">' +
+      'Questions? WhatsApp us on <a href="' + EMAIL.whatsappHelpLink + '" style="color:' + P + ';font-weight:700;text-decoration:none;">' + EMAIL.whatsappHelp + '</a>' +
+    '</div>' +
+    '<div style="' + font + 'font-size:16px;line-height:24px;color:' + INK + ';padding-top:16px;">Happy reading!<br><strong>Team neOwn</strong></div>' +
+  '</td></tr>' +
+
+  '<tr><td align="center" style="padding:18px 12px 0;' + font + 'font-size:12px;line-height:18px;color:#9a94ad;">' +
+    'You\'re receiving this because you registered ' + esc_(v.child) + ' for the neOwn Young Voices Championship.<br>' +
+    '<a href="https://neown.in" style="color:#9a94ad;">neown.in</a>' +
+  '</td></tr>' +
+
+  '</table></td></tr></table></body></html>';
 }
 
 /* ---------- Columns by heading ----------
