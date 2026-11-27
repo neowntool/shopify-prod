@@ -31,16 +31,16 @@
  */
 
 var COLUMNS = [
-  'Submitted At (IST)', 'Registration ID', 'Child Name', 'Date of Birth', 'Age (years)',
+  'Submitted At (IST)', 'Registration ID', 'Child Name', 'Date of Birth', 'Age (years)', 'Gender',
   'School', 'Standard', 'Division / Section', 'Parent / Guardian Name', 'Email', 'Phone',
   'Phone Verified', 'Page', 'UTM Source', 'UTM Medium', 'UTM Campaign',
-  'Gender', 'Order Status', 'Order No', 'Order Env', 'Order Synced At (IST)', 'Order Error', 'Order Attempts'
+  'Order Status', 'Order No', 'Order Env', 'Order Synced At (IST)', 'Order Error', 'Order Attempts'
 ];
 
 /** Run once from the editor (select "setup" → Run): approves Drive access and makes the
  *  "Video Deadlines" and "Video Submissions" tabs and the "NYVC Videos" Drive folder. */
 function setup() {
-  ensureOrderColumns_(sheet_());
+  regMap_(sheet_());
   deadlines_();
   submissionsSheet_();
   console.log('Videos folder: ' + rootFolder_().getUrl());
@@ -169,11 +169,14 @@ function register_(body) {
 
     var id = data.id || ('NYVC-' + Utilities.getUuid().slice(0, 8).toUpperCase());
     var now = Utilities.formatDate(new Date(), 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss');
-    sheet.appendRow([
-      now, id, data.childName, data.dob, ageFromDob_(data.dob), data.school, data.standard, data.division,
-      data.parentName, data.email, data.phone, 'Yes', data.page, data.utmSource, data.utmMedium, data.utmCampaign,
-      data.gender === 'male' ? 'Male' : 'Female'
-    ].map(safeCell_));
+    var map = regMap_(sheet);
+    sheet.appendRow(rowArray_({
+      'Submitted At (IST)': now, 'Registration ID': id, 'Child Name': data.childName, 'Date of Birth': data.dob,
+      'Age (years)': ageFromDob_(data.dob), 'Gender': data.gender === 'male' ? 'Male' : 'Female',
+      'School': data.school, 'Standard': data.standard, 'Division / Section': data.division,
+      'Parent / Guardian Name': data.parentName, 'Email': data.email, 'Phone': data.phone, 'Phone Verified': 'Yes',
+      'Page': data.page, 'UTM Source': data.utmSource, 'UTM Medium': data.utmMedium, 'UTM Campaign': data.utmCampaign
+    }, map));
     var rowNo = sheet.getLastRow();
   } finally {
     lock.releaseLock();
@@ -198,21 +201,15 @@ function validate_(d) {
 
 /** Same phone number + same child name already in the sheet (siblings on one phone are allowed). */
 function findExisting_(sheet, d) {
-  var last = sheet.getLastRow();
-  if (last < 2) return null;
-  var rows = sheet.getRange(2, 2, last - 1, 10).getValues(); // B..K
   var child = normName_(d.childName);
-  for (var i = 0; i < rows.length; i++) {
-    var r = rows[i];
-    if (String(r[9]).replace(/\D/g, '').slice(-10) === d.phone && normName_(r[1]) === child) return String(r[0]);
-  }
-  return null;
+  var hit = regRows_(sheet, regMap_(sheet)).filter(function (r) {
+    return String(r['Phone']).replace(/\D/g, '').slice(-10) === d.phone && normName_(r['Child Name']) === child;
+  })[0];
+  return hit ? String(hit['Registration ID']) : null;
 }
 
 function findById_(sheet, id) {
-  var last = sheet.getLastRow();
-  if (last < 2) return false;
-  return sheet.getRange(2, 2, last - 1, 1).getValues().some(function (r) { return String(r[0]) === id; });
+  return regRows_(sheet, regMap_(sheet)).some(function (r) { return String(r['Registration ID']) === id; });
 }
 
 function normName_(v) { return String(v || '').toLowerCase().replace(/\s+/g, ' ').trim(); }
@@ -407,21 +404,23 @@ function uploadFinish_(body) {
   lock.waitLock(20000);
   try {
     var sheet = submissionsSheet_();
+    var map = headerMap_(sheet, SUBMISSION_COLUMNS);
     var last = sheet.getLastRow();
     if (last > 1) { // earlier uploads for this child are no longer the latest
-      var ids = sheet.getRange(2, 2, last - 1, 1).getValues();
-      var latest = sheet.getRange(2, 11, last - 1, 1).getValues();
+      var ids = sheet.getRange(2, map['Registration ID'], last - 1, 1).getValues();
+      var latest = sheet.getRange(2, map['Latest'], last - 1, 1).getValues();
       var changed = false;
       for (var i = 0; i < ids.length; i++) {
         if (String(ids[i][0]) === up.childId && latest[i][0] !== 'No') { latest[i][0] = 'No'; changed = true; }
       }
-      if (changed) sheet.getRange(2, 11, last - 1, 1).setValues(latest);
+      if (changed) sheet.getRange(2, map['Latest'], last - 1, 1).setValues(latest);
     }
-    sheet.appendRow([
-      now, up.childId, kid.childName || '', kid.school || '', kid.standard || '', kid.division || '',
-      kid.phone || '', file.getName(), Math.round(file.getSize() / MB * 10) / 10, file.getUrl(), 'Yes',
-      up.consent ? 'Yes' : 'No'
-    ].map(safeCell_));
+    sheet.appendRow(rowArray_({
+      'Uploaded At (IST)': now, 'Registration ID': up.childId, 'Child Name': kid.childName || '', 'School': kid.school || '',
+      'Standard': kid.standard || '', 'Division / Section': kid.division || '', 'Phone': kid.phone || '',
+      'File Name': file.getName(), 'Size (MB)': Math.round(file.getSize() / MB * 10) / 10, 'Drive Link': file.getUrl(),
+      'Latest': 'Yes', 'Promo Consent': up.consent ? 'Yes' : 'No'
+    }, map));
   } finally {
     lock.releaseLock();
   }
@@ -434,17 +433,15 @@ function uploadFinish_(body) {
 
 function registrationsByPhone_(mobile) {
   var sheet = sheet_();
-  var last = sheet.getLastRow();
-  if (last < 2) return [];
-  var rows = sheet.getRange(2, 1, last - 1, 11).getValues(); // A..K
   var seen = {}, out = [];
-  rows.forEach(function (r) {
-    if (String(r[10]).replace(/\D/g, '').slice(-10) !== mobile) return;
-    var id = String(r[1]);
-    var key = normName_(r[2]);
+  regRows_(sheet, regMap_(sheet)).forEach(function (r) {
+    if (String(r['Phone']).replace(/\D/g, '').slice(-10) !== mobile) return;
+    var id = String(r['Registration ID'] || '');
+    var key = normName_(r['Child Name']);
     if (!id || seen[key]) return; // same child registered twice: keep the first
     seen[key] = true;
-    out.push({ id: id, childName: String(r[2]), school: String(r[5]), standard: String(r[6]), division: String(r[7]), phone: mobile });
+    out.push({ id: id, childName: String(r['Child Name']), school: String(r['School']), standard: String(r['Standard']),
+      division: String(r['Division / Section']), phone: mobile });
   });
   return out;
 }
@@ -461,7 +458,7 @@ function deadlines_() {
     sheet.getRange(1, 1, 1, 3).setFontWeight('bold');
     var schools = {};
     var reg = sheet_();
-    if (reg.getLastRow() > 1) reg.getRange(2, 6, reg.getLastRow() - 1, 1).getValues().forEach(function (r) { if (r[0]) schools[r[0]] = true; });
+    regRows_(reg, regMap_(reg)).forEach(function (r) { if (r['School']) schools[r['School']] = true; });
     Object.keys(schools).forEach(function (s) { sheet.appendRow([s, '', '']); });
     sheet.appendRow(['All schools', '', 'Used for any school without its own row. Leave the date blank for no deadline.']);
     sheet.autoResizeColumns(1, 3);
@@ -543,12 +540,9 @@ function submissionsSheet_() {
     sheet.appendRow(SUBMISSION_COLUMNS);
     sheet.setFrozenRows(1);
     sheet.getRange(1, 1, 1, SUBMISSION_COLUMNS.length).setFontWeight('bold');
-    sheet.getRange('G:G').setNumberFormat('@');
+    sheet.getRange(1, SUBMISSION_COLUMNS.indexOf('Phone') + 1, sheet.getMaxRows(), 1).setNumberFormat('@');
   }
-  // Tabs made before a column was added get the new heading.
-  if (sheet.getLastColumn() < SUBMISSION_COLUMNS.length) {
-    sheet.getRange(1, 1, 1, SUBMISSION_COLUMNS.length).setValues([SUBMISSION_COLUMNS]).setFontWeight('bold');
-  }
+  headerMap_(sheet, SUBMISSION_COLUMNS); // adds any missing heading at the end
   return sheet;
 }
 
@@ -596,7 +590,6 @@ function pad_(n) { return ('0' + n).slice(-2); }
  *           Waiting for gender · (blank = not sent yet). Clear the status to send a row again.
  */
 
-var ORDER_COLS = { gender: 17, status: 18, orderNo: 19, env: 20, syncedAt: 21, error: 22, attempts: 23 };
 var ORDER_MAX_ATTEMPTS = 3;
 var ORDER_GAP_MS = 7000; // the API allows 10 calls a minute
 
@@ -629,6 +622,12 @@ function orderApi_() {
   return { url: url, env: /\/\/dev[-.]/i.test(url) ? 'dev' : 'prod' };
 }
 
+function genderOf_(v) {
+  var g = String(v || '').trim().toLowerCase();
+  g = { boy: 'male', m: 'male', girl: 'female', f: 'female' }[g] || g;
+  return g === 'male' || g === 'female' ? g : '';
+}
+
 /** Sends up to `max` ready rows. Never runs twice at the same time. */
 function syncOrders_(max) {
   var api = orderApi_();
@@ -639,34 +638,35 @@ function syncOrders_(max) {
   var started = Date.now(), sent = 0, failed = 0, checked = 0, waiting = 0;
   try {
     var sheet = sheet_();
-    ensureOrderColumns_(sheet);
-    var last = sheet.getLastRow();
-    if (last < 2) return { ok: true, sent: 0 };
-    var rows = sheet.getRange(2, 1, last - 1, ORDER_COLS.attempts).getValues();
+    var map = regMap_(sheet);
+    var rows = regRows_(sheet, map);
     var stale = Date.now() - 10 * 60 * 1000;
     for (var i = 0; i < rows.length && sent + failed < max; i++) {
       if (Date.now() - started > 5 * 60 * 1000) break; // stay inside Apps Script's 6-minute limit
-      var r = rows[i], rowNo = i + 2;
-      var status = String(r[ORDER_COLS.status - 1] || ''), env = String(r[ORDER_COLS.env - 1] || '');
-      var attempts = Number(r[ORDER_COLS.attempts - 1] || 0);
-      if (!r[1]) continue;
+      var r = rows[i];
+      if (!r['Registration ID']) continue;
+      var status = String(r['Order Status'] || ''), env = String(r['Order Env'] || '');
+      var attempts = Number(r['Order Attempts'] || 0);
       if (status === 'Sending') { // stuck from a run that never finished
-        var at = r[ORDER_COLS.syncedAt - 1];
-        if (!(at instanceof Date) || at.getTime() < stale) { setOrderCells_(sheet, rowNo, { status: 'Check', error: 'No answer recorded from the API. Look the parent up in the neOwn system before clearing this.' }); checked++; }
+        var at = r['Order Synced At (IST)'];
+        var atMs = at instanceof Date ? at.getTime() : Date.parse(String(at).replace(' ', 'T') + '+05:30');
+        if (!(atMs > stale)) {
+          setOrderCells_(sheet, map, r.__row, { 'Order Status': 'Check', 'Order Error': 'No answer recorded from the API. Look the parent up in the neOwn system before clearing this.' });
+          checked++;
+        }
         continue;
       }
       if (status === 'Check') continue;
       if (status === 'Sent' && env === api.env) continue;
       if (status === 'Failed' && env === api.env && attempts >= ORDER_MAX_ATTEMPTS) continue;
-      var gender = String(r[ORDER_COLS.gender - 1] || '').trim().toLowerCase();
-      gender = { boy: 'male', m: 'male', girl: 'female', f: 'female' }[gender] || gender;
-      if (gender !== 'male' && gender !== 'female') {
-        if (status !== 'Waiting for gender') setOrderCells_(sheet, rowNo, { status: 'Waiting for gender', error: 'Fill the Gender column (Male or Female).' });
+      var gender = genderOf_(r['Gender']);
+      if (!gender) {
+        if (status !== 'Waiting for gender') setOrderCells_(sheet, map, r.__row, { 'Order Status': 'Waiting for gender', 'Order Error': 'Fill the Gender column (Male or Female).' });
         waiting++;
         continue;
       }
       if (sent + failed > 0) Utilities.sleep(ORDER_GAP_MS);
-      var res = sendOrder_(api, sheet, rowNo, r, gender, env === api.env ? attempts : 0);
+      var res = sendOrder_(api, sheet, map, r, gender, env === api.env ? attempts : 0);
       if (res === 'Sent') sent++; else if (res === 'Failed') failed++; else checked++;
     }
     return { ok: true, env: api.env, sent: sent, failed: failed, check: checked, waiting_for_gender: waiting };
@@ -675,34 +675,38 @@ function syncOrders_(max) {
   }
 }
 
-function sendOrder_(api, sheet, rowNo, r, gender, attempts) {
+function sendOrder_(api, sheet, map, r, gender, attempts) {
   var payload = {
-    user: { phone: String(r[10]).replace(/\D/g, '').slice(-10), name: String(r[8] || ''), email: String(r[9] || '') },
+    user: {
+      phone: String(r['Phone'] || '').replace(/\D/g, '').slice(-10),
+      name: String(r['Parent / Guardian Name'] || '').trim(),
+      email: String(r['Email'] || '').trim()
+    },
     child: {
-      name: String(r[2]), gender: gender, dob: dobIso_(r[3]),
-      schoolName: String(r[5] || ''), standard: String(r[6] || '').replace(/\D/g, '')
+      name: String(r['Child Name'] || '').trim(), gender: gender, dob: dobIso_(r['Date of Birth']),
+      schoolName: String(r['School'] || '').trim(), standard: String(r['Standard'] || '').replace(/\D/g, '')
     }
   };
   if (!payload.user.email) delete payload.user.email;
   if (!payload.child.dob) delete payload.child.dob;
 
-  setOrderCells_(sheet, rowNo, { status: 'Sending', env: api.env, syncedAt: new Date(), error: '', attempts: attempts + 1 });
+  setOrderCells_(sheet, map, r.__row, { 'Order Status': 'Sending', 'Order Env': api.env, 'Order Synced At (IST)': new Date(), 'Order Error': '', 'Order Attempts': attempts + 1 });
   SpreadsheetApp.flush(); // the mark must be saved before the call, so a crash can't cause a second order
 
   var res;
   try {
     res = UrlFetchApp.fetch(api.url, { method: 'post', contentType: 'application/json', payload: JSON.stringify(payload), muteHttpExceptions: true });
   } catch (e) {
-    setOrderCells_(sheet, rowNo, { status: 'Check', syncedAt: new Date(), error: 'No answer from the API (' + String(e.message || e).slice(0, 150) + '). Look the parent up in the neOwn system before clearing this.' });
+    setOrderCells_(sheet, map, r.__row, { 'Order Status': 'Check', 'Order Synced At (IST)': new Date(), 'Order Error': 'No answer from the API (' + String(e.message || e).slice(0, 150) + '). Look the parent up in the neOwn system before clearing this.' });
     return 'Check';
   }
   var code = res.getResponseCode(), text = res.getContentText(), body = {};
   try { body = JSON.parse(text); } catch (e) {}
   if (code >= 200 && code < 300 && body && body.success) {
-    setOrderCells_(sheet, rowNo, { status: 'Sent', orderNo: String(body.orderNo || ''), syncedAt: new Date(), error: '' });
+    setOrderCells_(sheet, map, r.__row, { 'Order Status': 'Sent', 'Order No': String(body.orderNo || ''), 'Order Synced At (IST)': new Date(), 'Order Error': '' });
     return 'Sent';
   }
-  setOrderCells_(sheet, rowNo, { status: 'Failed', syncedAt: new Date(), error: ('HTTP ' + code + ': ' + apiError_(body, text)).slice(0, 500) });
+  setOrderCells_(sheet, map, r.__row, { 'Order Status': 'Failed', 'Order Synced At (IST)': new Date(), 'Order Error': ('HTTP ' + code + ': ' + apiError_(body, text)).slice(0, 500) });
   return 'Failed';
 }
 
@@ -724,27 +728,19 @@ function apiError_(body, text) {
   return String(text || '').slice(0, 300);
 }
 
-function setOrderCells_(sheet, rowNo, v) {
+function setOrderCells_(sheet, map, rowNo, v) {
   Object.keys(v).forEach(function (k) {
     var val = v[k];
-    if (k === 'syncedAt' && val instanceof Date) val = Utilities.formatDate(val, 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss');
-    sheet.getRange(rowNo, ORDER_COLS[k]).setValue(val);
+    if (val instanceof Date) val = Utilities.formatDate(val, 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss');
+    sheet.getRange(rowNo, map[k]).setValue(val);
   });
 }
 
 /** DD/MM/YYYY (or a date cell) → YYYY-MM-DD. */
 function dobIso_(v) {
   if (v instanceof Date && !isNaN(v)) return Utilities.formatDate(v, SpreadsheetApp.getActiveSpreadsheet().getSpreadsheetTimeZone(), 'yyyy-MM-dd');
-  var m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(String(v || '').trim());
-  return m ? m[3] + '-' + m[2] + '-' + m[1] : '';
-}
-
-/** Sheets made before these columns existed get the new headings. */
-function ensureOrderColumns_(sheet) {
-  var head = sheet.getRange(1, 1, 1, COLUMNS.length).getValues()[0];
-  if (head[COLUMNS.length - 1] !== COLUMNS[COLUMNS.length - 1]) {
-    sheet.getRange(1, 1, 1, COLUMNS.length).setValues([COLUMNS]).setFontWeight('bold');
-  }
+  var m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(String(v || '').trim());
+  return m ? m[3] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[1]).slice(-2) : '';
 }
 
 /** Called right after a registration is saved: sends it at once (any failure is retried by the timer). */
@@ -756,11 +752,13 @@ function sendNewOrder_(rowNo) {
     if (!lock.tryLock(3000)) return; // a sync run is busy; the timer will pick it up
     try {
       var sheet = sheet_();
-      var r = sheet.getRange(rowNo, 1, 1, ORDER_COLS.attempts).getValues()[0];
-      if (r[ORDER_COLS.status - 1]) return;
-      var gender = String(r[ORDER_COLS.gender - 1] || '').toLowerCase();
-      if (gender !== 'male' && gender !== 'female') return;
-      sendOrder_(api, sheet, rowNo, r, gender, 0);
+      var map = regMap_(sheet);
+      var r = rowObj_(sheet.getRange(rowNo, 1, 1, map.__width).getValues()[0], map);
+      r.__row = rowNo;
+      if (r['Order Status']) return;
+      var gender = genderOf_(r['Gender']);
+      if (!gender) return;
+      sendOrder_(api, sheet, map, r, gender, 0);
     } finally {
       lock.releaseLock();
     }
@@ -768,6 +766,53 @@ function sendNewOrder_(rowNo) {
     console.error('sendNewOrder_ failed: ' + (e && e.stack || e));
   }
 }
+
+/* ---------- Columns by heading ----------
+ * The script finds every column by its heading in row 1, never by position, so the team can move,
+ * add or hide columns. A missing heading is added at the end. Don't rename the headings.
+ */
+
+/** { heading: columnNumber } for the sheet; adds any of `columns` that are missing, at the end. */
+function headerMap_(sheet, columns) {
+  var width = Math.max(sheet.getLastColumn(), 1);
+  var head = sheet.getRange(1, 1, 1, width).getValues()[0];
+  var map = {};
+  head.forEach(function (h, i) { var k = String(h).trim(); if (k && !map[k]) map[k] = i + 1; });
+  var missing = columns.filter(function (c) { return !map[c]; });
+  if (missing.length) {
+    var start = head.filter(function (h) { return String(h).trim() !== ''; }).length ? width + 1 : 1;
+    sheet.getRange(1, start, 1, missing.length).setValues([missing]).setFontWeight('bold');
+    missing.forEach(function (c, i) { map[c] = start + i; });
+  }
+  map.__width = Math.max(width, start ? start + missing.length - 1 : width);
+  return map;
+}
+
+/** Row as { heading: value } for the given values array. */
+function rowObj_(values, map) {
+  var o = {};
+  Object.keys(map).forEach(function (k) { if (k !== '__width') o[k] = values[map[k] - 1]; });
+  return o;
+}
+
+/** Values array placing each { heading: value } in its column. */
+function rowArray_(obj, map) {
+  var arr = new Array(map.__width);
+  for (var i = 0; i < arr.length; i++) arr[i] = '';
+  Object.keys(obj).forEach(function (k) { if (map[k]) arr[map[k] - 1] = safeCell_(obj[k]); });
+  return arr;
+}
+
+/** All data rows of the registrations sheet as objects (with .__row = sheet row number). */
+function regRows_(sheet, map) {
+  var last = sheet.getLastRow();
+  if (last < 2) return [];
+  return sheet.getRange(2, 1, last - 1, map.__width).getValues().map(function (v, i) {
+    var o = rowObj_(v, map); o.__row = i + 2; return o;
+  });
+}
+
+function regMap_(sheet) { return headerMap_(sheet, COLUMNS); }
 
 /* ---------- Helpers ---------- */
 
@@ -779,8 +824,8 @@ function sheet_() {
     sheet.appendRow(COLUMNS);
     sheet.setFrozenRows(1);
     sheet.getRange(1, 1, 1, COLUMNS.length).setFontWeight('bold');
-    sheet.getRange('D:D').setNumberFormat('@');
-    sheet.getRange('K:K').setNumberFormat('@');
+    sheet.getRange(1, COLUMNS.indexOf('Date of Birth') + 1, sheet.getMaxRows(), 1).setNumberFormat('@');
+    sheet.getRange(1, COLUMNS.indexOf('Phone') + 1, sheet.getMaxRows(), 1).setNumberFormat('@');
   }
   return sheet;
 }
