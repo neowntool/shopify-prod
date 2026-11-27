@@ -433,7 +433,17 @@
     .nyvc-root .nyvc-reg-steps { margin: 2px 36px 22px; font-size: 11px; }
     .nyvc-root .nyvc-reg-steps-line { width: 28px; }
     .nyvc-root .nyvc-reg-x { top: 12px; right: 10px; }
-    .nyvc-root .nyvc-row { grid-template-columns: 1fr; gap: 18px; }
+    .nyvc-root .nyvc-row { grid-template-columns: 1fr; gap: 14px; }
+    /* Short fields stay side by side on phones so the form needs less scrolling. */
+    .nyvc-root .nyvc-row.nyvc-row--pair { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .nyvc-root .nyvc-reg-form { gap: 14px; }
+    .nyvc-root .nyvc-field { gap: 6px; }
+    .nyvc-root .nyvc-field label { font-size: 13px; }
+    .nyvc-root .nyvc-field input, .nyvc-root .nyvc-field select, .nyvc-root .nyvc-phone { height: 44px; }
+    .nyvc-root .nyvc-phone input { height: 42px; }
+    .nyvc-root .nyvc-row--pair .nyvc-select select { padding-right: 30px; }
+    .nyvc-root .nyvc-row--pair .nyvc-select::after { right: 12px; }
+    .nyvc-root .nyvc-reg-divider { margin: 2px 0 -4px; font-size: 14px; }
     .nyvc-root .nyvc-field input, .nyvc-root .nyvc-field select { font-size: 16px; }
     .nyvc-root .nyvc-phone-cc { font-size: 16px; }
     .nyvc-root .nyvc-otp-boxes { gap: 8px; }

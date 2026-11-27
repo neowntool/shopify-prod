@@ -29,7 +29,7 @@
         <input id="nyvc-child-{{ section.id }}" name="child_name" type="text" placeholder="e.g. Aarav Sharma" autocomplete="off" maxlength="80" required>
         <p class="nyvc-err" data-err="child_name"></p>
       </div>
-      <div class="nyvc-row">
+      <div class="nyvc-row nyvc-row--pair">
         <div class="nyvc-field">
           <label for="nyvc-dob-{{ section.id }}">{{ s.dob_label | escape }} <span aria-hidden="true">*</span></label>
           <input id="nyvc-dob-{{ section.id }}" name="dob" type="text" inputmode="numeric" placeholder="DD/MM/YYYY" maxlength="10" autocomplete="off" required>
@@ -47,20 +47,20 @@
           <p class="nyvc-err" data-err="gender"></p>
         </div>
       </div>
-      <div class="nyvc-row">
-        <div class="nyvc-field">
-          <label for="nyvc-school-{{ section.id }}">School Name <span aria-hidden="true">*</span></label>
-          <div class="nyvc-select">
-            <select id="nyvc-school-{{ section.id }}" name="school" required>
-              <option value="">Select school</option>
-              {%- for school in schools -%}
-                {%- assign sc = school | strip -%}
-                {%- if sc != blank -%}<option value="{{ sc | escape }}">{{ sc | escape }}</option>{%- endif -%}
-              {%- endfor -%}
-            </select>
-          </div>
-          <p class="nyvc-err" data-err="school"></p>
+      <div class="nyvc-field">
+        <label for="nyvc-school-{{ section.id }}">School Name <span aria-hidden="true">*</span></label>
+        <div class="nyvc-select">
+          <select id="nyvc-school-{{ section.id }}" name="school" required>
+            <option value="">Select school</option>
+            {%- for school in schools -%}
+              {%- assign sc = school | strip -%}
+              {%- if sc != blank -%}<option value="{{ sc | escape }}">{{ sc | escape }}</option>{%- endif -%}
+            {%- endfor -%}
+          </select>
         </div>
+        <p class="nyvc-err" data-err="school"></p>
+      </div>
+      <div class="nyvc-row nyvc-row--pair">
         <div class="nyvc-field">
           <label for="nyvc-std-{{ section.id }}">Standard / Grade <span aria-hidden="true">*</span></label>
           <div class="nyvc-select">
@@ -74,11 +74,11 @@
           </div>
           <p class="nyvc-err" data-err="standard"></p>
         </div>
-      </div>
-      <div class="nyvc-field">
-        <label for="nyvc-div-{{ section.id }}">Division / Section <span aria-hidden="true">*</span></label>
-        <input id="nyvc-div-{{ section.id }}" name="division" type="text" placeholder="e.g. Division A / D" maxlength="20" autocomplete="off" required>
-        <p class="nyvc-err" data-err="division"></p>
+        <div class="nyvc-field">
+          <label for="nyvc-div-{{ section.id }}">Division / Section <span aria-hidden="true">*</span></label>
+          <input id="nyvc-div-{{ section.id }}" name="division" type="text" placeholder="e.g. A" maxlength="20" autocomplete="off" required>
+          <p class="nyvc-err" data-err="division"></p>
+        </div>
       </div>
 
       <p class="nyvc-reg-divider"><span>Parent or guardian details</span></p>
