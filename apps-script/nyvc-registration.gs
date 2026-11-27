@@ -587,7 +587,8 @@ function pad_(n) { return ('0' + n).slice(-2); }
  *
  * Statuses: Sent · Failed (API answered with an error; retried up to 3 times) ·
  *           Check (no answer; may or may not exist, look it up before clearing) ·
- *           Waiting for gender · (blank = not sent yet). Clear the status to send a row again.
+ *           Waiting for gender · Skip (typed by the team: never send, e.g. tests or duplicates) ·
+ *           (blank = not sent yet). Clear the status to send a row again.
  */
 
 var ORDER_MAX_ATTEMPTS = 3;
@@ -656,7 +657,7 @@ function syncOrders_(max) {
         }
         continue;
       }
-      if (status === 'Check') continue;
+      if (status === 'Check' || status === 'Skip') continue; // Skip: the team marked it (test or duplicate row)
       if (status === 'Sent' && env === api.env) continue;
       if (status === 'Failed' && env === api.env && attempts >= ORDER_MAX_ATTEMPTS) continue;
       var gender = genderOf_(r['Gender']);
