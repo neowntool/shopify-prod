@@ -58,6 +58,38 @@
         "slider_item_qLGnAp": {
           "type": "slider_item",
           "settings": {
+            "background": "shopify://shop_images/flash_15_web_banner_22_2_2.png",
+            "mb_background": "shopify://shop_images/flash_15_web_banner_22_2_1.png",
+            "schedule_start": "2026-11-01 00:00",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
+        "slider_item_XzhUex": {
+          "type": "slider_item",
+          "disabled": true,
+          "settings": {
             "background": "shopify://shop_images/borrow_more_web_banner_8_1.png",
             "mb_background": "shopify://shop_images/borrow_more_web_banner_8_1.png",
             "schedule_start": "2026-11-01 00:00",
@@ -120,8 +152,8 @@
         "slider_item_ReNGYH": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/More_Reading_web_banner_2_3.png",
-            "mb_background": "shopify://shop_images/More_Reading_web_banner_2_3.png",
+            "background": "shopify://shop_images/Exclusives_renew_web_banner_4_1.png",
+            "mb_background": "shopify://shop_images/Exclusives_renew_web_banner_4_1.png",
             "schedule_start": "",
             "schedule_end": "",
             "content_in_container": false,
@@ -245,6 +277,7 @@
       "block_order": [
         "slider_item_yH3e7N",
         "slider_item_qLGnAp",
+        "slider_item_XzhUex",
         "slider_item_aCtpMe",
         "slider_item_ReNGYH",
         "slider_item_7XeXfR",

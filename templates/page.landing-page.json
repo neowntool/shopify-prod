@@ -51,6 +51,7 @@
         },
         "slider_item_gpyPXz": {
           "type": "slider_item",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/borrow_more_web_banner_8_1.png",
             "mb_background": "shopify://shop_images/borrow_more_web_banner_8_1.png",
@@ -80,13 +81,12 @@
             "footer_link": ""
           }
         },
-        "slider_item_WcPD3b": {
+        "slider_item_pM6caU": {
           "type": "slider_item",
-          "disabled": true,
           "settings": {
-            "background": "shopify://shop_images/kids_read_web_banner_12_1.png",
-            "mb_background": "shopify://shop_images/kids_read_web_banner_12_1.png",
-            "schedule_start": "2026-10-01 00:00",
+            "background": "shopify://shop_images/flash_15_web_banner_22_2_1.png",
+            "mb_background": "shopify://shop_images/flash_15_web_banner_22_2_1.png",
+            "schedule_start": "2026-11-01 00:00",
             "schedule_end": "",
             "content_in_container": false,
             "content_position": "center middle",
@@ -96,7 +96,7 @@
             "subheading": "",
             "title": "",
             "description": "",
-            "image_link": "https://neown.in/pages/books",
+            "image_link": "#m-featured-product-template--25164234195218__new_featured_product_TNkHwt",
             "button_text": "",
             "button_link": "",
             "button_style": "m-button--primary",
@@ -370,7 +370,7 @@
       "block_order": [
         "slider_item_LbFU8M",
         "slider_item_gpyPXz",
-        "slider_item_WcPD3b",
+        "slider_item_pM6caU",
         "slider_item_JK4r8Q",
         "slider_item_iNgN3n",
         "slider_item_jd6tPg",

@@ -25,10 +25,9 @@
       "blocks": {
         "slider_item_iwhYdJ": {
           "type": "slider_item",
-          "disabled": true,
           "settings": {
-            "background": "shopify://shop_images/More_Play_web_banner_5_2.png",
-            "mb_background": "shopify://shop_images/More_Play_web_banner_5_2.png",
+            "background": "shopify://shop_images/black_friday_toy_web_banner_22_1.png",
+            "mb_background": "shopify://shop_images/black_friday_toy_web_banner_22_1.png",
             "schedule_start": "",
             "schedule_end": "",
             "content_in_container": false,

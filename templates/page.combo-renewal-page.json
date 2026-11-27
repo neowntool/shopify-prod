@@ -118,6 +118,37 @@
             "footer_link": ""
           }
         },
+        "slider_item_8ggjCX": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/worth_unboxing_-_toys_web_banner_26_1_1.png",
+            "mb_background": "shopify://shop_images/worth_unboxing_-_toys_web_banner_26_1_1.png",
+            "schedule_start": "2026-10-16 00:00",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
         "slider_item_znxFAx": {
           "type": "slider_item",
           "settings": {
@@ -250,6 +281,7 @@
         "slider_item_pTqw4y",
         "slider_item_HaMkBQ",
         "slider_item_JLCjE8",
+        "slider_item_8ggjCX",
         "slider_item_znxFAx",
         "slider_item_Mbq37J",
         "slider_item_98MbrB",

@@ -26,8 +26,8 @@
         "slider_item_wzx4CE": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/Rent_premium_toys_web_1.png",
-            "mb_background": "shopify://shop_images/Rent_premium_toys_web_1.png",
+            "background": "shopify://shop_images/black_friday_toy_web_banner_22_1.png",
+            "mb_background": "shopify://shop_images/black_friday_toy_web_banner_22_1.png",
             "schedule_start": "2026-10-16 00:00",
             "schedule_end": "",
             "content_in_container": false,

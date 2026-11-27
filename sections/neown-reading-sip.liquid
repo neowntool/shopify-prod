@@ -583,7 +583,7 @@
     var d = values();
     var hash = [plan.planId, d.name, d.phone, d.email].join('|');
     if (sub && sub.hash === hash) { openCheckout(d); return; }
-    setBusy(true, 'Setting up your SIP…');
+    setBusy(true, 'Setting up your Plan…');
     Promise.all([loadRazorpay(), createSubscription({ planId: plan.planId, name: d.name, phone: d.phone, email: d.email, source: 'shopify-subscriptions-page' })])
       .then(function (res) {
         var r = res[1];
@@ -614,7 +614,7 @@
       modal: {
         ondismiss: function () {
           if (verifying) return;
-          backToDetails(lastFailure ? 'err' : 'info', (lastFailure ? lastFailure + ' ' : '') + 'Payment not completed, so your SIP has not started. Tap Continue to Payment to try again.');
+          backToDetails(lastFailure ? 'err' : 'info', (lastFailure ? lastFailure + ' ' : '') + 'Payment not completed, so your Plan has not started. Tap Continue to Payment to try again.');
           track('sip_payment_dismissed');
         }
       },

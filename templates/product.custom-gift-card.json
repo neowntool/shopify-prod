@@ -26,8 +26,8 @@
         "slider_item_WFDHzc": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/gifting_web_banner_10.png",
-            "mb_background": "shopify://shop_images/gifting_web_banner_10.png",
+            "background": "shopify://shop_images/black_friday_web_banner_25_1_1.png",
+            "mb_background": "shopify://shop_images/black_friday_web_banner_25_1_1.png",
             "schedule_start": "2026-11-13 00:00",
             "schedule_end": "",
             "content_in_container": false,

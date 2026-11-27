@@ -19,6 +19,7 @@
       "blocks": {
         "slider_item_fiWKBj": {
           "type": "slider_item",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/read_toys_web_banner_10_1.png",
             "mb_background": "shopify://shop_images/read_toys_web_banner_10_1.png",
@@ -50,6 +51,7 @@
         },
         "slider_item_zhjCNf": {
           "type": "slider_item",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/toys_web_banner_11_1.png",
             "mb_background": "shopify://shop_images/toys_web_banner_11_1.png",
@@ -81,10 +83,9 @@
         },
         "slider_item_XWUhhw": {
           "type": "slider_item",
-          "disabled": true,
           "settings": {
-            "background": "shopify://shop_images/Rent_premium_toys_web_2_2.png",
-            "mb_background": "shopify://shop_images/Rent_premium_toys_web_2_2.png",
+            "background": "shopify://shop_images/worth_unboxing_-_toys_web_banner_26_1_1.png",
+            "mb_background": "shopify://shop_images/worth_unboxing_-_toys_web_banner_26_1_1.png",
             "schedule_start": "2026-10-01 00:00",
             "schedule_end": "",
             "content_in_container": false,

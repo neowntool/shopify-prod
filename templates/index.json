@@ -21,6 +21,7 @@
       "blocks": {
         "slider_item_BqxHLb": {
           "type": "slider_item",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/borrow_more_web_banner_8_1.png",
             "mb_background": "shopify://shop_images/borrow_more_mob_banner_1.png",
@@ -54,7 +55,7 @@
           "type": "slider_item",
           "settings": {
             "background": "shopify://shop_images/flash_15_web_banner_22_1.png",
-            "mb_background": "shopify://shop_images/flash_15_mob_banner_1.png",
+            "mb_background": "shopify://shop_images/flash_15_web_banner_22_2_1.png",
             "schedule_start": "2026-11-27 00:00",
             "schedule_end": "2026-11-30 00:00",
             "content_in_container": true,
@@ -83,11 +84,12 @@
         },
         "slider_item_kULjQF": {
           "type": "slider_item",
+          "disabled": true,
           "settings": {
-            "background": "shopify://shop_images/Rent_premium_toys_web_1.png",
-            "mb_background": "shopify://shop_images/Rent_premium_toys_mob.png",
-            "schedule_start": "2026-10-15 19:21",
-            "schedule_end": "2026-11-26 00:00",
+            "background": "shopify://shop_images/black_friday_toy_web_banner_22_1.png",
+            "mb_background": "shopify://shop_images/black_friday_toy_web_banner_22_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
             "content_in_container": true,
             "content_position": "right middle",
             "text_alignment": "right",
@@ -115,8 +117,8 @@
         "slider_item_XBrRWF": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/More_Reading_web_banner_2_3.png",
-            "mb_background": "shopify://shop_images/More_Reading_mob_banner_3.png",
+            "background": "shopify://shop_images/Exclusives_renew_web_banner_3_1.png",
+            "mb_background": "shopify://shop_images/Exclusives_renew_web_banner_3_1.png",
             "schedule_start": "",
             "schedule_end": "",
             "content_in_container": true,
@@ -451,6 +453,7 @@
       "block_order": [
         "announcement_jwHDpY"
       ],
+      "custom_css": [],
       "name": "Scrolling promotion",
       "settings": {
         "container": "w-full",

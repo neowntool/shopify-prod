@@ -17,12 +17,42 @@
     "slider_GrccVh": {
       "type": "slider",
       "blocks": {
+        "slider_item_HN9pEe": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/Exclusives_renew_web_banner_3_1.png",
+            "mb_background": "shopify://shop_images/Exclusives_renew_web_banner_3_1.png",
+            "schedule_start": "",
+            "schedule_end": "",
+            "content_in_container": false,
+            "content_position": "center middle",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "#m-featured-product-template--25164234227986__new_featured_product_TNkHwt",
+            "button_text": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--primary",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        },
         "slider_item_pTqw4y": {
           "type": "slider_item",
-          "disabled": true,
           "settings": {
-            "background": "shopify://shop_images/Worth_Repeating_web_banner_3_1.png",
-            "mb_background": "shopify://shop_images/Worth_Repeating_web_banner_3_1.png",
+            "background": "shopify://shop_images/flash_15_web_banner_23_2_1.png",
+            "mb_background": "shopify://shop_images/flash_15_web_banner_23_2_1.png",
             "schedule_start": "2026-10-16 00:00",
             "schedule_end": "2026-10-21 23:59",
             "content_in_container": false,
@@ -49,40 +79,9 @@
             "footer_link": ""
           }
         },
-        "slider_item_HN9pEe": {
-          "type": "slider_item",
-          "disabled": true,
-          "settings": {
-            "background": "shopify://shop_images/books_web_banner_14_2_1.png",
-            "mb_background": "shopify://shop_images/books_web_banner_14_2_1.png",
-            "schedule_start": "2026-11-13 00:00",
-            "schedule_end": "2026-11-16 23:59",
-            "content_in_container": false,
-            "content_position": "center middle",
-            "text_alignment": "center",
-            "text_size": "medium",
-            "text_color": "black",
-            "subheading": "",
-            "title": "",
-            "description": "",
-            "image_link": "#m-featured-product-template--25164234227986__new_featured_product_TNkHwt",
-            "button_text": "",
-            "button_link": "",
-            "button_style": "m-button--primary",
-            "button_size": "",
-            "second_button_text": "",
-            "second_button_link": "",
-            "second_button_style": "m-button--primary",
-            "second_button_size": "",
-            "show_footer": false,
-            "footer_alignment": "end",
-            "footer_text": "",
-            "footer_button": "",
-            "footer_link": ""
-          }
-        },
         "slider_item_hHcyeW": {
           "type": "slider_item",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/More_Reading_web_banner_2_3.png",
             "mb_background": "shopify://shop_images/More_Reading_web_banner_2_3.png",
@@ -146,6 +145,7 @@
         },
         "slider_item_Bkf8e4": {
           "type": "slider_item",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/reading_stop_web_banner_13_1.png",
             "mb_background": "shopify://shop_images/reading_stop_web_banner_13_1.png",
@@ -273,8 +273,8 @@
         }
       },
       "block_order": [
-        "slider_item_pTqw4y",
         "slider_item_HN9pEe",
+        "slider_item_pTqw4y",
         "slider_item_hHcyeW",
         "slider_item_mhpqnP",
         "slider_item_Bkf8e4",
