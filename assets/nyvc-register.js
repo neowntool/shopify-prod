@@ -115,11 +115,15 @@
     if (e.inputType && e.inputType.indexOf('delete') === 0) out = this.value.replace(/[^\d/]/g, '').slice(0, 10);
     this.value = out;
   });
-  form.elements.phone.addEventListener('input', function () {
-    var d = this.value.replace(/\D/g, '');
-    if (d.length > 10 && d.indexOf('91') === 0) d = d.slice(2);
-    this.value = d.slice(0, 10);
-  });
+  /* Pasted or autofilled numbers like "+91 98765 43210", "091-98765-43210" or "919876543210"
+     become "9876543210". A leading 91 or 0 is only kept while the number is still being typed. */
+  function cleanPhone(v) {
+    var d = String(v || '').replace(/\D/g, '').slice(0, 14);
+    var m = /^(?:0091|091|91|0)(\d{10})$/.exec(d);
+    if (m) return m[1];
+    return /^(?:0|91)/.test(d) && d.length <= 12 ? d : d.slice(0, 10);
+  }
+  form.elements.phone.addEventListener('input', function () { this.value = cleanPhone(this.value); });
   form.addEventListener('input', function (e) { if (e.target.name) setErr(e.target.name, ''); setErr('form', ''); refreshDetailsBtn(); });
   form.addEventListener('change', refreshDetailsBtn);
   fields.forEach(function (f) {
